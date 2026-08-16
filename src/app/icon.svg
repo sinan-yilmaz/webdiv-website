@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- webdiv Zeichen, Variante 3: schwere Variante in abgerundeter quadratischer
+       Flaeche (App-Icon / Favicon). Flaeche Kobalt #2A3CFF, Zeichen Paper #F2EFE9.
+       Funktioniert bei 16 px und 96 px. -->
+  <rect width="120" height="120" rx="30" fill="#2A3CFF"/>
+  <g fill="none" stroke="#F2EFE9" transform="translate(60 60) scale(0.72) translate(-60 -60)">
+    <path d="M15 91.5 L31 28.5" stroke-width="16"/>
+    <path d="M49 27 L105 60 L49 93" stroke-width="16" stroke-linejoin="miter"/>
+  </g>
+</svg>

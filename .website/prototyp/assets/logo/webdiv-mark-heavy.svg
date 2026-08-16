@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- webdiv Zeichen, Variante 2: schwer.
+       Gleiche Konstruktion wie Variante 1 (drei Striche je 65 Einheiten),
+       Strichstaerke 16 – optisch an die Stammstaerke von Mona Sans 700/800
+       angepasst, damit Zeichen und Wortmarke aus einem Guss wirken. -->
+  <path class="mark-slash" d="M15 91.5 L31 28.5" stroke="currentColor" stroke-width="16"/>
+  <path class="mark-angle" d="M49 27 L105 60 L49 93" stroke="currentColor" stroke-width="16" stroke-linejoin="miter"/>
+</svg>

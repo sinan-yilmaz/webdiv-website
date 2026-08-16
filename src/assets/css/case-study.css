@@ -1,0 +1,289 @@
+/* ==========================================================================
+   webdiv – Case Study /projekte/bucan-eventservice (Runde 2)
+   webdiv-Formensprache als Rahmen; die Bucan-Kundenfarben (--bucan-*)
+   setzt die Page als Inline-Variablen aus core/consts/caseStudyBucan.ts –
+   sie gelten nur innerhalb dieser Seite, nie im globalen Token-System.
+   ========================================================================== */
+
+.case-bucan { background: var(--paper); }
+
+/* Subpage-Nav: CTA bleibt in der Pille – der Kompakt-Modus der One-Page
+   (Menue-Knopf statt Links) blendet .btn-primary sonst aus */
+@media (max-width: 1023px) {
+  .subpage-nav .nav-pill > .btn-primary { display: inline-flex; }
+}
+
+/* --- Projektkopf --- */
+
+.case-intro { padding: 172px 0 96px; }
+.case-back { margin-bottom: 44px; }
+.case-back a { color: var(--ink-2); }
+.case-back a:hover { color: var(--ink); }
+.case-intro .eyebrow { margin-bottom: 18px; }
+
+.case-title {
+  font-size: clamp(2.75rem, 10vw, 8rem);
+  font-weight: 640;
+  font-stretch: 103%;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  margin-bottom: 26px;
+}
+
+.case-lead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px 28px;
+  margin-bottom: 64px;
+}
+.case-sub {
+  font-size: 1.375rem;
+  color: var(--ink-2);
+}
+
+.case-facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px 28px;
+  border-top: 1px solid var(--line);
+  padding-top: 26px;
+  margin: 0;
+}
+.case-fact dt {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 8px;
+}
+.case-fact dd {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 550;
+}
+
+/* --- Screenshot im Browserrahmen --- */
+
+.case-screen { padding-bottom: var(--section-gap); }
+.case-browser {
+  width: 100%;
+  margin: 0;
+  aspect-ratio: auto;
+}
+.case-browser .bf-body {
+  position: relative;
+  flex: none;
+  aspect-ratio: 16 / 9.4;
+}
+.case-browser .bf-body img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.case-browser .missing-note { display: none; }
+.case-browser.missing img { display: none; }
+.case-browser.missing .missing-note { display: block; }
+.case-browser .missing-note small {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  opacity: 0.7;
+}
+
+/* --- Auftrag --- */
+
+.case-brief { padding-bottom: var(--section-gap); }
+.case-brief .eyebrow { margin-bottom: 20px; }
+.case-brief-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 64px;
+  align-items: start;
+}
+.case-brief-text { display: grid; gap: 22px; }
+.case-brief-text p {
+  max-width: 58ch;
+  color: var(--ink-2);
+}
+.case-brief-text .case-brief-detail {
+  background: var(--paper-2);
+  border-radius: var(--r-card);
+  padding: 24px 26px;
+  color: var(--ink);
+  font-size: 1.0625rem;
+  max-width: none;
+}
+
+/* --- Design-Kapitel in den Bucan-Farben --- */
+
+.case-design {
+  background: var(--bucan-green);
+  color: var(--bucan-cream);
+  padding: calc(var(--section-gap) * 0.9) 0;
+  /* goldgesaeumte Haarlinien – Zitat der Uebergaenge aus der Bucan-CI */
+  --rail: color-mix(in srgb, var(--bucan-gold) 30%, transparent);
+}
+.case-design .eyebrow {
+  color: var(--bucan-gold);
+  margin-bottom: 20px;
+}
+.case-design .h2 { margin-bottom: 26px; }
+.case-design-text {
+  max-width: 62ch;
+  opacity: 0.92;
+  margin-bottom: 56px;
+}
+
+.case-swatches {
+  list-style: none;
+  margin: 0 0 56px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.case-swatch i {
+  display: block;
+  aspect-ratio: 5 / 3;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--bucan-gold) 40%, transparent);
+  margin-bottom: 12px;
+}
+.case-swatch .swatch-name {
+  display: block;
+  font-weight: 600;
+}
+.case-swatch .swatch-hex {
+  display: block;
+  color: var(--bucan-gold);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+
+.case-design-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.case-col-label {
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--bucan-gold);
+  margin-bottom: 12px;
+}
+.case-design-cols div > p:last-child {
+  font-size: 1.0625rem;
+  opacity: 0.9;
+}
+
+/* --- Technik & Datenschutz --- */
+
+.case-craft { padding: var(--section-gap) 0; }
+.case-craft .eyebrow { margin-bottom: 20px; }
+.case-craft .h2 { margin-bottom: 72px; }
+.case-craft-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 0;
+}
+.case-craft-item {
+  border-left: 1px solid var(--line);
+  padding: 8px 32px 12px 24px;
+}
+.case-craft-item h3 {
+  font-size: 1.25rem;
+  font-weight: 620;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+.case-craft-item p {
+  color: var(--ink-2);
+  font-size: 1.0625rem;
+}
+.case-craft-note {
+  margin-top: 72px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.02em;
+  color: var(--ink-2);
+}
+
+/* --- Kobalt-Abschluss --- */
+
+.case-cta {
+  background: var(--cobalt);
+  color: var(--on-cobalt);
+  overflow: clip;
+}
+/* padding-block statt Shorthand: das padding-inline kommt vom .container */
+.case-cta > .container { padding-block: calc(var(--section-gap) * 0.8) 100px; }
+.case-cta .display2 { margin-bottom: 20px; }
+.case-cta-text {
+  max-width: 50ch;
+  opacity: 0.92;
+  margin-bottom: 44px;
+}
+.case-cta-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px 36px;
+}
+.case-cta-footer {
+  border-top: 1px solid var(--line-cobalt);
+  padding: 24px 0 max(28px, env(safe-area-inset-bottom));
+}
+.case-cta-footer .container {
+  text-align: center;
+  font-size: 0.78125rem;
+  letter-spacing: 0.02em;
+}
+.case-cta-footer a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Responsive-Ableitung (Stufen wie die One-Page) --- */
+
+@media (max-width: 1023px) {
+  .case-intro { padding: 150px 0 80px; }
+  .case-facts { grid-template-columns: repeat(2, 1fr); }
+  .case-brief-grid { grid-template-columns: 1fr; gap: 36px; }
+  .case-craft-grid { grid-template-columns: 1fr 1fr; }
+  .case-craft .h2 { margin-bottom: 56px; }
+}
+
+@media (max-width: 767px) {
+  .case-intro { padding: 126px 0 64px; }
+  .case-back { margin-bottom: 30px; }
+  .case-lead { margin-bottom: 44px; }
+  .case-sub { font-size: 1.125rem; }
+  .case-swatches { gap: 12px; margin-bottom: 44px; }
+  .case-swatch .swatch-name { font-size: 0.9375rem; }
+  .case-swatch .swatch-hex { font-size: 0.6875rem; }
+  .case-design-text { margin-bottom: 44px; }
+  .case-design-cols { grid-template-columns: 1fr; gap: 30px; }
+  .case-craft .h2 { margin-bottom: 40px; }
+  .case-craft-grid { grid-template-columns: 1fr; gap: 0; }
+  .case-craft-item { padding: 20px 0 26px 20px; }
+  .case-craft-note { margin-top: 44px; }
+}
+
+@media (max-width: 559px) {
+  .case-facts { grid-template-columns: 1fr; gap: 18px; }
+}

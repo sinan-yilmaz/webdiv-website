@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>webdiv – Websites &amp; Web-Anwendungen. Sinan Yilmaz, Günzburg</title>
+  <meta name="description" content="webdiv gestaltet und entwickelt Firmen-Websites und Web-Anwendungen – von der ersten Skizze bis zum Livegang. Sinan Yilmaz, Webentwickler in Günzburg.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/webdiv-icon.svg">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- Preloader: nur beim ersten Aufruf pro Session (JS steuert Sichtbarkeit) -->
+  <div class="preloader bg-grid" id="preloader" hidden>
+    <div class="preloader-sig" id="preloaderSig"></div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="site-nav" id="siteNav">
+    <nav class="nav-pill" aria-label="Hauptnavigation">
+      <a class="nav-lockup" href="#top" aria-label="webdiv – zum Seitenanfang">
+        <svg id="navMark" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+          <path class="mark-slash" d="M15 91.5 L31 28.5" stroke="currentColor" stroke-width="16"/>
+          <path class="mark-angle" d="M49 27 L105 60 L49 93" stroke="currentColor" stroke-width="16" stroke-linejoin="miter"/>
+        </svg>
+        <span class="lockup-word wordmark">webdiv</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#projekte">Projekte</a></li>
+        <li><a href="#ablauf">Ablauf</a></li>
+        <li><a href="#ueber-mich">Über mich</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+      <a class="btn btn-primary btn-small" href="#kontakt">Erstgespräch<span class="btn-arrow" aria-hidden="true">→</span></a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- 2. Hero -->
+    <section class="hero bg-grid" id="hero" data-theme="light" data-rails aria-label="webdiv – Sinan Yilmaz, Websites und Web-Anwendungen, Günzburg">
+      <div class="hero-hline" aria-hidden="true"></div>
+      <div class="hero-mark-wrap">
+        <h1 class="hero-mark wordmark" id="heroMark" aria-label="webdiv">webdiv</h1>
+      </div>
+      <p class="hero-sub sub-left">Sinan Yilmaz — Websites &amp; Web-Anwendungen</p>
+      <p class="hero-sub sub-right">Günzburg, Bayern</p>
+    </section>
+
+    <!-- Treppenkante hell -> dunkel -->
+    <div class="step-edge" style="--edge-from: var(--paper); --edge-to: var(--dark-photo);" aria-hidden="true"></div>
+
+    <div class="stack">
+      <!-- 3. Portraet-Block -->
+      <section class="portrait bg-dots-dark" id="portrait" data-theme="dark" data-rails aria-label="Porträt Sinan Yilmaz">
+        <svg class="portrait-stroke" id="portraitStroke" viewBox="0 0 920 220" aria-hidden="true">
+          <path id="portraitStrokePath" d="M0 158 C 210 158, 320 52, 464 52 C 610 52, 700 172, 920 128"/>
+        </svg>
+        <figure class="portrait-figure" id="portraitFigure">
+          <img src="assets/img/portrait.jpg" alt="Porträt von Sinan Yilmaz, frontal vor schwarzem Hintergrund" id="portraitImg">
+          <div class="missing-note" aria-hidden="true">
+            [ Porträt folgt ]
+            <small>assets/img/portrait.jpg</small>
+          </div>
+        </figure>
+        <div class="portrait-pills" aria-label="Konzept, Design, Code">
+          <span class="pill-label" style="--ri: 0">Konzept</span>
+          <span class="pill-label" style="--ri: 1">Design</span>
+          <span class="pill-label" style="--ri: 2">Code</span>
+        </div>
+      </section>
+
+      <!-- 4. Statement -->
+      <section class="statement" id="statement" data-theme="dark" aria-label="Über zehn Jahre Webentwicklung">
+        <div class="statement-inner bg-dots-dark" data-rails>
+
+          <div class="float-obj obj-browser" data-depth="1">
+            <svg viewBox="0 0 190 140" stroke-width="1.5" aria-hidden="true">
+              <rect class="st-paper" x="1" y="1" width="188" height="138" rx="10"/>
+              <line class="st-paper" x1="1" y1="26" x2="189" y2="26"/>
+              <circle class="st-paper" cx="14" cy="13.5" r="2.6"/>
+              <circle class="st-paper" cx="24" cy="13.5" r="2.6"/>
+              <circle class="st-paper" cx="34" cy="13.5" r="2.6"/>
+              <rect class="st-paper" x="48" y="8" width="94" height="11" rx="5.5"/>
+              <rect class="st-cobalt" x="14" y="40" width="112" height="46" rx="4"/>
+              <line class="st-paper" x1="14" y1="102" x2="150" y2="102"/>
+              <line class="st-paper" x1="14" y1="114" x2="104" y2="114"/>
+            </svg>
+          </div>
+
+          <div class="float-obj obj-appcard" data-depth="1.6">
+            <svg viewBox="0 0 170 150" stroke-width="1.5" aria-hidden="true">
+              <rect class="st-paper" x="1" y="1" width="168" height="148" rx="10"/>
+              <line class="st-paper" x1="1" y1="28" x2="169" y2="28"/>
+              <line class="st-paper" x1="14" y1="48" x2="96" y2="48"/>
+              <line class="st-paper" x1="14" y1="66" x2="96" y2="66"/>
+              <line class="st-paper" x1="14" y1="84" x2="96" y2="84"/>
+              <line class="st-paper" x1="14" y1="102" x2="96" y2="102"/>
+              <line class="st-paper" x1="55" y1="40" x2="55" y2="110"/>
+              <line class="st-cobalt" x1="112" y1="56" x2="156" y2="56"/>
+              <line class="st-cobalt" x1="112" y1="82" x2="156" y2="82"/>
+              <rect class="st-cobalt" x="112" y="100" width="44" height="16" rx="8"/>
+            </svg>
+          </div>
+
+          <div class="float-obj obj-db" data-depth="1.3">
+            <svg viewBox="0 0 130 150" stroke-width="1.5" aria-hidden="true">
+              <ellipse class="st-paper" cx="65" cy="24" rx="56" ry="17"/>
+              <line class="st-paper" x1="9" y1="24" x2="9" y2="126"/>
+              <line class="st-paper" x1="121" y1="24" x2="121" y2="126"/>
+              <path class="st-paper" d="M9 126 C 9 135.4, 34 143, 65 143 C 96 143, 121 135.4, 121 126"/>
+              <path class="st-paper" d="M9 58 C 9 67.4, 34 75, 65 75 C 96 75, 121 67.4, 121 58"/>
+              <path class="st-cobalt" d="M9 92 C 9 101.4, 34 109, 65 109 C 96 109, 121 101.4, 121 92"/>
+            </svg>
+          </div>
+
+          <div class="float-obj obj-mark" data-depth="1.8">
+            <svg viewBox="0 0 120 120" stroke-width="6" aria-hidden="true">
+              <path class="st-cobalt" d="M16 91.5 L32 28.5"/>
+              <path class="st-cobalt" d="M48 27 L104 60 L48 93" stroke-linejoin="miter"/>
+            </svg>
+          </div>
+
+          <p class="statement-text display2" id="statementText"><strong class="w-strong">Über zehn Jahre</strong> Webentwicklung. Websites für Firmen, die nicht aussehen wollen wie ihr Wettbewerb. Web-Anwendungen für Firmen, die Excel-Listen und E-Mail-Ketten loswerden wollen.</p>
+
+          <svg class="statement-line" id="statementLine" viewBox="0 0 1000 520" aria-hidden="true">
+            <path id="statementLinePath" d="M64 22 C 360 86, 820 66, 896 178 C 948 266, 320 282, 264 384 C 238 452, 536 470, 520 520"/>
+          </svg>
+        </div>
+      </section>
+    </div>
+
+    <!-- Treppenkante dunkel -> hell -->
+    <div class="step-edge" style="--edge-from: var(--dark); --edge-to: var(--paper);" aria-hidden="true"></div>
+
+    <!-- 5. Leistungen (gepinnt) -->
+    <section class="services" id="leistungen" data-theme="light" data-rails>
+      <h2 class="sr-only">Leistungen</h2>
+      <div class="pin-wrap" id="servicesPinWrap">
+        <div class="pin">
+          <div class="container">
+            <p class="eyebrow">Leistungen</p>
+            <div class="services-grid">
+              <div class="services-list" id="servicesList">
+
+                <div class="svc active" data-idx="0">
+                  <button class="svc-title" type="button">Firmen-Websites</button>
+                  <div class="svc-desc"><div>
+                    <p>Kein Baukasten, kein gekauftes Theme. Ihre Website wird für Ihre Firma entworfen und gebaut, damit sie aussieht wie Ihr Betrieb und nicht wie eine Vorlage.</p>
+                  </div></div>
+                </div>
+
+                <div class="svc" data-idx="1">
+                  <button class="svc-title" type="button">Web-Anwendungen</button>
+                  <div class="svc-desc"><div>
+                    <p>Individuelle Software im Browser für einen konkreten Ablauf in Ihrem Betrieb: Kundenportal, interne Verwaltung, Buchung, Auftragsabwicklung. Nichts zu installieren.</p>
+                  </div></div>
+                </div>
+
+                <div class="svc" data-idx="2">
+                  <button class="svc-title" type="button">Schnittstellen &amp; Datenbanken</button>
+                  <div class="svc-desc"><div>
+                    <p>Das Fundament dahinter: Datenbank, Login und Rechte, Datenimporte, Anbindung an Systeme, die Sie schon nutzen. Ich baue das Backend auf Supabase oder binde Ihre bestehende Schnittstelle an.</p>
+                  </div></div>
+                </div>
+
+              </div>
+
+              <div class="svc-media" id="svcMedia">
+                <!-- 1: Bucan-Screenshot im Browserrahmen (Platzhalter) -->
+                <div class="media-layer active" data-idx="0">
+                  <div class="browser-frame">
+                    <div class="bf-bar" aria-hidden="true">
+                      <i></i><i></i><i></i>
+                      <span class="bf-url">bucan-eventservice.de</span>
+                    </div>
+                    <div class="bf-body">Screenshot folgt</div>
+                  </div>
+                </div>
+                <!-- 2: abstrakte App-Oberflaeche (Tabelle + Formular) -->
+                <div class="media-layer" data-idx="1">
+                  <svg class="media-draw" viewBox="0 0 560 400" aria-hidden="true">
+                    <rect class="ln" x="1" y="1" width="558" height="398" rx="14"/>
+                    <line class="ln" x1="1" y1="52" x2="559" y2="52"/>
+                    <circle class="ln-dim" cx="26" cy="26" r="5"/>
+                    <line class="ln-dim" x1="44" y1="26" x2="120" y2="26"/>
+                    <!-- Tabelle -->
+                    <line class="ln-dim" x1="32" y1="96" x2="330" y2="96"/>
+                    <line class="ln" x1="32" y1="128" x2="330" y2="128"/>
+                    <line class="ln" x1="32" y1="164" x2="330" y2="164"/>
+                    <line class="ln" x1="32" y1="200" x2="330" y2="200"/>
+                    <line class="ln" x1="32" y1="236" x2="330" y2="236"/>
+                    <line class="ln" x1="32" y1="272" x2="330" y2="272"/>
+                    <line class="ln" x1="32" y1="308" x2="330" y2="308"/>
+                    <line class="ln-dim" x1="150" y1="84" x2="150" y2="320"/>
+                    <line class="ln-dim" x1="248" y1="84" x2="248" y2="320"/>
+                    <!-- Formular -->
+                    <line class="ln-dim" x1="376" y1="102" x2="430" y2="102"/>
+                    <line class="ln" x1="376" y1="132" x2="528" y2="132"/>
+                    <line class="ln-dim" x1="376" y1="172" x2="444" y2="172"/>
+                    <line class="ln" x1="376" y1="202" x2="528" y2="202"/>
+                    <line class="ln-dim" x1="376" y1="242" x2="420" y2="242"/>
+                    <rect class="ln" x="376" y="262" width="152" height="58" rx="6"/>
+                    <rect class="ln-cobalt" x="376" y="344" width="112" height="30" rx="15"/>
+                  </svg>
+                </div>
+                <!-- 3: Datenbank-/Schnittstellen-Schema (Kobalt) -->
+                <div class="media-layer" data-idx="2">
+                  <svg class="media-draw" viewBox="0 0 560 400" aria-hidden="true">
+                    <!-- Zylinder Mitte -->
+                    <ellipse class="ln-cobalt" cx="280" cy="150" rx="74" ry="22"/>
+                    <line class="ln-cobalt" x1="206" y1="150" x2="206" y2="238"/>
+                    <line class="ln-cobalt" x1="354" y1="150" x2="354" y2="238"/>
+                    <path class="ln-cobalt" d="M206 238 C 206 250, 239 260, 280 260 C 321 260, 354 250, 354 238"/>
+                    <path class="ln-cobalt" d="M206 194 C 206 206, 239 216, 280 216 C 321 216, 354 206, 354 194"/>
+                    <!-- Browser-Knoten links oben -->
+                    <rect class="ln-cobalt" x="40" y="34" width="132" height="86" rx="10"/>
+                    <line class="ln-cobalt" x1="40" y1="56" x2="172" y2="56"/>
+                    <circle class="ln-cobalt" cx="52" cy="45" r="2.4"/>
+                    <circle class="ln-cobalt" cx="61" cy="45" r="2.4"/>
+                    <!-- App-Knoten rechts oben -->
+                    <rect class="ln-cobalt" x="396" y="34" width="124" height="86" rx="10"/>
+                    <line class="ln-cobalt" x1="412" y1="64" x2="470" y2="64"/>
+                    <line class="ln-cobalt" x1="412" y1="84" x2="504" y2="84"/>
+                    <line class="ln-cobalt" x1="412" y1="100" x2="486" y2="100"/>
+                    <!-- Bestehendes System unten -->
+                    <rect class="ln-cobalt" x="120" y="316" width="150" height="56" rx="10"/>
+                    <line class="ln-cobalt" x1="138" y1="338" x2="222" y2="338"/>
+                    <line class="ln-cobalt" x1="138" y1="352" x2="196" y2="352"/>
+                    <!-- Verbindungen -->
+                    <path class="ln-cobalt" d="M172 92 C 216 108, 232 118, 246 132" stroke-dasharray="5 6"/>
+                    <path class="ln-cobalt" d="M396 92 C 356 108, 336 118, 318 132" stroke-dasharray="5 6"/>
+                    <path class="ln-cobalt" d="M226 258 C 214 280, 204 296, 197 316" stroke-dasharray="5 6"/>
+                    <path class="ln-cobalt" d="M354 226 C 420 250, 452 292, 460 344 L 270 344" stroke-dasharray="5 6"/>
+                    <circle class="ln-cobalt" cx="246" cy="132" r="3.4"/>
+                    <circle class="ln-cobalt" cx="318" cy="132" r="3.4"/>
+                    <circle class="ln-cobalt" cx="197" cy="316" r="3.4"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Projekte -->
+    <section class="projects" id="projekte" data-theme="light" data-rails>
+      <div class="container">
+        <p class="eyebrow" data-reveal>Projekte</p>
+        <h2 class="h2" data-reveal style="--ri: 1">Zuletzt gebaut</h2>
+        <div class="project-list" data-reveal style="--ri: 2">
+          <a class="project-row" href="/projekte/bucan-eventservice" id="projectBucan">
+            <span class="project-year">2026</span>
+            <span class="project-main">
+              <span class="project-title">Bucan GmbH</span>
+              <span class="project-sub">Premium Catering &amp; Eventservice, Günzburg</span>
+            </span>
+            <span class="project-meta">One-Pager · Design &amp; Entwicklung</span>
+            <span class="project-arrow" aria-hidden="true">
+              <svg viewBox="0 0 18 18" fill="none" stroke-width="1.5"><path d="M2 9 H16 M10 3 L16 9 L10 15"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Ablauf -->
+    <section class="process" id="ablauf" data-theme="light" data-rails>
+      <div class="container">
+        <p class="eyebrow" data-reveal>Ablauf</p>
+        <h2 class="h2" data-reveal style="--ri: 1">Vier Schritte, ein&nbsp;Ansprechpartner.</h2>
+        <div class="process-cols">
+          <div class="process-col" style="--ri: 0">
+            <span class="process-num" data-num="01">01</span>
+            <h3>Erstgespräch</h3>
+            <p>Kostenlos und unverbindlich. Wir klären, was Sie brauchen – und ob ich der Richtige dafür bin.</p>
+          </div>
+          <div class="process-col" style="--ri: 1">
+            <span class="process-num" data-num="02">02</span>
+            <h3>Konzept &amp; Festpreis</h3>
+            <p>Sie bekommen ein schriftliches Konzept mit Umfang und Zeitplan – und einen Festpreis, der gilt.</p>
+          </div>
+          <div class="process-col" style="--ri: 2">
+            <span class="process-num" data-num="03">03</span>
+            <h3>Design &amp; Umsetzung</h3>
+            <p>Design und Code entstehen bei mir am selben Tisch. Zwischenstände sehen Sie im Browser, nicht auf Folien.</p>
+          </div>
+          <div class="process-col" style="--ri: 3">
+            <span class="process-num" data-num="04">04</span>
+            <h3>Livegang &amp; Betreuung</h3>
+            <p>Ich bringe Ihre Seite oder Anwendung live und bleibe dran: Änderungen, Erweiterungen, Pflege.</p>
+          </div>
+        </div>
+        <p class="process-note" data-reveal>Festpreis nach Erstgespräch – das Erstgespräch ist kostenlos.</p>
+      </div>
+    </section>
+
+    <!-- 8. Ueber mich -->
+    <section class="about" id="ueber-mich" data-theme="light" data-rails>
+      <div class="container">
+        <p class="eyebrow" data-reveal>Über mich</p>
+        <div class="about-grid">
+          <figure class="about-figure" id="aboutFigure" data-reveal>
+            <img src="assets/img/portrait.jpg" alt="Sinan Yilmaz, engerer Bildausschnitt" id="aboutImg">
+            <div class="missing-note" aria-hidden="true">[ Porträt folgt ]</div>
+          </figure>
+          <div class="about-text" data-reveal style="--ri: 1">
+            <p>Ich bin Sinan Yilmaz, Webentwickler aus Günzburg. Seit über zehn Jahren baue ich Oberflächen und Anwendungen für den Browser – heute vor allem mit React, Next.js und Supabase. webdiv ist bewusst klein: Von der ersten Skizze bis zum Livegang sprechen Sie mit dem, der Ihre Seite auch baut.</p>
+            <div class="about-sig" id="aboutSig" aria-label="Unterschrift Sinan Yilmaz"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Treppenkante hell -> Kobalt -->
+    <div class="step-edge" style="--edge-from: var(--paper); --edge-to: var(--cobalt);" aria-hidden="true"></div>
+
+    <!-- 9. Kontakt / Footer -->
+    <section class="contact bg-dots-cobalt" id="kontakt" data-theme="cobalt" data-rails>
+      <div class="contact-bg-mark wordmark" aria-hidden="true">webdiv</div>
+
+      <div class="contact-head">
+        <div class="pixel-portrait" id="pixelPortrait">
+          <canvas width="24" height="24" id="pixelCanvas" hidden></canvas>
+          <span class="missing-note" id="pixelNote">[ Pixel-Porträt folgt ]</span>
+        </div>
+      </div>
+
+      <div class="container contact-grid">
+        <div class="contact-intro">
+          <h2 class="display2">Was haben Sie&nbsp;vor?</h2>
+          <p>Neue Website oder eine Anwendung für Ihren Betrieb – schreiben Sie mir kurz, worum es geht. Sie bekommen eine klare Einschätzung, was sinnvoll ist und was nicht. Festpreis nach Erstgespräch – das Erstgespräch ist kostenlos.</p>
+        </div>
+
+        <div class="contact-form-wrap">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="field">
+              <label for="fName">Name</label>
+              <input type="text" id="fName" name="name" autocomplete="name" required>
+              <span class="field-error">Bitte geben Sie Ihren Namen an.</span>
+            </div>
+            <div class="field">
+              <label for="fMail">E-Mail</label>
+              <input type="email" id="fMail" name="email" autocomplete="email" required>
+              <span class="field-error">Bitte prüfen Sie die E-Mail-Adresse.</span>
+            </div>
+            <div class="field">
+              <label for="fMsg">Worum geht es?</label>
+              <textarea id="fMsg" name="message" rows="4" required></textarea>
+              <span class="field-error">Bitte beschreiben Sie kurz Ihr Vorhaben.</span>
+            </div>
+            <button class="btn btn-invert" type="submit">Anfrage senden<span class="btn-arrow" aria-hidden="true">→</span></button>
+            <p class="form-message ok" role="status">Danke – Ihre Nachricht ist angekommen. Ich melde mich.</p>
+            <p class="form-message err" role="alert">Das hat nicht geklappt. Schreiben Sie mir direkt an [E-Mail-Adresse].</p>
+          </form>
+          <p class="form-direct">Oder direkt: [E-Mail-Adresse]</p>
+        </div>
+      </div>
+
+      <footer class="contact-footer">
+        <div class="container">
+          <span class="cf-left">created by <b>webdiv</b></span>
+          <span class="cf-mid">© 2026 · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a></span>
+          <span class="cf-right">created with <b>Claude Code</b></span>
+        </div>
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- Cursor-Elemente (nur Desktop) -->
+  <div class="proj-thumb" id="projThumb" aria-hidden="true">Screenshot folgt</div>
+  <div class="cursor-pill" id="cursorPill" aria-hidden="true">Projekt ansehen</div>
+
+  <!-- 12-Spalten-Overlay -->
+  <div class="col-overlay" id="colOverlay" aria-hidden="true">
+    <div class="container">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+  </div>
+
+  <!-- Regler-Panel (Prototyp-Werkzeug) -->
+  <div class="controls" id="controls">
+    <div class="controls-panel" id="controlsPanel">
+      <div class="cp-row">
+        <label>Akzent · Farbton <output id="outHue">233</output></label>
+        <input type="range" id="ctlHue" min="0" max="360" value="233" step="1">
+      </div>
+      <div class="cp-row">
+        <label>Akzent · Sättigung <output id="outSat">100</output></label>
+        <input type="range" id="ctlSat" min="0" max="100" value="100" step="1">
+      </div>
+      <hr>
+      <div class="cp-row">
+        <label>Hero · Basisgewicht <output id="outWghtBase">700</output></label>
+        <input type="range" id="ctlWghtBase" min="200" max="900" value="700" step="10">
+      </div>
+      <div class="cp-row">
+        <label>Hero · Spitzengewicht <output id="outWghtPeak">900</output></label>
+        <input type="range" id="ctlWghtPeak" min="200" max="900" value="900" step="10">
+      </div>
+      <div class="cp-row">
+        <label>Hero · Basisbreite <output id="outWdthBase">105</output></label>
+        <input type="range" id="ctlWdthBase" min="75" max="125" value="105" step="1">
+      </div>
+      <div class="cp-row">
+        <label>Hero · Spitzenbreite <output id="outWdthPeak">125</output></label>
+        <input type="range" id="ctlWdthPeak" min="75" max="125" value="125" step="1">
+      </div>
+      <hr>
+      <div class="cp-row">
+        <label>Stufenhöhe Treppen <output id="outStep">64</output></label>
+        <input type="range" id="ctlStep" min="48" max="96" value="64" step="1">
+      </div>
+      <div class="cp-row">
+        <label>Sektionsabstand <output id="outGap">180</output></label>
+        <input type="range" id="ctlGap" min="160" max="200" value="180" step="1">
+      </div>
+      <div class="cp-row">
+        <label>Raster-Sichtbarkeit <output id="outGrid">100</output></label>
+        <input type="range" id="ctlGrid" min="0" max="200" value="100" step="5">
+      </div>
+      <div class="cp-row cp-check">
+        <input type="checkbox" id="ctlCols">
+        <label for="ctlCols" style="margin:0">12 Spalten einblenden</label>
+      </div>
+      <hr>
+      <button class="cp-reset" type="button" id="ctlReset">Zurücksetzen</button>
+    </div>
+    <button class="controls-toggle" type="button" id="controlsToggle" aria-expanded="false" aria-controls="controlsPanel">Regler</button>
+  </div>
+
+  <script src="js/signature-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

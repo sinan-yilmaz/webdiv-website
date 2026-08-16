@@ -1,0 +1,5 @@
+{
+  "enabled": true,
+  "logEnabled": false,
+  "logPath": "frontend-next-plugin-logs"
+}

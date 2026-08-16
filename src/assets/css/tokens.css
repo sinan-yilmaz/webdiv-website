@@ -1,0 +1,441 @@
+/* ==========================================================================
+   webdiv – Design-Tokens (Runde 1)
+   Grundlage: Design-Briefing. Alle Werte hier sind die einzige Quelle
+   fuer Farbe, Typografie, Raster, Radien und Motion.
+   Schriften: selbst gehostet ueber next/font/local (siehe src/app/layout.tsx),
+   eingebunden als --font-mona-sans und --font-geist-mono.
+   ========================================================================== */
+
+:root {
+  /* --- Farbe --- */
+  --paper: #F2EFE9;          /* Grundflaeche hell */
+  --paper-2: #E8E4DB;        /* Karten, Baender, Hover-Flaechen */
+  --ink: #111111;            /* Text auf hell, dunkle Buttons */
+  --ink-2: #4A4946;          /* Sekundaertext */
+  --ink-3: #8B8983;          /* Eyebrows, gedaempfte Labels, inaktive Titel */
+  --line: rgba(17, 17, 17, 0.14);          /* Haarlinien auf hell */
+  --dark: #121212;           /* dunkles Kapitel (Statement) */
+  --dark-photo: #0B0B0B;     /* Portraet-Sektion */
+  --on-dark: #F2EFE9;        /* Text auf dunkel */
+  --on-dark-dim: rgba(242, 239, 233, 0.28); /* ungefuellte Woerter im Statement */
+  --line-dark: rgba(242, 239, 233, 0.14);  /* Haarlinien auf dunkel */
+  --cobalt: #2A3CFF;         /* einziger Akzent */
+  --cobalt-deep: #1F2FE0;    /* Hover/Active des Akzents */
+  --cobalt-tint: #DCE0FF;    /* dezente Akzentflaechen auf hell */
+  --on-cobalt: #F2EFE9;      /* Text auf Kobalt – nie --ink auf Kobalt */
+  --error: #B23A2E;          /* Formularfehler */
+  --line-cobalt: rgba(242, 239, 233, 0.28); /* Haarlinien auf Kobalt */
+
+  /* --- Typografie --- */
+  --font-sans: var(--font-mona-sans), "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), "JetBrains Mono", "Cascadia Mono", monospace;
+
+  --fs-hero: clamp(5rem, 18vw, 17rem);          /* Hero-Wortmarke */
+  --fs-display2: clamp(2.5rem, 6vw, 5.5rem);    /* Statement, Footer-Frage */
+  --fs-h2: clamp(2rem, 4.5vw, 4rem);            /* Sektionstitel */
+  --fs-service: clamp(2.5rem, 6vw, 5rem);       /* Leistungs-Titel */
+  --fs-body: 1.125rem;                          /* 18 px */
+  --lh-body: 1.6;
+  --fs-small: 0.875rem;                         /* 14 px */
+  --fs-eyebrow: 0.8125rem;                      /* 13 px */
+  --track-eyebrow: 0.08em;
+
+  /* Wortmarke: immer Kleinschreibung, 700 / wdth 105 / -0.03em */
+  --wordmark-wght: 700;
+  --wordmark-wdth: 105%;
+  --wordmark-track: -0.03em;
+
+  /* Hero-Lupe (per Regler verstellbar) */
+  --hero-wght-base: 700;
+  --hero-wght-peak: 900;
+  --hero-wdth-base: 105;
+  --hero-wdth-peak: 125;
+
+  /* --- Raster & Struktur --- */
+  --pad: 40px;               /* Seitenrand */
+  --content-max: 1440px;     /* max. Inhaltsbreite */
+  --cols: 12;
+  --gutter: 24px;
+  --rail-inset: max(var(--pad), calc((100% - var(--content-max)) / 2));
+
+  --cell: 48px;              /* Karo-Zelle im Hero */
+  --rail-pad: 36px;          /* Innenabstand des Inhalts zu den Rail-Haarlinien */
+
+  /* --- Radien --- */
+  --r-pill: 999px;
+  --r-card: 20px;
+  --r-field: 0;
+
+  /* --- Abstaende & Kanten --- */
+  --section-gap: 180px;      /* vertikaler Sektionsabstand (Regler 160–200) */
+  --step-h: 64px;            /* Stufenhoehe Treppenkanten (Regler 48–96) */
+
+  /* --- Motion --- */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-micro: 240ms;          /* Micro-Interaktionen 200–300 ms */
+  --t-reveal: 850ms;         /* Reveals 700–1000 ms */
+  --stagger: 80ms;           /* Stagger 60–90 ms */
+}
+
+/* --- Basis --- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px;
+  /* Scrollbalken-Spur dauerhaft anzeigen – sonst rutscht das Layout nach
+     links, sobald der Preloader das Scrollen wieder freigibt (Chrome laesst
+     scrollbar-gutter bei overflow: hidden kollabieren, daher overflow-y) */
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Mit aktivem Lenis (Desktop) fuehrt Lenis alle Fahrten selbst – natives
+   Smooth-Scrolling wuerde pro Frame dagegen animieren */
+html.lenis { scroll-behavior: auto; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--cobalt); color: var(--on-cobalt); }
+
+:focus-visible {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+[data-theme="cobalt"] :focus-visible { outline-color: var(--paper); }
+
+h1, h2, h3, p, figure { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+img, svg, canvas { display: block; max-width: 100%; }
+
+/* --- Utility-Typografie --- */
+
+.mono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.02em;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+.wordmark {
+  font-family: var(--font-sans);
+  font-weight: var(--wordmark-wght);
+  font-stretch: var(--wordmark-wdth);
+  letter-spacing: var(--wordmark-track);
+  text-transform: lowercase;
+  line-height: 1;
+}
+
+.h2 {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  font-stretch: 102%;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.display2 {
+  font-size: var(--fs-display2);
+  font-weight: 650;
+  font-stretch: 103%;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Layout-Grundgeruest --- */
+
+.container {
+  width: min(100% - (2 * var(--pad)), var(--content-max));
+  margin-inline: auto;
+  /* Luft zwischen den Rail-Haarlinien (an der Containerkante) und dem Inhalt */
+  padding-inline: var(--rail-pad);
+}
+
+/* Vertikale Haarlinien an den Inhaltsraendern – laufen durch jede Sektion */
+[data-rails] { position: relative; }
+[data-rails]::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  left: var(--rail-inset);
+  right: var(--rail-inset);
+  border-left: 1px solid var(--rail, var(--line));
+  border-right: 1px solid var(--rail, var(--line));
+  pointer-events: none;
+  z-index: 0;
+}
+[data-theme="dark"] { --rail: var(--line-dark); }
+[data-theme="cobalt"] { --rail: var(--line-cobalt); }
+
+/* --- Buttons & Links --- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--r-pill);
+  font-weight: 550;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 16px 28px;
+  transition: background var(--t-micro) var(--ease), color var(--t-micro) var(--ease);
+  cursor: pointer;
+}
+.btn .btn-arrow {
+  display: inline-block;
+  transition: transform var(--t-micro) var(--ease);
+}
+.btn:hover .btn-arrow { transform: translateX(4px); }
+
+.btn-primary { background: var(--ink); color: var(--on-dark); }
+.btn-primary:hover { background: #2A2A28; }
+
+/* invertiert auf dunkel und kobalt */
+[data-theme="dark"] .btn-primary,
+[data-theme="cobalt"] .btn-primary,
+.btn-invert {
+  background: var(--paper);
+  color: var(--ink);
+}
+[data-theme="dark"] .btn-primary:hover,
+[data-theme="cobalt"] .btn-primary:hover,
+.btn-invert:hover { background: #FFFFFF; }
+
+.btn-small { padding: 11px 20px; font-size: 0.9375rem; }
+
+/* Sekundaer-Link: Unterstreichung zeichnet sich von links nach rechts */
+.link-draw {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+.link-draw::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 320ms var(--ease);
+}
+.link-draw:hover::after,
+.link-draw:focus-visible::after { transform: scaleX(1); }
+
+/* Pill-Label (Rollen-Titel im Porträt) – Pfeil-Cursor statt Text-Cursor,
+   Selektion bleibt moeglich */
+.pill-label {
+  display: inline-block;
+  background: var(--dark);
+  color: var(--on-dark);
+  border: 1px solid var(--line-dark);
+  font-size: 1.5rem;
+  font-weight: 550;
+  line-height: 1;
+  padding: 20px 40px;
+  border-radius: var(--r-pill);
+  cursor: default;
+}
+
+/* --- Formularfeld: transparent, nur Unterlinie --- */
+
+.field { display: flex; flex-direction: column; gap: 10px; }
+.field label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+}
+.field input,
+.field textarea {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--field-line, var(--line));
+  border-radius: var(--r-field);
+  font: inherit;
+  color: inherit;
+  padding: 6px 0 12px;
+  transition: border-color var(--t-micro) var(--ease);
+}
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom: 2px solid var(--cobalt);
+  padding-bottom: 11px;
+}
+[data-theme="cobalt"] .field input:focus,
+[data-theme="cobalt"] .field textarea:focus {
+  border-bottom-color: var(--paper);
+}
+.field.has-error input,
+.field.has-error textarea { border-bottom-color: var(--error); }
+.field .field-error {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--error);
+  display: none;
+}
+.field.has-error .field-error { display: block; }
+
+/* --- Treppenkante: ein Motiv fuer alle Uebergaenge ---
+   Drei Stufen unterschiedlicher Breite (32 / 22 / 28 / 18 %),
+   Stufenhoehe per --step-h. Die neue Flaeche steht links am hoechsten
+   und faellt in drei Stufen nach rechts ab. */
+
+.step-edge {
+  position: relative;
+  height: calc(var(--step-h) * 3);
+  background-color: var(--edge-from, var(--paper));
+  /* Rails laufen durch die Uebergangszone: dunkle + helle Haarlinie an den
+     Rail-Positionen uebereinander – auf jeder Flaeche bleibt nur die zum
+     Untergrund passende sichtbar (die andere geht im Grund unter) */
+  background-image:
+    linear-gradient(var(--line), var(--line)),
+    linear-gradient(var(--line-dark), var(--line-dark)),
+    linear-gradient(var(--line), var(--line)),
+    linear-gradient(var(--line-dark), var(--line-dark));
+  background-size: 1px 100%;
+  background-repeat: no-repeat;
+  background-position:
+    var(--rail-inset) 0, var(--rail-inset) 0,
+    calc(100% - var(--rail-inset)) 0, calc(100% - var(--rail-inset)) 0;
+  z-index: 2;
+}
+.step-edge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--edge-to, var(--dark));
+  background-image:
+    linear-gradient(var(--line), var(--line)),
+    linear-gradient(var(--line-dark), var(--line-dark)),
+    linear-gradient(var(--line), var(--line)),
+    linear-gradient(var(--line-dark), var(--line-dark));
+  background-size: 1px 100%;
+  background-repeat: no-repeat;
+  background-position:
+    var(--rail-inset) 0, var(--rail-inset) 0,
+    calc(100% - var(--rail-inset)) 0, calc(100% - var(--rail-inset)) 0;
+  clip-path: polygon(
+    0 0,
+    32% 0,
+    32% 33.34%,
+    54% 33.34%,
+    54% 66.67%,
+    82% 66.67%,
+    82% 100%,
+    0 100%
+  );
+}
+
+/* --- Hintergrund-Raster --- */
+
+/* Karo (Hero): 1,5 px Linien, 48 px Zellen, ~6 % Deckkraft;
+   oberste Schicht blendet das Raster von der Mitte (Wortmarke) nach aussen aus */
+.bg-grid {
+  background-image:
+    radial-gradient(ellipse 75% 90% at center, rgb(242 239 233 / 0) 32%, rgb(242 239 233 / 0.55) 30%, var(--paper) 92%),
+    linear-gradient(rgb(17 17 17 / 0.06) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgb(17 17 17 / 0.06) 1.5px, transparent 1.5px);
+  background-size: 100% 100%, var(--cell) var(--cell), var(--cell) var(--cell);
+}
+
+/* Punktraster (dunkle Sektionen) */
+.bg-dots-dark {
+  background-image: radial-gradient(rgb(242 239 233 / 0.07) 1px, transparent 1.6px);
+  background-size: 26px 26px;
+}
+
+/* Punktraster (Footer, Kobalt): --paper bei 12 % */
+.bg-dots-cobalt {
+  background-image: radial-gradient(rgb(242 239 233 / 0.12) 1px, transparent 1.6px);
+  background-size: 26px 26px;
+}
+
+/* ==========================================================================
+   Responsive Token-Ableitung (Runde 2)
+   Tablet < 1024 · Mobile < 768 – nur Skalierung, keine neuen Werte-Quellen.
+   ========================================================================== */
+
+@media (max-width: 1023px) {
+  :root {
+    --pad: 32px;
+    --section-gap: 132px;
+    --rail-pad: 26px;
+    /* Wortmarke auf Tablet etwas dominanter als die Desktop-Skala (18vw) */
+    --fs-hero: clamp(5rem, 20vw, 12rem);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --pad: 20px;
+    --section-gap: 104px;
+    --step-h: 44px;
+    --cell: 40px;
+    --gutter: 16px;
+    --rail-pad: 16px;
+    /* Wortmarke ~85 % der Inhaltsbreite; Peak-Zustand (Welle) muss noch passen */
+    --fs-hero: clamp(4.25rem, 23vw, 10rem);
+    --fs-display2: clamp(1.875rem, 8vw, 2.75rem);
+    --fs-h2: clamp(1.75rem, 8vw, 2.5rem);
+    --fs-service: clamp(1.625rem, 7vw, 2.25rem);
+  }
+
+  html { scroll-padding-top: 88px; }
+
+  .pill-label {
+    font-size: 1.1875rem;
+    padding: 14px 28px;
+  }
+
+  .btn { padding: 14px 24px; }
+}

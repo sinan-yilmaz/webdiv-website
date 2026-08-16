@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- webdiv Zeichen, Variante 1: Monoline.
+       Konstruktion: drei exakt gleich lange Striche (65 Einheiten) in einem Quadrat.
+       Schraegstrich: dx 16 / dy 63 (16-63-65). Winkelstriche: je dx 56 / dy 33 (33-56-65).
+       Slash und unterer Winkelstrich sind gegensinnig geneigt, Ober- und Unterkanten
+       der drei Striche fluchten (y 27/28.5 bzw. 91.5/93).
+       Strichstaerke 9, eckige Enden (butt), Gehrungs-Scheitel. -->
+  <path class="mark-slash" d="M16 91.5 L32 28.5" stroke="currentColor" stroke-width="9"/>
+  <path class="mark-angle" d="M48 27 L104 60 L48 93" stroke="currentColor" stroke-width="9" stroke-linejoin="miter"/>
+</svg>

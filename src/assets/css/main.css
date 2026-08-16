@@ -1,0 +1,1202 @@
+/* ==========================================================================
+   webdiv – Layout, Komponenten, Sektionen (Runde 1, Desktop 1440)
+   ========================================================================== */
+
+body { overflow-x: clip; }
+
+/* ==========================================================================
+   Preloader
+   ========================================================================== */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background-color: var(--paper);
+  display: grid;
+  place-items: center;
+  transition: opacity 500ms var(--ease);
+}
+.preloader.done { opacity: 0; pointer-events: none; }
+.preloader[hidden] { display: none; }
+
+.preloader-sig {
+  width: min(520px, 44vw);
+  transform-origin: center;
+  will-change: transform, opacity;
+  /* im statischen HTML unsichtbar, sonst blitzt die fertige Kontur vor der
+     Schreib-Animation auf; JS schaltet beim Schreibstart auf visible */
+  visibility: hidden;
+}
+.preloader-sig svg { width: 100%; height: auto; overflow: visible; }
+.preloader-sig .sig-glyph {
+  stroke: var(--cobalt);
+  stroke-width: 2.2;
+  fill: var(--cobalt);
+  fill-opacity: 0;
+}
+
+/* Erstbesuchs-Veil: deckt die statisch gerenderte Seite ab, bis der
+   React-Preloader uebernimmt (Attribut setzt ein Inline-Script im Layout,
+   der Preloader entfernt es beim Mount). */
+html[data-intro-pending] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(ellipse 75% 90% at center, rgb(242 239 233 / 0) 22%, rgb(242 239 233 / 0.55) 55%, var(--paper) 92%),
+    linear-gradient(rgb(17 17 17 / 0.06) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgb(17 17 17 / 0.06) 1.5px, transparent 1.5px);
+  background-size: 100% 100%, var(--cell) var(--cell), var(--cell) var(--cell);
+}
+html[data-intro-pending] .site-nav { opacity: 0; }
+
+/* ==========================================================================
+   Navigation – Glas-Pille, sticky oben zentriert
+   ========================================================================== */
+
+.site-nav {
+  position: fixed;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  transition: transform 350ms var(--ease), opacity 350ms var(--ease);
+}
+.site-nav.nav-hidden {
+  transform: translate(-50%, -180%);
+  opacity: 0;
+}
+
+.nav-pill {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 9px 9px 9px 22px;
+  border-radius: var(--r-pill);
+  background: rgb(242 239 233 / 0.72);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: background var(--t-micro) var(--ease), border-color var(--t-micro) var(--ease), color var(--t-micro) var(--ease);
+}
+
+.nav-lockup {
+  display: flex;
+  align-items: center;
+  /* Abstand Zeichen–Wortmarke = Strichstaerke x 2 (Variante 2: 16/120 -> bei 21px Zeichen 5.6px) */
+  gap: 6px;
+  color: var(--ink);
+}
+.nav-lockup svg { width: 21px; height: 21px; overflow: visible; }
+.nav-lockup .lockup-word { font-size: 1.0625rem; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a {
+  font-size: 0.9063rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0.82;
+  transition: opacity var(--t-micro) var(--ease);
+}
+.nav-links a:hover { opacity: 1; }
+
+/* Invertierung auf dunklen / kobaltfarbenen Sektionen */
+.site-nav.on-dark .nav-pill {
+  background: rgb(18 18 18 / 0.55);
+  border-color: var(--line-dark);
+  color: var(--on-dark);
+}
+.site-nav.on-dark .nav-lockup { color: var(--on-dark); }
+.site-nav.on-dark .btn-primary { background: var(--paper); color: var(--ink); }
+.site-nav.on-dark .btn-primary:hover { background: #FFFFFF; }
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 640px;
+  background-color: var(--paper);
+  overflow: clip;
+}
+
+/* Unterschrift – Ruheposition ueber der Wortmarke (Landeplatz des
+   Preloader-Flugs); erscheint ohne Transition, damit die fliegende
+   Preloader-Kopie deckungsgleich uebergeben kann */
+.hero-sig {
+  position: absolute;
+  top: 21svh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(150px, 13vw, 210px);
+  color: var(--cobalt);
+  opacity: 0;
+}
+.hero.revealed .hero-sig { opacity: 1; }
+.hero-sig svg { width: 100%; height: auto; overflow: visible; }
+.hero-sig .sig-glyph {
+  stroke: currentColor;
+  stroke-width: 2.2;
+  fill: currentColor;
+}
+
+.hero-mark-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  padding-top: 0.08em;
+}
+.hero-mark {
+  font-size: var(--fs-hero);
+  white-space: nowrap;
+  display: block;
+  transform: translateY(105%);
+  will-change: transform;
+  margin-bottom: -0.09em; /* Baseline optisch auf die Haarlinie setzen */
+  user-select: none;
+  -webkit-user-select: none;
+}
+.hero.revealed .hero-mark {
+  transform: translateY(0);
+  transition: transform 1100ms var(--ease);
+}
+.hero-mark .ltr {
+  display: inline-block;
+  font-variation-settings: "wght" var(--hero-wght-base), "wdth" var(--hero-wdth-base);
+  letter-spacing: var(--wordmark-track);
+}
+/* Kein Nachlauf-Tracking hinter dem letzten Buchstaben: das negative
+   letter-spacing macht die Zeilenbox sonst schmaler als die Glyphen und
+   overflow: hidden (Reveal) schneidet das "v" rechts an */
+.hero-mark .ltr:last-child { letter-spacing: 0; }
+
+.hero-sub {
+  position: absolute;
+  /* unterhalb der vertikal zentrierten Wortmarke (halbe Markenbox + Luft) */
+  top: calc(50% + var(--fs-hero) * 0.46);
+  /* Luft unter der Wortmarke (skaliert mit der Marke) */
+  --sub-gap: calc(var(--fs-hero) * 0.22);
+  /* Laenge der Fuehrungslinie – bestimmt zugleich den Einzug der Zeile
+     (Zeile = Rail + Linie + 18px Luecke) */
+  --sub-line: calc(2 * (var(--sub-gap) - 18px));
+  display: flex;
+  align-items: baseline;
+  /* -16px: Baseline-Ueberhang der Wortmarke + Versalien-Anschnitt der Zeile,
+     damit die sichtbare Luft optisch dem --sub-gap entspricht */
+  padding-top: calc(var(--sub-gap) - 16px);
+  font-size: 1.25rem;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(14px);
+}
+.hero-sub.sub-left { left: calc(var(--rail-inset) + var(--sub-line) + 18px); }
+.hero-sub.sub-right { right: calc(var(--rail-inset) + var(--sub-line) + 18px); }
+/* Fuehrungslinien: beginnen buendig an der Rail-Haarlinie, enden 18 px vor
+   der Subzeile, auf der Versalien-Mitte; faden mit der Zeile ein */
+.hero-sub::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--sub-gap) - 1px); /* padding-top + Zeilenmitte */
+  width: var(--sub-line);
+  border-top: 1px solid var(--line);
+}
+.hero-sub.sub-left::before { right: calc(100% + 18px); }
+.hero-sub.sub-right::before { left: calc(100% + 18px); }
+.hero.revealed .hero-sub {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+}
+.hero.revealed .sub-left { transition-delay: 650ms; }
+.hero.revealed .sub-right { transition-delay: 830ms; }
+
+/* ==========================================================================
+   Portraet-Block + Statement (Stacking)
+   ========================================================================== */
+
+.stack { position: relative; }
+
+.portrait {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 640px;
+  background: var(--dark-photo);
+  z-index: 1;
+}
+
+/* Compositing-Gruppe Strich + Foto: Scroll-Opacity liegt hier, damit der Kopf
+   die Linie auch im halbtransparenten Zustand vollstaendig verdeckt */
+.portrait-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  /* Startwert des Scroll-Fade-ins – JS uebernimmt ab dem ersten Frame */
+  opacity: 0.15;
+  will-change: opacity;
+}
+.portrait-figure {
+  position: absolute;
+  left: 50%;
+  top: 11svh;
+  transform: translateX(-50%);
+  height: 66svh;
+  aspect-ratio: 3 / 4;
+  z-index: 3;
+  will-change: transform;
+}
+.portrait-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Crop-Ausgleich: Motiv sitzt im aktuellen Foto ~4 % rechts der Bildmitte –
+     entfernen, sobald ein mittig gecropptes Portraet vorliegt */
+  transform: translateX(-4%);
+  /* weiche radiale Abdunklung: Raender verlaufen in die Sektion */
+  -webkit-mask-image: radial-gradient(ellipse 74% 62% at 50% 40%, #000 46%, transparent 74%);
+  mask-image: radial-gradient(ellipse 74% 62% at 50% 40%, #000 46%, transparent 74%);
+}
+
+/* Platzhalter-Zustand, solange assets/img/portrait.jpg fehlt */
+.portrait-figure.missing {
+  border: 1px solid var(--line-dark);
+  border-radius: var(--r-card);
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  text-align: center;
+  color: var(--on-dark-dim);
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 34%, rgb(242 239 233 / 0.05), transparent 70%);
+}
+.portrait-figure.missing img { display: none; }
+.portrait-figure .missing-note { display: none; }
+.portrait-figure.missing .missing-note {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.04em;
+}
+.portrait-figure.missing .missing-note small {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.6875rem;
+  opacity: 0.7;
+}
+
+/* einzelner Kobalt-Strich hinter dem Kopf */
+.portrait-stroke {
+  position: absolute;
+  left: 50%;
+  top: 30svh;
+  transform: translateX(-50%);
+  width: min(920px, 74vw);
+  z-index: 2;
+  pointer-events: none;
+}
+.portrait-stroke path {
+  stroke: var(--cobalt);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+/* zweiter Stift-Durchgang: duenner, leicht transparent, versetzt gezeichnet */
+.portrait-stroke .stroke-echo {
+  stroke-width: 2.5;
+  opacity: 0.55;
+}
+
+/* drei Pill-Labels im unteren Drittel, ueber die volle Inhaltsbreite */
+.portrait-pills {
+  position: absolute;
+  left: var(--rail-inset);
+  right: var(--rail-inset);
+  bottom: 12svh;
+  /* 1fr auto 1fr statt space-between: die mittlere Pill bleibt exakt zentriert,
+     auch wenn die aeusseren Pills unterschiedlich breit sind */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  justify-items: center;
+  align-items: center;
+  padding: 0 48px;
+  z-index: 4;
+  /* JS schiebt die Gruppe mit der Oberkante der einfahrenden Statement-Sektion hoch */
+  will-change: transform;
+}
+.portrait-pills .pill-label:first-child { justify-self: start; }
+.portrait-pills .pill-label:last-child { justify-self: end; }
+.portrait-pills .pill-label {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+  transition-delay: calc(var(--ri) * var(--stagger));
+}
+.portrait.in .pill-label { opacity: 1; transform: none; }
+
+/* --- Statement --- */
+
+.statement {
+  position: relative;
+  z-index: 5;
+  background: var(--dark);
+  color: var(--on-dark);
+  height: 320vh;
+}
+.statement-inner {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 640px;
+  display: grid;
+  place-items: center;
+  overflow: clip;
+}
+.statement-text {
+  position: relative;
+  z-index: 2;
+  max-width: 26ch;
+  line-height: 1.1;
+  text-align: center;
+}
+.statement-text .w { color: rgb(242 239 233 / var(--wo, 0.28)); }
+.statement-text .w-strong {
+  font-variation-settings: "wght" 800;
+  color: var(--on-dark);
+}
+
+/* vier schwebende Objekte in flachem 3D */
+.float-obj {
+  position: absolute;
+  z-index: 1;
+  will-change: transform;
+  pointer-events: none;
+}
+.float-obj svg { overflow: visible; }
+.float-obj .st-paper { stroke: var(--on-dark); opacity: 0.85; }
+.float-obj .st-cobalt { stroke: var(--cobalt); }
+.float-obj path, .float-obj rect, .float-obj ellipse, .float-obj line, .float-obj circle {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+.obj-browser { top: 12svh; left: 5.5vw; width: 190px; }
+.obj-appcard { top: 15svh; right: 4.5vw; width: 170px; }
+.obj-db { bottom: 12svh; left: 7vw; width: 130px; }
+.obj-mark { bottom: 14svh; right: 7.5vw; width: 120px; }
+
+/* geschwungene Kobalt-Linie unter dem Text, laeuft nach unten aus dem Bild */
+.statement-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -42svh;
+  width: min(1000px, 76vw);
+  z-index: 1;
+  pointer-events: none;
+}
+.statement-line path {
+  stroke: var(--cobalt);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+/* ==========================================================================
+   Leistungen (gepinnt)
+   ========================================================================== */
+
+.services { background: var(--paper); }
+.services .pin-wrap { height: 300vh; }
+.services .pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.services .eyebrow { margin-bottom: 56px; }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 64px;
+  align-items: center;
+}
+
+.svc { border-top: 1px solid var(--line); padding: 26px 0; }
+.svc:last-child { border-bottom: 1px solid var(--line); }
+.svc-title {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-size: var(--fs-service);
+  font-weight: 640;
+  font-stretch: 103%;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  color: rgb(139 137 131 / 0.55);
+  transition: color 450ms var(--ease);
+}
+.svc.active .svc-title { color: var(--ink); }
+.svc-desc {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 550ms var(--ease), opacity 450ms var(--ease);
+  opacity: 0;
+}
+.svc.active .svc-desc { grid-template-rows: 1fr; opacity: 1; }
+.svc-desc > div { overflow: hidden; }
+.svc-desc p {
+  max-width: 52ch;
+  color: var(--ink-2);
+  padding-top: 18px;
+  font-size: var(--fs-body);
+}
+
+.svc-media {
+  position: relative;
+  aspect-ratio: 4 / 3.1;
+  border-radius: var(--r-card);
+  background: var(--paper-2);
+  overflow: hidden;
+}
+.svc-media .media-layer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 500ms var(--ease);
+}
+.svc-media .media-layer.active { opacity: 1; }
+.svc-media svg { width: 78%; height: auto; }
+
+/* Browserrahmen (Platzhalter Bucan-Screenshot) */
+.browser-frame {
+  width: 78%;
+  aspect-ratio: 16 / 10.5;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.browser-frame .bf-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.browser-frame .bf-bar i {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  border: 1px solid var(--ink-3);
+}
+.browser-frame .bf-url {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-3);
+  margin-left: 10px;
+  letter-spacing: 0.02em;
+}
+.browser-frame .bf-body {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  color: var(--ink-3);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  background: repeating-linear-gradient(-45deg, transparent 0 22px, rgb(17 17 17 / 0.025) 22px 23px);
+}
+
+/* Linienzeichnungen in den Medienkarten */
+.media-draw .ln { stroke: var(--ink); }
+.media-draw .ln-dim { stroke: var(--ink-3); }
+.media-draw .ln-cobalt { stroke: var(--cobalt); }
+.media-draw line, .media-draw rect, .media-draw path, .media-draw circle, .media-draw ellipse {
+  fill: none;
+  stroke-width: 1.5;
+}
+
+/* ==========================================================================
+   Projekte
+   ========================================================================== */
+
+.projects {
+  background: var(--paper);
+  padding: var(--section-gap) 0;
+}
+.projects .eyebrow { margin-bottom: 20px; }
+.projects .h2 { margin-bottom: 72px; }
+
+.project-list { border-top: 1px solid var(--line); }
+.project-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) auto 72px;
+  align-items: center;
+  gap: 32px;
+  padding: 34px 20px;
+  margin: 0 -20px;
+  border-radius: 14px;
+  transition: background var(--t-micro) var(--ease);
+  cursor: pointer;
+}
+.project-row::after {
+  content: "";
+  position: absolute;
+  left: 20px; right: 20px; bottom: 0;
+  border-bottom: 1px solid var(--line);
+}
+.project-row:hover { background: var(--paper-2); }
+
+.project-main { display: block; }
+.project-year {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+}
+.project-title {
+  display: block;
+  font-size: 1.9375rem; /* 31 px */
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+.project-sub {
+  display: block;
+  color: var(--ink-2);
+  font-size: var(--fs-body);
+  margin-top: 4px;
+}
+.project-meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
+  text-align: right;
+}
+.project-arrow {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  justify-self: end;
+}
+.project-arrow svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--ink);
+  transition: transform var(--t-micro) var(--ease);
+}
+.project-row:hover .project-arrow svg { transform: translateX(6px); }
+
+/* Vorschaubild + Cursor-Pill folgen dem Zeiger (nur Desktop) */
+.proj-thumb {
+  position: fixed;
+  top: 0; left: 0;
+  width: 240px;
+  height: 160px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.9);
+  transition: opacity 250ms var(--ease);
+  will-change: transform;
+  overflow: hidden;
+}
+.cursor-pill {
+  position: fixed;
+  top: 0; left: 0;
+  background: var(--cobalt);
+  color: var(--on-cobalt);
+  font-size: 0.9375rem;
+  font-weight: 550;
+  line-height: 1;
+  padding: 13px 22px;
+  border-radius: var(--r-pill);
+  pointer-events: none;
+  z-index: 91;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
+  transition: opacity 250ms var(--ease);
+  will-change: transform;
+  white-space: nowrap;
+}
+.proj-thumb.on, .cursor-pill.on { opacity: 1; }
+
+/* ==========================================================================
+   Ablauf
+   ========================================================================== */
+
+.process {
+  background: var(--paper-2);
+  padding: calc(var(--section-gap) * 0.75) 0;
+}
+.process .eyebrow { margin-bottom: 20px; }
+.process .h2 { margin-bottom: 88px; }
+
+.process-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.process-col {
+  padding: 8px 36px 20px 28px;
+  border-left: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 750ms var(--ease), transform 750ms var(--ease);
+  transition-delay: calc(var(--ri) * var(--stagger));
+}
+.process.in .process-col { opacity: 1; transform: none; }
+.process-num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  color: var(--cobalt);
+  display: block;
+  margin-bottom: 26px;
+}
+.process-col h3 {
+  font-size: 1.5rem;
+  font-weight: 620;
+  letter-spacing: -0.015em;
+  margin-bottom: 14px;
+}
+.process-col p { color: var(--ink-2); font-size: var(--fs-body); }
+
+.process-note {
+  margin-top: 88px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  color: var(--ink-2);
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   Ueber mich
+   ========================================================================== */
+
+.about {
+  background: var(--paper);
+  padding: var(--section-gap) 0;
+}
+.about .eyebrow { margin-bottom: 64px; }
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 96px;
+  align-items: center;
+}
+.about-figure {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  background: var(--dark-photo);
+}
+.about-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+}
+.about-figure.missing {
+  display: grid;
+  place-content: center;
+  text-align: center;
+  color: var(--on-dark-dim);
+  background:
+    radial-gradient(ellipse 70% 52% at 50% 38%, rgb(242 239 233 / 0.05), transparent 72%),
+    var(--dark-photo);
+}
+.about-figure.missing img { display: none; }
+.about-figure .missing-note { display: none; }
+.about-figure.missing .missing-note {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+}
+.about-text p {
+  max-width: 60ch;
+  font-size: 1.375rem;
+  line-height: 1.55;
+}
+.about-sig {
+  margin-top: 56px;
+  width: 230px;
+  color: var(--cobalt);
+}
+.about-sig svg { width: 100%; height: auto; overflow: visible; }
+.about-sig .sig-glyph {
+  stroke: currentColor;
+  stroke-width: 2.2;
+  fill: currentColor;
+  fill-opacity: 0;
+}
+
+/* ==========================================================================
+   Kontakt / Footer (Kobalt)
+   ========================================================================== */
+
+.contact {
+  position: relative;
+  background: var(--cobalt);
+  color: var(--on-cobalt);
+  overflow: clip;
+}
+.contact-bg-mark {
+  position: absolute;
+  left: 50%;
+  bottom: -0.24em;
+  transform: translateX(-50%) translateY(18%);
+  font-size: clamp(12rem, 24vw, 22rem);
+  color: var(--paper);
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 900ms var(--ease), transform 900ms var(--ease);
+}
+.contact.in .contact-bg-mark {
+  opacity: 0.1;
+  transform: translateX(-50%) translateY(0);
+  transition-delay: 150ms;
+}
+
+.contact-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  padding-top: 26px;
+}
+.pixel-portrait {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(20px) ;
+  transition: opacity 800ms var(--ease), transform 800ms var(--ease);
+}
+.contact.in .pixel-portrait { opacity: 1; transform: none; }
+.pixel-portrait canvas {
+  width: 168px;
+  height: 168px;
+  image-rendering: pixelated;
+}
+.pixel-portrait .missing-note {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.contact-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 6.5fr) minmax(0, 4.5fr);
+  gap: 110px;
+  /* padding-block statt Shorthand: das padding-inline kommt vom .container */
+  padding-block: 96px 140px;
+  align-items: start;
+}
+.contact-intro .display2 {
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 850ms var(--ease), transform 850ms var(--ease);
+  transition-delay: 320ms;
+}
+.contact-intro p {
+  max-width: 46ch;
+  font-size: var(--fs-body);
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 850ms var(--ease), transform 850ms var(--ease);
+  transition-delay: 440ms;
+}
+.contact.in .contact-intro .display2,
+.contact.in .contact-intro p { opacity: 1; transform: none; }
+.contact.in .contact-intro p { opacity: 0.92; }
+
+.contact-form-wrap {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 850ms var(--ease), transform 850ms var(--ease);
+  transition-delay: 580ms;
+}
+.contact.in .contact-form-wrap { opacity: 1; transform: none; }
+
+.contact-form { display: grid; gap: 34px; --field-line: rgb(242 239 233 / 0.44); }
+.contact-form textarea { resize: none; min-height: 96px; }
+.contact-form .btn { justify-self: start; margin-top: 6px; }
+.form-direct {
+  margin-top: 26px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+}
+.form-message {
+  display: none;
+  font-size: var(--fs-body);
+  border-top: 1px solid var(--line-cobalt);
+  padding-top: 22px;
+  margin-top: 6px;
+}
+.contact-form.sent .form-message.ok { display: block; }
+.contact-form.failed .form-message.err { display: block; }
+
+.contact-footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--line-cobalt);
+  padding: 26px 0 30px;
+  opacity: 0;
+  transition: opacity 900ms var(--ease);
+  transition-delay: 850ms;
+}
+.contact.in .contact-footer { opacity: 1; }
+.contact-footer .container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.78125rem; /* 12.5 px */
+  letter-spacing: 0.02em;
+}
+.contact-footer .cf-right { text-align: right; }
+.contact-footer .cf-mid { text-align: center; }
+.contact-footer b { font-weight: 700; }
+.contact-footer a { text-decoration: none; }
+.contact-footer a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ==========================================================================
+   Generische Reveals
+   ========================================================================== */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--t-reveal) var(--ease), transform var(--t-reveal) var(--ease);
+  transition-delay: calc(var(--ri, 0) * var(--stagger));
+}
+[data-reveal].in { opacity: 1; transform: none; }
+
+/* ==========================================================================
+   Menü-Overlay (Nav unter 1024 px) – dunkles Kapitel in der Formensprache
+   der Site: Punktraster, maskierte Link-Reveals, Kobalt nur als Akzent.
+   Gerendert nur bei geoeffnetem Menue (React), Einblendung als Animation.
+   ========================================================================== */
+
+.nav-menu-toggle {
+  display: none;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 12px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  transition: border-color var(--t-micro) var(--ease);
+}
+
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: none;
+  background-color: var(--dark);
+  color: var(--on-dark);
+  animation: nav-overlay-in 380ms var(--ease);
+}
+@keyframes nav-overlay-in {
+  from { opacity: 0; }
+}
+
+.nav-overlay-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 118px var(--pad) calc(30px + env(safe-area-inset-bottom));
+}
+
+.nav-overlay-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.nav-overlay-links li { overflow: hidden; }
+.nav-overlay-links a {
+  display: inline-block;
+  font-size: clamp(2.125rem, 8.5vw, 3.25rem);
+  font-weight: 620;
+  font-stretch: 102%;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  transform: translateY(112%);
+  animation: nav-link-in 620ms var(--ease) forwards;
+  animation-delay: calc(90ms + var(--ri, 0) * 65ms);
+}
+.nav-overlay-links a:active { color: var(--cobalt); }
+@keyframes nav-link-in {
+  to { transform: translateY(0); }
+}
+
+.nav-overlay-foot {
+  display: grid;
+  justify-items: start;
+  gap: 22px;
+  opacity: 0;
+  animation: nav-foot-in 500ms var(--ease) 420ms forwards;
+}
+@keyframes nav-foot-in {
+  to { opacity: 1; }
+}
+.nav-overlay-place {
+  color: var(--on-dark);
+  opacity: 0.55;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Responsive-Ableitung (Runde 2) – Tablet < 1024 px, Mobile < 768 px.
+   Grundwerte (Raster, Typo-Skalen, Abstaende) kommen aus tokens.css.
+   ========================================================================== */
+
+/* Touch-Geraete: Cursor-Follower sind Zeiger-Instrumente, ohne Zeiger weg */
+@media (pointer: coarse) {
+  .proj-thumb,
+  .cursor-pill { display: none; }
+}
+
+/* --- Tablet + Mobile (< 1024): kompakte Nav, gestapelte Leistungen --- */
+
+@media (max-width: 1023px) {
+  /* Nav-Pille: nur Lockup + Menü-Knopf, Links und CTA ziehen ins Overlay */
+  .nav-pill { gap: 16px; }
+  .nav-links,
+  .nav-pill > .btn-primary { display: none; }
+  .nav-menu-toggle { display: inline-flex; }
+  .nav-overlay { display: block; }
+  .site-nav.on-dark .nav-menu-toggle,
+  .site-nav.menu-open .nav-menu-toggle { border-color: var(--line-dark); }
+  .site-nav.menu-open .nav-pill {
+    background: rgb(18 18 18 / 0.55);
+    border-color: var(--line-dark);
+    color: var(--on-dark);
+  }
+  .site-nav.menu-open .nav-lockup { color: var(--on-dark); }
+  /* Prototyp-Regler unter das Menue-Overlay (verdeckt sonst dessen Fusszeile) */
+  .controls { z-index: 90; }
+
+  /* Leistungen: Pin aufgeloest, Eintraege als gestapelte Karten, alle offen */
+  .services .pin-wrap { height: auto; }
+  .services .pin {
+    position: static;
+    height: auto;
+    min-height: 0;
+    display: block;
+    padding: calc(var(--section-gap) * 0.75) 0;
+  }
+  .services .eyebrow { margin-bottom: 40px; }
+  .services-grid { display: block; }
+  .svc-media { display: none; }
+  .services-list { display: grid; gap: 14px; }
+  .svc,
+  .svc:last-child { border: 0; }
+  .svc {
+    background: var(--paper-2);
+    border-radius: var(--r-card);
+    padding: 26px 24px 30px;
+  }
+  .svc-title {
+    color: var(--ink);
+    cursor: default;
+    font-size: clamp(1.625rem, 3.5vw, 2.25rem);
+  }
+  .svc-desc { grid-template-rows: 1fr; opacity: 1; }
+  .svc-desc p { padding-top: 12px; }
+
+  /* Projekte: Zeile bricht in Jahr / Titel / Meta, Pfeil bleibt rechts
+     (das Desktop-Grid quetscht den Titel schon auf Tablet-Breite) */
+  .projects .h2 { margin-bottom: 48px; }
+  .project-row {
+    grid-template-areas:
+      "year arrow"
+      "main arrow"
+      "meta arrow";
+    grid-template-columns: minmax(0, 1fr) 48px;
+    gap: 6px 16px;
+    padding: 24px 6px;
+    margin: 0 -6px;
+  }
+  .project-row::after { left: 6px; right: 6px; }
+  .project-year { grid-area: year; }
+  .project-main { grid-area: main; }
+  .project-meta { grid-area: meta; text-align: left; }
+  .project-arrow {
+    grid-area: arrow;
+    width: 48px;
+    height: 48px;
+    align-self: center;
+  }
+
+  /* Ablauf: 2 x 2 */
+  .process .h2 { margin-bottom: 64px; }
+  .process-cols { grid-template-columns: 1fr 1fr; row-gap: 44px; }
+  .process-col { padding: 8px 24px 16px 24px; }
+  .process-note { margin-top: 64px; }
+
+  /* Engere Spalten-Gaps */
+  .about-grid { gap: 56px; }
+  .contact-grid { gap: 64px; padding-block: 88px 120px; }
+}
+
+/* --- Mobile (< 768): einspaltig, zentrierte Hero-Subzeilen --- */
+
+@media (max-width: 767px) {
+  /* Nav: volle Breite – Lockup links, Menü rechts, Seitenrand = top-Abstand */
+  .site-nav {
+    left: 22px;
+    right: 22px;
+    transform: none;
+  }
+  .site-nav.nav-hidden { transform: translateY(-180%); }
+  .nav-pill { justify-content: space-between; }
+
+  /* Hero: Subzeilen mittig unter der Wortmarke gestapelt */
+  .hero { min-height: 560px; }
+  .hero-sig { top: 17svh; width: 128px; }
+  .hero-sub {
+    padding-top: 0;
+    font-size: 1.0625rem;
+    white-space: nowrap;
+  }
+  /* gestapelte Zeilen sind mittig – Fuehrungslinien entfallen */
+  .hero-sub::before { display: none; }
+  .hero-sub.sub-left {
+    left: 50%;
+    right: auto;
+    top: calc(50% + var(--fs-hero) * 0.52 + 12px);
+    transform: translate(-50%, 14px);
+  }
+  .hero-sub.sub-right {
+    left: 50%;
+    right: auto;
+    top: calc(50% + var(--fs-hero) * 0.52 + 54px);
+    transform: translate(-50%, 14px);
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+  .hero.revealed .hero-sub { transform: translate(-50%, 0); }
+
+  /* Portraet: Figur ueber die Breite, Pills kompakt in einer Reihe */
+  .portrait { min-height: 560px; }
+  .portrait-figure {
+    top: 12svh;
+    height: auto;
+    width: min(76vw, 360px);
+  }
+  .portrait-stroke { top: 27svh; width: 94vw; }
+  /* Rollen-Titel unter 768 px vertikal gestapelt statt nebeneinander */
+  .portrait-pills { bottom: 7svh; padding: 0 8px; grid-template-columns: auto; gap: 18px; }
+  .portrait-pills .pill-label:first-child,
+  .portrait-pills .pill-label:last-child { justify-self: center; }
+
+  /* Statement: kuerzere Scroll-Strecke, Objekte klein in den Ecken */
+  .statement { height: 260vh; }
+  .statement-inner { min-height: 560px; }
+  .statement-text {
+    max-width: none;
+    padding-inline: calc(var(--pad) + 8px);
+  }
+  .obj-browser { width: 112px; top: 8svh; left: 4vw; }
+  .obj-appcard { width: 96px; top: 10svh; right: 4vw; }
+  .obj-db { width: 76px; bottom: 9svh; left: 6vw; }
+  .obj-mark { width: 62px; bottom: 10svh; right: 8vw; }
+  .statement-line { width: 94vw; }
+
+  /* Projekte: kompaktere Titelzeile */
+  .project-title { font-size: 1.5rem; }
+
+  /* Ueber mich: einspaltig */
+  .about .eyebrow { margin-bottom: 40px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-figure { max-width: 420px; }
+  .about-text p { font-size: 1.1875rem; }
+  .about-sig { margin-top: 40px; width: 190px; }
+
+  /* Kontakt: einspaltig, Footer zentriert gestapelt */
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding-block: 56px 88px;
+  }
+  .contact-bg-mark { font-size: clamp(7rem, 32vw, 12rem); }
+  .contact-intro .display2 { margin-bottom: 24px; }
+  .contact-form { gap: 28px; }
+  .contact-footer { padding-bottom: max(26px, env(safe-area-inset-bottom)); }
+  .contact-footer .container {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    justify-items: center;
+  }
+  .contact-footer .cf-left,
+  .contact-footer .cf-mid,
+  .contact-footer .cf-right { text-align: center; }
+
+  /* Werkzeuge */
+  .preloader-sig { width: min(300px, 64vw); }
+}
+
+/* --- Schmale Geraete: Ablauf einspaltig als Zeitleiste --- */
+
+@media (max-width: 559px) {
+  .process-cols { grid-template-columns: 1fr; row-gap: 0; }
+  .process-col { padding: 22px 0 26px 20px; }
+  .process-num { margin-bottom: 16px; }
+}
