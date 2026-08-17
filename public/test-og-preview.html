@@ -1,0 +1,136 @@
+<!doctype html>
+<!-- Nur fuer lokale Checks: stellt nach, wie die Link-Vorschau mit den
+     aktuellen Meta-Tags + /og-image.jpg in gaengigen Diensten aussehen
+     wuerde (Mockups, keine echten Renderer). Nicht deployen. -->
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<title>og-preview-test</title>
+<style>
+  :root { color-scheme: light; }
+  * { margin: 0; box-sizing: border-box; }
+  body {
+    background: #2b2b2b;
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    padding: 28px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 560px));
+    gap: 28px;
+    justify-content: center;
+  }
+  .panel { background: #fff; border-radius: 10px; padding: 22px; }
+  .panel > h2 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 16px;
+  }
+
+  /* --- Google-SERP (Title/Description, ohne Bild) --- */
+  .serp { max-width: 600px; }
+  .serp .site {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
+  }
+  .serp .site img { width: 26px; height: 26px; border-radius: 50%; background: #f1f3f4; padding: 4px; }
+  .serp .site .name { font-size: 14px; color: #202124; }
+  .serp .site .url { font-size: 12px; color: #4d5156; }
+  .serp .title {
+    font-size: 20px; line-height: 1.3; color: #1a0dab; margin-bottom: 4px;
+    font-weight: 400; cursor: pointer;
+  }
+  .serp .desc { font-size: 14px; line-height: 1.58; color: #4d5156; }
+
+  /* --- WhatsApp --- */
+  .wa-bg { background: #e5ddd5; border-radius: 8px; padding: 18px; }
+  .wa-bubble {
+    background: #dcf8c6; border-radius: 8px; padding: 5px; max-width: 340px;
+    box-shadow: 0 1px 0.5px rgb(0 0 0 / 0.13);
+  }
+  .wa-card { background: #cfe9ba; border-radius: 6px; overflow: hidden; }
+  .wa-card img { display: block; width: 100%; aspect-ratio: 1200 / 630; object-fit: cover; }
+  .wa-card .txt { padding: 8px 10px; }
+  .wa-card .t { font-size: 13.5px; font-weight: 600; color: #111; margin-bottom: 2px; }
+  .wa-card .d {
+    font-size: 12.5px; color: #555; line-height: 1.35;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .wa-card .u { font-size: 11.5px; color: #888; margin-top: 3px; }
+  .wa-link { padding: 6px 10px 8px; font-size: 13.5px; color: #039be5; word-break: break-all; }
+
+  /* --- LinkedIn --- */
+  .li-card { border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; max-width: 520px; }
+  .li-card img { display: block; width: 100%; aspect-ratio: 1200 / 630; object-fit: cover; }
+  .li-card .txt { padding: 10px 14px; background: #f9fafb; }
+  .li-card .t { font-size: 15px; font-weight: 600; color: rgb(0 0 0 / 0.9); line-height: 1.35; }
+  .li-card .u { font-size: 12.5px; color: rgb(0 0 0 / 0.6); margin-top: 4px; }
+
+  /* --- X / Twitter --- */
+  .x-card {
+    position: relative; border-radius: 16px; overflow: hidden;
+    border: 1px solid #cfd9de; max-width: 520px;
+  }
+  .x-card img { display: block; width: 100%; aspect-ratio: 1200 / 630; object-fit: cover; }
+  .x-card .badge {
+    position: absolute; left: 12px; bottom: 12px;
+    background: rgb(0 0 0 / 0.77); color: #fff;
+    font-size: 13px; padding: 2px 8px; border-radius: 4px;
+  }
+  .x-note { font-size: 13px; color: #536471; margin-top: 6px; }
+</style>
+</head>
+<body>
+  <div class="panel">
+    <h2>Google-Suche (Title + Description, ohne Bild)</h2>
+    <div class="serp">
+      <div class="site">
+        <img src="/icon.svg" alt="" />
+        <div>
+          <div class="name">webdiv</div>
+          <div class="url">https://webdiv.de</div>
+        </div>
+      </div>
+      <div class="title">webdiv – Websites &amp; Web-Anwendungen. Sinan Yilmaz, Günzburg</div>
+      <div class="desc">Digitale Lösungen, die mehr können als gut aussehen: Firmen-Websites und Web-Anwendungen, entworfen und entwickelt von Sinan Yilmaz – webdiv, Günzburg.</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>WhatsApp</h2>
+    <div class="wa-bg">
+      <div class="wa-bubble">
+        <div class="wa-card">
+          <img src="/og-image.jpg" alt="" />
+          <div class="txt">
+            <div class="t">webdiv – Websites &amp; Web-Anwendungen. Sinan Yilmaz, Günzburg</div>
+            <div class="d">Digitale Lösungen, die mehr können als gut aussehen: Firmen-Websites und Web-Anwendungen, entworfen und entwickelt von Sinan Yilmaz – webdiv, Günzburg.</div>
+            <div class="u">webdiv.de</div>
+          </div>
+        </div>
+        <div class="wa-link">https://webdiv.de</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>LinkedIn / Slack</h2>
+    <div class="li-card">
+      <img src="/og-image.jpg" alt="" />
+      <div class="txt">
+        <div class="t">webdiv – Websites &amp; Web-Anwendungen. Sinan Yilmaz, Günzburg</div>
+        <div class="u">webdiv.de</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>X (summary_large_image)</h2>
+    <div class="x-card">
+      <img src="/og-image.jpg" alt="" />
+      <div class="badge">webdiv.de</div>
+    </div>
+    <div class="x-note">X zeigt Title/Description nicht mehr an – nur Bild + Domain.</div>
+  </div>
+</body>
+</html>

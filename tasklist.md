@@ -85,6 +85,24 @@
 - [ ] Case Study durchlesen: http://localhost:3000/projekte/bucan-eventservice (Projekte-Zeile auf der Startseite verlinkt sie); Texte und Seitentitel/Description sind [Vorschlag] – bitte absegnen
 - [ ] Von der Case Study aus „Erstgespräch“ klicken: Startseite lädt mit Intro und fährt danach zur Kontakt-Sektion – Verhalten ok?
 
+## Fertig (SEO/Meta-Grundausstattung, 17.08.2026)
+
+- [x] Meta-Description neu am Statement ausgerichtet (Variante A, abgesegnet); Domain: webdiv.de
+- [x] `metadataBase` + Canonicals, OpenGraph/Twitter-Tags (Startseite + Case Study), `viewport`/themeColor (Papier)
+- [x] OG-Bild 1200×630 (`public/og-image.jpg`): Lockup V3-Icon + Wortmarke auf Papier mit Karo-Raster, echte Markenfonts
+- [x] JSON-LD nach Bucan-Blaupause: WebSite + LocalBusiness (nur belegte Fakten, ohne E-Mail/Telefon-Platzhalter; ProfessionalService wäre naheliegend, ist aber laut schema.org deprecated – geprüft 17.08.2026)
+- [x] `public/robots.txt` + `public/sitemap.xml` (statisch, wie Bucan)
+- [x] `app/apple-icon.tsx` (180×180) + `app/icon.tsx` (64×64 PNG-Fallback zum SVG-Favicon), generiert aus der V3-Geometrie
+- [x] „Über mich“: sr-only-h2 ergänzt (einzige Sektion ohne Überschrift – Outline/SEO)
+
+## Offen aus dem Bucan-Abgleich (für Deploy-Phase)
+
+- [ ] `not-found.tsx` (eigene 404 wie Bucan, inkl. `ErrorDocument 404` in der .htaccess)
+- [ ] SkipLink im Layout (a11y; Bucan hat einen)
+- [ ] `.htaccess` (Caching für `_next/static`, Schutz der Formular-Config) + GitHub-Actions-Deploy (`deploy.yml`) – erst wenn Hosting steht
+- [ ] `favicon.ico` als Alt-Client-Fallback (optional; SVG + PNG decken moderne Browser ab)
+- [ ] JSON-LD um E-Mail/Telefon ergänzen, sobald die [Platzhalter] ersetzt sind; Impressum/Datenschutz in die Sitemap aufnehmen, sobald die Seiten existieren
+
 ## Offene Entscheidungen (Feedback nötig)
 
 - [ ] Hero-Wortmarke: mit Token-Skala ~62 % der Inhaltsbreite statt ~80 % aus dem Briefing – Skala behalten oder auf ~22,5vw vergrößern?
@@ -93,13 +111,13 @@
 - [ ] Eyebrows in `--ink-3` (13 px) ≈ 3,2:1 Kontrast, unter AA – so lassen oder auf `--ink-2` heben?
 - [ ] Regler-Toggle unten links verdeckt am Seitenende „created by webdiv“ – Position ok (nur Prototyp-Werkzeug)?
 - [ ] Nav-Button „Erstgespräch“ springt zu `#kontakt` – gewünschtes Verhalten?
-- [ ] Ergänzte [Vorschlag]-Texte absegnen: Seitentitel, Meta-Description, Formular-Validierungstexte, Platzhalter-Labels
+- [ ] Ergänzte [Vorschlag]-Texte absegnen: Seitentitel, Formular-Validierungstexte, Platzhalter-Labels (Meta-Description: Variante A am 17.08.2026 abgesegnet)
 
 ## Meine Todos (Assets liefern)
 
 - [ ] Porträtfoto (frontal, schwarzer Hintergrund) als `public/portrait.jpg` ablegen → Porträt-Block und Über-mich übernehmen es automatisch
 - [ ] Echte Unterschrift als SVG-Einstrich-Pfad (ersetzt Mr-Dafoe-Platzhalter in `src/core/consts/signature.ts`)
-- [ ] E-Mail-Adresse, Domain, Impressumsdaten (stehen als sichtbare `[Platzhalter]` in `src/core/consts/content.ts`)
+- [ ] E-Mail-Adresse, Impressumsdaten (stehen als sichtbare `[Platzhalter]` in `src/core/consts/content.ts`); Domain webdiv.de ist seit 17.08.2026 hinterlegt
 - [ ] Bucan-Screenshots (für Leistungs-Karte 1, Projekt-Vorschaubild); Case Study: Startseiten-Screenshot als `public/projekte/bucan/screen-home.webp` ablegen → Browserrahmen übernimmt ihn automatisch
 
 ## Runde 2 (nächste Session)

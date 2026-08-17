@@ -3,9 +3,13 @@
    bis die echten Angaben vorliegen (siehe tasklist.md). */
 
 export const site = {
+  url: 'https://webdiv.de',
   title: 'webdiv – Websites & Web-Anwendungen. Sinan Yilmaz, Günzburg',
+  /* Description am Statement ausgerichtet ("mehr können als gut aussehen"),
+     Variante A – abgesegnet 17.08.2026 */
   description:
-    'webdiv gestaltet und entwickelt Firmen-Websites und Web-Anwendungen – von der ersten Skizze bis zum Livegang. Sinan Yilmaz, Webentwickler in Günzburg.',
+    'Digitale Lösungen, die mehr können als gut aussehen: Firmen-Websites und Web-Anwendungen, entworfen und entwickelt von Sinan Yilmaz – webdiv, Günzburg.',
+  ogImage: '/og-image.jpg',
 } as const;
 
 export const marke = {
@@ -124,6 +128,7 @@ export const ablauf = {
 
 export const ueberMich = {
   eyebrow: 'Über mich',
+  titel: 'Über mich',
   bildAlt: 'Sinan Yilmaz, engerer Bildausschnitt',
   text: 'Ich bin Sinan Yilmaz, Webentwickler aus Günzburg. Seit über zehn Jahren baue ich Oberflächen und Anwendungen für den Browser – heute vor allem mit React, Next.js und Supabase. webdiv ist bewusst klein: Von der ersten Skizze bis zum Livegang sprechen Sie mit dem, der Ihre Seite auch baut.',
   signaturLabel: 'Unterschrift Sinan Yilmaz',

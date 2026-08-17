@@ -35,6 +35,9 @@ function AboutSection() {
   return (
     <section className="about" id="ueber-mich" data-theme="light" data-rails ref={sectionRef}>
       <div className="container">
+        {/* Ueberschrift fuer Outline/SEO – sichtbar bleibt nur das Eyebrow
+            (gleiches Muster wie die Leistungen) */}
+        <h2 className="sr-only">{ueberMich.titel}</h2>
         <p className="eyebrow" data-reveal>
           {ueberMich.eyebrow}
         </p>

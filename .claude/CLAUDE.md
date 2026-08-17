@@ -32,3 +32,13 @@ greifen automatisch (bis dahin markierte `[ Porträt folgt ]`-Platzhalter).
   Case Study `/projekte/bucan-eventservice` (nichts erfinden) und Blaupause für
   Stack-, Hosting-, Formular-, DSGVO- und Deploy-Entscheidungen sowie die
   gelernten Prinzipien (Abschnitt 13).
+
+## Website-Checkliste (projektübergreifend)
+
+`../checklist/checklist.md` ist die Checkliste für alle webdiv-Websites (Meta/OG,
+JSON-LD, Icons, robots/sitemap, .htaccess, Recht, Sprache, Performance, a11y,
+Livegang). Beim Abarbeiten gilt deren Abschnitt 0: nichts ungeprüft implementieren
+(Primärquellen-Check mit Prüfdatum), jeden Punkt mit Vorschau/Verifikation abschließen.
+**Taucht in der Arbeit ein neues Ding/Thema auf, das dort noch fehlt** (neuer Technik-,
+SEO-, Recht- oder Qualitätsaspekt), **aktiv vorschlagen, ob es in die Checkliste
+aufgenommen werden soll** – Entscheidung trifft Sinan, nicht ungefragt eintragen.

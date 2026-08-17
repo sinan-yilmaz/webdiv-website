@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import { site } from 'core/consts/content';
 import 'assets/css/tokens.css';
@@ -22,8 +22,15 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: site.title,
   description: site.description,
+};
+
+export const viewport: Viewport = {
+  /* Papier – Erstansicht (Hero/Veil) ist hell */
+  themeColor: '#F2EFE9',
+  viewportFit: 'cover',
 };
 
 /* Intro-Veil: deckt die Startseite bei jedem vollen Aufruf vor der Hydration ab,

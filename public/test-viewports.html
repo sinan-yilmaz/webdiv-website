@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- Nur fuer lokale Layout-Checks (CDP-Chrome drosselt rAF im Hintergrund;
+     Layout hier per iframe pruefen, Motion nicht). Nicht deployen. -->
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<title>viewport-test</title>
+<style>
+  body { margin: 0; background: #333; display: flex; gap: 16px; padding: 16px; font-family: monospace; }
+  .wrap { flex: none; }
+  .wrap p { color: #ddd; margin: 0 0 6px; font-size: 12px; }
+  iframe { border: 0; background: #fff; display: block; }
+  #m { width: 390px; height: 844px; }
+  #d-outer { width: 720px; height: 450px; overflow: hidden; }
+  #d { width: 1440px; height: 900px; transform: scale(0.5); transform-origin: top left; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p>mobil 390&times;844</p>
+    <iframe id="m" src="/"></iframe>
+  </div>
+  <div class="wrap">
+    <p>desktop 1440&times;900 (0.5x)</p>
+    <div id="d-outer"><iframe id="d" src="/"></iframe></div>
+  </div>
+  <script>
+    /* Statement-Sektion in beiden Frames auf Fortschritt p scrollen */
+    function toStatement(id, p) {
+      const w = document.getElementById(id).contentWindow;
+      const el = w.document.querySelector('.statement');
+      const top = el.getBoundingClientRect().top + w.scrollY;
+      const vh = w.innerHeight;
+      w.scrollTo(0, top + p * (el.offsetHeight + vh) - vh);
+    }
+  </script>
+</body>
+</html>
