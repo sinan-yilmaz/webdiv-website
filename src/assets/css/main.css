@@ -1231,17 +1231,26 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   }
   .obj-browser { width: 112px; top: 8svh; left: calc(var(--rail-inset) + 10px); }
   .obj-appcard { width: 96px; top: 10svh; right: calc(var(--rail-inset) + 10px); }
-  .obj-db { width: 76px; bottom: 9svh; left: calc(var(--rail-inset) + 16px); }
-  .obj-mark { width: 62px; bottom: 10svh; right: calc(var(--rail-inset) + 12px); }
-  /* eigene Mobil-Linie im Band unterhalb der Ecken-Objekte: von links rein,
-     kleiner Bogen nach oben ueber den freien Korridor, Ende hakt unter dem
-     Mark nach links unten ein; linkes Ende laeuft seitlich aus dem Bild */
+  /* untere Objekte am selben Anker wie die Linie (2svh-Sockel + vw-Anteil):
+     die Linienhoehe skaliert mit vw – nur so bleibt der Abstand zwischen
+     Linie und Objekten auf jeder Viewporthoehe erhalten (svh allein wuerde
+     auf flachen Geraeten unter die Linie rutschen) */
+  .obj-db { width: 76px; bottom: calc(2svh + 17vw); left: calc(var(--rail-inset) + 16px); }
+  .obj-mark { width: 62px; bottom: calc(2svh + 20vw); right: calc(var(--rail-inset) + 12px); }
+  /* Mobil-Linie mit derselben Geste wie Desktop (Schwung + Einhak-Schleife);
+     linkes Ende laeuft seitlich aus dem Bild, die Schleife bleibt im Bild.
+     max-width hebt den globalen svg-Reset (max-width: 100%) auf, sonst wird
+     die 130vw-Breite auf Viewportbreite geklemmt; Strichstaerken gleichen die
+     viewBox-Skalierung aus (~7px / ~2.5px effektiv wie auf 1440) */
   .statement-line--desktop { visibility: hidden; }
   .statement-line--mobile {
     visibility: visible;
     bottom: 2svh;
-    width: 145vw;
+    width: min(760px, 130vw);
+    max-width: none;
   }
+  .statement-line--mobile path { stroke-width: 9.5; }
+  .statement-line--mobile .line-echo { stroke-width: 3.4; }
 
   /* Projekte: kompaktere Titelzeile */
   .project-title { font-size: 1.5rem; }

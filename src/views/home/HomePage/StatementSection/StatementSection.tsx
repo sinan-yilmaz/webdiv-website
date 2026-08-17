@@ -205,21 +205,23 @@ function StatementSection() {
             />
           </svg>
 
-          {/* Mobil: kommt flach von links unter dem DB-Objekt rein, laeuft
-              nach rechts mit kleinem Bogen nach oben ueber den freien
-              Korridor und hakt am Ende unter dem Mark nach links unten ein */}
+          {/* Mobil: kommt tief von links (laeuft seitlich aus dem Bild und
+              UNTER dem DB-Objekt durch), schwingt im freien Korridor zwischen
+              den unteren Objekten nach oben und hakt dort in der Schleife nach
+              links zurueck – Duktus wie Desktop, aber ohne die Ecken-Objekte
+              zu schneiden (Schleife endet vor der Mark-Spalte) */}
           <svg
             className="statement-line statement-line--mobile"
-            viewBox="0 0 1200 340"
+            viewBox="0 0 700 320"
             aria-hidden="true"
           >
             <path
               className="line-main"
-              d="M-40 262 C 160 284, 320 270, 480 218 C 600 160, 720 146, 840 182 C 940 210, 1010 248, 992 284 C 978 308, 918 306, 870 290"
+              d="M-60 285 C 60 272, 150 266, 250 252 C 310 246, 330 170, 380 150 C 415 138, 440 170, 446 205 C 452 248, 438 286, 400 290 C 370 293, 352 283, 345 270"
             />
             <path
               className="line-echo"
-              d="M-33 270 C 167 292, 327 278, 487 226 C 607 168, 727 154, 847 190 C 947 218, 1017 256, 999 292 C 985 316, 925 314, 877 298"
+              d="M-53 293 C 67 280, 157 274, 257 260 C 317 254, 337 178, 387 158 C 422 146, 447 178, 453 213 C 459 256, 445 294, 407 298 C 377 301, 359 291, 352 278"
             />
           </svg>
         </div>
