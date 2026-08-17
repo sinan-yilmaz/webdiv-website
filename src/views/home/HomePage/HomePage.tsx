@@ -66,7 +66,7 @@ function HomePage() {
       />
       <main id="top">
         <HeroSection revealed={heroRevealed} sigRef={heroSigRef} />
-        <StepEdge ref={edgeToDarkRef} from="var(--paper)" to="var(--dark-photo)" />
+        <StepEdge ref={edgeToDarkRef} from="var(--paper)" to="var(--dark-photo)" dots />
         <div className="stack" ref={stackRef}>
           <PortraitSection stackRef={stackRef} />
           <StatementSection />

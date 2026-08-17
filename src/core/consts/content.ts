@@ -50,9 +50,9 @@ export const portraet = {
 } as const;
 
 export const statement = {
-  ariaLabel: 'Über zehn Jahre Webentwicklung',
-  lead: 'Über zehn Jahre',
-  rest: ' Webentwicklung. Websites für Firmen, die nicht aussehen wollen wie ihr Wettbewerb. Web-Anwendungen für Firmen, die Excel-Listen und E-Mail-Ketten loswerden wollen.',
+  ariaLabel: 'Leitsatz',
+  lead: 'In jeder Firma',
+  rest: ' steckt Arbeit, die niemand vermissen würde. Seit über zehn Jahren mache ich sie digital.',
 } as const;
 
 export const leistungen = {

@@ -236,7 +236,24 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   height: 100svh;
   min-height: 640px;
   background: var(--dark-photo);
-  z-index: 1;
+  /* ueber der StepEdge (z 2): das Dot-Lupen-Canvas ragt in den Kantenstreifen
+     hinein; Sektion und Kante ueberlappen sich geometrisch nie */
+  z-index: 3;
+}
+
+/* Dot-Lupe: Canvas ueber der Szene (JS daempft die Punkte per Foto-Vignette),
+   unter den Pills; ragt oben um den StepEdge-Streifen hinaus, damit die Lupe
+   auf der Ziggurat-Flaeche weiterlaeuft */
+.portrait-dots {
+  position: absolute;
+  top: calc(-3 * var(--step-h));
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 3 * var(--step-h));
+  z-index: 3;
+  pointer-events: none;
 }
 
 /* Compositing-Gruppe Strich + Foto: Scroll-Opacity liegt hier, damit der Kopf
@@ -263,6 +280,8 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
   /* Crop-Ausgleich: Motiv sitzt im aktuellen Foto ~4 % rechts der Bildmitte –
      entfernen, sobald ein mittig gecropptes Portraet vorliegt */
   transform: translateX(-4%);
@@ -355,16 +374,28 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   z-index: 5;
   background: var(--dark);
   color: var(--on-dark);
-  height: 320vh;
+  /* frei scrollend (kein Pin); >= 100vh + Marge noetig, damit die Sektion das
+     sticky Portraet vollstaendig deckt, bevor der Stack endet */
+  height: 150vh;
 }
 .statement-inner {
-  position: sticky;
-  top: 0;
+  position: relative;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  overflow: clip;
+}
+/* Buehne: 100svh-Szene mittig in der Sektion; JS schiebt sie mit Lag 0.18
+   gegen den Scroll (weiches Verweilen statt Pin) – Hub ±22.5vh bleibt in der
+   25vh-Marge der zentrierten Buehne */
+.statement-stage {
+  position: relative;
+  width: 100%;
   height: 100svh;
   min-height: 640px;
   display: grid;
   place-items: center;
-  overflow: clip;
+  will-change: transform;
 }
 .statement-text {
   position: relative;
@@ -1148,8 +1179,7 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   .portrait-pills .pill-label:last-child { justify-self: center; }
 
   /* Statement: kuerzere Scroll-Strecke, Objekte klein in den Ecken */
-  .statement { height: 260vh; }
-  .statement-inner { min-height: 560px; }
+  .statement-stage { min-height: 560px; }
   .statement-text {
     max-width: none;
     padding-inline: calc(var(--pad) + 8px);

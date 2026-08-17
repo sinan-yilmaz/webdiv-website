@@ -326,9 +326,10 @@ img, svg, canvas { display: block; max-width: 100%; }
 .field.has-error .field-error { display: block; }
 
 /* --- Treppenkante: ein Motiv fuer alle Uebergaenge ---
-   Drei Stufen unterschiedlicher Breite (32 / 22 / 28 / 18 %),
-   Stufenhoehe per --step-h. Die neue Flaeche steht links am hoechsten
-   und faellt in drei Stufen nach rechts ab. */
+   Zentriertes Ziggurat: die neue Flaeche steigt symmetrisch zur Mitte an
+   (Basis voll, Mittelstufe 22-78 %, Spitze 40-60 %), Stufenhoehe per
+   --step-h. Die Stufen wachsen scroll-gekoppelt ueber --edge-p (0 = flach,
+   1 = volle Hoehe; setzt die StepEdge-Komponente pro Frame). */
 
 .step-edge {
   position: relative;
@@ -352,7 +353,11 @@ img, svg, canvas { display: block; max-width: 100%; }
 .step-edge::after {
   content: "";
   position: absolute;
-  inset: 0;
+  /* 1px Ueberzeichnung nach unten: die Zielflaeche endet sonst exakt auf der
+     Sektionsgrenze und laesst dort auf Mobil-DPR eine Subpixel-Fuge, durch die
+     die Ausgangsflaeche als helle Querlinie scheint; in der farbgleichen
+     Folgesektion ist der Ueberstand unsichtbar */
+  inset: 0 0 -1px;
   background-color: var(--edge-to, var(--dark));
   background-image:
     linear-gradient(var(--line), var(--line)),
@@ -365,15 +370,39 @@ img, svg, canvas { display: block; max-width: 100%; }
     var(--rail-inset) 0, var(--rail-inset) 0,
     calc(100% - var(--rail-inset)) 0, calc(100% - var(--rail-inset)) 0;
   clip-path: polygon(
-    0 0,
-    32% 0,
-    32% 33.34%,
-    54% 33.34%,
-    54% 66.67%,
-    82% 66.67%,
-    82% 100%,
+    0 66.67%,
+    22% 66.67%,
+    22% 33.34%,
+    40% 33.34%,
+    40% 0,
+    60% 0,
+    60% 33.34%,
+    78% 33.34%,
+    78% 66.67%,
+    100% 66.67%,
+    100% 100%,
     0 100%
   );
+  transform: scaleY(var(--edge-p, 1));
+  transform-origin: bottom;
+  will-change: transform;
+}
+/* Variante: Zielflaeche traegt das Punktraster der Folgesektion
+   (.bg-dots-dark); unten verankert, damit die Phase am Sektionsanfang
+   nahtlos weiterlaeuft */
+.step-edge--dots::after {
+  background-image:
+    radial-gradient(rgb(242 239 233 / 0.07) 1px, transparent 1.6px),
+    linear-gradient(var(--line), var(--line)),
+    linear-gradient(var(--line-dark), var(--line-dark)),
+    linear-gradient(var(--line), var(--line)),
+    linear-gradient(var(--line-dark), var(--line-dark));
+  background-size: 26px 26px, 1px 100%, 1px 100%, 1px 100%, 1px 100%;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position:
+    0 100%,
+    var(--rail-inset) 0, var(--rail-inset) 0,
+    calc(100% - var(--rail-inset)) 0, calc(100% - var(--rail-inset)) 0;
 }
 
 /* --- Hintergrund-Raster --- */
