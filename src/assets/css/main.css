@@ -131,6 +131,11 @@ html[data-intro-pending] .site-nav { opacity: 0; }
 .site-nav.on-dark .btn-primary { background: var(--paper); color: var(--ink); }
 .site-nav.on-dark .btn-primary:hover { background: #FFFFFF; }
 
+/* Unterseiten: Pille auch ohne Anker-Links in der Breite der Startseiten-Pille
+   (691px, wie die Kompakt-Nav < 1024) – einheitliches Bild auf allen Seiten */
+.subpage-nav { width: min(691px, calc(100% - 2 * var(--pad))); }
+.subpage-nav .nav-pill { justify-content: space-between; }
+
 /* ==========================================================================
    Hero
    ========================================================================== */
@@ -1037,6 +1042,33 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+
+/* ==========================================================================
+   404 (not-found) – rein typografisch, vertikal zentriert; Typo skaliert
+   ueber clamp, daher ohne eigene Responsive-Ableitung.
+   ========================================================================== */
+
+.notfound {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 172px 0 96px;
+}
+.notfound .eyebrow { margin-bottom: 18px; }
+.notfound-title {
+  font-size: clamp(2.75rem, 8vw, 6rem);
+  font-weight: 640;
+  font-stretch: 103%;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  margin-bottom: 26px;
+}
+.notfound-text {
+  max-width: 58ch;
+  color: var(--ink-2);
+  margin-bottom: 40px;
+}
+.notfound-cta { margin: 0; }
 
 /* ==========================================================================
    Responsive-Ableitung (Runde 2) – Tablet < 1024 px, Mobile < 768 px.

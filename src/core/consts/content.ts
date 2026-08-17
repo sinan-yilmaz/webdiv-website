@@ -148,6 +148,15 @@ export const kontakt = {
   direkt: 'Oder direkt: [E-Mail-Adresse]',
 } as const;
 
+/* 404-Seite – Texte sind [Vorschlag], bitte absegnen (siehe tasklist.md) */
+export const notFound = {
+  metaTitle: 'Seite nicht gefunden – webdiv',
+  code: '404',
+  titel: 'Diese Seite gibt es nicht.',
+  text: 'Die aufgerufene Adresse führt ins Leere – vielleicht ein Tippfehler, vielleicht ein veralteter Link. Alles Weitere finden Sie auf der Startseite.',
+  cta: { label: 'Zur Startseite', href: '/' },
+} as const;
+
 export const footer = {
   linksPrefix: 'created by',
   linksName: 'webdiv',

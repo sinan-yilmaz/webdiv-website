@@ -84,6 +84,7 @@
 - [ ] Mobile/Tablet ansehen: Fenster schmal ziehen oder Geräte-Emulation (390/768) – Menü-Overlay, gestapelte Leistungs-Karten, Hero-Subzeilen, Projekt-Zeile
 - [ ] Case Study durchlesen: http://localhost:3000/projekte/bucan-eventservice (Projekte-Zeile auf der Startseite verlinkt sie); Texte und Seitentitel/Description sind [Vorschlag] – bitte absegnen
 - [ ] Von der Case Study aus „Erstgespräch“ klicken: Startseite lädt mit Intro und fährt danach zur Kontakt-Sektion – Verhalten ok?
+- [ ] 404 ansehen: http://localhost:3000/gibt-es-nicht (im Dev-Server rendert jede unbekannte Adresse die 404) – Texte sind [Vorschlag], bitte absegnen
 
 ## Fertig (SEO/Meta-Grundausstattung, 17.08.2026)
 
@@ -95,12 +96,16 @@
 - [x] `app/apple-icon.tsx` (180×180) + `app/icon.tsx` (64×64 PNG-Fallback zum SVG-Favicon), generiert aus der V3-Geometrie
 - [x] „Über mich“: sr-only-h2 ergänzt (einzige Sektion ohne Überschrift – Outline/SEO)
 
+## Fertig (404 & favicon.ico, 17.08.2026)
+
+- [x] `not-found.tsx` + `views/not-found/NotFoundPage`: rein typografische 404 in der webdiv-Formensprache (SubpageNav, mono-„404“-Eyebrow, große Zeile, CTA zur Startseite), vertikal zentriert, Reveals wie Case Study; Texte als `notFound` in `content.ts` – **[Vorschlag], bitte absegnen**; im Export als `out/404.html` (der `ErrorDocument 404`-Eintrag folgt mit der .htaccess in der Deploy-Phase)
+- [x] `public/favicon.ico` als Alt-Client-Fallback: 16/32/48 px aus der V3-Geometrie (`app/icon.svg`) gerastert; moderne Browser nutzen weiter SVG/PNG aus `app/`
+- [x] SubpageNav-Pille auch auf Desktop in der einheitlichen Breite (691px wie die Startseiten-Pille bzw. Kompakt-Nav < 1024, Lockup links / CTA rechts) – vorher war sie auf Unterseiten inhaltsgetrieben schmaler
+
 ## Offen aus dem Bucan-Abgleich (für Deploy-Phase)
 
-- [ ] `not-found.tsx` (eigene 404 wie Bucan, inkl. `ErrorDocument 404` in der .htaccess)
-- [ ] SkipLink im Layout (a11y; Bucan hat einen)
-- [ ] `.htaccess` (Caching für `_next/static`, Schutz der Formular-Config) + GitHub-Actions-Deploy (`deploy.yml`) – erst wenn Hosting steht
-- [ ] `favicon.ico` als Alt-Client-Fallback (optional; SVG + PNG decken moderne Browser ab)
+- [ ] SkipLink im Layout (a11y; Bucan hat einen) – 17.08.2026: bewusst weggelassen (Entscheidung Sinan)
+- [ ] `.htaccess` (Caching für `_next/static`, Schutz der Formular-Config, `ErrorDocument 404 /404.html`) + GitHub-Actions-Deploy (`deploy.yml`) – erst wenn Hosting steht
 - [ ] JSON-LD um E-Mail/Telefon ergänzen, sobald die [Platzhalter] ersetzt sind; Impressum/Datenschutz in die Sitemap aufnehmen, sobald die Seiten existieren
 
 ## Offene Entscheidungen (Feedback nötig)
@@ -111,7 +116,7 @@
 - [ ] Eyebrows in `--ink-3` (13 px) ≈ 3,2:1 Kontrast, unter AA – so lassen oder auf `--ink-2` heben?
 - [ ] Regler-Toggle unten links verdeckt am Seitenende „created by webdiv“ – Position ok (nur Prototyp-Werkzeug)?
 - [ ] Nav-Button „Erstgespräch“ springt zu `#kontakt` – gewünschtes Verhalten?
-- [ ] Ergänzte [Vorschlag]-Texte absegnen: Seitentitel, Formular-Validierungstexte, Platzhalter-Labels (Meta-Description: Variante A am 17.08.2026 abgesegnet)
+- [ ] Ergänzte [Vorschlag]-Texte absegnen: Seitentitel, Formular-Validierungstexte, Platzhalter-Labels, 404-Texte (`notFound` in `content.ts`) (Meta-Description: Variante A am 17.08.2026 abgesegnet)
 
 ## Meine Todos (Assets liefern)
 
