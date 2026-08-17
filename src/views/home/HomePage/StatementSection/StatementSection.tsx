@@ -36,7 +36,7 @@ function StatementSection() {
   const stateRef = useRef({
     top: 0,
     height: 1,
-    lines: [] as { path: SVGPathElement; len: number }[],
+    lines: [] as { path: SVGPathElement; len: number; echo: boolean }[],
     words: [] as HTMLSpanElement[],
     wordOpacities: [] as number[],
     objects: [] as FloatObject[],
@@ -62,7 +62,7 @@ function StatementSection() {
       const len = path.getTotalLength();
       path.style.strokeDasharray = String(len);
       path.style.strokeDashoffset = String(len);
-      return { path, len };
+      return { path, len, echo: path.classList.contains('line-echo') };
     });
   }, []);
 
@@ -102,8 +102,8 @@ function StatementSection() {
     /* Kobalt-Linie zeichnet sich synchron zum Scroll; der Echo-Strich zieht
        wie ein zweiter Stift-Durchgang leicht versetzt nach */
     const dl = clamp((p - 0.46) / 0.36, 0, 1);
-    st.lines.forEach(({ path, len }, index) => {
-      const lp = index === 0 ? dl : clamp((dl - 0.12) / 0.88, 0, 1);
+    st.lines.forEach(({ path, len, echo }) => {
+      const lp = echo ? clamp((dl - 0.12) / 0.88, 0, 1) : dl;
       path.style.strokeDashoffset = String(len * (1 - smoothstep(lp)));
     });
 
@@ -185,15 +185,41 @@ function StatementSection() {
           </p>
 
           {/* Duktus wie der Portraet-Kritzel: satter Hauptstrich + duenner,
-              versetzter Echo-Strich als zweiter Stift-Durchgang */}
-          <svg className="statement-line" viewBox="0 0 1000 520" aria-hidden="true">
+              versetzter Echo-Strich als zweiter Stift-Durchgang. Beide Formen
+              enden IM Bild: die untere Clip-Kante der Sektion liegt unsichtbar
+              im durchlaufenden Dunkel der Treppenkante und wuerde jede nach
+              unten auslaufende Linie hart kappen; seitlich (echte
+              Bildschirmkante) duerfen die Enden raus. */}
+          <svg
+            className="statement-line statement-line--desktop"
+            viewBox="0 0 1000 280"
+            aria-hidden="true"
+          >
             <path
               className="line-main"
-              d="M64 22 C 360 86, 820 66, 896 178 C 948 266, 320 282, 264 384 C 238 452, 536 470, 520 520"
+              d="M64 96 C 360 150, 820 122, 896 200 C 924 240, 900 262, 854 262 C 808 262, 770 252, 746 236"
             />
             <path
               className="line-echo"
-              d="M71 30 C 367 94, 827 74, 903 186 C 955 274, 327 290, 271 392 C 245 460, 543 478, 527 528"
+              d="M71 104 C 367 158, 827 130, 903 208 C 931 248, 907 270, 861 270 C 815 270, 777 260, 753 244"
+            />
+          </svg>
+
+          {/* Mobil: kommt flach von links unter dem DB-Objekt rein, laeuft
+              nach rechts mit kleinem Bogen nach oben ueber den freien
+              Korridor und hakt am Ende unter dem Mark nach links unten ein */}
+          <svg
+            className="statement-line statement-line--mobile"
+            viewBox="0 0 1200 340"
+            aria-hidden="true"
+          >
+            <path
+              className="line-main"
+              d="M-40 262 C 160 284, 320 270, 480 218 C 600 160, 720 146, 840 182 C 940 210, 1010 248, 992 284 C 978 308, 918 306, 870 290"
+            />
+            <path
+              className="line-echo"
+              d="M-33 270 C 167 292, 327 278, 487 226 C 607 168, 727 154, 847 190 C 947 218, 1017 256, 999 292 C 985 316, 925 314, 877 298"
             />
           </svg>
         </div>

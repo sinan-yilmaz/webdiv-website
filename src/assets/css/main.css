@@ -447,16 +447,24 @@ html[data-intro-pending] .site-nav { opacity: 0; }
 .obj-db { bottom: 9svh; left: calc(var(--rail-inset) + 80px); width: 130px; }
 .obj-mark { bottom: 11svh; right: calc(var(--rail-inset) + 72px); width: 120px; }
 
-/* geschwungene Kobalt-Linie unter dem Text, laeuft nach unten aus dem Bild */
+/* geschwungene Kobalt-Linie unter dem Text; endet vollstaendig IN der Buehne:
+   die untere Clip-Kante der Sektion (overflow: clip) liegt unsichtbar im
+   durchlaufenden Dunkel der Treppenkante – eine nach unten auslaufende Linie
+   wuerde dort mitten in der Flaeche hart gekappt. Seitliche Enden sind ok
+   (echte Bildschirmkante). */
 .statement-line {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -42svh;
+  bottom: 2svh;
   width: min(1000px, 76vw);
   z-index: 1;
+  overflow: visible;
   pointer-events: none;
 }
+/* visibility statt display, damit getTotalLength() der verdeckten Variante
+   ueberall zuverlaessig misst */
+.statement-line--mobile { visibility: hidden; }
 .statement-line path {
   stroke: var(--cobalt);
   stroke-width: 7;
@@ -1193,14 +1201,14 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   .obj-appcard { width: 96px; top: 10svh; right: calc(var(--rail-inset) + 10px); }
   .obj-db { width: 76px; bottom: 9svh; left: calc(var(--rail-inset) + 16px); }
   .obj-mark { width: 62px; bottom: 10svh; right: calc(var(--rail-inset) + 12px); }
-  /* mittig hinter dem Text statt im unteren Objekt-Band (dort kollidiert
-     sie mit den Ecken-Objekten); breiter als der Viewport, damit Anfang und
-     rechter Scheitel aus dem Bild laufen statt nackt in der Flaeche zu enden */
-  .statement-line {
-    width: 132vw;
-    bottom: auto;
-    top: 50%;
-    transform: translate(-50%, -50%);
+  /* eigene Mobil-Linie im Band unterhalb der Ecken-Objekte: von links rein,
+     kleiner Bogen nach oben ueber den freien Korridor, Ende hakt unter dem
+     Mark nach links unten ein; linkes Ende laeuft seitlich aus dem Bild */
+  .statement-line--desktop { visibility: hidden; }
+  .statement-line--mobile {
+    visibility: visible;
+    bottom: 2svh;
+    width: 145vw;
   }
 
   /* Projekte: kompaktere Titelzeile */
