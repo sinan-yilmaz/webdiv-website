@@ -5,17 +5,18 @@ import { statement } from 'core/consts/content';
 import { useFrame } from 'lib/motion/hooks/useFrame';
 import { useInViewFlag } from 'lib/motion/hooks/useInViewFlag';
 import { useRemeasure } from 'lib/motion/hooks/useRemeasure';
-import { clamp, lerp } from 'lib/motion/services/interpolate';
+import { clamp, lerp, smoothstep } from 'lib/motion/services/interpolate';
 
 type FloatObject = { el: HTMLElement; depth: number; phase: number; mx: number; my: number };
 
-/* Text in fuellbare Wort-Spans zerlegen (Whitespace bleibt als Textknoten) */
-function renderWords(parts: string[]) {
+/* Text in fuellbare Wort-Spans zerlegen (Whitespace bleibt als Textknoten);
+   accents-Woerter fuellen sich ins Kobalt statt Papier-Weiss */
+function renderWords(parts: string[], accents: readonly string[] = []) {
   return parts.map((part, index) => {
     if (!part) return null;
     if (/^\s+$/.test(part)) return part;
     return (
-      <span key={index} className="w">
+      <span key={index} className={accents.includes(part) ? 'w w-accent' : 'w'}>
         {part}
       </span>
     );
@@ -32,11 +33,10 @@ function StatementSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
   const textRef = useRef<HTMLParagraphElement | null>(null);
-  const linePathRef = useRef<SVGPathElement | null>(null);
   const stateRef = useRef({
     top: 0,
     height: 1,
-    lineLen: 0,
+    lines: [] as { path: SVGPathElement; len: number }[],
     words: [] as HTMLSpanElement[],
     wordOpacities: [] as number[],
     objects: [] as FloatObject[],
@@ -56,11 +56,14 @@ function StatementSection() {
       mx: 0,
       my: 0,
     }));
-    const path = linePathRef.current;
-    if (!path) return;
-    st.lineLen = path.getTotalLength();
-    path.style.strokeDasharray = String(st.lineLen);
-    path.style.strokeDashoffset = String(st.lineLen);
+    st.lines = Array.from(
+      sectionRef.current?.querySelectorAll<SVGPathElement>('.statement-line path') ?? [],
+    ).map((path) => {
+      const len = path.getTotalLength();
+      path.style.strokeDasharray = String(len);
+      path.style.strokeDashoffset = String(len);
+      return { path, len };
+    });
   }, []);
 
   useRemeasure(() => {
@@ -96,12 +99,13 @@ function StatementSection() {
       }
     });
 
-    /* Kobalt-Linie zeichnet sich synchron zum Scroll */
-    const path = linePathRef.current;
-    if (path) {
-      const dl = clamp((p - 0.46) / 0.36, 0, 1);
-      path.style.strokeDashoffset = String(st.lineLen * (1 - dl));
-    }
+    /* Kobalt-Linie zeichnet sich synchron zum Scroll; der Echo-Strich zieht
+       wie ein zweiter Stift-Durchgang leicht versetzt nach */
+    const dl = clamp((p - 0.46) / 0.36, 0, 1);
+    st.lines.forEach(({ path, len }, index) => {
+      const lp = index === 0 ? dl : clamp((dl - 0.12) / 0.88, 0, 1);
+      path.style.strokeDashoffset = String(len * (1 - smoothstep(lp)));
+    });
 
     /* Objekte: langsame Rotation (24 s/Umdrehung als Sinus-Pendel ±24°),
        minimale Zeiger-Reaktion (Lerp 0.04) */
@@ -177,13 +181,19 @@ function StatementSection() {
           <p className="statement-text display2" ref={textRef}>
             {/* Lead fuellt sich wie der Rest (statt dauerhaft weiss), nur fett */}
             <strong className="w-strong">{renderWords(leadParts)}</strong>
-            {renderWords(restParts)}
+            {renderWords(restParts, statement.accents)}
           </p>
 
+          {/* Duktus wie der Portraet-Kritzel: satter Hauptstrich + duenner,
+              versetzter Echo-Strich als zweiter Stift-Durchgang */}
           <svg className="statement-line" viewBox="0 0 1000 520" aria-hidden="true">
             <path
-              ref={linePathRef}
+              className="line-main"
               d="M64 22 C 360 86, 820 66, 896 178 C 948 266, 320 282, 264 384 C 238 452, 536 470, 520 520"
+            />
+            <path
+              className="line-echo"
+              d="M71 30 C 367 94, 827 74, 903 186 C 955 274, 327 290, 271 392 C 245 460, 543 478, 527 528"
             />
           </svg>
         </div>

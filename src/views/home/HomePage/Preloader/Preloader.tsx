@@ -33,11 +33,11 @@ function Preloader({ heroSigRef, onHandoff, onReveal, onDone }: PreloaderProps) 
        Smooth-Fahrt einer evtl. Browser-Scroll-Restauration. */
     document.documentElement.removeAttribute('data-intro-pending');
     window.scrollTo({ top: 0, behavior: 'instant' });
-    /* Scroll-Lock ueber fixierten Body statt overflow: hidden – so bleibt die
-       Scrollbalken-Spur (html overflow-y: scroll) stehen und das Layout
-       rutscht beim Freigeben nicht nach links */
-    document.body.style.position = 'fixed';
-    document.body.style.width = '100%';
+    /* Kein Scroll-Lock: der Preloader liegt absolut ueber dem Hero und
+       scrollt mit der Seite mit – wer sofort scrollt, sieht die Sektionen
+       darunter, waehrend das Intro im Hero normal weiterlaeuft. Der
+       FLIP-Flug bleibt korrekt: from und to werden im selben Frame im
+       Viewport gemessen, der Scroll-Anteil kuerzt sich aus dx/dy raus. */
     let cancelled = false;
     const timers: number[] = [];
 
@@ -76,9 +76,6 @@ function Preloader({ heroSigRef, onHandoff, onReveal, onDone }: PreloaderProps) 
           timers.push(
             window.setTimeout(() => {
               setFading(true);
-              document.body.style.position = '';
-              document.body.style.width = '';
-              window.scrollTo({ top: 0, behavior: 'instant' });
               callbacksRef.current.onReveal();
               timers.push(window.setTimeout(() => callbacksRef.current.onDone(), 550));
             }, 660),
@@ -90,8 +87,6 @@ function Preloader({ heroSigRef, onHandoff, onReveal, onDone }: PreloaderProps) 
     return () => {
       cancelled = true;
       timers.forEach((timer) => clearTimeout(timer));
-      document.body.style.position = '';
-      document.body.style.width = '';
     };
   }, [heroSigRef]);
 

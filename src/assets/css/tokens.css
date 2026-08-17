@@ -275,10 +275,14 @@ img, svg, canvas { display: block; max-width: 100%; }
   background: var(--dark);
   color: var(--on-dark);
   border: 1px solid var(--line-dark);
-  font-size: 1.5rem;
+  /* fluid statt Breakpoint-Stufen: >= ~1280px die Desktop-Werte (24px / 20 40),
+     dazwischen stufenlos, ab 768px exakt die Mobil-Werte (19px / 14 28) –
+     keine Umbruch-Klippe an der 1024er-Grenze */
+  font-size: clamp(1.1875rem, 0.7rem + 1vw, 1.5rem);
   font-weight: 550;
   line-height: 1;
-  padding: 20px 40px;
+  text-align: center;
+  padding: clamp(14px, 1.4vw, 20px) clamp(28px, 2.9vw, 40px);
   border-radius: var(--r-pill);
   cursor: default;
 }
@@ -460,11 +464,6 @@ img, svg, canvas { display: block; max-width: 100%; }
   }
 
   html { scroll-padding-top: 88px; }
-
-  .pill-label {
-    font-size: 1.1875rem;
-    padding: 14px 28px;
-  }
 
   .btn { padding: 14px 24px; }
 }

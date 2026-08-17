@@ -37,8 +37,8 @@ export const hero = {
   subRight: 'Günzburg, Bayern',
 } as const;
 
-/* Portraetfoto: liegt noch nicht vor. Datei als public/portrait.jpg ablegen –
-   Portraet-Block, "Über mich" und das Pixel-Portraet im Footer greifen automatisch. */
+/* Portraetfoto: Datei als public/portrait.jpg ablegen –
+   Portraet-Block und "Über mich" greifen automatisch. */
 export const portraet = {
   ariaLabel: 'Porträt Sinan Yilmaz',
   bildSrc: '/portrait.jpg',
@@ -51,8 +51,10 @@ export const portraet = {
 
 export const statement = {
   ariaLabel: 'Leitsatz',
-  lead: 'In jeder Firma',
-  rest: ' steckt Arbeit, die niemand vermissen würde. Seit über zehn Jahren mache ich sie digital.',
+  lead: 'Seit 10+ Jahren',
+  rest: ' schaffe ich digitale Lösungen, die mehr können als gut aussehen.',
+  /* Diese Woerter fuellen sich ins Kobalt statt Papier-Weiss */
+  accents: ['mehr', 'können'],
 } as const;
 
 export const leistungen = {
@@ -130,7 +132,6 @@ export const ueberMich = {
 export const kontakt = {
   titel: 'Was haben Sie vor?',
   text: 'Neue Website oder eine Anwendung für Ihren Betrieb – schreiben Sie mir kurz, worum es geht. Sie bekommen eine klare Einschätzung, was sinnvoll ist und was nicht. Festpreis nach Erstgespräch – das Erstgespräch ist kostenlos.',
-  pixelPlatzhalter: '[ Pixel-Porträt folgt ]',
   formular: {
     name: { label: 'Name', fehler: 'Bitte geben Sie Ihren Namen an.' },
     email: { label: 'E-Mail', fehler: 'Bitte prüfen Sie die E-Mail-Adresse.' },

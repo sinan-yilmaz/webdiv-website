@@ -53,9 +53,12 @@ function HomePage() {
           onReveal={() => setHeroRevealed(true)}
           onDone={() => {
             setIntroPhase('done');
-            /* Deeplinks von Unterseiten (z. B. /#kontakt): der Preloader
-               erzwingt Position 0, danach faehrt die Seite zum Ziel */
-            if (window.location.hash) scrollToAnchor(window.location.hash);
+            /* Deeplinks (z. B. /#kontakt): der Load beginnt am Seitenanfang,
+               nach dem Intro faehrt die Seite zum Ziel – ausser der Nutzer
+               hat waehrend des Intros selbst gescrollt, dann gewinnt er */
+            if (window.location.hash && window.scrollY <= 1) {
+              scrollToAnchor(window.location.hash);
+            }
           }}
         />
       )}

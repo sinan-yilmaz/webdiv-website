@@ -97,7 +97,7 @@
 
 ## Meine Todos (Assets liefern)
 
-- [ ] Porträtfoto (frontal, schwarzer Hintergrund) als `public/portrait.jpg` ablegen → Porträt-Block, Über-mich und Footer-Pixelbild übernehmen es automatisch
+- [ ] Porträtfoto (frontal, schwarzer Hintergrund) als `public/portrait.jpg` ablegen → Porträt-Block und Über-mich übernehmen es automatisch
 - [ ] Echte Unterschrift als SVG-Einstrich-Pfad (ersetzt Mr-Dafoe-Platzhalter in `src/core/consts/signature.ts`)
 - [ ] E-Mail-Adresse, Domain, Impressumsdaten (stehen als sichtbare `[Platzhalter]` in `src/core/consts/content.ts`)
 - [ ] Bucan-Screenshots (für Leistungs-Karte 1, Projekt-Vorschaubild); Case Study: Startseiten-Screenshot als `public/projekte/bucan/screen-home.webp` ablegen → Browserrahmen übernimmt ihn automatisch
@@ -108,5 +108,4 @@
 - [x] Unterseite `/projekte/bucan-eventservice` (16.08.2026 – siehe „Fertig (Case Study Bucan)“)
 - [ ] Unterseiten `/impressum`, `/datenschutz` (rein typografisch)
 - [ ] Motion-Feinschliff mit GSAP/ScrollTrigger (Lenis ist seit 16.08.2026 drin; Design-Intent steht in `.website/HANDOFF.md`)
-- [ ] Footer-Pixel-Porträt als Partikel-Aufbau statt Canvas-Standbild
 - [ ] Formular an echtes Backend anbinden (z. B. Supabase Edge Function)

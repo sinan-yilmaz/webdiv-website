@@ -19,8 +19,8 @@ Aufgabenstand und offene Punkte: `tasklist.md` im Projektroot.
 - `src/lib/motion/` – gemeinsamer rAF-Loop mit gelerptem Scrollwert (`services/frameLoop.ts`), Remeasure-Kanal, Sichtbarkeits-/Reveal-Hooks
 - `src/assets/css/tokens.css` – Design-Tokens (einzige Quelle für Farbe/Typo/Raster/Motion-Werte) · `main.css` – Layout, Komponenten, Sektionen der One-Page · `case-study.css` – Case-Study-Sektionen
 
-**Porträt nachrüsten:** Datei als `public/portrait.jpg` ablegen – Porträt-Block, „Über mich“
-und Footer-Pixelbild greifen automatisch (bis dahin markierte `[ Porträt folgt ]`-Platzhalter).
+**Porträt nachrüsten:** Datei als `public/portrait.jpg` ablegen – Porträt-Block und „Über mich“
+greifen automatisch (bis dahin markierte `[ Porträt folgt ]`-Platzhalter).
 
 ## Referenzdokumente (vor Arbeit an Runde 2 lesen)
 

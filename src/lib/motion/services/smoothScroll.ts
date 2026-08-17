@@ -13,6 +13,13 @@ const anchorEasing = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
 
 let lenis: Lenis | null = null;
 let consumers = 0;
+/* true zwischen Browser-Zurueck/Vor und dem Mount der Zielseite – dann hat
+   der Router eine restaurierte Position gesetzt, die erhalten bleiben soll */
+let popNavigation = false;
+
+function onPopState() {
+  popNavigation = true;
+}
 
 function onAnchorClick(event: MouseEvent) {
   if (!lenis || event.defaultPrevented || event.button !== 0) return;
@@ -47,6 +54,19 @@ export function scrollToAnchor(target: string): void {
   }
 }
 
+/* Beim Mount einer Seite nach Client-Navigation aufrufen: Push-Navigation
+   beginnt oben, Zurueck/Vor behaelt die restaurierte Position, Hash-Ziele
+   bleiben. Lenis' internes Ziel wird hart mitgezogen – ein noch laufender
+   Wheel-Lerp wuerde die Seite sonst auf die alte Position zurueckziehen.
+   Ohne Lenis (Touch) regelt der Router alles selbst. */
+export function settleNavigationScroll(): void {
+  if (!lenis) return;
+  const keepPosition = popNavigation || !!window.location.hash;
+  popNavigation = false;
+  if (!keepPosition) window.scrollTo({ top: 0, behavior: 'instant' });
+  lenis.scrollTo(window.scrollY, { immediate: true, force: true });
+}
+
 export function isSmoothScrollActive(): boolean {
   return lenis !== null;
 }
@@ -62,11 +82,13 @@ export function startSmoothScroll(): () => void {
        eine Reduced-Motion-Variante – Lenis wuerde sonst hart springen */
     lenis = new Lenis({ lerp: WHEEL_LERP, respectReducedMotion: false });
     window.addEventListener('click', onAnchorClick);
+    window.addEventListener('popstate', onPopState);
   }
   return () => {
     consumers -= 1;
     if (consumers === 0 && lenis) {
       window.removeEventListener('click', onAnchorClick);
+      window.removeEventListener('popstate', onPopState);
       lenis.destroy();
       lenis = null;
     }

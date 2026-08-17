@@ -9,8 +9,14 @@ body { overflow-x: clip; }
    ========================================================================== */
 
 .preloader {
-  position: fixed;
-  inset: 0;
+  /* absolut ueber dem Hero statt fixed uebers Viewport: scrollt mit der
+     Seite mit – das Intro laeuft ohne Scroll-Lock im Hero weiter */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100svh;
+  min-height: 640px;
   z-index: 999;
   background-color: var(--paper);
   display: grid;
@@ -41,8 +47,13 @@ body { overflow-x: clip; }
    der Preloader entfernt es beim Mount). */
 html[data-intro-pending] body::before {
   content: "";
-  position: fixed;
-  inset: 0;
+  /* wie der Preloader dokumentverankert ueber dem Hero (kein Scroll-Lock) */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100svh;
+  min-height: 640px;
   z-index: 998;
   background-color: var(--paper);
   background-image:
@@ -405,15 +416,20 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   text-align: center;
 }
 .statement-text .w { color: rgb(242 239 233 / var(--wo, 0.28)); }
+/* Akzentwoerter: gleiche Fuell-Mechanik, aber ins Kobalt */
+.statement-text .w-accent {
+  color: color-mix(in srgb, var(--cobalt) calc(var(--wo, 0.28) * 100%), transparent);
+}
 .statement-text .w-strong {
   font-variation-settings: "wght" 800;
   color: var(--on-dark);
 }
 
-/* vier schwebende Objekte in flachem 3D */
+/* vier schwebende Objekte in flachem 3D; ueber der Kobalt-Linie (z 1),
+   damit die hinter ihnen durchlaeuft statt sie zu schneiden */
 .float-obj {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   will-change: transform;
   pointer-events: none;
 }
@@ -424,10 +440,12 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   fill: none;
   vector-effect: non-scaling-stroke;
 }
-.obj-browser { top: 12svh; left: 5.5vw; width: 190px; }
-.obj-appcard { top: 15svh; right: 4.5vw; width: 170px; }
-.obj-db { bottom: 12svh; left: 7vw; width: 130px; }
-.obj-mark { bottom: 14svh; right: 7.5vw; width: 120px; }
+/* innerhalb der Rails (Abstand zur Haarlinie), vertikal mittig im Leerraum
+   zwischen Textblock (~35-65svh) und Sektionsrand */
+.obj-browser { top: 9svh; left: calc(var(--rail-inset) + 56px); width: 190px; }
+.obj-appcard { top: 10svh; right: calc(var(--rail-inset) + 48px); width: 170px; }
+.obj-db { bottom: 9svh; left: calc(var(--rail-inset) + 80px); width: 130px; }
+.obj-mark { bottom: 11svh; right: calc(var(--rail-inset) + 72px); width: 120px; }
 
 /* geschwungene Kobalt-Linie unter dem Text, laeuft nach unten aus dem Bild */
 .statement-line {
@@ -441,24 +459,28 @@ html[data-intro-pending] .site-nav { opacity: 0; }
 }
 .statement-line path {
   stroke: var(--cobalt);
-  stroke-width: 1.5;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   fill: none;
+}
+/* zweiter Stift-Durchgang wie beim Portraet-Strich: duenner, transparent */
+.statement-line .line-echo {
+  stroke-width: 2.5;
+  opacity: 0.55;
 }
 
 /* ==========================================================================
-   Leistungen (gepinnt)
+   Leistungen (frei scrollend, Hover/Fokus schaltet die Eintraege)
    ========================================================================== */
 
 .services { background: var(--paper); }
-.services .pin-wrap { height: 300vh; }
 .services .pin {
-  position: sticky;
-  top: 0;
-  height: 100svh;
-  min-height: 640px;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: calc(var(--section-gap) * 0.5) 0;
 }
 .services .eyebrow { margin-bottom: 56px; }
 
@@ -764,6 +786,10 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   height: 100%;
   object-fit: cover;
   object-position: 50% 18%;
+  /* Crop-Ausgleich, Spiegel von .portrait-figure img: Motiv sitzt im Foto
+     ~4 % rechts der Mitte; der Rand rechts geht im dunklen Kartengrund unter.
+     Entfernen, sobald ein mittig gecropptes Portraet vorliegt */
+  transform: translateX(-4%);
 }
 .about-figure.missing {
   display: grid;
@@ -826,35 +852,6 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   opacity: 0.1;
   transform: translateX(-50%) translateY(0);
   transition-delay: 150ms;
-}
-
-.contact-head {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  padding-top: 26px;
-}
-.pixel-portrait {
-  display: grid;
-  justify-items: center;
-  gap: 14px;
-  opacity: 0;
-  transform: translateY(20px) ;
-  transition: opacity 800ms var(--ease), transform 800ms var(--ease);
-}
-.contact.in .pixel-portrait { opacity: 1; transform: none; }
-.pixel-portrait canvas {
-  width: 168px;
-  height: 168px;
-  image-rendering: pixelated;
-}
-.pixel-portrait .missing-note {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: var(--track-eyebrow);
-  text-transform: uppercase;
-  opacity: 0.75;
 }
 
 .contact-grid {
@@ -1047,8 +1044,11 @@ html[data-intro-pending] .site-nav { opacity: 0; }
 /* --- Tablet + Mobile (< 1024): kompakte Nav, gestapelte Leistungen --- */
 
 @media (max-width: 1023px) {
-  /* Nav-Pille: nur Lockup + Menü-Knopf, Links und CTA ziehen ins Overlay */
-  .nav-pill { gap: 16px; }
+  /* Nav-Pille: nur Lockup + Menü-Knopf, Links und CTA ziehen ins Overlay.
+     Breite bleibt die der Desktop-Pille mit sichtbaren Links (691px) und
+     schrumpft erst, wenn der Viewport minus Seitenrand nicht mehr reicht */
+  .site-nav { width: min(691px, calc(100% - 2 * var(--pad))); }
+  .nav-pill { gap: 16px; justify-content: space-between; }
   .nav-links,
   .nav-pill > .btn-primary { display: none; }
   .nav-menu-toggle { display: inline-flex; }
@@ -1122,6 +1122,10 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   .process-col { padding: 8px 24px 16px 24px; }
   .process-note { margin-top: 64px; }
 
+  /* Portraet-Pills: weniger Gruppen-Padding, damit die drei Titel bis 768 px
+     nebeneinander passen */
+  .portrait-pills { padding: 0 24px; }
+
   /* Engere Spalten-Gaps */
   .about-grid { gap: 56px; }
   .contact-grid { gap: 64px; padding-block: 88px 120px; }
@@ -1134,6 +1138,7 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   .site-nav {
     left: 22px;
     right: 22px;
+    width: auto;
     transform: none;
   }
   .site-nav.nav-hidden { transform: translateY(-180%); }
@@ -1184,11 +1189,19 @@ html[data-intro-pending] .site-nav { opacity: 0; }
     max-width: none;
     padding-inline: calc(var(--pad) + 8px);
   }
-  .obj-browser { width: 112px; top: 8svh; left: 4vw; }
-  .obj-appcard { width: 96px; top: 10svh; right: 4vw; }
-  .obj-db { width: 76px; bottom: 9svh; left: 6vw; }
-  .obj-mark { width: 62px; bottom: 10svh; right: 8vw; }
-  .statement-line { width: 94vw; }
+  .obj-browser { width: 112px; top: 8svh; left: calc(var(--rail-inset) + 10px); }
+  .obj-appcard { width: 96px; top: 10svh; right: calc(var(--rail-inset) + 10px); }
+  .obj-db { width: 76px; bottom: 9svh; left: calc(var(--rail-inset) + 16px); }
+  .obj-mark { width: 62px; bottom: 10svh; right: calc(var(--rail-inset) + 12px); }
+  /* mittig hinter dem Text statt im unteren Objekt-Band (dort kollidiert
+     sie mit den Ecken-Objekten); breiter als der Viewport, damit Anfang und
+     rechter Scheitel aus dem Bild laufen statt nackt in der Flaeche zu enden */
+  .statement-line {
+    width: 132vw;
+    bottom: auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   /* Projekte: kompaktere Titelzeile */
   .project-title { font-size: 1.5rem; }

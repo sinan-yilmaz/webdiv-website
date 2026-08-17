@@ -4,10 +4,9 @@ import { Fragment, useRef } from 'react';
 import { footer, kontakt, marke } from 'core/consts/content';
 import { useInViewOnce } from 'lib/motion/hooks/useInViewOnce';
 import FormArea from './FormArea';
-import PixelPortraitArea from './PixelPortraitArea';
 
 /* Kobalt-Kapitel: Sequenz ueber CSS-transition-delays nach dem Eintritt
-   (Kante/Pixel-Portraet -> BG-Wortmarke -> Frage -> Intro -> Formular -> Credits). */
+   (BG-Wortmarke -> Frage -> Intro -> Formular -> Credits). */
 function ContactSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const inView = useInViewOnce(sectionRef, 0.16);
@@ -22,10 +21,6 @@ function ContactSection() {
     >
       <div className="contact-bg-mark wordmark" aria-hidden="true">
         {marke.wortmarke}
-      </div>
-
-      <div className="contact-head">
-        <PixelPortraitArea />
       </div>
 
       <div className="container contact-grid">
