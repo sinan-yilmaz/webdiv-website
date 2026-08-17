@@ -1,7 +1,7 @@
 # webdiv – Website
 
 One-Page-Website für webdiv (Sinan Yilmaz, Webentwickler, Günzburg).
-Next.js (App Router, TypeScript) mit `output: 'export'` – statisches HTML, kein Server nötig.
+Next.js (App Router, TypeScript) mit `output: 'export'` -> statisches HTML, kein Server nötig.
 
 ## Entwicklung
 
