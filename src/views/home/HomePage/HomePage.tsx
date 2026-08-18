@@ -74,8 +74,13 @@ function HomePage() {
           <PortraitSection stackRef={stackRef} />
           <StatementSection />
         </div>
-        <StepEdge ref={edgeToPaperRef} from="var(--dark)" to="var(--paper)" />
+        <StepEdge from="var(--dark)" to="var(--paper)" />
         <ServicesSection />
+        {/* Teil des dunklen visuellen Tests: das dunkle Kapitel endet mit
+            derselben Treppenkante, mit der es beginnt. Solange der Test steht,
+            misst die Nav ihre Hell-Grenze hier (edgeToPaperRef) – bei Rueckbau
+            des Tests wandert das Ref zurueck an die Kante vor den Services. */}
+        <StepEdge ref={edgeToPaperRef} from="var(--dark)" to="var(--paper)" />
         <ProjectsSection />
         <ProcessSection />
         <AboutSection />

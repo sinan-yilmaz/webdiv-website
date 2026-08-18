@@ -117,6 +117,11 @@
 - [x] Dezente Schattierung wieder rein (Wunsch Sinan, „will das sehen“): zweischichtiger weicher Wurf nach unten (`0 2px 6px` 3% + `0 22px 48px` 6% Ink) – Blatt-auf-Papier-Tiefe; mobil aus (dort keine Box) – Look bewerten
 - [x] Tag-Pills: `cursor: default` (Labels, nicht klickbar; Selektion bleibt); Desktop-Größe erst wie Portrait-Pills (24px) → Sinan: zu groß → final eine Stufe darunter (19px / 14 28 = Mobil-Maß der Portrait-Pills); mobil <768 bleibt 15px / 11 20
 - [x] Titel höher + mehr Luft zum Text (Wunsch Sinan): Spacer-Row über dem Titel von 1fr auf 0.55fr (Titel rückt nach oben), Strich-margin-bottom 30→72px (Abstand Titelblock→Text wächst); mobil unverändert (dortiger Strich-margin-Override 24/32 bleibt)
+- [ ] **TEMPORÄRER TESTBLOCK am Ende von `main.css`** („VISUELLER TEST“, 18.08.2026): Dunkel läuft vom Statement bis „Zuletzt gebaut“ durch (Leistungen-Sektion + Karten in `--dark`, Karten nur mit `--line-dark`-Haarlinie), Treppenkante als Konturlinie in Rail-Liniensprache (1px, `--line-dark`; `::before` Originalform als Linie, `::after` um 1px geschrumpfte dunkle Füllung – Inline-`--edge-to` der Komponente wird per `::after`-background übersteuert; Selektor `.step-edge:has(+ .services)`) → nach Sinans Bewertung KOMPLETT ENTFERNEN (nur diesen Block löschen, sonst ist nichts angefasst)
+- [x] Dot-Lupe („Kreisel“) je Leistungs-Karte (Wunsch Sinan, exakt wie Portrait): Canvas pro Karte (`.svc-card-dots`, z-index -1 hinter dem Inhalt via `isolation: isolate`), gleiche Parameter wie die Portrait-Lupe (26px-Raster, Radius 260, Ring `0.06+0.14e`, Lerp amt 0.12 / Position 0.25), nur feine Pointer + `pointerType === 'mouse'` → mobil/Touch bewusst ohne Effekt (wie Portrait); Karten-Punktraster (bg-dots-dark-Werte) liegt aktuell im TESTBLOCK – bei Rückbau auf hell braucht die Lupe eine Ink-Farbvariante + helles Raster (Canvas-Farbe kommt aus `--paper`)
+- [x] Unteres Ende des dunklen Kapitels (Sinan: „nicht plötzlich gerade Linie zu weiß“): erst Probe nach Referenz-Übergang harrisoncarloss.com (`BrushEdge`, SVG-Ink-Riss mit Trockenpinsel-Fragmenten) – Entscheidung Sinan 19.08.2026: „einheitlich mit den Stufen“ → BrushEdge komplett entfernt (Komponente, Barrel, CSS), stattdessen `<StepEdge from="var(--dark)" to="var(--paper)" />` in HomePage zwischen Services und Projekte (ohne Ref, nicht in `stepEdgeRefs` der Nav)
+- [x] Folge-Punkt aus dem dunklen Test (gefixt 19.08.2026, gemeldet von Sinan: Nav war hell über den dunklen Leistungen): `edgeToPaperRef` (Hell-Messpunkt der Nav) von der Kante Statement→Services an die Kante Services→Projekte verschoben – Nav bleibt jetzt bis zum Ende des dunklen Kapitels invertiert und kippt über „Zuletzt gebaut“ zurück (beide Richtungen im Browser geprüft); bei Rückbau des Tests wandert das Ref zurück (Kommentar in HomePage.tsx)
+- [x] Leistungen dezent heller als das Statement (Wunsch Sinan 19.08.2026): Testblock-Variable `--dark-soft` (erst #1B1B1A, Sinan: „passt farblich nicht, dunkler“ → #161615; Statement bleibt `--dark` #121212) für Sektion, Karten, oberes Kontur-::after und die Grundfläche der unteren Kante (`.services + .step-edge`) – die obere Treppe liest sich dadurch als subtiler Zweiton + Konturlinie; bei Übernahme des Tests wird `--dark-soft` ein echter Token in tokens.css
 - [ ] Nächster Schritt: Look so bewerten; falls es weiterhin nicht sitzt, ganz neue Richtung für die Sektion erarbeiten (Sinan: „hmm, was ganz neues“ – erst mal zurückgestellt)
 
 ## Fertig (Leistungen als Service-Bühnen mit Sticky-Overlap, 18.08.2026 – Referenz harrisoncarloss.com)
@@ -148,6 +153,32 @@
 - [x] Mobile: Boxen full-bleed (Farbe volle Breite, Inhalt behält Seitenrand, Radius entfällt) statt der alten paper-2-Karten – Entscheidung Sinan: keine „eingerückten“ Boxen, kein Pinning
 - [x] Aufgeräumt: `MediaArea` (Browserrahmen-Platzhalter + Medien-SVGs) entfernt, `leistungen.browserUrl`/`screenshotPlatzhalter` aus `content.ts`; `.browser-frame` bleibt (Case Study nutzt ihn); neues Token `--r-box: 28px`
 - [x] Feinschliff offen: Sinan will noch nachschärfen („da gibt es noch einiges“)
+
+## Ablauf-Sektion & CTA (besprochen 19.08.2026, noch nichts umgesetzt)
+
+- [ ] Ablauf-Sektion bleibt (sie ist die Einwandbehandlung: kostenlos/unverbindlich, schriftlicher
+      Festpreis, Zwischenstände im Browser, Betreuung – wichtigster Vertrauensbaustein solange nur
+      eine Referenz da ist); Entscheidung Sinan 19.08.2026 (Lab-Runde): KEIN Erstgespräch-CTA in
+      der Sektion – der Haupt-CTA bleibt allein bei Nav + Kontakt, die Monospace-Schlusszeile bleibt
+- [ ] Ablauf-Redesign: zwei Lab-Runden am 19.08.2026 verworfen (Lab `public/lab/ablauf.html`
+      wieder gelöscht) – Runde 1 mit 4 Typo-Layouts (Leitlinie/Register/Frage-Antwort/Kompakt):
+      Sinan „alles langweilig, passt nicht zum Design“; Runde 2 mit 4 Mechanik-Varianten in der
+      Website-Sprache (A Titel-Füllung scroll-gekoppelt, B gezeichnete Kobalt-Weglinie,
+      C Linienobjekt-Vignetten, D monumentale Outline-Ziffern mit Tinten-Füllstand):
+      „gefällt mir alles nicht“ → Richtung weiter offen, neuer Anlauf in einer nächsten Session
+- [ ] Entschieden: kein Accordion (versteckt die Einwandbehandlung, falsches UI-Möbel);
+      FAQ-Unterseite kommt erst NACH dem Livegang (Entscheidung Sinan 19.08.2026) – dann vom
+      Ablauf-Ende + Footer verlinken; Checklisten-Kandidat „FAQ + FAQPage-Strukturdaten“ dabei prüfen
+- [ ] Entschieden: kein interaktiver Preiskalkulator und kein E-Mail-Gate (Hormozi „eine Hürde“;
+      Konfigurator = Baukasten-Signal, bei Custom-Arbeit keine ehrlichen Zahlen möglich)
+- [ ] Offene Entscheidung Sinan: „ab“-Preis öffentlich auf die Seite? (Listenpreis laut Akquise-Plan
+      Abschnitt 9: 3.500–6.000 € Custom-One-Pager; KI-Einwand „mach ich selbst für 50 €“ besprochen –
+      Preis selektiert richtig, aber nur tragfähig, wenn Sinan selbst dahintersteht)
+- [ ] Idee fürs Kontaktformular: Anliegen-Feld (neue Website / bestehende Seite verbessern /
+      Anwendung) zur Qualifizierung, ggf. Budget-Select – Entscheidung offen
+- [ ] Kontakttext ggf. um die Facette „ehrliche Einschätzung Ihrer bestehenden Seite“ schärfen
+      (ersetzt einen separaten prominenten „Website-Check“-CTA auf der One-Page; der Check selbst
+      kommt später als eigenes Tool, siehe Akquise-Plan Abschnitt 1 Variante B)
 
 ## Offen aus dem Bucan-Abgleich (für Deploy-Phase)
 

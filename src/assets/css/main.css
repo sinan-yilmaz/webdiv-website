@@ -509,6 +509,8 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   border-radius: var(--r-box);
   /* dezente Schattierung: Blatt liegt auf dem Papier */
   box-shadow: 0 2px 6px rgb(17 17 17 / 0.03), 0 22px 48px rgb(17 17 17 / 0.06);
+  /* isolate haelt den z-index:-1-Canvas der Dot-Lupe vor dem Kartengrund */
+  isolation: isolate;
   padding: clamp(44px, 4.5vw, 72px);
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
@@ -523,6 +525,18 @@ html[data-intro-pending] .site-nav { opacity: 0; }
     "text   obj"
     "tags   obj";
   column-gap: 72px;
+}
+/* Dot-Lupe (Canvas, zeichnet die Portraet-Lupe je Karte): hinter dem
+   Inhalt, Radius clippt die Ecken, Zeiger-Events bleiben auf der Karte */
+.svc-card-dots {
+  position: absolute;
+  inset: 0;
+  /* explizit: inset streckt ein replaced element (canvas) nicht */
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  border-radius: calc(var(--r-box) - 1px);
+  pointer-events: none;
 }
 .svc-card-num {
   grid-area: num;
@@ -1410,4 +1424,85 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   .process-cols { grid-template-columns: 1fr; row-gap: 0; }
   .process-col { padding: 22px 0 26px 20px; }
   .process-num { margin-bottom: 16px; }
+}
+
+/* ==========================================================================
+   VISUELLER TEST (temporaer – nach der Bewertung komplett entfernen):
+   das Statement-Dunkel laeuft bis "Zuletzt gebaut" durch, die Treppenkante
+   davor bleibt als helle Konturlinie sichtbar (::before = um 2px
+   vergroessertes Stufen-Polygon, ::after deckt das Innere farbgleich ab)
+   ========================================================================== */
+
+/* Leistungen dezent heller als das Statement-Dunkel */
+:root { --dark-soft: #161615; }
+
+/* Inline-Style der Komponente setzt --edge-to, daher direkt das ::after:
+   dunkle Fuellung, um 2px geschrumpft – darunter zeichnet das ::before die
+   Originalform als hellen Kontur-Saum (ragt nirgends aus dem Streifen,
+   das Statement mit z-index 5 wuerde Ueberstaende decken) */
+.step-edge:has(+ .services)::after {
+  background-color: var(--dark-soft);
+  clip-path: polygon(
+    0 calc(66.67% + 1px),
+    calc(22% + 1px) calc(66.67% + 1px),
+    calc(22% + 1px) calc(33.34% + 1px),
+    calc(40% + 1px) calc(33.34% + 1px),
+    calc(40% + 1px) 1px,
+    calc(60% - 1px) 1px,
+    calc(60% - 1px) calc(33.34% + 1px),
+    calc(78% - 1px) calc(33.34% + 1px),
+    calc(78% - 1px) calc(66.67% + 1px),
+    100% calc(66.67% + 1px),
+    100% 100%,
+    0 100%
+  );
+}
+.step-edge:has(+ .services)::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -1px;
+  /* Liniensprache der Rails: 1px in --line-dark */
+  background: var(--line-dark);
+  clip-path: polygon(
+    0 66.67%,
+    22% 66.67%,
+    22% 33.34%,
+    40% 33.34%,
+    40% 0,
+    60% 0,
+    60% 33.34%,
+    78% 33.34%,
+    78% 66.67%,
+    100% 66.67%,
+    100% 100%,
+    0 100%
+  );
+  transform: scaleY(var(--edge-p, 1));
+  transform-origin: bottom;
+}
+
+.services {
+  background: var(--dark-soft);
+  --rail: var(--line-dark);
+}
+/* Kante am Kapitelende: Grundflaeche des Streifens haengt an der helleren
+   Sektion, das Papier-::after (Inline --edge-to) bleibt */
+.services + .step-edge { background-color: var(--dark-soft); }
+.services .eyebrow { color: rgb(242 239 233 / 0.55); }
+.svc-card {
+  background-color: var(--dark-soft);
+  /* Punktraster wie .bg-dots-dark: Grundlage der Dot-Lupe */
+  background-image: radial-gradient(rgb(242 239 233 / 0.07) 1px, transparent 1.6px);
+  background-size: 26px 26px;
+  border-color: var(--line-dark);
+  box-shadow: none;
+  --obj-ink: var(--on-dark);
+  --obj-dim: rgb(242 239 233 / 0.45);
+}
+.svc-card-title { color: var(--on-dark); }
+.svc-card-num { color: rgb(242 239 233 / 0.45); }
+.svc-card-text { color: rgb(242 239 233 / 0.82); }
+.svc-card-tag {
+  border-color: var(--line-dark);
+  color: rgb(242 239 233 / 0.82);
 }

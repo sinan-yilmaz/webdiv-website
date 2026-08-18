@@ -1,6 +1,6 @@
 # webdiv – Akquise-Plan (nach Livegang der Website)
 
-Stand: 18.08.2026 · Pläne für die Phase NACH Vervollständigung der Website.
+Stand: 19.08.2026 · Pläne für die Phase NACH Vervollständigung der Website.
 Positionierung als Grundlage: nicht „ich baue Websites", sondern „Lösungen, die mehr
 können als gut aussehen" – ein Ansprechpartner von der Skizze bis zum Betrieb.
 KI-Tools (Lovable & Co.) bedienen Selbstbauer; webdiv verkauft Verantwortung,
@@ -31,6 +31,17 @@ Messlatte (Hormozi: verschenken, wofür andere Geld nehmen): Der Gratis-Report
 soll besser sein als das, was Agenturen als bezahltes Audit für mehrere Hundert
 Euro verkaufen. Und bewusst nur eine Hürde: URL eingeben → Report bekommen
 (Need-to-Believes, Abschnitt 4).
+
+Kostenfrage geklärt (19.08.2026): kein gemietetes Backend nötig, 0 € laufend
+machbar. Architektur: webdiv.de bleibt statisch (`output: 'export'`); Messwerte
+liefert die Google-PageSpeed-Insights-API (kostenlos, Google führt Lighthouse
+aus); eigene Checks (HTML/Header/Impressum/Fonts/Tracker) über eine einzelne
+Serverless-Funktion (CORS-Proxy) auf Cloudflare Workers oder Netlify Free –
+deren Free-Tiers erlauben kommerzielle Nutzung, Vercel-Hobby dagegen nicht.
+Keine Datenbank, solange Reports live berechnet statt gespeichert werden
+(später optional Supabase Free). Rate-Limiting gegen Missbrauch einplanen.
+Vor Umsetzung Free-Tier-Konditionen und API-Quota gegen Primärquellen prüfen
+(Stand der Angaben: Wissensstand 19.08.2026, nicht tagesaktuell verifiziert).
 
 ## 2. Websites verkaufen – Kanäle
 
@@ -97,6 +108,26 @@ stecken drin, und welche lassen sich durch Zeigen statt Behaupten beseitigen?
 Regeln: festes Zeitbudget pro Pitch; fremde Fotos/Texte/Logos nur in der
 privaten Demo verwenden, nie öffentlich hosten oder bewerben (Urheberrecht);
 Demo nach Entscheidung offline nehmen.
+
+**Konkreter Kandidat (19.08.2026): aysenskitchen.com** – Ayşe Şen („Ayşen's
+Kitchen®", Ebersbach BW), Food-Creatorin mit laut Sinan über 1 Mio
+Instagram-Followern; gewünscht war eine Rezept-Website. Stand 19.08.2026 zeigt
+die Domain nur ein Impressum (WordPress; Ex-Dienstleister „Website Stuttgart"/
+Mehmet Soysal steht noch drin). Vorgeschichte laut Sinan: an unseriöse Anbieter
+geraten, Projekt gescheitert, liegt seitdem brach – Vertrauen ist verbrannt,
+Need-to-Believes entsprechend hoch → zeigen statt versprechen. Warmer Intro
+über einen Freund Sinans möglich.
+
+Vorgehen: erst webdiv.de live (sie wird googeln), dann Intro mit genau einem
+Stufe-1-Screen (Timebox; ihre Fotos nur privat teilen). Ton: Chance statt
+Befund, Ex-Dienstleister nicht schlechtreden. Pitch-Winkel: 1 Mio geliehene
+Reichweite auf einer fremden Plattform → eigene Rezept-Plattform (Rezept-
+Suche/Filter, Recipe-Strukturdaten für Google-Traffic, Newsletter, später
+Shop/Kochbuch). Gegenleistung explizit als Dealbestandteil verhandeln
+(Namensnennung/„created by webdiv", Testimonial, ggf. Story-Erwähnung –
+das ist Geld wert; Muster „Projektwert X, Referenzpreis Y" aus Abschnitt 9),
+nicht gratis auf vage Exposure-Hoffnung arbeiten. Nebeneffekt: wäre die zweite
+Case Study mit Anwendungs-Charakter (Rezept-Datenbank + Pflege-CMS).
 
 ## 5. Zeit-Ökonomie (Beobachtung aus dem eigenen Projekt)
 
