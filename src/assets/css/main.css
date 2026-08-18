@@ -444,13 +444,15 @@ html[data-intro-pending] .site-nav { opacity: 0; }
 .float-obj path, .float-obj rect, .float-obj ellipse, .float-obj line, .float-obj circle {
   fill: none;
   vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 /* innerhalb der Rails (Abstand zur Haarlinie), vertikal mittig im Leerraum
    zwischen Textblock (~35-65svh) und Sektionsrand */
-.obj-browser { top: 9svh; left: calc(var(--rail-inset) + 56px); width: 190px; }
-.obj-appcard { top: 10svh; right: calc(var(--rail-inset) + 48px); width: 170px; }
-.obj-db { bottom: 9svh; left: calc(var(--rail-inset) + 80px); width: 130px; }
-.obj-mark { bottom: 11svh; right: calc(var(--rail-inset) + 72px); width: 120px; }
+.obj-browser { top: 9svh; left: calc(var(--rail-inset) + 56px); width: 196px; }
+.obj-phone { top: 8svh; right: calc(var(--rail-inset) + 64px); width: 96px; }
+.obj-db { bottom: 9svh; left: calc(var(--rail-inset) + 80px); width: 128px; }
+.obj-api { bottom: 14svh; right: calc(var(--rail-inset) + 40px); width: 156px; }
 
 /* geschwungene Kobalt-Linie unter dem Text; endet vollstaendig IN der Buehne:
    die untere Clip-Kante der Sektion (overflow: clip) liegt unsichtbar im
@@ -1230,13 +1232,13 @@ html[data-intro-pending] .site-nav { opacity: 0; }
     padding-inline: calc(var(--pad) + 8px);
   }
   .obj-browser { width: 112px; top: 8svh; left: calc(var(--rail-inset) + 10px); }
-  .obj-appcard { width: 96px; top: 10svh; right: calc(var(--rail-inset) + 10px); }
+  .obj-phone { width: 54px; top: 9svh; right: calc(var(--rail-inset) + 12px); }
   /* untere Objekte am selben Anker wie die Linie (2svh-Sockel + vw-Anteil):
      die Linienhoehe skaliert mit vw – nur so bleibt der Abstand zwischen
      Linie und Objekten auf jeder Viewporthoehe erhalten (svh allein wuerde
      auf flachen Geraeten unter die Linie rutschen) */
-  .obj-db { width: 76px; bottom: calc(2svh + 17vw); left: calc(var(--rail-inset) + 16px); }
-  .obj-mark { width: 62px; bottom: calc(2svh + 20vw); right: calc(var(--rail-inset) + 12px); }
+  .obj-db { width: 74px; bottom: calc(2svh + 17vw); left: calc(var(--rail-inset) + 16px); }
+  .obj-api { width: 84px; bottom: calc(2svh + 21.5vw); right: calc(var(--rail-inset) + 10px); }
   /* Mobil-Linie mit derselben Geste wie Desktop (Schwung + Einhak-Schleife);
      linkes Ende laeuft seitlich aus dem Bild, die Schleife bleibt im Bild.
      max-width hebt den globalen svg-Reset (max-width: 100%) auf, sonst wird

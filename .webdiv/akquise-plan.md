@@ -86,7 +86,99 @@ nicht ersetzen. Ein großer Teil der 20 Std ist zudem Einmal-Investition
 werden mit jedem Projekt schneller. Für die Preisgestaltung heißt das:
 Festpreis trägt die Einmal-Investitionen nicht mit, sie sind schon bezahlt.
 
-## 6. Reihenfolge
+## 6. Potenzielle Referenz: cnyn (contract-copilot-frontend)
+
+„cnyn" – modulares B2B-SaaS/ERP für die Bau-/Immobilienwirtschaft (deutsch,
+mandantenfähig, AWS Cognito). Sinan hat das Frontend als Hauptautor gebaut
+(201 von ~320 Commits): ~243 eigene Komponenten, TanStack Query + Zod,
+Feature-Sliced-Architektur, Dark Mode; Highlight: Standardschreiben-Builder
+(DOCX-Upload, Bookmark-Mapping, IF/ELSEIF/ELSE-Logik, Berechnungen, PDF/ZIP).
+Aus dem Projekt einvernehmlich ausgestiegen (Reviewer-Rolle abgelehnt).
+
+Wert für webdiv: belegt die Leistungen „Web-Anwendungen" und „Schnittstellen &
+Datenbanken" – die fehlende Hälfte neben Bucan (Websites).
+
+Vor Verwendung von Stefan Eitel einholen (keine LICENSE/NDA im Repo – Rechte
+formal ungeklärt, Freigabe ist Voraussetzung):
+1. Testimonial mit Namensnennung als Auftraggeber
+2. Nennung von Produkt/Marke „cnyn" (Fallback: anonym „B2B-SaaS für die Bauwirtschaft")
+3. Screenshots – anonymisiert, am besten frisch mit Dummy-Daten; Endkunden
+   (Fides Gruppe, Tenant-URLs) nicht zeigen/nennen ohne separate Freigabe
+
+Nebenbei ihm melden: `.env.local` (reale Cognito-IDs, API-URL) ist nicht
+gitignored und liegt im Repo-Verlauf.
+
+Einbau: zweiter Eintrag in der Projekte-Sektion (Meta „Web-Anwendung ·
+Frontend-Entwicklung", ohne Live-Link, da Login-App); Case Study optional
+später mit Fakten-Doku analog `.website/referenz-bucan-website.md`.
+
+## 7. Zertifizierungen & Partnerprogramme
+
+Grundregel: Bei der Kernzielgruppe (Geschäftsführer Mittelstand) schlägt eine
+Referenz jedes Zertifikat. Zertifikate wirken indirekt – bei Multiplikatoren,
+Systemhäusern, Plattformen und Partnern. Zeit primär in Referenzen, Zertifikate
+nur dort, wo sie einen Kanal öffnen.
+
+**Lohnt sich:**
+- **AWS-Zertifizierung** (Developer Associate oder Solutions Architect
+  Associate): einziges klassisches Zertifikat mit Marktgewicht hier – wirkt bei
+  Systemhäusern/Multiplikatoren, größeren Mittelständlern und auf
+  Freelancer-Plattformen. Praxisgrundlage durch cnyn (Cognito/Amplify) da.
+- **Partnerprogramme mit Verzeichnis-Listing** (Supabase, Vercel): weniger
+  Zertifikat als Inbound-Kanal – Agentur-Verzeichnisse leiten echte Anfragen,
+  passen exakt zum Stack. Kriterien/Konditionen vor Bewerbung aktuell prüfen.
+
+**Lohnt sich nicht:**
+- Framer/Webflow Expert – falsches Ökosystem, widerspricht der
+  „kein Baukasten"-Positionierung
+- Coursera-/Meta-React-Zertifikate – praktisch gewichtslos; GitHub + Case
+  Studies beweisen mehr
+- Google-Ads/Analytics-Zertifikate – nur falls Marketing je Leistung wird
+- ISO & Co. – Unternehmens-Zertifizierungen, falsche Größenordnung
+
+## 8. Wettbewerb regional (Beobachtung 18.08.2026)
+
+**Webwavers** (webwavers.de) – Einzelunternehmen Edip Kilinc, Marktplatz 31,
+Günzburg. Webdesign/UI/UX/Branding/Motion/Shopify + Performance Marketing über
+Tochtermarken (nextpercent.de, peakbid.de); German Web Award / German Design
+Award; **Webflow Premium Partner + Framer Expert**. Referenzen überregional
+(Startups/Marken), kein regionaler Mittelstand erkennbar, keine Preise.
+
+Einordnung: anderes Spielfeld – Design-Agentur auf Plattformen (Webflow/
+Framer), keine Individual-Entwicklung, keine Web-Anwendungen/Datenbanken/
+Schnittstellen. Zielgruppe „ambitionierte Marken" mit Branding-Budget, Du-Form/
+Denglisch – nicht der Bucan-Typ Kunde. Validiert den regionalen Markt (wenn das
+in Günzburg trägt, gibt es Nachfrage). Nicht frontal im Segment „schöne
+Marken-Website" positionieren, sondern über Anwendungs-/Code-Kompetenz.
+Perspektivisch eher Multiplikator-Kandidat (Design-Agentur ohne Devs,
+Abschnitt 3) als Bedrohung. Abschauen: Auftritt skaliert Wahrnehmung;
+Partnerschaften/Auszeichnungen sichtbar machen.
+
+Deren Multi-Brand-Strategie (Webwavers = Design, nextpercent.de = Shopify/
+E-Commerce „gegründet aus der Expertise von Webwavers", peakbid.de = Ads):
+pro Marke ein enges Spezialisten-Versprechen + mehrere Suchintentionen
+besetzen. Für webdiv NICHT nachmachen – Ein-Mann-Authentizität („der es auch
+baut") ist das Gegen-Asset, Multi-Brand wäre Overhead + Verwässerung.
+Einzige spätere Ausnahme: ein Produkt (z. B. Website-Check) als eigene Marke.
+
+## 9. Referenz-Pflege: Bucan aufwerten (Timebox 4–6 Std)
+
+Bewusstes Marketing-Investment in die wichtigste Referenz (bezahlt war sie mit
+1.500 € / 10–12 Std ≈ 125–150 €/Std – gesunder Satz, aber unter Marktpreis der
+Leistung; künftig Listenpreis 3.500–6.000 € für Custom-One-Pager und
+Referenz-Rabatte explizit ausweisen: „Projektwert X, Referenzpreis Y").
+
+1. Performance-Audit + Feinschliff, bis Messwerte vorzeigbar sind (PageSpeed,
+   Ladezeit, Cookies/Tracker) → liefert zugleich die Belege für den
+   „performant + custom"-USP auf webdiv.de (Fakten-Leiste im Technik-Kapitel
+   der Case Study; Zahlen statt Adjektive)
+2. Screenshots erzeugen (Leistungs-Karte, Projekt-Vorschaubild,
+   Case-Study-Browserrahmen – fehlen laut tasklist ohnehin)
+3. Optische Upgrades nur, wenn Timebox es hergibt
+4. Als Beziehungsanlass nutzen: Update melden → Testimonial, Google-Bewertung
+   und 2–3 Intros erbitten (Empfehlungskaskade, Abschnitt 2)
+
+## 10. Reihenfolge
 
 1. Website live bringen (Voraussetzung für alles).
 2. Bucan-Empfehlungen einsammeln.

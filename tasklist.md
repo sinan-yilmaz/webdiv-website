@@ -127,6 +127,8 @@
 
 ## Runde 2 (nächste Session)
 
+- [ ] USP „performant + custom + zugeschnitten" belegt hervorheben: Satz-Ergänzung in Leistungen/Firmen-Websites (Text-[Vorschlag] liegt vor, absegnen) + Fakten-Leiste mit Messwerten im Technik-Kapitel der Case Study (PageSpeed/Ladezeit/Cookies der Bucan-Seite – erst messen, nichts behaupten)
+
 - [x] Mobile-Ableitung bis 390 px (16.08.2026 – siehe „Fertig (Mobile/Tablet-Ableitung)“; Touch: nur Welle statt Lupe war schon im Port enthalten)
 - [x] Unterseite `/projekte/bucan-eventservice` (16.08.2026 – siehe „Fertig (Case Study Bucan)“)
 - [ ] Unterseiten `/impressum`, `/datenschutz` (rein typografisch)

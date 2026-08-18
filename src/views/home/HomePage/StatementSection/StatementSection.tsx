@@ -27,8 +27,8 @@ function renderWords(parts: string[], accents: readonly string[] = []) {
    Rand → Unterkante am oberen Rand). Woerter fuellen sich wortweise beim
    Einfahren (p 0.24–0.54), die Kobalt-Linie zeichnet sich im unteren Drittel
    (p 0.46–0.82); die Buehne laeuft mit ~0.82x Scrolltempo (Lag 0.18, weiches
-   Verweilen). Vier Objekte pendeln in flachem 3D (24 s Zyklus, ±6°
-   Zeiger-Reaktion, leichtes Floaten). */
+   Verweilen). Vier Objekte pendeln in flachem 3D (18 s Zyklus, ±8°
+   Zeiger-Reaktion, Floaten auf beiden Achsen, Scroll-Parallaxe je Tiefe). */
 function StatementSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -107,20 +107,23 @@ function StatementSection() {
       path.style.strokeDashoffset = String(len * (1 - smoothstep(lp)));
     });
 
-    /* Objekte: langsame Rotation (24 s/Umdrehung als Sinus-Pendel ±24°),
-       minimale Zeiger-Reaktion (Lerp 0.04) */
-    const baseRot = (now / 24000) * 360;
+    /* Objekte: Sinus-Pendel ±30° (18 s/Zyklus), Zeiger-Reaktion (Lerp 0.04),
+       Floaten auf beiden Achsen und eine tiefenabhaengige Scroll-Parallaxe
+       (depth 1 laeuft mit der Buehne, tiefere Objekte ziehen spuerbar nach) */
+    const baseRot = (now / 18000) * 360;
     st.objects.forEach((obj) => {
       obj.mx = lerp(obj.mx, mouse.nx, 0.04);
       obj.my = lerp(obj.my, mouse.ny, 0.04);
       const rotY =
-        Math.sin(((baseRot + obj.phase * 40) * Math.PI) / 180) * 24 + obj.mx * 6 * obj.depth;
+        Math.sin(((baseRot + obj.phase * 40) * Math.PI) / 180) * 30 + obj.mx * 8 * obj.depth;
       const rotX =
         10 +
         Math.cos(((baseRot * 0.7 + obj.phase * 60) * Math.PI) / 180) * 6 +
-        obj.my * -4 * obj.depth;
-      const fy = Math.sin(now / 2400 + obj.phase) * 9;
-      obj.el.style.transform = `perspective(1100px) translateY(${fy}px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        obj.my * -6 * obj.depth;
+      const fx = Math.cos(now / 3100 + obj.phase * 1.3) * 6;
+      const fy = Math.sin(now / 2400 + obj.phase) * 13;
+      const py = (p - 0.5) * travel * 0.045 * (obj.depth - 1);
+      obj.el.style.transform = `perspective(1100px) translate3d(${fx.toFixed(1)}px, ${(fy + py).toFixed(1)}px, 0) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg)`;
     });
   });
 
@@ -132,49 +135,88 @@ function StatementSection() {
       <div className="statement-inner bg-dots-dark" data-rails>
         <div className="statement-stage" ref={stageRef}>
           <div className="float-obj obj-browser" data-depth="1">
-            <svg viewBox="0 0 190 140" strokeWidth="1.5" aria-hidden="true">
-              <rect className="st-paper" x="1" y="1" width="188" height="138" rx="10" />
-              <line className="st-paper" x1="1" y1="26" x2="189" y2="26" />
-              <circle className="st-paper" cx="14" cy="13.5" r="2.6" />
-              <circle className="st-paper" cx="24" cy="13.5" r="2.6" />
-              <circle className="st-paper" cx="34" cy="13.5" r="2.6" />
-              <rect className="st-paper" x="48" y="8" width="94" height="11" rx="5.5" />
-              <rect className="st-cobalt" x="14" y="40" width="112" height="46" rx="4" />
-              <line className="st-paper" x1="14" y1="102" x2="150" y2="102" />
-              <line className="st-paper" x1="14" y1="114" x2="104" y2="114" />
+            <svg viewBox="0 0 200 150" strokeWidth="1.5" aria-hidden="true">
+              <rect className="st-paper" x="1" y="1" width="198" height="148" rx="10" />
+              <line className="st-paper" x1="1" y1="26" x2="199" y2="26" />
+              <circle className="st-paper" cx="13" cy="13.5" r="2.6" />
+              <circle className="st-paper" cx="23" cy="13.5" r="2.6" />
+              <circle className="st-paper" cx="33" cy="13.5" r="2.6" />
+              <rect className="st-paper" x="46" y="7.5" width="108" height="13" rx="6.5" />
+              <rect className="st-paper" x="52" y="11" width="6" height="6" rx="1.5" />
+              <line className="st-paper" x1="64" y1="14" x2="118" y2="14" />
+              <rect className="st-cobalt" x="14" y="38" width="110" height="34" rx="4" />
+              <line className="st-cobalt" x1="22" y1="49" x2="86" y2="49" />
+              <line className="st-cobalt" x1="22" y1="60" x2="64" y2="60" />
+              <line className="st-paper" x1="140" y1="46" x2="186" y2="46" />
+              <line className="st-paper" x1="140" y1="56" x2="178" y2="56" />
+              <line className="st-paper" x1="140" y1="66" x2="170" y2="66" />
+              <rect className="st-paper" x="14" y="84" width="52" height="44" rx="4" />
+              <rect className="st-paper" x="74" y="84" width="52" height="44" rx="4" />
+              <rect className="st-paper" x="134" y="84" width="52" height="44" rx="4" />
+              <circle className="st-paper" cx="24" cy="98" r="4" />
+              <circle className="st-paper" cx="84" cy="98" r="4" />
+              <circle className="st-paper" cx="144" cy="98" r="4" />
+              <line className="st-paper" x1="20" y1="118" x2="48" y2="118" />
+              <line className="st-paper" x1="80" y1="118" x2="108" y2="118" />
+              <line className="st-paper" x1="140" y1="118" x2="168" y2="118" />
+              <line className="st-paper" x1="193" y1="36" x2="193" y2="60" />
             </svg>
           </div>
 
-          <div className="float-obj obj-appcard" data-depth="1.6">
-            <svg viewBox="0 0 170 150" strokeWidth="1.5" aria-hidden="true">
-              <rect className="st-paper" x="1" y="1" width="168" height="148" rx="10" />
-              <line className="st-paper" x1="1" y1="28" x2="169" y2="28" />
-              <line className="st-paper" x1="14" y1="48" x2="96" y2="48" />
-              <line className="st-paper" x1="14" y1="66" x2="96" y2="66" />
-              <line className="st-paper" x1="14" y1="84" x2="96" y2="84" />
-              <line className="st-paper" x1="14" y1="102" x2="96" y2="102" />
-              <line className="st-paper" x1="55" y1="40" x2="55" y2="110" />
-              <line className="st-cobalt" x1="112" y1="56" x2="156" y2="56" />
-              <line className="st-cobalt" x1="112" y1="82" x2="156" y2="82" />
-              <rect className="st-cobalt" x="112" y="100" width="44" height="16" rx="8" />
+          <div className="float-obj obj-phone" data-depth="1.6">
+            <svg viewBox="0 0 90 170" strokeWidth="1.5" aria-hidden="true">
+              <rect className="st-paper" x="1" y="1" width="88" height="168" rx="18" />
+              <rect className="st-paper" x="7" y="7" width="76" height="156" rx="13" />
+              <circle className="st-paper" cx="45" cy="15" r="2" />
+              <line className="st-paper" x1="16" y1="36" x2="74" y2="36" />
+              <line className="st-paper" x1="16" y1="46" x2="58" y2="46" />
+              <rect className="st-paper" x="16" y="60" width="58" height="44" rx="4" />
+              <line className="st-paper" x1="19" y1="101" x2="71" y2="63" />
+              <circle className="st-paper" cx="28" cy="72" r="4" />
+              <rect className="st-cobalt" x="16" y="116" width="46" height="15" rx="7.5" />
+              <line className="st-cobalt" x1="24" y1="123.5" x2="48" y2="123.5" />
+              <line className="st-paper" x1="32" y1="154" x2="58" y2="154" />
             </svg>
           </div>
 
           <div className="float-obj obj-db" data-depth="1.3">
-            <svg viewBox="0 0 130 150" strokeWidth="1.5" aria-hidden="true">
-              <ellipse className="st-paper" cx="65" cy="24" rx="56" ry="17" />
-              <line className="st-paper" x1="9" y1="24" x2="9" y2="126" />
-              <line className="st-paper" x1="121" y1="24" x2="121" y2="126" />
-              <path className="st-paper" d="M9 126 C 9 135.4, 34 143, 65 143 C 96 143, 121 135.4, 121 126" />
-              <path className="st-paper" d="M9 58 C 9 67.4, 34 75, 65 75 C 96 75, 121 67.4, 121 58" />
-              <path className="st-cobalt" d="M9 92 C 9 101.4, 34 109, 65 109 C 96 109, 121 101.4, 121 92" />
+            <svg viewBox="0 0 170 150" strokeWidth="1.5" aria-hidden="true">
+              <ellipse className="st-paper" cx="55" cy="22" rx="46" ry="14" />
+              <line className="st-paper" x1="9" y1="22" x2="9" y2="118" />
+              <line className="st-paper" x1="101" y1="22" x2="101" y2="118" />
+              <path className="st-paper" d="M9 118 C 9 126, 30 132, 55 132 C 80 132, 101 126, 101 118" />
+              <path className="st-paper" d="M9 54 C 9 62, 30 68, 55 68 C 80 68, 101 62, 101 54" />
+              <path className="st-cobalt" d="M9 86 C 9 94, 30 100, 55 100 C 80 100, 101 94, 101 86" />
+              <path className="st-paper" d="M101 62 C 118 62, 112 44, 128 44" />
+              <path className="st-cobalt" d="M101 94 C 118 94, 112 106, 128 106" />
+              <rect className="st-paper" x="128" y="30" width="36" height="26" rx="5" />
+              <line className="st-paper" x1="135" y1="40" x2="157" y2="40" />
+              <line className="st-paper" x1="135" y1="47" x2="150" y2="47" />
+              <rect className="st-paper" x="128" y="94" width="36" height="26" rx="5" />
+              <line className="st-paper" x1="135" y1="104" x2="157" y2="104" />
+              <line className="st-cobalt" x1="135" y1="111" x2="150" y2="111" />
+              <circle className="st-paper" cx="113" cy="55" r="1.8" />
+              <circle className="st-cobalt" cx="113" cy="99" r="1.8" />
             </svg>
           </div>
 
-          <div className="float-obj obj-mark" data-depth="1.8">
-            <svg viewBox="0 0 120 120" strokeWidth="6" aria-hidden="true">
-              <path className="st-cobalt" d="M16 91.5 L32 28.5" />
-              <path className="st-cobalt" d="M48 27 L104 60 L48 93" strokeLinejoin="miter" />
+          <div className="float-obj obj-api" data-depth="1.8">
+            <svg viewBox="0 0 190 120" strokeWidth="1.5" aria-hidden="true">
+              <rect className="st-paper" x="1" y="34" width="54" height="52" rx="8" />
+              <line className="st-paper" x1="11" y1="52" x2="43" y2="52" />
+              <line className="st-paper" x1="11" y1="63" x2="35" y2="63" />
+              <circle className="st-paper" cx="14" cy="75" r="2.4" />
+              <rect className="st-paper" x="135" y="34" width="54" height="52" rx="8" />
+              <line className="st-paper" x1="145" y1="52" x2="177" y2="52" />
+              <line className="st-paper" x1="145" y1="63" x2="169" y2="63" />
+              <circle className="st-paper" cx="148" cy="75" r="2.4" />
+              <path className="st-paper" d="M55 60 C 62 60, 64 58, 68 58" />
+              <path className="st-paper" d="M122 58 C 126 58, 128 60, 135 60" />
+              <path className="st-cobalt" d="M84 40 C 76 40, 80 51, 72 57 C 80 63, 76 76, 84 76" />
+              <path className="st-cobalt" d="M106 40 C 114 40, 110 51, 118 57 C 110 63, 114 76, 106 76" />
+              <circle className="st-paper" cx="90" cy="58" r="1.5" />
+              <circle className="st-paper" cx="95" cy="58" r="1.5" />
+              <circle className="st-paper" cx="100" cy="58" r="1.5" />
             </svg>
           </div>
 
