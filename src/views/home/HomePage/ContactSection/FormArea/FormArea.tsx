@@ -85,7 +85,6 @@ function FormArea() {
           {kontakt.formular.fehlerServer}
         </p>
       </form>
-      <p className="form-direct">{kontakt.direkt}</p>
     </div>
   );
 }

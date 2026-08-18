@@ -102,6 +102,13 @@
 - [x] `public/favicon.ico` als Alt-Client-Fallback: 16/32/48 px aus der V3-Geometrie (`app/icon.svg`) gerastert; moderne Browser nutzen weiter SVG/PNG aus `app/`
 - [x] SubpageNav-Pille auch auf Desktop in der einheitlichen Breite (691px wie die Startseiten-Pille bzw. Kompakt-Nav < 1024, Lockup links / CTA rechts) – vorher war sie auf Unterseiten inhaltsgetrieben schmaler
 
+## Fertig (Footer-Umbau Variante D „Werkbank“, 18.08.2026)
+
+- [x] Footer-Redesign aus 4 Lab-Varianten (Lab lag unter `public/lab/footer.html`, Umschalter A–D; nach Entscheidung wieder entfernt): Variante D übernommen – kompaktes Abschluss-Band über der Credits-Zeile (Wortmarke 2rem + Adresszeile links, Icon-Reihe Mail/Instagram/LinkedIn rechts), Kontaktformular unverändert
+- [x] Abgeschnittene Hintergrund-Wortmarke (`contact-bg-mark`) entfernt; „Oder direkt“-Zeile unterm Formular ins Band gewandert (`footer.adresse` in `content.ts`)
+- [x] Social-Icons als Monoline-Glyphen (1,5 px, currentColor) in `src/lib/primitives/components/` (MailIcon, InstagramIcon, LinkedInIcon); Pill-Duktus `.icon-btn`, Hover invertiert Paper/Kobalt
+- [x] Kontakt-Sektion auf mindestens volle Viewport-Höhe (100svh als Flex-Spalte, Grid zentriert, Band + Credits unten): die Treppenkante ist am Seitenende komplett aus dem Bild; weiterer Feinschliff folgt
+
 ## Offen aus dem Bucan-Abgleich (für Deploy-Phase)
 
 - [ ] SkipLink im Layout (a11y; Bucan hat einen) – 17.08.2026: bewusst weggelassen (Entscheidung Sinan)
@@ -123,6 +130,7 @@
 - [ ] Porträtfoto (frontal, schwarzer Hintergrund) als `public/portrait.jpg` ablegen → Porträt-Block und Über-mich übernehmen es automatisch
 - [ ] Echte Unterschrift als SVG-Einstrich-Pfad (ersetzt Mr-Dafoe-Platzhalter in `src/core/consts/signature.ts`)
 - [ ] E-Mail-Adresse, Impressumsdaten (stehen als sichtbare `[Platzhalter]` in `src/core/consts/content.ts`); Domain webdiv.de ist seit 17.08.2026 hinterlegt
+- [ ] Instagram-/LinkedIn-Profil-URLs für die Footer-Icons (`footer.soziale` in `content.ts` – hrefs sind noch `[Platzhalter]`; falls es die Profile noch nicht gibt: anlegen oder Icons vorerst raus?)
 - [ ] Bucan-Screenshots (für Leistungs-Karte 1, Projekt-Vorschaubild); Case Study: Startseiten-Screenshot als `public/projekte/bucan/screen-home.webp` ablegen → Browserrahmen übernimmt ihn automatisch
 
 ## Runde 2 (nächste Session)

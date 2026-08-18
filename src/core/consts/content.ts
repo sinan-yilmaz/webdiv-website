@@ -145,7 +145,6 @@ export const kontakt = {
     erfolg: 'Danke – Ihre Nachricht ist angekommen. Ich melde mich.',
     fehlerServer: 'Das hat nicht geklappt. Schreiben Sie mir direkt an [E-Mail-Adresse].',
   },
-  direkt: 'Oder direkt: [E-Mail-Adresse]',
 } as const;
 
 /* 404-Seite – Texte sind [Vorschlag], bitte absegnen (siehe tasklist.md) */
@@ -158,6 +157,14 @@ export const notFound = {
 } as const;
 
 export const footer = {
+  /* Abschluss-Band ueber der Credits-Zeile: Marke + Adresszeile links, Icons rechts.
+     hrefs sind [Platzhalter], bis E-Mail und Profile feststehen (siehe tasklist.md) */
+  adresse: 'Websites & Anwendungen · Günzburg · [E-Mail-Adresse]',
+  soziale: [
+    { id: 'mail', label: 'E-Mail', href: 'mailto:[E-Mail-Adresse]' },
+    { id: 'instagram', label: 'Instagram', href: '[Instagram-Profil]' },
+    { id: 'linkedin', label: 'LinkedIn', href: '[LinkedIn-Profil]' },
+  ],
   linksPrefix: 'created by',
   linksName: 'webdiv',
   copyright: '© 2026',
