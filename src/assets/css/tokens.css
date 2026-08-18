@@ -33,7 +33,7 @@
   --fs-hero: clamp(5rem, 18vw, 17rem);          /* Hero-Wortmarke */
   --fs-display2: clamp(2.5rem, 6vw, 5.5rem);    /* Statement, Footer-Frage */
   --fs-h2: clamp(2rem, 4.5vw, 4rem);            /* Sektionstitel */
-  --fs-service: clamp(2.5rem, 6vw, 5rem);       /* Leistungs-Titel */
+  --fs-service: clamp(2.5rem, 6.7vw, 6rem);     /* Leistungs-Titel (96px auf 1440) */
   --fs-body: 1.125rem;                          /* 18 px */
   --lh-body: 1.6;
   --fs-small: 0.875rem;                         /* 14 px */
@@ -64,6 +64,7 @@
   /* --- Radien --- */
   --r-pill: 999px;
   --r-card: 20px;
+  --r-box: 28px;             /* grosse Farbboxen (Leistungen) */
   --r-field: 0;
 
   /* --- Abstaende & Kanten --- */

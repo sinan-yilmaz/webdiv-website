@@ -27,6 +27,10 @@ einem Redesign-Screen als Artefakt (siehe Abschnitt 4).
 eingeben → Report bekommen. Leads kommen mit Einwilligung von selbst; das Tool
 selbst demonstriert die Web-Anwendungs-Kompetenz und wird nebenbei die zweite
 Case Study. Löst Rechts- und Positionierungsproblem gleichzeitig.
+Messlatte (Hormozi: verschenken, wofür andere Geld nehmen): Der Gratis-Report
+soll besser sein als das, was Agenturen als bezahltes Audit für mehrere Hundert
+Euro verkaufen. Und bewusst nur eine Hürde: URL eingeben → Report bekommen
+(Need-to-Believes, Abschnitt 4).
 
 ## 2. Websites verkaufen – Kanäle
 
@@ -54,6 +58,18 @@ Case Study. Löst Rechts- und Positionierungsproblem gleichzeitig.
 - **Über Multiplikatoren:** Steuerberater, Unternehmensberater, IT-Systemhäuser
   und Werbeagenturen ohne eigene Entwickler sitzen täglich in Betrieben und
   sehen Prozessprobleme. 2–3 solcher Partnerbeziehungen > 100 Cold Mails.
+- **Partner-Mechanik „100 % statt 20 %" (Hormozi):** Provisionsmodelle ändern
+  kein Verhalten – kein Steuerberater riskiert Mandantenvertrauen für 20 %
+  Anteil. Stattdessen ein abgeschlossenes Teilprodukt herausschälen (z. B.
+  „Digital-Audit": Website-Check-Report + Prozessfrage „Was läuft noch über
+  Excel/Zettel?", Wert ~500 €, Aufwand 2–3 Std) und dem Partner zu 100 %
+  überlassen: Er verkauft es unter eigenem Namen oder legt es seiner Beratung
+  bei und behält den Erlös komplett; Mindestpreis vorgeben (filtert
+  Schnäppchenjäger). webdiv liefert das Audit ohne Marge und bekommt dafür
+  zahlende, vorqualifizierte, warm vorgestellte Kunden – verdient wird am
+  Folgeprojekt. Keine Kaltansprache, kein UWG-Thema. Bedingung: Das Teilprodukt
+  muss in der Lieferung billig sein (Website-Check als Motor), sonst
+  Timebox-Falle wie bei den Pitch-Demos (Abschnitt 4).
 - **Ggf. Subunternehmer für Agenturen:** am Anfang für Cashflow und
   App-Referenzen (z. B. freelancermap, Uplink, regionale Agenturen).
 
@@ -72,6 +88,12 @@ antworten:
 3. **Stufe 3 (erst nach Erstgespräch):** alles Weitere – gehört ins bezahlte
    Projekt, nie in den Pitch.
 
+Wirkprinzip dahinter – **Need-to-Believes minimieren** (Hormozi): Je weniger
+ein Kunde glauben muss, bevor er kauft, desto eher kauft er. Der Stufe-1-Screen
+ersetzt „glauben, dass er es kann" durch „sehen, dass es besser aussieht".
+Als Prüffrage für jeden Pitch und jedes Angebot: Wie viele Überzeugungs-Hürden
+stecken drin, und welche lassen sich durch Zeigen statt Behaupten beseitigen?
+
 Regeln: festes Zeitbudget pro Pitch; fremde Fotos/Texte/Logos nur in der
 privaten Demo verwenden, nie öffentlich hosten oder bewerben (Urheberrecht);
 Demo nach Entscheidung offline nehmen.
@@ -85,6 +107,14 @@ nicht ersetzen. Ein großer Teil der 20 Std ist zudem Einmal-Investition
 (Designsystem, Motion-Framework, Blaupausen, Checkliste) – Kundenprojekte
 werden mit jedem Projekt schneller. Für die Preisgestaltung heißt das:
 Festpreis trägt die Einmal-Investitionen nicht mit, sie sind schon bezahlt.
+
+Zweiter Preis-Hebel: **LTV statt Lead-Kosten** (Hormozi). „Leads sind zu teuer"
+ist selten das echte Problem – zu wenig Umsatz pro Kunde ist es; Akquise- und
+Werbekosten steigen langfristig nur. Gegenkraft: Wartungs-, Hosting- und
+Betreuungsverträge als festen Angebotsbestandteil denken (passt exakt zur
+Positionierung „von der Skizze bis zum Betrieb"), nicht nur Projekt-Festpreise.
+Wer pro Kunde mehr verdient, kann sich teurere Akquise leisten als jeder
+Wettbewerber – das ist der eigentliche Wachstums-Spielraum.
 
 ## 6. Potenzielle Referenz: cnyn (contract-copilot-frontend)
 

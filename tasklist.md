@@ -109,6 +109,46 @@
 - [x] Social-Icons als Monoline-Glyphen (1,5 px, currentColor) in `src/lib/primitives/components/` (MailIcon, InstagramIcon, LinkedInIcon); Pill-Duktus `.icon-btn`, Hover invertiert Paper/Kobalt
 - [x] Kontakt-Sektion auf mindestens volle Viewport-Höhe (100svh als Flex-Spalte, Grid zentriert, Band + Credits unten): die Treppenkante ist am Seitenende komplett aus dem Bild; weiterer Feinschliff folgt
 
+## Fertig (Leistungen: Rückbau auf ruhige Bühnen-Karten, 18.08.2026 spät)
+
+- [x] Entscheidung Sinan nach Ansicht von Sticky-Overlap + Bild-Texturen: „passt alles nicht zur Website“ – Sticky-Overlap raus („dass die Card pinned ist, bis das nächste kommt, stört mich“ → auch sticky zählt als Pinning), Wurfschatten raus, Bilder raus (kommen nicht wieder; `public/leistungen/` gelöscht, `bildSrc` aus `content.ts`, `.svc-card-bg` aus TSX/CSS), Karten-Tönung zurück von `--paper-2` auf `--paper`
+- [x] Geblieben: helle Haarlinien-Karten in Bühnengröße (`min-height: calc(100svh - 176px)`), Nummer 01–03, 96px-Titel, Kobalt-Strich, Text, Tags am Kartenfuß, Objekt rechts; Stack wieder `display: grid` + `gap: 26px` (Block/Margin war nur für sticky nötig), frei scrollend
+- [x] Mobil <768 (Entscheidung Sinan): gar keine Karten-Box mehr – Rahmen/Radius weg, Inhalt auf dem Seitenrand (padding-inline 0, bündig mit Eyebrow), Trennung über Nummer + Tag-Haarlinie + 40px Gap
+- [x] Dezente Schattierung wieder rein (Wunsch Sinan, „will das sehen“): zweischichtiger weicher Wurf nach unten (`0 2px 6px` 3% + `0 22px 48px` 6% Ink) – Blatt-auf-Papier-Tiefe; mobil aus (dort keine Box) – Look bewerten
+- [x] Tag-Pills: `cursor: default` (Labels, nicht klickbar; Selektion bleibt); Desktop-Größe erst wie Portrait-Pills (24px) → Sinan: zu groß → final eine Stufe darunter (19px / 14 28 = Mobil-Maß der Portrait-Pills); mobil <768 bleibt 15px / 11 20
+- [x] Titel höher + mehr Luft zum Text (Wunsch Sinan): Spacer-Row über dem Titel von 1fr auf 0.55fr (Titel rückt nach oben), Strich-margin-bottom 30→72px (Abstand Titelblock→Text wächst); mobil unverändert (dortiger Strich-margin-Override 24/32 bleibt)
+- [ ] Nächster Schritt: Look so bewerten; falls es weiterhin nicht sitzt, ganz neue Richtung für die Sektion erarbeiten (Sinan: „hmm, was ganz neues“ – erst mal zurückgestellt)
+
+## Fertig (Leistungen als Service-Bühnen mit Sticky-Overlap, 18.08.2026 – Referenz harrisoncarloss.com)
+
+- [x] Referenz-Mechanik übernommen, Ausführung webdiv (kein Klon): eine fast viewportfüllende Karte pro Service (Fokus), beim Weiterscrollen schiebt sich die nächste per `position: sticky` über die vorige – CSS-only, Scroll bleibt 1:1, bewusst KEIN Scroll-Hijacking (Abgrenzung zur Pinning-Abneigung: es ist ständig Bewegung im Bild)
+- [x] Karte: Nummer 01–03 (`--ink-3`, aus dem Index generiert) → 96px-Titel volle Kartenbreite (`--fs-service` auf `clamp(2.5rem, 6.7vw, 6rem)`; „Schnittstellen & Datenbanken“ bricht gewollt zweizeilig am &) → Kobalt-Strich → Text → Tags am Kartenfuß; Objekt rechts im unteren Bereich (auf 430px vergrößert); zwei 1fr-Räume verteilen die Bühnenhöhe
+- [x] Sticky-Geometrie: `top: 88px`, `min-height: calc(100svh - 176px)`, Stack als `display: block` (in einer Grid-Row hätte sticky keinen Klebe-Spielraum), 32px Fluss-Abstand; Deckung über Paint-Reihenfolge, dezenter Wurfschatten nach oben trennt Papier von Papier
+- [x] Referenz-Abweichung bestätigt: Tags bleiben neutrale Outline-Pills (Referenz füllt sie orange, weil klickbar – wollen wir nicht)
+- [x] Schutzschalter: Overlap aus bei `max-height: 699px` (flache Laptops – angedockte Karte ragt sonst unter den Fold, unterer Inhalt nie erreichbar) und unter 1024px Breite (einspaltige Karte höher als Viewport); mobil <768 normaler Stapel im Seitenrand
+- [x] Bild-Textur pro Bühnenkarte (Idee Sinan): Karte auf `--paper-2` abgetönt, `.svc-card-bg` als Layer hinter dem Inhalt (`z-index: -1` + `isolation: isolate`, `overflow: hidden` clippt am Radius) mit `grayscale(1)` und Opacity 0.13 – jedes Stock-Foto wird so zur webdiv-Textur; `bildSrc` je Eintrag in `content.ts` → Dateien fehlen noch: `public/leistungen/firmen-websites.jpg`, `web-anwendungen.jpg`, `schnittstellen-datenbanken.jpg` (Platzhalter-Mechanik: background-image ohne Datei rendert nichts)
+- [x] Bilder eingesetzt (18.08.2026, Sinan aus Downloads 01–03.jpg): via System.Drawing auf 1920px skaliert + JPEG q78 (107–260 KB); 02 (Code, fast schwarzer Grund) wurde beim Erzeugen INVERTIERT gespeichert – dunkle Codezeilen auf hellem Grund statt 13%-Eintrübung der ganzen Karte, CSS bleibt für alle Bilder gleich (Original in Downloads unangetastet); Originale: 01 minimalistischer Schreibtisch, 02 Code-Screen, 03 RJ45-Stecker-Makro
+- [ ] Mobile-Strategie für die Sektion (Sinan: „später“)
+- [ ] Look mit Sinan bewerten; Option, falls gewünscht: `top` je Karte leicht staffeln (88/96/104px), damit die Kanten der vorigen Karten als Deck sichtbar bleiben
+
+## Fertig (Leistungen hell gedreht, 18.08.2026 – nach den „Farbboxen“)
+
+- [x] Diagnose zum „irgendwas passt nicht“ der dunklen Karten: drei fast full-breite `--dark`-Flächen à 640px direkt nach dem dunklen Statement = Seitenmitte über zwei Screens schwarz, Statement verliert die Sonderrolle, Treppenkante wird sofort widerrufen; min-height 640 bei 3 Zeilen Text = großes Loch zwischen Text und Tags; kollidiert mit der Linie „keine großen Flächenkarten, Typo/Linien“
+- [x] Karten hell gedreht: `--paper` + 1px-Haarlinien-Rahmen (`--line`), kein Punktraster, Objekte zeichnen in Ink/Kobalt/`--ink-3` (CSS-Fallbacks greifen, Karten-Overrides entfernt); dunkel bleibt exklusiv Statement, Kobalt dem Footer
+- [x] Kompakt statt aufgeblasen: `min-height` raus, Padding `clamp(44px, 4.5vw, 72px)`, Tags rücken direkt an den Text (letzte Grid-Zeile `1fr` + `align-self: start` statt `end`) → Kartenhöhen ~420/420/493 statt 3×640, Sektion 1731 statt 2319px
+- [x] Titel-Umbruch gefixt: `--fs-service` auf `clamp(2.25rem, 5.5vw, 4.5rem)` (war cap 5rem) → „Web-Anwendungen“ einzeilig bei 1440; Kobalt-Strich 76→88px, Text/Tags in `--ink-2`, Tag-/Fuß-Haarlinien auf `--line`
+- [x] Mobile <768: full-bleed passt nicht zum Haarlinien-Rahmen → Karte bleibt im Seitenrand (Radius 20px, Padding 44/28, Stack-Gap 18px); <1024-Stack unverändert, Tag-Trennlinie hell
+- [ ] Look mit Sinan bewerten (Screens: Desktop 1440, Tablet 800, Mobil 390 geprüft via iframe-Testseite, danach gelöscht)
+
+## Fertig (Leistungen-Redesign „Farbboxen“, 18.08.2026)
+
+- [x] Sektion neu als große dunkle Karten (finale Richtung nach mehreren Lab-Iterationen in `public/lab/leistungen.html`: 5 Richtungen A–E → Farbboxen E1/Tint → Referenz-Impuls „dunkle Karten mit Keyword-Pills“): pro Leistung eine Karte (volle Containerbreite, `--r-box`, Punktraster, min-height 640px – Höhe testweise +1/3, Sinan will den Big-Card-Look prüfen); Aufbau: Titel (voll hell) → Kobalt-Strich (zeichnet sich beim Reveal) → Text → Keyword-Tags unten links als Kartenfuß; frei scrollend, bewusst ohne Pin; einheitlich dunkel = Kobalt bleibt reiner Akzent, Footer behält den einzigen großen Kobalt-Block
+- [ ] Tag-Labels absegnen (`leistungen.eintraege[].tags` in `content.ts`; 18.08.2026 spät auf Sinans Feedback überarbeitet): Design & Entwicklung / SEO / Hosting & Pflege · Kundenportale / Verwaltung / Buchung & Abwicklung · Backend / Nutzer & Rechte / Datenübernahme (Karte 3 neu: „Login & Rechte“ → „Nutzer & Rechte“, „Datenimporte“ → „Datenübernahme“ – beide [Vorschlag]; Alternativen falls unpassend: Zugriffsrechte, Benutzerverwaltung, Systemanbindung)
+- [x] Linienobjekte im Statement-Duktus (`BoxObject`: web/app/db, 1,5 px, pathLength-Zeichnen beim Reveal mit Strich-Stagger); Objekte schwenken gelerpt zur Mausposition (`--sway-x/-y` via frameLoop, Stärke je Box) und floaten leicht
+- [x] Mobile: Boxen full-bleed (Farbe volle Breite, Inhalt behält Seitenrand, Radius entfällt) statt der alten paper-2-Karten – Entscheidung Sinan: keine „eingerückten“ Boxen, kein Pinning
+- [x] Aufgeräumt: `MediaArea` (Browserrahmen-Platzhalter + Medien-SVGs) entfernt, `leistungen.browserUrl`/`screenshotPlatzhalter` aus `content.ts`; `.browser-frame` bleibt (Case Study nutzt ihn); neues Token `--r-box: 28px`
+- [x] Feinschliff offen: Sinan will noch nachschärfen („da gibt es noch einiges“)
+
 ## Offen aus dem Bucan-Abgleich (für Deploy-Phase)
 
 - [ ] SkipLink im Layout (a11y; Bucan hat einen) – 17.08.2026: bewusst weggelassen (Entscheidung Sinan)
@@ -131,7 +171,7 @@
 - [ ] Echte Unterschrift als SVG-Einstrich-Pfad (ersetzt Mr-Dafoe-Platzhalter in `src/core/consts/signature.ts`)
 - [ ] E-Mail-Adresse, Impressumsdaten (stehen als sichtbare `[Platzhalter]` in `src/core/consts/content.ts`); Domain webdiv.de ist seit 17.08.2026 hinterlegt
 - [ ] Instagram-/LinkedIn-Profil-URLs für die Footer-Icons (`footer.soziale` in `content.ts` – hrefs sind noch `[Platzhalter]`; falls es die Profile noch nicht gibt: anlegen oder Icons vorerst raus?)
-- [ ] Bucan-Screenshots (für Leistungs-Karte 1, Projekt-Vorschaubild); Case Study: Startseiten-Screenshot als `public/projekte/bucan/screen-home.webp` ablegen → Browserrahmen übernimmt ihn automatisch
+- [ ] Bucan-Screenshot (Projekt-Vorschaubild; der Slot in den Leistungen ist seit dem Farbboxen-Redesign 18.08.2026 entfallen); Case Study: Startseiten-Screenshot als `public/projekte/bucan/screen-home.webp` ablegen → Browserrahmen übernimmt ihn automatisch
 
 ## Runde 2 (nächste Session)
 

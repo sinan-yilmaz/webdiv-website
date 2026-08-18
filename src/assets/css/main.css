@@ -486,75 +486,152 @@ html[data-intro-pending] .site-nav { opacity: 0; }
 }
 
 /* ==========================================================================
-   Leistungen (frei scrollend, Hover/Fokus schaltet die Eintraege)
+   Leistungen (eine Buehne pro Service: helle Haarlinien-Karte fast
+   viewportfuellend, Nummer + 96px-Titel, Kobalt-Strich, Text, Keyword-
+   Tags, Linienobjekt; frei scrollend, kein Pin, kein Overlap. Dunkel
+   bleibt exklusiv dem Statement.)
    ========================================================================== */
 
-.services { background: var(--paper); }
-.services .pin {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: calc(var(--section-gap) * 0.5) 0;
+.services {
+  background: var(--paper);
+  padding: calc(var(--section-gap) * 0.75) 0;
 }
 .services .eyebrow { margin-bottom: 56px; }
 
-.services-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: 64px;
-  align-items: center;
-}
+.services-stack { display: grid; gap: 26px; }
 
-.svc { border-top: 1px solid var(--line); padding: 26px 0; }
-.svc:last-child { border-bottom: 1px solid var(--line); }
-.svc-title {
-  display: block;
-  width: 100%;
-  text-align: left;
+.svc-card {
+  /* position + background schieben die Karte ueber die Rail-Haarlinien */
+  position: relative;
+  min-height: calc(100svh - 176px);
+  background-color: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-box);
+  /* dezente Schattierung: Blatt liegt auf dem Papier */
+  box-shadow: 0 2px 6px rgb(17 17 17 / 0.03), 0 22px 48px rgb(17 17 17 / 0.06);
+  padding: clamp(44px, 4.5vw, 72px);
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  /* asymmetrische Raeume: kleiner Raum ueber dem Titel (Titel sitzt hoch),
+     der groessere unten – Tags an den Kartenfuss, Objekt zentriert */
+  grid-template-rows: auto 0.55fr auto auto auto 1fr;
+  grid-template-areas:
+    "num    num"
+    ".      ."
+    "title  title"
+    "stroke obj"
+    "text   obj"
+    "tags   obj";
+  column-gap: 72px;
+}
+.svc-card-num {
+  grid-area: num;
+  font-size: 1.25rem;
+  font-weight: 560;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+.svc-card-title {
+  grid-area: title;
   font-size: var(--fs-service);
   font-weight: 640;
   font-stretch: 103%;
   letter-spacing: -0.025em;
   line-height: 1.02;
-  color: rgb(139 137 131 / 0.55);
-  transition: color 450ms var(--ease);
 }
-.svc.active .svc-title { color: var(--ink); }
-.svc-desc {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 550ms var(--ease), opacity 450ms var(--ease);
-  opacity: 0;
+/* Kobalt-Strich unter dem Titel: zeichnet sich beim Reveal */
+.svc-card-stroke {
+  grid-area: stroke;
+  width: 88px;
+  height: 3px;
+  background: var(--cobalt);
+  /* grosszuegiger Abstand zum Text: rueckt den Titelblock optisch nach oben */
+  margin: 26px 0 72px;
+  transform: scaleX(0);
+  transform-origin: left center;
 }
-.svc.active .svc-desc { grid-template-rows: 1fr; opacity: 1; }
-.svc-desc > div { overflow: hidden; }
-.svc-desc p {
-  max-width: 52ch;
+[data-reveal].in .svc-card-stroke {
+  transform: scaleX(1);
+  transition: transform 700ms var(--ease) 350ms;
+}
+.svc-card-text {
+  grid-area: text;
+  align-self: start;
+  max-width: 54ch;
   color: var(--ink-2);
-  padding-top: 18px;
-  font-size: var(--fs-body);
+}
+.svc-card-tags {
+  grid-area: tags;
+  align-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 32px 0 0;
+}
+.svc-card-tag {
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  /* eine Stufe unter den Portraet-Pills (deren Mobil-Mass 19px / 14 28) */
+  padding: 14px 28px;
+  font-size: 1.1875rem;
+  font-weight: 550;
+  line-height: 1;
+  color: var(--ink-2);
+  white-space: nowrap;
+  /* Pfeil statt Text-Cursor: Pills sind Labels, nicht klickbar (Selektion bleibt) */
+  cursor: default;
 }
 
-.svc-media {
-  position: relative;
-  aspect-ratio: 4 / 3.1;
-  border-radius: var(--r-card);
-  background: var(--paper-2);
-  overflow: hidden;
+.svc-card .svc-obj { grid-area: obj; align-self: center; }
+.svc-obj {
+  width: min(100%, 430px);
+  margin-inline: auto;
+  will-change: transform;
+  animation: svc-float 6.5s ease-in-out infinite alternate;
 }
-.svc-media .media-layer {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  opacity: 0;
-  transition: opacity 500ms var(--ease);
+@keyframes svc-float {
+  from { transform: translateY(-7px); }
+  to { transform: translateY(7px); }
 }
-.svc-media .media-layer.active { opacity: 1; }
-.svc-media svg { width: 78%; height: auto; }
 
-/* Browserrahmen (Platzhalter Bucan-Screenshot) */
+/* Maus-Schwenk: die Sektion liefert --sway-x/--sway-y (-1..1, gelerpt im
+   frameLoop), --sway-f staffelt die Staerke je Objekt */
+.svc-obj svg {
+  transform:
+    perspective(1100px)
+    translate3d(
+      calc(var(--sway-x, 0) * 12px * var(--sway-f, 1)),
+      calc(var(--sway-y, 0) * 9px * var(--sway-f, 1)),
+      0
+    )
+    rotateX(calc(var(--sway-y, 0) * -11deg * var(--sway-f, 1)))
+    rotateY(calc(var(--sway-x, 0) * 15deg * var(--sway-f, 1)));
+}
+
+/* Linienzeichnung im Statement-Duktus: zeichnet sich beim Reveal der Box
+   (pathLength=1 macht dashoffset laengenunabhaengig, Stagger via Inline-Delay) */
+.svc-obj .o,
+.svc-obj .oc,
+.svc-obj .od {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke: var(--obj-ink, var(--ink));
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.svc-obj .oc { stroke: var(--obj-accent, var(--cobalt)); }
+.svc-obj .od { stroke: var(--obj-dim, var(--ink-3)); }
+[data-reveal].in .svc-obj .o,
+[data-reveal].in .svc-obj .oc,
+[data-reveal].in .svc-obj .od {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1100ms var(--ease);
+}
+
+/* Browserrahmen (Case Study: grosser Screenshot-Rahmen) */
 .browser-frame {
   width: 78%;
   aspect-ratio: 16 / 10.5;
@@ -594,15 +671,6 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   letter-spacing: var(--track-eyebrow);
   text-transform: uppercase;
   background: repeating-linear-gradient(-45deg, transparent 0 22px, rgb(17 17 17 / 0.025) 22px 23px);
-}
-
-/* Linienzeichnungen in den Medienkarten */
-.media-draw .ln { stroke: var(--ink); }
-.media-draw .ln-dim { stroke: var(--ink-3); }
-.media-draw .ln-cobalt { stroke: var(--cobalt); }
-.media-draw line, .media-draw rect, .media-draw path, .media-draw circle, .media-draw ellipse {
-  fill: none;
-  stroke-width: 1.5;
 }
 
 /* ==========================================================================
@@ -704,6 +772,19 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   will-change: transform;
   overflow: hidden;
 }
+.proj-thumb-note { grid-area: 1 / 1; }
+.proj-thumb-img {
+  grid-area: 1 / 1;
+  place-self: stretch;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0;
+  transition: opacity 200ms var(--ease);
+}
+.proj-thumb-img.on { opacity: 1; }
+
 .cursor-pill {
   position: fixed;
   top: 0; left: 0;
@@ -800,11 +881,11 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 18%;
-  /* Crop-Ausgleich, Spiegel von .portrait-figure img: Motiv sitzt im Foto
-     ~4 % rechts der Mitte; der Rand rechts geht im dunklen Kartengrund unter.
-     Entfernen, sobald ein mittig gecropptes Portraet vorliegt */
-  transform: translateX(-4%);
+  /* Crop-Ausgleich unabhaengig von .portrait-figure img: Motiv sitzt im Foto
+     ~3 % rechts der Bildmitte; im 4/5-Crop des quadratischen Fotos zentriert
+     object-position 65 % das Motiv, ohne die Kachel freizulegen.
+     Auf 50 % zuruecksetzen, sobald ein mittig gecropptes Portraet vorliegt */
+  object-position: 65% 18%;
 }
 .about-figure.missing {
   display: grid;
@@ -1127,33 +1208,31 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   /* Prototyp-Regler unter das Menue-Overlay (verdeckt sonst dessen Fusszeile) */
   .controls { z-index: 90; }
 
-  /* Leistungen: Pin aufgeloest, Eintraege als gestapelte Karten, alle offen */
-  .services .pin-wrap { height: auto; }
-  .services .pin {
-    position: static;
-    height: auto;
-    min-height: 0;
-    display: block;
-    padding: calc(var(--section-gap) * 0.75) 0;
-  }
+  /* Leistungen: Karte stapelt (Titel, Strich, Objekt, Text), Tags als
+     Kartenfuss hinter einer Haarlinie */
   .services .eyebrow { margin-bottom: 40px; }
-  .services-grid { display: block; }
-  .svc-media { display: none; }
-  .services-list { display: grid; gap: 14px; }
-  .svc,
-  .svc:last-child { border: 0; }
-  .svc {
-    background: var(--paper-2);
-    border-radius: var(--r-card);
-    padding: 26px 24px 30px;
+  /* einspaltig: Karte stapelt, die Hoehe kommt vom Inhalt */
+  .svc-card {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "num"
+      "title"
+      "stroke"
+      "obj"
+      "text"
+      "tags";
   }
-  .svc-title {
-    color: var(--ink);
-    cursor: default;
-    font-size: clamp(1.625rem, 3.5vw, 2.25rem);
+  .svc-card-num { margin-bottom: 20px; }
+  .svc-card-stroke { margin: 24px 0 32px; }
+  .svc-card .svc-obj { margin: 0 0 32px; }
+  .svc-obj { width: min(56vw, 300px); }
+  .svc-card-tags {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
   }
-  .svc-desc { grid-template-rows: 1fr; opacity: 1; }
-  .svc-desc p { padding-top: 12px; }
 
   /* Projekte: Zeile bricht in Jahr / Titel / Meta, Pfeil bleibt rechts
      (das Desktop-Grid quetscht den Titel schon auf Tablet-Breite) */
@@ -1274,6 +1353,17 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   }
   .statement-line--mobile path { stroke-width: 9.5; }
   .statement-line--mobile .line-echo { stroke-width: 3.4; }
+
+  /* Leistungen: mobil keine Karten-Box mehr – Rahmen weg, Inhalt auf dem
+     Seitenrand, Eintraege trennen sich durch Nummer, Tag-Haarlinie und Luft */
+  .svc-card {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 32px 0;
+  }
+  .svc-card-tag { padding: 11px 20px; font-size: 0.9375rem; }
+  .services-stack { gap: 40px; }
 
   /* Projekte: kompaktere Titelzeile */
   .project-title { font-size: 1.5rem; }

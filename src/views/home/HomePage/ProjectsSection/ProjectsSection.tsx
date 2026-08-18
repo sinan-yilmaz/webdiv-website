@@ -1,7 +1,8 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties, MouseEvent } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { projekte } from 'core/consts/content';
 import { useFrame } from 'lib/motion/hooks/useFrame';
@@ -17,10 +18,25 @@ function ProjectsSection() {
   const pillRef = useRef<HTMLDivElement | null>(null);
   const followRef = useRef({ on: false, tx: 0, ty: 0, x: 0, y: 0, px: 0, py: 0, vx: 0 });
   const [followOn, setFollowOn] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [missing, setMissing] = useState<readonly boolean[]>(() =>
+    projekte.eintraege.map(() => false),
+  );
   useRevealChildren(sectionRef);
 
-  const handleRowEnter = (event: MouseEvent<HTMLAnchorElement>) => {
+  const markMissing = (index: number) =>
+    setMissing((prev) => (prev[index] ? prev : prev.map((value, i) => (i === index ? true : value))));
+
+  /* Bildfehler vor der Hydration erkennen (onError feuert dann nicht mehr) */
+  useEffect(() => {
+    thumbRef.current?.querySelectorAll('img').forEach((img, index) => {
+      if (img.complete && img.naturalWidth === 0) markMissing(index);
+    });
+  }, []);
+
+  const handleRowEnter = (event: MouseEvent<HTMLAnchorElement>, index: number) => {
     if (!hasFinePointer()) return;
+    setActiveIndex(index);
     const follow = followRef.current;
     follow.on = true;
     follow.x = event.clientX;
@@ -65,12 +81,12 @@ function ProjectsSection() {
             {projekte.titel}
           </h2>
           <div className="project-list" data-reveal style={{ '--ri': 2 } as CSSProperties}>
-            {projekte.eintraege.map((projekt) => (
+            {projekte.eintraege.map((projekt, index) => (
               <Link
                 key={projekt.href}
                 className="project-row"
                 href={projekt.href}
-                onMouseEnter={handleRowEnter}
+                onMouseEnter={(event) => handleRowEnter(event, index)}
                 onMouseLeave={handleRowLeave}
               >
                 <span className="project-year">{projekt.jahr}</span>
@@ -90,7 +106,18 @@ function ProjectsSection() {
         </div>
       </section>
       <div className={`proj-thumb${followOn ? ' on' : ''}`} aria-hidden="true" ref={thumbRef}>
-        {projekte.thumbPlatzhalter}
+        <span className="proj-thumb-note">{projekte.thumbPlatzhalter}</span>
+        {projekte.eintraege.map((projekt, index) => (
+          <Image
+            key={projekt.href}
+            className={`proj-thumb-img${index === activeIndex && !missing[index] ? ' on' : ''}`}
+            src={projekt.thumbSrc}
+            alt=""
+            width={480}
+            height={320}
+            onError={() => markMissing(index)}
+          />
+        ))}
       </div>
       <div className={`cursor-pill${followOn ? ' on' : ''}`} aria-hidden="true" ref={pillRef}>
         {projekte.cursorPill}

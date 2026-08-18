@@ -64,22 +64,25 @@ export const statement = {
 export const leistungen = {
   eyebrow: 'Leistungen',
   titel: 'Leistungen',
+  /* tags: Keyword-Pills am Kartenfuss – Begriffe aus den Texten bzw. der
+     Bucan-Blaupause abgeleitet, Labels sind [Vorschlag] (18.08.2026) */
   eintraege: [
     {
       titel: 'Firmen-Websites',
       text: 'Kein Baukasten, kein gekauftes Theme. Ihre Website wird für Ihre Firma entworfen und gebaut, damit sie aussieht wie Ihr Betrieb und nicht wie eine Vorlage.',
+      tags: ['Design & Entwicklung', 'SEO', 'Hosting & Pflege'],
     },
     {
       titel: 'Web-Anwendungen',
       text: 'Individuelle Software im Browser für einen konkreten Ablauf in Ihrem Betrieb: Kundenportal, interne Verwaltung, Buchung, Auftragsabwicklung. Nichts zu installieren.',
+      tags: ['Kundenportale', 'Verwaltung', 'Buchung & Abwicklung'],
     },
     {
       titel: 'Schnittstellen & Datenbanken',
       text: 'Das Fundament dahinter: Datenbank, Login und Rechte, Datenimporte, Anbindung an Systeme, die Sie schon nutzen. Ich baue das Backend auf Supabase oder binde Ihre bestehende Schnittstelle an.',
+      tags: ['Backend', 'Nutzer & Rechte', 'Datenübernahme'],
     },
   ],
-  browserUrl: 'bucan-eventservice.de',
-  screenshotPlatzhalter: 'Screenshot folgt',
 } as const;
 
 export const projekte = {
@@ -94,6 +97,7 @@ export const projekte = {
       sub: 'Premium Catering & Eventservice, Günzburg',
       meta: 'One-Pager · Design & Entwicklung',
       href: '/projekte/bucan-eventservice',
+      thumbSrc: '/projekte/bucan/thumb.webp',
     },
   ],
 } as const;
