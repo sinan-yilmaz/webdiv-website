@@ -169,6 +169,12 @@
 - [ ] Entschieden: kein Accordion (versteckt die Einwandbehandlung, falsches UI-Möbel);
       FAQ-Unterseite kommt erst NACH dem Livegang (Entscheidung Sinan 19.08.2026) – dann vom
       Ablauf-Ende + Footer verlinken; Checklisten-Kandidat „FAQ + FAQPage-Strukturdaten“ dabei prüfen
+      (Achtung: Google zeigt FAQ-Rich-Results seit 2023 praktisch nur noch für Behörden-/
+      Gesundheitsseiten – vor Einbau gegen Primärquelle prüfen, Strukturdaten schaden aber nicht)
+- [ ] FAQ-Fragensammlung: liegt in `.webdiv/faq.md` (Start 19.08.2026 – Frage 1
+      „seriös ohne auszusehen wie alle anderen“ mit Antwort-[Vorschlag], fünf aus fremdem
+      Portfolio-Screenshot adaptierte Kandidaten + zwei eigene als [Rohidee]); Antworten in
+      webdiv-Stimme ausformulieren und absegnen, auf die Website erst mit der FAQ-Unterseite
 - [ ] Entschieden: kein interaktiver Preiskalkulator und kein E-Mail-Gate (Hormozi „eine Hürde“;
       Konfigurator = Baukasten-Signal, bei Custom-Arbeit keine ehrlichen Zahlen möglich)
 - [ ] Offene Entscheidung Sinan: „ab“-Preis öffentlich auf die Seite? (Listenpreis laut Akquise-Plan
@@ -192,7 +198,7 @@
 - [ ] Logo Variante 2: Strichstärke 16/120 statt exakt Mona-Sans-800-Stamm (20/120) – bewusste Abweichung, ok so?
 - [x] Logo-Favorit benannt (16.08.2026): Variante 3 (Icon, Kobalt-Quadrat) – bereits als Favicon/App-Icon im Einsatz; die Varianten haben laut Briefing feste Rollen (V1 Monoline = feine Kontexte, V2 Schwer = Nav/Lockups, V3 = Icon). Falls V3 auch im Nav-Lockup gewünscht: Bescheid geben
 - [ ] Eyebrows in `--ink-3` (13 px) ≈ 3,2:1 Kontrast, unter AA – so lassen oder auf `--ink-2` heben?
-- [ ] Regler-Toggle unten links verdeckt am Seitenende „created by webdiv“ – Position ok (nur Prototyp-Werkzeug)?
+- [x] Regler-Toggle unten links: obsolet (19.08.2026) – die Prototyp-Regler (DevControls) wurden nie in die Next.js-App portiert und bleiben bewusst draußen; CSS-Rest `.controls` in `main.css` mit entfernt
 - [ ] Nav-Button „Erstgespräch“ springt zu `#kontakt` – gewünschtes Verhalten?
 - [ ] Ergänzte [Vorschlag]-Texte absegnen: Seitentitel, Formular-Validierungstexte, Platzhalter-Labels, 404-Texte (`notFound` in `content.ts`) (Meta-Description: Variante A am 17.08.2026 abgesegnet)
 

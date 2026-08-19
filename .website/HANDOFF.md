@@ -30,7 +30,7 @@ assets/fonts/         Mona Sans VF (wght 200–900, wdth 75–125, opsz) · Geis
 assets/logo/          Zeichen-SVGs: monoline · heavy · icon (Kobalt-Fläche)
 assets/img/           LEER – hier portrait.jpg ablegen (frontal, schwarzer Hintergrund)
 serve.js              Mini-Server für die lokale Ansicht
-tasklist.md           Aufgabenstand, offene Entscheidungen, Runde-2-Plan
+.webdiv/tasklist.md   Aufgabenstand, offene Entscheidungen, Runde-2-Plan
 .website/             Referenzdokumente: dieses Handoff · referenz-bucan-website.md
 .claude/CLAUDE.md     Projektkontext für Claude Code, verweist auf .website/
 ```

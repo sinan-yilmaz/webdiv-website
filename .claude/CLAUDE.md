@@ -7,12 +7,12 @@ responsive bis 390 px (Token-Ableitung in `tokens.css`, Layout-Ableitung am Ende
 Ansehen: `yarn dev` → http://localhost:3000 · statischer Build: `yarn build` → `out/`.
 Der Runde-1-Prototyp (statisches HTML/CSS/JS inkl. `design-system.html`) liegt als Snapshot in
 `.website/prototyp/` (Ansehen: dort `node serve.js` → http://localhost:4173).
-Aufgabenstand und offene Punkte: `tasklist.md` im Projektroot.
+Aufgabenstand und offene Punkte: `.webdiv/tasklist.md` (siehe „Projektpläne").
 
 ## Struktur (frontend-next-plugin)
 
 - `src/app/` – Route-Shells: `layout.tsx` (Fonts via `next/font/local`, Metadata, Veil-Script), `page.tsx` → HomePage, `projekte/bucan-eventservice/page.tsx` → BucanEventservicePage
-- `src/views/home/HomePage/` – One-Page-Komposition, eine Komponente pro Sektion (Preloader, SiteNav, Hero, Portrait, Statement, Services, Projects, Process, About, Contact, DevControls)
+- `src/views/home/HomePage/` – One-Page-Komposition, eine Komponente pro Sektion (Preloader, SiteNav, Hero, Portrait, Statement, Services, Projects, Process, About, Contact)
 - `src/views/projekte/BucanEventservicePage/` – Case Study (Intro, Screen, Brief, Design, Craft, Cta); Bucan-Kundenfarben nur hier, als Inline-Tokens aus `caseStudyBucan.ts`
 - `src/core/consts/content.ts` – sämtliche One-Page-Texte (wörtlich aus dem Briefing, `[Platzhalter]` sichtbar) · `caseStudyBucan.ts` – Case-Study-Texte (Fakten aus der Bucan-Referenz) · `signature.ts` – Unterschrift-Pfade
 - `src/core/components/branding/` – BrandMark + SignatureMark mit Zeichnen-Animationen · `shell/` – SubpageNav (Unterseiten) · `transitions/` – StepEdge (Treppenkante)
@@ -21,6 +21,20 @@ Aufgabenstand und offene Punkte: `tasklist.md` im Projektroot.
 
 **Porträt nachrüsten:** Datei als `public/portrait.jpg` ablegen – Porträt-Block und „Über mich“
 greifen automatisch (bis dahin markierte `[ Porträt folgt ]`-Platzhalter).
+
+## Projektpläne (`.webdiv/` – intern, nicht deployen)
+
+Alle Pläne und der Arbeitsstand dieses Projekts liegen in `.webdiv/`:
+
+- **`.webdiv/tasklist.md`** – Aufgabenstand, offene Entscheidungen, Runde-2-Plan;
+  zu Sessionbeginn lesen und beim Erledigen oder Anlegen von Aufgaben pflegen.
+- **`.webdiv/akquise-plan.md`** – Akquise-, Marketing- und Social-Media-Plan nach
+  Livegang (Website-Check, Kanäle, Pitch-Demos, Referenz-Pflege; Instagram/
+  LinkedIn-Strategie in Abschnitt 11); reinschauen, sobald ein Thema Marketing,
+  Leads, Referenzen, Preise oder Social Media berührt.
+- **`.webdiv/faq.md`** – Fragensammlung für die FAQ-Unterseite (kommt erst nach
+  dem Livegang); Q&A-Texte entstehen und reifen hier in webdiv-Stimme, bevor
+  sie auf die Website gehen – neue Kundenfragen/Einwände hier ergänzen.
 
 ## Referenzdokumente (vor Arbeit an Runde 2 lesen)
 

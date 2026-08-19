@@ -14,6 +14,5 @@ yarn lint
 ## Orientierung
 
 - Projektkontext und Struktur: `.claude/CLAUDE.md`
-- Aufgabenstand und offene Punkte: `tasklist.md`
 - Handoff, Runde-1-Prototyp-Snapshot (`prototyp/`, dort `node serve.js`) und Bucan-Referenzdoku: `.website/`
 - Porträtfoto nachrüsten: als `public/portrait.jpg` ablegen (Platzhalter schalten automatisch um)

@@ -1,6 +1,6 @@
 /* Saemtliche Texte der webdiv-One-Page – woertlich aus dem Design-Briefing
    Runde 1 uebernommen (Prototyp index.html). [Platzhalter] bleiben sichtbar,
-   bis die echten Angaben vorliegen (siehe tasklist.md). */
+   bis die echten Angaben vorliegen (siehe .webdiv/tasklist.md). */
 
 export const site = {
   url: 'https://webdiv.de',
@@ -151,7 +151,7 @@ export const kontakt = {
   },
 } as const;
 
-/* 404-Seite – Texte sind [Vorschlag], bitte absegnen (siehe tasklist.md) */
+/* 404-Seite – Texte sind [Vorschlag], bitte absegnen (siehe .webdiv/tasklist.md) */
 export const notFound = {
   metaTitle: 'Seite nicht gefunden – webdiv',
   code: '404',
@@ -162,7 +162,7 @@ export const notFound = {
 
 export const footer = {
   /* Abschluss-Band ueber der Credits-Zeile: Marke + Adresszeile links, Icons rechts.
-     E-Mail ist [Platzhalter], bis die Adresse final ist (siehe tasklist.md) */
+     E-Mail ist [Platzhalter], bis die Adresse final ist (siehe .webdiv/tasklist.md) */
   adresse: 'Websites & Anwendungen · Günzburg · [E-Mail-Adresse]',
   soziale: [
     { id: 'mail', label: 'E-Mail', href: 'mailto:[E-Mail-Adresse]' },

@@ -1221,8 +1221,6 @@ html[data-intro-pending] .site-nav { opacity: 0; }
     color: var(--on-dark);
   }
   .site-nav.menu-open .nav-lockup { color: var(--on-dark); }
-  /* Prototyp-Regler unter das Menue-Overlay (verdeckt sonst dessen Fusszeile) */
-  .controls { z-index: 90; }
 
   /* Leistungen: Karte stapelt (Titel, Strich, Objekt, Text), Tags als
      Kartenfuss hinter einer Haarlinie */
