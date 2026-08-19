@@ -111,9 +111,11 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   list-style: none;
   margin: 0;
   padding: 0;
+  /* am ul statt am Link: die li erben sonst den 18px-Body-Strut, dessen
+     tiefere Baseline die Links ~1.6px unter die Pillen-Mitte drueckt */
+  font-size: 0.9063rem;
 }
 .nav-links a {
-  font-size: 0.9063rem;
   font-weight: 500;
   white-space: nowrap;
   opacity: 0.82;
