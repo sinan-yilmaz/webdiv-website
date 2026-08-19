@@ -122,7 +122,14 @@
 - [x] Unteres Ende des dunklen Kapitels (Sinan: „nicht plötzlich gerade Linie zu weiß“): erst Probe nach Referenz-Übergang harrisoncarloss.com (`BrushEdge`, SVG-Ink-Riss mit Trockenpinsel-Fragmenten) – Entscheidung Sinan 19.08.2026: „einheitlich mit den Stufen“ → BrushEdge komplett entfernt (Komponente, Barrel, CSS), stattdessen `<StepEdge from="var(--dark)" to="var(--paper)" />` in HomePage zwischen Services und Projekte (ohne Ref, nicht in `stepEdgeRefs` der Nav)
 - [x] Folge-Punkt aus dem dunklen Test (gefixt 19.08.2026, gemeldet von Sinan: Nav war hell über den dunklen Leistungen): `edgeToPaperRef` (Hell-Messpunkt der Nav) von der Kante Statement→Services an die Kante Services→Projekte verschoben – Nav bleibt jetzt bis zum Ende des dunklen Kapitels invertiert und kippt über „Zuletzt gebaut“ zurück (beide Richtungen im Browser geprüft); bei Rückbau des Tests wandert das Ref zurück (Kommentar in HomePage.tsx)
 - [x] Leistungen dezent heller als das Statement (Wunsch Sinan 19.08.2026): Testblock-Variable `--dark-soft` (erst #1B1B1A, Sinan: „passt farblich nicht, dunkler“ → #161615; Statement bleibt `--dark` #121212) für Sektion, Karten, oberes Kontur-::after und die Grundfläche der unteren Kante (`.services + .step-edge`) – die obere Treppe liest sich dadurch als subtiler Zweiton + Konturlinie; bei Übernahme des Tests wird `--dark-soft` ein echter Token in tokens.css
-- [ ] Nächster Schritt: Look so bewerten; falls es weiterhin nicht sitzt, ganz neue Richtung für die Sektion erarbeiten (Sinan: „hmm, was ganz neues“ – erst mal zurückgestellt)
+- [ ] Nächster Schritt: Look so bewerten; falls es weiterhin nicht sitzt, ganz neue Richtung für die Sektion erarbeiten (Sinan: „hmm, was ganz neues” – erst mal zurückgestellt)
+
+## Projekte-Sektionstitel (20.08.2026, Entscheidung offen)
+
+- [ ] Sinan fragt nach Alternativen zu „Zuletzt gebaut” (h2 der Projekte-Sektion) – Vorschläge
+      liegen vor (u. a. „Woran Sie mich messen können.”, „Echte Aufträge.”, „Arbeit, die Sie
+      sich ansehen können.”); Empfehlung: behalten oder „Woran Sie mich messen können.”;
+      Achtung bei Alternativen: keine „live/im Einsatz”-Behauptung (cnyn unveröffentlicht)
 
 ## Fertig (Leistungen als Service-Bühnen mit Sticky-Overlap, 18.08.2026 – Referenz harrisoncarloss.com)
 
@@ -222,8 +229,33 @@
       der dunklen Referenzfarbe (Bucan Tannengrün, ERP Graugrün; `farben` je Eintrag in
       `content.ts` → Inline-Variablen), Texte invertieren gestuft (color-mix), Haarlinien-
       Kontur über transparente Border (kein Layout-Sprung); im Browser geprüft
-- [ ] Nächster Schritt: Projekt-Zeilen der Liste größer ziehen (Sinan: „Zeile etwas zu
-      klein") – Richtung jetzt mit zwei Einträgen festlegen
+- [x] Projekt-Zeilen größer: Lab 1 (`public/lab/projekte.html`, A Register / B Schlagzeile /
+      C Farbmarke / D Monument) → Entscheidung Sinan 20.08.2026: **Variante B übernommen**
+      (Mono-Kicker „Jahr · Meta" über clamp(3rem, 5vw, 4.5rem)-Titel, Sub darunter, Pfeil 64px
+      rechts; <1024 kompakter/Pfeil 48, <768 Titel clamp(1.75rem, 8vw, 2.5rem) + Kicker 12px);
+      project-year/project-meta-Spalten samt Tablet-grid-areas entfielen; Lab 1 gelöscht;
+      Desktop/800/390 im Browser verifiziert (Mobile via iframe-Testseite), tsc sauber
+- [x] Hover-Farbwelt auf helle Markenfarben gedreht (Wunsch Sinan 20.08.2026): Bucan
+      Gold #C2A25E + Tannengrün-Tinte (Badge-Kombi der Bucan-Website), ERP Salbei #507A61 +
+      Hell #FCFCFC (Primary-Button-Kombi der App) – Creme/Weiß beider Marken lägen unsichtbar
+      auf dem webdiv-Papier; Cursor-Pill + Thumb unverändert (waren nie entfernt)
+- [x] Lab 2 (`public/lab/projekt-titel.html`): (a) Ruhe-Differenzierung h2 vs. Projekttitel
+      (T1 wdth 112 / T2 Skala 88px / T3 beides / T4 Kopf auf Mono-Zeile) + (b) Farbmodus-Analyse
+      (R Referenzfarben / M monoton / H hybrid: dunkle Flut, Referenzfarbe an Kicker+Pfeil) →
+      **Entscheidung Sinan 20.08.2026: T3 + M** – Titel clamp(3.25rem, 5.8vw, 5.25rem) (84px
+      auf 1440) mit font-stretch 110 % (eigene Stimme neben der h2 mit 102 %), Hover dehnt auf
+      115 % (font-stretch-Transition 380ms); Fremdfarben-Mechanik komplett entfernt (`farben`
+      aus content.ts, Inline `--row-bg/--row-ink` aus ProjectsSection.tsx, Hover-Regeln in
+      main.css) – Referenzfarben leben nur noch auf den Case-Study-Unterseiten; Lab gelöscht,
+      Desktop im Browser verifiziert, tsc sauber
+- [x] Hover-Flut revidiert (Sinan, gleiche Session): statt `--dark` jetzt **`--paper-2`** –
+      die Fläche der direkt folgenden Ablauf-Sektion, Hover als Übergangs-Vorgriff; keine
+      Text-Invertierung mehr nötig (Tinten bleiben unverändert, tote color-Transitions mit
+      entfernt), Dehnung/Kontur/Pfeil/Pill/Thumb unverändert; im Browser verifiziert
+- [x] Doppellinien-Fix (Sinan, gleiche Session): beim Hover weichen die angrenzenden
+      Trennlinien der Hover-Kontur (eigene ::after-Linie, ::after der Zeile darüber via
+      `:has(+ .project-row:hover)`, Listen-Kopflinie via `:has(> :first-child:hover)`),
+      jeweils weich über border-color-Transition; beide Zeilen im Browser per Zoom geprüft
 
 ## Offen aus dem Bucan-Abgleich (für Deploy-Phase)
 

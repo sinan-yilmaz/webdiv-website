@@ -86,21 +86,14 @@ function ProjectsSection() {
                 key={projekt.href}
                 className="project-row"
                 href={projekt.href}
-                style={
-                  {
-                    '--row-bg': projekt.farben.flaeche,
-                    '--row-ink': projekt.farben.tinte,
-                  } as CSSProperties
-                }
                 onMouseEnter={(event) => handleRowEnter(event, index)}
                 onMouseLeave={handleRowLeave}
               >
-                <span className="project-year">{projekt.jahr}</span>
                 <span className="project-main">
+                  <span className="project-kicker">{`${projekt.jahr} · ${projekt.meta}`}</span>
                   <span className="project-title">{projekt.titel}</span>
                   <span className="project-sub">{projekt.sub}</span>
                 </span>
-                <span className="project-meta">{projekt.meta}</span>
                 <span className="project-arrow" aria-hidden="true">
                   <svg viewBox="0 0 18 18" fill="none" strokeWidth="1.5">
                     <path d="M2 9 H16 M10 3 L16 9 L10 15" />
