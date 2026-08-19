@@ -186,6 +186,45 @@
       (ersetzt einen separaten prominenten „Website-Check“-CTA auf der One-Page; der Check selbst
       kommt später als eigenes Tool, siehe Akquise-Plan Abschnitt 1 Variante B)
 
+## Projekte-Sektion & cnyn-Referenz (19.08.2026, in Arbeit)
+
+- [x] Freigabe Stefan Eitel (mündlich, 19.08.2026): Projekt als Referenz + Case Study ok,
+      Namensnennung „Stefan E." ok, Testimonial (2–3 Sätze, von Sinan formuliert) ok.
+      **Auflagen:** Produktname „cnyn" nicht nennen, Produkt/Funktionalitäten nicht erklären
+      (Produkt unveröffentlicht), keine Verlinkung auf die Web-App, Launch-Zeitpunkt nicht
+      anzeigen. Konsequenz: keine App-Screenshots (Logo/Modulnamen identifizierbar) –
+      Erzählung auf Engineering-Ebene (Rolle, Zahlen, Architektur, Arbeitsweise)
+- [x] Zweiter Projekte-Eintrag umgesetzt (19.08.2026): „ERP für die Bauwirtschaft" /
+      „Modulare B2B-Anwendung, im Kundenauftrag" / „Web-Anwendung · Frontend & Beratung" /
+      Jahr 2025–26, gleiche Zeilen-Anatomie wie Bucan; Entscheidungen Sinan: Branche ja,
+      kein Redaction-/Diskretions-Motiv, Testimonial-Wortlaut („Fundament gelegt … Großteil
+      gebaut … Jederzeit wieder") abgenickt, KI-Workflow nicht erwähnt
+- [x] Case Study `/projekte/erp-bauwirtschaft` komplett (19.08.2026): Intro mit Status-Zeile
+      statt Live-Link, zwei Browserrahmen (Nutzerverwaltung Übersicht + Anlage), Auftrag/
+      Rolle mit Vertraulichkeits-Box, dunkles Fundament-Kapitel in den Produktfarben
+      (#1E2A24/#507A61, aus dem UI-Theme der App konvertiert) mit Zahlen-Leiste
+      (10 Monate · 201/320 Commits · 200+ Komponenten · ~30 Ansichten), Arbeitsweise
+      (6 Punkte), Zitat Stefan E., Kobalt-CTA; Texte in `caseStudyErp.ts` – **[Vorschlag],
+      Sinan absegnen + Stefan als Kurzfreigabe vorlegen (Titel „ERP", Branche, Screenshots,
+      Testimonial)**; Fakten verifiziert aus `../contract-copilot-frontend` (git-Historie:
+      Aug 2025–Jun 2026, 633/698 src-Dateien, 209 eigene Komponenten, ~31.000 LOC)
+- [x] Screenshots erzeugt (19.08.2026): cnyn-App lokal mit temporären Mock-Patches
+      (Auth/useMe/useUserModules/useAllUsers + Detail-Hooks + Dummy-Logo „ERP") gestartet –
+      alle Personen fiktiv, kein cnyn-Bezug sichtbar, schlanke Sidebar (nur Dashboard/
+      Administration, nichts Produktspezifisches erfunden); Repo danach per git restore
+      zurückgesetzt; Dateien: `public/projekte/erp-bauwirtschaft/{screen-tabelle,screen-detail,thumb}.webp`
+- [x] Feedback Sinan (19.08.2026): Screens wirkten beschnitten (Crop + cover-Mismatch) →
+      neu aufgenommen als unbeschnittene Vollbilder; zweiter Screen jetzt die
+      **Detailansicht** (`/users/:id` mit Stammdaten/Modulen/Rollen) statt des Anlage-Sheets;
+      ScreenSection-Layout von 2 Spalten auf untereinander/volle Breite mit natürlicher
+      Bildhöhe (`aspect-ratio` nur noch als Platzhalter-Fallback)
+- [x] Hover-Farbwelt der Projektzeilen (Idee Sinan 19.08.2026): Hover füllt die Zeile mit
+      der dunklen Referenzfarbe (Bucan Tannengrün, ERP Graugrün; `farben` je Eintrag in
+      `content.ts` → Inline-Variablen), Texte invertieren gestuft (color-mix), Haarlinien-
+      Kontur über transparente Border (kein Layout-Sprung); im Browser geprüft
+- [ ] Nächster Schritt: Projekt-Zeilen der Liste größer ziehen (Sinan: „Zeile etwas zu
+      klein") – Richtung jetzt mit zwei Einträgen festlegen
+
 ## Offen aus dem Bucan-Abgleich (für Deploy-Phase)
 
 - [ ] SkipLink im Layout (a11y; Bucan hat einen) – 17.08.2026: bewusst weggelassen (Entscheidung Sinan)

@@ -86,6 +86,12 @@ function ProjectsSection() {
                 key={projekt.href}
                 className="project-row"
                 href={projekt.href}
+                style={
+                  {
+                    '--row-bg': projekt.farben.flaeche,
+                    '--row-ink': projekt.farben.tinte,
+                  } as CSSProperties
+                }
                 onMouseEnter={(event) => handleRowEnter(event, index)}
                 onMouseLeave={handleRowLeave}
               >

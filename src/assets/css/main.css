@@ -710,7 +710,11 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   padding: 34px 20px;
   margin: 0 -20px;
   border-radius: 14px;
-  transition: background var(--t-micro) var(--ease);
+  /* transparente Border von Anfang an: die Hover-Kontur springt nicht */
+  border: 1px solid transparent;
+  transition:
+    background var(--t-micro) var(--ease),
+    border-color var(--t-micro) var(--ease);
   cursor: pointer;
 }
 .project-row::after {
@@ -719,13 +723,31 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   left: 20px; right: 20px; bottom: 0;
   border-bottom: 1px solid var(--line);
 }
-.project-row:hover { background: var(--paper-2); }
+/* Hover taucht die Zeile in die Farbwelt der Referenz (--row-bg/--row-ink
+   kommen als Inline-Variablen aus content.ts) + Haarlinien-Kontur */
+.project-row:hover {
+  background: var(--row-bg, var(--paper-2));
+  border-color: var(--line);
+}
+.project-row:hover .project-title { color: var(--row-ink, var(--ink)); }
+.project-row:hover .project-year,
+.project-row:hover .project-sub {
+  color: color-mix(in srgb, var(--row-ink, var(--ink)) 72%, transparent);
+}
+.project-row:hover .project-meta {
+  color: color-mix(in srgb, var(--row-ink, var(--ink)) 58%, transparent);
+}
+.project-row:hover .project-arrow {
+  border-color: color-mix(in srgb, var(--row-ink, var(--ink)) 35%, transparent);
+}
+.project-row:hover .project-arrow svg { stroke: var(--row-ink, var(--ink)); }
 
 .project-main { display: block; }
 .project-year {
   font-family: var(--font-mono);
   font-size: var(--fs-small);
   color: var(--ink-2);
+  transition: color var(--t-micro) var(--ease);
 }
 .project-title {
   display: block;
@@ -733,12 +755,14 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   font-weight: 600;
   letter-spacing: -0.015em;
   line-height: 1.15;
+  transition: color var(--t-micro) var(--ease);
 }
 .project-sub {
   display: block;
   color: var(--ink-2);
   font-size: var(--fs-body);
   margin-top: 4px;
+  transition: color var(--t-micro) var(--ease);
 }
 .project-meta {
   font-family: var(--font-mono);
@@ -746,6 +770,7 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   color: var(--ink-3);
   letter-spacing: 0.02em;
   text-align: right;
+  transition: color var(--t-micro) var(--ease);
 }
 .project-arrow {
   width: 56px;
@@ -755,12 +780,15 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   display: grid;
   place-items: center;
   justify-self: end;
+  transition: border-color var(--t-micro) var(--ease);
 }
 .project-arrow svg {
   width: 18px;
   height: 18px;
   stroke: var(--ink);
-  transition: transform var(--t-micro) var(--ease);
+  transition:
+    transform var(--t-micro) var(--ease),
+    stroke var(--t-micro) var(--ease);
 }
 .project-row:hover .project-arrow svg { transform: translateX(6px); }
 

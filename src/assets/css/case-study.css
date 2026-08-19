@@ -287,3 +287,131 @@
 @media (max-width: 559px) {
   .case-facts { grid-template-columns: 1fr; gap: 18px; }
 }
+
+/* ==========================================================================
+   Case Study /projekte/erp-bauwirtschaft – Produktfarben (--erp-*) als
+   Inline-Variablen aus core/consts/caseStudyErp.ts, nur auf dieser Seite.
+   Wiederverwendet die generischen .case-*-Bausteine; eigen sind die
+   Status-Zeile, das Doppel-Screen-Grid, das dunkle Fundament-Kapitel
+   mit der Zahlen-Leiste und das Zitat.
+   ========================================================================== */
+
+.case-erp { background: var(--paper); }
+.case-erp .case-col-label { color: var(--erp-sage); }
+
+/* Status-Zeile im Projektkopf (statt Live-Link – App nicht oeffentlich) */
+.case-status {
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+  max-width: 34ch;
+  text-align: right;
+}
+
+/* Zwei Browserrahmen untereinander: Tabelle + Detailansicht der
+   Nutzerverwaltung – volle Breite, Bild unbeschnitten in natuerlicher
+   Hoehe (aspect-ratio nur als Fallback, solange die Datei fehlt) */
+.case-screens {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+.case-screens .case-browser .bf-body { aspect-ratio: auto; }
+.case-screens .case-browser .bf-body img {
+  position: static;
+  height: auto;
+}
+.case-screens .case-browser.missing .bf-body { aspect-ratio: 16 / 7.7; }
+.case-screens-note {
+  margin-top: 18px;
+  text-align: center;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+}
+
+/* Dunkles Fundament-Kapitel in den Produktfarben */
+.case-foundation {
+  background: var(--erp-dark);
+  color: var(--erp-light);
+  padding: calc(var(--section-gap) * 0.9) 0;
+  --rail: color-mix(in srgb, var(--erp-sage) 34%, transparent);
+}
+.case-foundation .eyebrow {
+  color: var(--erp-sage);
+  margin-bottom: 20px;
+}
+.case-foundation .h2 { margin-bottom: 26px; }
+.case-foundation-text {
+  max-width: 62ch;
+  opacity: 0.92;
+  margin-bottom: 56px;
+}
+
+.case-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px 28px;
+  border-top: 1px solid color-mix(in srgb, var(--erp-sage) 34%, transparent);
+  padding-top: 30px;
+  margin: 0 0 56px;
+}
+.case-stat dd {
+  margin: 0 0 10px;
+  font-size: clamp(2.25rem, 4.4vw, 3.75rem);
+  font-weight: 640;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.case-stat dt {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--erp-sage);
+}
+
+.case-foundation-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.case-foundation-cols div > p:last-child {
+  font-size: 1.0625rem;
+  opacity: 0.9;
+}
+
+/* Kundenstimme */
+.case-quote { padding-bottom: var(--section-gap); }
+.case-quote-figure {
+  margin: 0;
+  border-left: 1px solid var(--line);
+  padding: 10px 0 14px 36px;
+}
+.case-quote-figure blockquote {
+  margin: 0;
+  max-width: 30ch;
+  font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+  font-weight: 560;
+  letter-spacing: -0.015em;
+  line-height: 1.32;
+}
+.case-quote-figure figcaption {
+  margin-top: 26px;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+@media (max-width: 1023px) {
+  .case-lead { align-items: flex-start; }
+  .case-status { text-align: left; }
+  .case-stats { grid-template-columns: repeat(2, 1fr); }
+  .case-foundation-cols { grid-template-columns: 1fr; gap: 30px; }
+}
+
+@media (max-width: 767px) {
+  .case-quote-figure { padding-left: 24px; }
+}

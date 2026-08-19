@@ -90,6 +90,9 @@ export const projekte = {
   titel: 'Zuletzt gebaut',
   cursorPill: 'Projekt ansehen',
   thumbPlatzhalter: 'Screenshot folgt',
+  /* farben = Hover-Farbwelt der Zeile (dunkle Referenzfarbe + Tinte darauf);
+     Werte stammen aus den Case-Study-Tokens (caseStudyBucan/caseStudyErp),
+     als Literale, damit content.ts nicht von den Unterseiten abhaengt. */
   eintraege: [
     {
       jahr: '2026',
@@ -98,6 +101,16 @@ export const projekte = {
       meta: 'One-Pager · Design & Entwicklung',
       href: '/projekte/bucan-eventservice',
       thumbSrc: '/projekte/bucan/thumb.webp',
+      farben: { flaeche: '#0E2318', tinte: '#F7F3EA' },
+    },
+    {
+      jahr: '2025–26',
+      titel: 'ERP für die Bauwirtschaft',
+      sub: 'Modulare B2B-Anwendung, im Kundenauftrag',
+      meta: 'Web-Anwendung · Frontend & Beratung',
+      href: '/projekte/erp-bauwirtschaft',
+      thumbSrc: '/projekte/erp-bauwirtschaft/thumb.webp',
+      farben: { flaeche: '#1E2A24', tinte: '#FCFCFC' },
     },
   ],
 } as const;
