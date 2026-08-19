@@ -201,7 +201,7 @@
 - [ ] Porträtfoto (frontal, schwarzer Hintergrund) als `public/portrait.jpg` ablegen → Porträt-Block und Über-mich übernehmen es automatisch
 - [ ] Echte Unterschrift als SVG-Einstrich-Pfad (ersetzt Mr-Dafoe-Platzhalter in `src/core/consts/signature.ts`)
 - [ ] E-Mail-Adresse, Impressumsdaten (stehen als sichtbare `[Platzhalter]` in `src/core/consts/content.ts`); Domain webdiv.de ist seit 17.08.2026 hinterlegt
-- [ ] Instagram-/LinkedIn-Profil-URLs für die Footer-Icons (`footer.soziale` in `content.ts` – hrefs sind noch `[Platzhalter]`; falls es die Profile noch nicht gibt: anlegen oder Icons vorerst raus?)
+- [x] Instagram-/LinkedIn-Profil-URLs für die Footer-Icons (19.08.2026): beide als direkte externe Links in `footer.soziale` (`content.ts`) – https://www.instagram.com/webdiv.de und https://www.linkedin.com/in/sinan-yilmaz-webdiv/ (Slug auf Empfehlung geändert); externe Footer-Links bekommen `target="_blank" rel="noopener"` (`ContactSection.tsx`); JSON-LD (`src/app/page.tsx`): Instagram als `sameAs` am LocalBusiness, LinkedIn als `sameAs` am `founder`-Person-Objekt. Social-Strategie-TODOs: `.webdiv/akquise-plan.md` Abschnitt 11
 - [ ] Bucan-Screenshot (Projekt-Vorschaubild; der Slot in den Leistungen ist seit dem Farbboxen-Redesign 18.08.2026 entfallen); Case Study: Startseiten-Screenshot als `public/projekte/bucan/screen-home.webp` ablegen → Browserrahmen übernimmt ihn automatisch
 
 ## Runde 2 (nächste Session)

@@ -43,8 +43,15 @@ function ContactSection() {
           <div className="cb-icons">
             {footer.soziale.map((eintrag) => {
               const Icon = socialIcons[eintrag.id];
+              const extern = eintrag.href.startsWith('http');
               return (
-                <a key={eintrag.id} className="icon-btn" href={eintrag.href} aria-label={eintrag.label}>
+                <a
+                  key={eintrag.id}
+                  className="icon-btn"
+                  href={eintrag.href}
+                  aria-label={eintrag.label}
+                  {...(extern ? { target: '_blank', rel: 'noopener' } : {})}
+                >
                   <Icon />
                 </a>
               );

@@ -248,3 +248,69 @@ Referenz-Rabatte explizit ausweisen: „Projektwert X, Referenzpreis Y").
 5. Zwei Multiplikatoren-Beziehungen für den Anwendungsteil aufbauen.
 
 Alles andere erst, wenn diese fünf laufen.
+
+## 11. Social Media: Instagram & LinkedIn (Grundrauschen, kein Hauptkanal)
+
+Stand 19.08.2026: Instagram-Profil existiert (instagram.com/webdiv.de).
+LinkedIn läuft über Sinans persönliches Profil – Personenprofile erzielen auf
+LinkedIn erfahrungsgemäß deutlich mehr Reichweite als Unternehmensseiten, und
+es passt zur Ein-Mann-Authentizität (Abschnitt 8). Optional später eine
+schlanke Unternehmensseite „webdiv" nur als Logo-Anker für den
+Berufserfahrungs-Eintrag und zur Markenreservierung, ohne eigene Content-Pflege.
+
+Einordnung: Social ist Glaubwürdigkeits-Schicht und Grundrauschen, nicht
+Hauptakquise (Abschnitt 2: breites Content-Marketing nicht am Anfang; die
+Reihenfolge in Abschnitt 10 bleibt unberührt). Grundprinzip deshalb
+**Repurposing statt Content-Produktion**: Jedes Posting entsteht aus ohnehin
+vorhandenen Artefakten (Bucan-Case-Study, Motion-Details der eigenen Website,
+Prozess-Zwischenstände, später Website-Check-Befunde) – nie umgekehrt Zeit in
+Content stecken, der kein Projekt-Nebenprodukt ist. Festes Zeitbudget (z. B.
+2–3 Std/Woche inkl. Interaktion), damit es die fünf Punkte oben nicht frisst.
+
+Rollenverteilung (Vorschlag): **Instagram = visuelle Gewerke und die
+Branchen-Nischen** – Caterer/Event/Gastro leben dort, exakt die Bucan-Nische
+aus Abschnitt 2. **LinkedIn = B2B-Anwendungen und Multiplikatoren** –
+Steuerberater, Systemhäuser, Agenturen (Abschnitt 3) sitzen dort.
+
+Offene TODOs (bewusst noch nicht ausformuliert, Vorschläge als Startpunkt):
+
+- [ ] **IG Profil-Basics:** Bio mit Positionierung + Link auf webdiv.de
+      (später Website-Check); Namensfeld befüllen („webdiv · Websites &
+      Web-Anwendungen" o. ä. – das Namensfeld ist neben dem Handle in der
+      IG-Suche auffindbar); Highlights; Start-Grid mit 6–9 Posts, bevor der
+      Footer der Website aufs Profil verlinkt
+- [ ] **IG Content-Säulen festlegen.** Vorschlag: (a) Projekt-Showcases/
+      Case-Study-Schnipsel (Bucan vorher/nachher, Detail-Shots),
+      (b) Motion-Snippets als Reels (Screen-Recordings der eigenen Website:
+      Porträt-Lupe, Footer-Reveal, Karten – Eye-Candy reist am weitesten),
+      (c) Educational-Carousels aus Leserperspektive („Woran Sie erkennen,
+      dass Ihre Website Kunden kostet"), (d) Behind-the-scenes
+      Skizze → Design → Code
+- [ ] **IG Kadenz festlegen.** Vorschlag: 1–2 Posts/Woche (z. B. 1 Reel +
+      1 Carousel), monatlich im Batch produziert, Stories ad hoc –
+      Konsistenz schlägt Frequenz, lieber niedrig anfangen und halten
+- [ ] **IG Lead-Mechanik.** Vorschlag: Profil als Landing (Bio-Link),
+      Nischen- und Regional-Hashtags, Kunden in Postings taggen (Bucan);
+      Gespräche entstehen in Kommentaren → DM. Keine Cold-DMs: rechtlich
+      wie unaufgeforderte Werbe-Mails zu werten (§ 7 UWG, Abschnitt 1),
+      Positionierungsschaden ohnehin sicher
+- [ ] **LinkedIn Profil schärfen:** Headline als Nutzenversprechen statt
+      Jobtitel, Featured-Bereich (webdiv.de + Bucan-Case-Study),
+      Berufserfahrungs-Eintrag „webdiv"
+- [ ] **LinkedIn Kadenz + Kommentar-Strategie.** Vorschlag: 1–2 Text-Posts/
+      Woche (Case-Study-Zahlen, Projekt-Learnings, Haltung „KI-Tools bedienen
+      Selbstbauer, ich verkaufe Verantwortung", „Was läuft bei Ihnen noch
+      über Excel?"-Geschichten). Der eigentliche Wachstumshebel sind
+      10–15 substanzielle Kommentare/Woche bei Zielgruppe und
+      Multiplikatoren – Posts ohne Kommentar-Praxis verpuffen
+- [ ] **Follower-Aufbau beide Kanäle.** Vorschlag: Cross-Verlinkung
+      (Website-Footer, E-Mail-Signatur, Google Business Profile),
+      Kunden-Tags/Reposts, jede Kommentar-Antwort mitnehmen; größter
+      Einzelhebel wäre eine Ayşen-Story-Erwähnung als verhandelter
+      Deal-Bestandteil (Abschnitt 4)
+- [ ] **Handles sichern:** „webdiv.de" (bzw. „webdivde", wo Punkte unzulässig
+      sind) auf TikTok/YouTube/X reservieren, auch wenn vorerst ungenutzt
+- [x] **Technik auf der Website** (19.08.2026): echte Profil-URLs in
+      `footer.soziale` (`content.ts`) mit `target="_blank" rel="noopener"`;
+      Instagram als `sameAs` am LocalBusiness, LinkedIn am `founder`-Person-
+      Objekt im JSON-LD (`src/app/page.tsx`)

@@ -162,12 +162,12 @@ export const notFound = {
 
 export const footer = {
   /* Abschluss-Band ueber der Credits-Zeile: Marke + Adresszeile links, Icons rechts.
-     hrefs sind [Platzhalter], bis E-Mail und Profile feststehen (siehe tasklist.md) */
+     E-Mail ist [Platzhalter], bis die Adresse final ist (siehe tasklist.md) */
   adresse: 'Websites & Anwendungen · Günzburg · [E-Mail-Adresse]',
   soziale: [
     { id: 'mail', label: 'E-Mail', href: 'mailto:[E-Mail-Adresse]' },
-    { id: 'instagram', label: 'Instagram', href: '[Instagram-Profil]' },
-    { id: 'linkedin', label: 'LinkedIn', href: '[LinkedIn-Profil]' },
+    { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/webdiv.de' },
+    { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/sinan-yilmaz-webdiv/' },
   ],
   linksPrefix: 'created by',
   linksName: 'webdiv',

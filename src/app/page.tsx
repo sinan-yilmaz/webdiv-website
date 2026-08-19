@@ -41,7 +41,12 @@ const jsonLd = [
     description: site.description,
     url: `${site.url}/`,
     image: `${site.url}${site.ogImage}`,
-    founder: { '@type': 'Person', name: 'Sinan Yilmaz' },
+    sameAs: ['https://www.instagram.com/webdiv.de'],
+    founder: {
+      '@type': 'Person',
+      name: 'Sinan Yilmaz',
+      sameAs: ['https://www.linkedin.com/in/sinan-yilmaz-webdiv/'],
+    },
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Günzburg',
