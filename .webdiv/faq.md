@@ -79,6 +79,74 @@ Erweiterungen, Pflege, Hosting-Betreuung (Ablauf-Sektion sagt das schon);
 Betreuungsvereinbarung als normaler Bestandteil des Angebots (LTV-Strategie,
 Akquise-Plan Abschnitt 5). Dezent halten, nicht als Vertriebs-Pitch.
 
+## Startseiten-Kurzfassung (21.08.2026 – ÜBERHOLT durch den
+## Value-first-Umbau weiter unten, bleibt als Verlauf stehen)
+
+Sinans Feedback: die Fragen oben klingen „zu maschinell" – für die Startseite
+menschlichere, gesprochene Fassungen [Vorschlag] (inhaltlich unverändert;
+im Lab `public/lab/faq.html` verbaut):
+
+1. Frage 1 → **„Wir wollen seriös wirken – aber nicht aussehen wie alle
+   anderen. Geht das?"** (Antwort: gekürzte Fassung des Vorschlags oben)
+2. Frage 5 → **„Kann ich meine Website nicht einfach selbst mit KI bauen?"**
+   – die echte Kundenfrage statt der Gretchenfrage. Antwort-[Entwurf]:
+   „Können Sie – und für manche ist das die richtige Wahl. Ich nutze KI
+   selbst, sie macht mich schneller. Was sie nicht ersetzt, ist das, wofür
+   Sie mich beauftragen: Urteil, Geschmack, Verantwortung – und das
+   Fertigmachen bis ins letzte Detail. Das Billige wird gerade billiger.
+   Das Gute wird dadurch sichtbarer."
+3. Frage 3 → **„Wir wissen noch nicht genau, was wir brauchen. Ist das zu
+   früh?"** Antwort-[Entwurf]: „Nein – genau dafür ist das Erstgespräch da.
+   Sie bringen die Ausgangslage mit, ich die Einschätzung, was sinnvoll ist
+   und was nicht. Manchmal lautet die Antwort auch: Sie brauchen noch keine
+   neue Website. Auch das erfahren Sie kostenlos." (Brücke zur
+   Kontakt-Sektion direkt danach)
+
+## Value-first-Umbau der Startseiten-Fragen (21.08.2026, umgesetzt als [Vorschlag])
+
+Sinans Vorgabe: Der Chat soll nicht verkaufen, sondern Besuchern bereits im
+Chat ernsthaft helfen – sie sollen merken, dass das Gespräch selbst schon
+Wert liefert. Dazu sein Feedback zur ersten Fassung: Antworten zu lang,
+Frage 1 anders formulieren, die Kobalt-Akzentwörter („Präzision" usw.)
+schlecht gewählt – bessere wählen oder ganz weglassen.
+
+**Stand auf der Website (content.ts, alles [Vorschlag] – absegnen):**
+
+1. **Frage 1 NEU:** „Ist unsere Website eigentlich noch gut genug?"
+   (ersetzt seriös/abheben; die wandert auf die FAQ-Unterseite,
+   Abschnitt 1 oben bleibt dafür stehen.)
+
+   > Drei Prüfungen, keine Minute Aufwand: Lädt sie auf dem Handy sofort?
+   > Findet ein Fremder Ihre Telefonnummer und Ihre wichtigste Leistung in
+   > zehn Sekunden? Und wirkt sie neben Ihren zwei besten Mitbewerbern eine
+   > Klasse darüber – oder darunter?
+   >
+   > Zweimal Nein: Dann lohnt sich ein Gespräch. Alles Ja: **Behalten Sie
+   > Ihre Seite.**
+
+2. **Frage 2 (KI) gekürzt,** ehrliche Weichenstellung nach vorn:
+
+   > Können Sie. Wenn Ihre Website vor allem Visitenkarte ist – Kontakt,
+   > Öffnungszeiten, drei Bilder –, reicht das oft völlig. Ich nutze KI
+   > selbst, sie macht mich schneller.
+   >
+   > Was sie nicht ersetzt: das Urteil, was gut ist – und das Fertigmachen
+   > bis ins letzte Detail. Das Billige wird gerade billiger. **Das Gute
+   > wird dadurch sichtbarer.**
+
+3. **Frage 3 (zu früh) leicht gestrafft** (Absatzgrenze verschoben):
+
+   > Nein – genau dafür ist das Erstgespräch da. Sie bringen die
+   > Ausgangslage mit, ich die Einschätzung, was sinnvoll ist und was nicht.
+   >
+   > Manchmal lautet die Antwort auch: **Sie brauchen noch keine neue
+   > Website.** Auch das erfahren Sie kostenlos.
+
+**Akzent-Prinzip neu:** Kobalt markiert nicht mehr Begriffe, sondern den
+einen Merksatz je Antwort (fett oben) – jeweils die Anti-Verkaufs-/
+Kernaussage. Komplettes Weglassen bleibt ein Handgriff (akzent-Felder in
+content.ts + Rendering in FaqSection).
+
 ## Weitere Kandidaten (unsortiert)
 
 - **Was kostet eine Website?** – hängt an der offenen „ab"-Preis-Entscheidung

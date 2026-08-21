@@ -146,6 +146,64 @@ export const ueberMich = {
   signaturLabel: 'Unterschrift Sinan Yilmaz',
 } as const;
 
+/* FAQ-Kurzsektion als Chat-Fenster (Beschluss 21.08.2026): Startseiten-
+   Fassungen der Fragen aus .webdiv/faq.md; Antworten 2+3 sowie Status- und
+   Composer-Zeile sind [Vorschlag] (siehe .webdiv/tasklist.md) */
+export const faq = {
+  eyebrow: 'FAQ',
+  titel: 'Bevor wir sprechen.',
+  chat: {
+    avatar: 'w',
+    name: 'Sinan Yilmaz',
+    /* bewusst kein Erreichbarkeits-Status („online" suggeriert Live-Chat) */
+    status: 'Websites & Web-Anwendungen',
+  },
+  /* akzent: genau eine Stelle pro Antwort faerbt sich Kobalt – jeweils der
+     eine Merksatz der Antwort (Anti-Verkaufs-/Kernaussage), muss woertlich
+     im Antwort-Text vorkommen. Texte value-first gekuerzt 21.08.2026,
+     [Vorschlag] (siehe .webdiv/faq.md „Value-first-Umbau") */
+  paare: [
+    {
+      chip: 'Frage 01',
+      frage: 'Ist unsere Website eigentlich noch gut genug?',
+      antwort: [
+        'Drei Prüfungen, keine Minute Aufwand: Lädt sie auf dem Handy sofort? Findet ein Fremder Ihre Telefonnummer und Ihre wichtigste Leistung in zehn Sekunden? Und wirkt sie neben Ihren zwei besten Mitbewerbern eine Klasse darüber – oder darunter?',
+        'Zweimal Nein: Dann lohnt sich ein Gespräch. Alles Ja: Behalten Sie Ihre Seite.',
+      ],
+      akzent: 'Behalten Sie Ihre Seite',
+    },
+    {
+      chip: 'Frage 02',
+      frage: 'Kann ich meine Website nicht einfach selbst mit KI bauen?',
+      antwort: [
+        'Können Sie. Wenn Ihre Website vor allem Visitenkarte ist – Kontakt, Öffnungszeiten, drei Bilder –, reicht das oft völlig. Ich nutze KI selbst, sie macht mich schneller.',
+        'Was sie nicht ersetzt: das Urteil, was gut ist – und das Fertigmachen bis ins letzte Detail. Das Billige wird gerade billiger. Das Gute wird dadurch sichtbarer.',
+      ],
+      akzent: 'Das Gute wird dadurch sichtbarer',
+    },
+    {
+      chip: 'Frage 03',
+      frage: 'Wir wissen noch nicht genau, was wir brauchen. Ist das zu früh?',
+      antwort: [
+        'Nein – genau dafür ist das Erstgespräch da. Sie bringen die Ausgangslage mit, ich die Einschätzung, was sinnvoll ist und was nicht.',
+        'Manchmal lautet die Antwort auch: Sie brauchen noch keine neue Website. Auch das erfahren Sie kostenlos.',
+      ],
+      akzent: 'Sie brauchen noch keine neue Website',
+    },
+  ],
+  composer: {
+    /* Tipp-Geist: Beispiel-Fragen tippen sich in die Leiste, die ganze
+       Leiste bleibt ein Link zum Kontaktformular (Entscheidung 21.08.2026) */
+    beispiele: [
+      'Was kostet eine Website?',
+      'Wir haben schon eine Website – lohnt sich ein Neuanfang?',
+      'Wie lange dauert so ein Projekt?',
+    ],
+    sendenLabel: 'Zum Kontaktformular',
+    href: '#kontakt',
+  },
+} as const;
+
 export const kontakt = {
   titel: 'Was haben Sie vor?',
   text: 'Neue Website oder eine Anwendung für Ihren Betrieb – schreiben Sie mir kurz, worum es geht. Sie bekommen eine klare Einschätzung, was sinnvoll ist und was nicht. Festpreis nach Erstgespräch – das Erstgespräch ist kostenlos.',

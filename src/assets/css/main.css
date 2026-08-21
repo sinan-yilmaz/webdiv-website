@@ -961,6 +961,194 @@ html[data-intro-pending] .site-nav { opacity: 0; }
 }
 
 /* ==========================================================================
+   FAQ (Chat-App als Flaeche)
+   Die Sektion als geoeffnete Chat-App in voller Breite (Lab-Entscheidung
+   21.08.2026, Variante D): Kopfzeile und Composer sind volle Haarlinien-
+   Baender, der Verlauf ist ein paper-2-Band mit Doodle-Raster (.bg-doodle),
+   der Inhalt lebt im Container. Perspektive des Besuchers: die eigene
+   Frage rechts ohne Tail, Sinans dunkle Antwort links als Gegenueber-
+   Bubble mit Tail (ohne Absender-Label). Avatar und Composer sitzen
+   buendig auf der Textkante. Kopf und Composer kleben beim Scrollen
+   oben/unten (Chat-App-Effekt; kein Pinning, der Scroll bleibt 1:1) –
+   die Nav kippt dazu ab dem Kopf auf dunkel (themeZones in HomePage).
+   ========================================================================== */
+
+.faq {
+  background: var(--paper);
+  padding: var(--section-gap) 0;
+}
+.faq .eyebrow { margin-bottom: 20px; }
+.faq .h2 { margin-bottom: clamp(56px, 6vw, 88px); }
+
+.faq-band-head,
+.faq-band-composer {
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  /* ueber dem Verlauf, unter der Nav-Pille (z-index 100) */
+  z-index: 5;
+}
+.faq-band-head { position: sticky; top: 0; }
+.faq-band-composer { position: sticky; bottom: 0; }
+/* Die Sektion-Rails ([data-rails]::before, z-index 0) liegen unter den
+   klebenden Baendern – jedes Band fuehrt die Haarlinien selbst weiter */
+.faq-band-head::before,
+.faq-band-composer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--rail-inset);
+  right: var(--rail-inset);
+  border-left: 1px solid var(--rail, var(--line));
+  border-right: 1px solid var(--rail, var(--line));
+  pointer-events: none;
+}
+.faq-band-log { background-color: var(--paper-2); }
+
+.faq-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 0;
+}
+.faq-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--dark);
+  color: var(--on-dark);
+  display: grid;
+  place-items: center;
+  font-size: 1.125rem;
+}
+.faq-name {
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: 1.2;
+}
+.faq-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  margin-top: 3px;
+}
+/* bewusst ohne Status-Punkt: nichts soll Live-Erreichbarkeit suggerieren */
+
+.faq-log {
+  display: flex;
+  flex-direction: column;
+  padding-block: clamp(48px, 5vw, 80px);
+}
+.faq-chip {
+  align-self: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: 7px 16px;
+  margin-bottom: clamp(28px, 3vw, 44px);
+}
+.faq-chip:not(:first-child) { margin-top: clamp(56px, 6vw, 96px); }
+
+.faq-msg {
+  position: relative;
+  padding: clamp(20px, 2.2vw, 30px) clamp(22px, 2.4vw, 34px);
+  border-radius: 20px;
+}
+.faq-msg-q {
+  align-self: flex-end;
+  max-width: min(720px, 72%);
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+.faq-msg-q > p {
+  font-size: clamp(1.25rem, 1.9vw, 1.75rem);
+  font-weight: 600;
+  font-stretch: 102%;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+.faq-tail {
+  position: absolute;
+  top: 0;
+  left: -11px;
+  width: 12px;
+  height: 14px;
+  overflow: visible;
+}
+.faq-tail-fill { fill: var(--dark); }
+.faq-msg-a {
+  align-self: flex-start;
+  max-width: min(720px, 76%);
+  background: var(--dark);
+  color: var(--on-dark);
+  background-image: radial-gradient(rgb(242 239 233 / 0.07) 1px, transparent 1.6px);
+  background-size: 26px 26px;
+  margin-top: clamp(18px, 2vw, 28px);
+  /* die Oberkante laeuft in den Tail aus */
+  border-top-left-radius: 0;
+}
+.faq-msg-a > p {
+  font-size: clamp(1rem, 1.25vw, 1.1875rem);
+  line-height: 1.65;
+}
+.faq-msg-a > p + p { margin-top: 0.9em; }
+/* Kobalt auf dunkel wie die Statement-Akzentwoerter; etwas mehr Gewicht
+   gleicht den geringeren Kontrast bei Lesegroesse aus */
+.faq-accent {
+  color: var(--cobalt);
+  font-weight: 600;
+}
+
+.faq-composer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+}
+/* Tipp-Geist: Beispiel-Fragen tippen sich in die Leiste, der Strich am
+   Textende ist der ruhende Cursor */
+.faq-ghost {
+  flex: 1;
+  color: var(--ink-3);
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  /* laeuft die getippte Frage ueber (schmale Viewports), endet sie in … */
+  text-overflow: ellipsis;
+}
+.faq-ghost-text {
+  border-right: 1px solid var(--ink-3);
+  padding-right: 2px;
+}
+.faq-send {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--cobalt);
+  color: var(--on-cobalt);
+  display: grid;
+  place-items: center;
+  font-size: 1.125rem;
+  transition: background var(--t-micro) var(--ease), transform var(--t-micro) var(--ease);
+}
+.faq-composer:hover .faq-send,
+.faq-composer:focus-visible .faq-send {
+  background: var(--cobalt-deep);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
    Kontakt / Footer (Kobalt)
    ========================================================================== */
 
@@ -1427,6 +1615,12 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   .contact-footer .cf-left,
   .contact-footer .cf-mid,
   .contact-footer .cf-right { text-align: center; }
+
+  /* FAQ: Bubbles fast volle Breite, Kopf/Composer kompakter */
+  .faq-msg-q,
+  .faq-msg-a { max-width: 94%; }
+  .faq-avatar { width: 38px; height: 38px; font-size: 1rem; }
+  .faq-send { width: 38px; height: 38px; }
 
   /* Werkzeuge */
   .preloader-sig { width: min(300px, 64vw); }

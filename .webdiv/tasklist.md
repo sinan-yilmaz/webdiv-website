@@ -182,6 +182,112 @@
       „seriös ohne auszusehen wie alle anderen“ mit Antwort-[Vorschlag], fünf aus fremdem
       Portfolio-Screenshot adaptierte Kandidaten + zwei eigene als [Rohidee]); Antworten in
       webdiv-Stimme ausformulieren und absegnen, auf die Website erst mit der FAQ-Unterseite
+- [ ] **Beschlossen 21.08.2026:** Ablauf-Sektion bleibt endgültig (De-Risking = Kernargument);
+      ZUSÄTZLICH FAQ-Kurzsektion auf der Startseite – drei Fragen voll ausgeschrieben (kein
+      Akkordeon), Position zwischen „Über mich“ und Kontakt (nach dem Profil antwortet Sinan
+      persönlich auf Fragen), je Q&A großzügige Höhe (~70–80vh statt starrer 100vh);
+      volle FAQ-Unterseite bleibt Nach-Livegang-Thema. Fragen-Auswahl: seriös/abheben ·
+      „selbst mit KI bauen?“ · „wissen noch nicht, was wir brauchen“ (Brücke zu Kontakt).
+      Sinans Feedback: bisherige Formulierungen „zu maschinell“ → menschlichere Fassungen
+      als [Vorschlag] im Lab; Design-Wunsch Sinan: große Chat-Bubbles, seine Antwort-Bubble
+      in anderer Farbe
+- [ ] FAQ-Sektion-Lab erstellt (21.08.2026): `public/lab/faq.html` (+ Fonts kopiert,
+      Lab nach Entscheidung löschen), Varianten-Umschalter A–D: A Chat-Bubbles mit dunkler
+      Antwort (Punktraster, Kobalt-Punkt am Absender-Label) · B Chat mit Kobalt-Tint-Antwort
+      (Footer behält den einzigen großen Kobalt-Block) · C Antwort monumental (Frage klein
+      mono, Antwort als Display-Typo mit Kobalt-Akzentwort, Statement-Duktus) ·
+      D Gesprächsfaden (gezeichnete Kobalt-Linie verbindet die drei Paare, Chat-Versatz ohne
+      Flächen); alle im Browser verifiziert; Entscheidung Sinan steht aus → danach Profiltext
+      („Über mich“ passt ihm nicht ganz), dann Footer
+- [x] Feedback-Runde 2 (21.08.2026): Sinan wählt A, aber „noch keine Chat-Blasen" → A umgebaut
+      zur **Chat-App-Anmutung** (Fenster + Kopfzeile, WhatsApp-Tail nur am Gegenüber, Labels
+      raus) und **von Sinan freigegeben → auf die Website übernommen, Lab gelöscht**
+- [x] FAQ-Sektion eingebaut (21.08.2026): `FaqSection` (views/home/HomePage) zwischen
+      AboutSection und Kobalt-StepEdge, id `#faq`; Texte als `faq`-Export in `content.ts`
+      (Startseiten-Fassungen; Antworten 2+3, Status „online" und Composer-Zeile weiter
+      [Vorschlag]); Styles in main.css (Block „FAQ (Chat-Fenster)" + Mobile-Ableitung <768);
+      Bubbles erscheinen einzeln via [data-reveal], Antwort mit --ri-Stagger; Tail neu als
+      Inline-SVG bündig aus der Bubble-Oberkante (nach WhatsApp-Referenz-Screenshots,
+      Vorgänger-„Knubbel" verworfen); Composer klickt via scrollToAnchor zu `#kontakt`
+      (im Browser verifiziert: Desktop-Screens Kopf/Verlauf/Composer + Klicktest)
+- [x] FAQ-Seitentausch (21.08.2026, Feedback Sinan): Perspektive korrigiert – die Frage ist
+      die Nachricht des Besuchers (rechts, ohne Tail), Sinans dunkle Antwort kommt als
+      Gegenüber-Bubble (links, MIT Tail, border-top-left-radius 0); Tail-SVG nur noch
+      Füllpfad in `--dark` (Haarlinien-Pfad entfallen, dunkle Bubble hat keinen Rahmen);
+      im Browser verifiziert (Desktop), tsc sauber
+- [x] FAQ-Composer entschieden & umgesetzt (21.08.2026): Lab mit 4 Varianten (A Eingabe
+      mit Formular-Übergabe · B Quick Replies · C Tipp-Geist · D ohne Composer) →
+      **Sinan wählt C**, aber ohne den ↑-Send-Kreis („Pfeil nach oben passt nicht") →
+      auf der Website: Beispiel-Fragen (`faq.composer.beispiele` in content.ts, 3 Stück,
+      [Vorschlag]) tippen sich zeichenweise in die Leiste (Effekt in FaqSection, startet
+      bei inView, direkt am DOM), ruhender Cursor-Strich, Send-Kreis jetzt mit „→"
+      (Duktus der Nav-CTA); ganze Leiste bleibt Link/Fahrt zu #kontakt (Klick im Browser
+      verifiziert); Lab gelöscht; Nachtrag: überlaufende Beispiel-Frage endet auf
+      schmalen Viewports in Ellipsis statt hart abzuschneiden (text-overflow, 390er geprüft)
+- [x] FAQ-Sticky entschieden & umgesetzt (21.08.2026): Lab (3 Telefonrahmen + Desktop-
+      Probe) → Sinan: ja, ABER Nav-Logik (hide-on-scroll) unangetastet lassen und die
+      Nav über der FAQ auf dunkel stellen statt sie zu verstecken → umgesetzt: Kopf-Band
+      `position: sticky; top: 0`, Composer-Band `bottom: 0` (z-index 5, unter der Nav),
+      gilt Desktop UND Mobile; SiteNav-Prop `stepEdgeRefs` → `themeZones` verallgemeinert
+      (kind 'edge' = Treppenkante kippt auf Kantenmitte · 'band' = kippt bei Berührung
+      der Pille, Messpunkt top − 36), HomePage reicht `faqHeadRef` an FaqSection
+      (headBandRef auf dem Kopf-Band) und als dunkle Zone zwischen edgeToPaper und
+      edgeToCobalt; im Browser verifiziert (Desktop + 390er-iframe: Kopf/Composer kleben,
+      Composer-Fahrt zu #kontakt, Übergang zum Kobalt-Footer löst sauber); Labs gelöscht
+- [x] Nav-Pille ab FAQ ausgeblendet (Revision Sinan 21.08.2026, ersetzt „dunkel
+      stellen"): Die on-dark-Pille über dem klebenden Kopf verdeckte Avatar/Name →
+      Entscheidung: ab Berührung des Chat-Kopfs bis zum SEITENENDE (inkl. Kobalt-Footer)
+      wird die Pille komplett ausgeblendet – im Chat ist der Kopf die Kopfzeile, im
+      Footer steht der Kontakt selbst; Umsetzung: `hideNav`-Flag je themeZone
+      (FAQ-Band + Kobalt-Kante), eigener `suppressed`-State nutzt die nav-hidden-Optik,
+      die hide-on-scroll-Logik läuft intern unverändert weiter und übernimmt beim
+      Verlassen der Zone nach oben nahtlos; im Browser verifiziert (in FAQ + Footer
+      hochscrollen: keine Pille · oberhalb der FAQ: Pille kommt hell zurück)
+- [x] Bugfix Zonen-Messung (Meldung Sinan 21.08.2026: Pille blitzte beim Hochscrollen
+      zwischen Footer und FAQ-Composer auf): Der Nav-Messpunkt lag auf dem Kopf-Band
+      selbst – das ist sticky, ein Remeasure (Resize etc.) während es klebt/unten in
+      der Sektion geparkt ist maß die Zonengrenze auf die verschobene Position, der
+      Streifen darunter fiel aus der Hide-Zone → jetzt unsichtbarer 0-Hoehen-Messanker
+      an der Flussposition vor dem Band (`headAnchorRef`, positionsunabhängig);
+      verifiziert per MutationObserver-Log: Rad-Scroll ganz runter, resize (Remeasure)
+      erzwungen, Rad hoch durch den kritischen Streifen – kein einziger Klassenwechsel,
+      Pille bleibt durchgehend weg
+- [x] Rail-Fix (Feedback Sinan 21.08.2026, Screenshot): Kopf-/Composer-Band verdeckten
+      mit ihrem Sticky-z-index die Sektion-Rails ([data-rails]::before, z-index 0) –
+      beide Bänder führen die Haarlinien jetzt mit eigenem ::before auf --rail-inset
+      selbst weiter (klebt mit); im Browser links+rechts im Klebezustand verifiziert
+- [x] FAQ-Fragen value-first umgesetzt (21.08.2026, alles [Vorschlag] – absegnen):
+      Sinans Feedback „Antworten zu lang, Frage 1 anders formulieren, Akzentwörter
+      schlecht gewählt (oder weglassen)" → alle drei Antworten gekürzt, Frage 1 neu:
+      „Ist unsere Website eigentlich noch gut genug?" mit 3-Punkte-Selbst-Check;
+      KI-Antwort mit ehrlicher Weichenstellung (Visitenkarten-Fall reicht Selbstbau);
+      Akzent-Prinzip neu: statt Begriffen ist jetzt der eine MERKSATZ der Antwort Kobalt
+      („Behalten Sie Ihre Seite" · „Das Gute wird dadurch sichtbarer" · „Sie brauchen
+      noch keine neue Website" – jeweils die Anti-Verkaufs-Kernaussage); komplettes
+      Weglassen bleibt Ein-Zeilen-Option (akzent-Rendering in FaqSection); Details in
+      `.webdiv/faq.md` („Value-first-Umbau")
+- [ ] FAQ-Feinschliff (weiter offen, mit Sinan): Tail-Kurve final abnehmen, Motion-Idee
+      Tipp-Indikator (··· bevor die Antwort-Bubble poppt), Tablet-Durchgang, offene
+      Frage „FAQ" in die Nav?, Copy-Freigaben (neue Fragen/Antworten/Merksatz-Akzente,
+      Status-Zeile, Tipp-Geist-Beispielfragen); danach Profiltext („Über mich"),
+      dann Footer
+- [x] Feedback-Runde 3 umgesetzt (21.08.2026, direkt auf der Website): ✓✓-Häkchen entfernt;
+      pro Antwort genau EIN Kobalt-Akzent (`faq.paare[].akzent` in content.ts, [Vorschlag]:
+      „Präzision" / „Urteil, Geschmack, Verantwortung" / „das Erstgespräch"; Rendering via
+      renderAntwortAbsatz, .faq-accent = Kobalt + weight 600 wie Statement-Akzente); Status
+      „online" ersetzt durch „Websites & Web-Anwendungen" + Status-Punkt entfernt (nichts
+      soll Live-Erreichbarkeit suggerieren)
+- [x] FAQ-Flächen-Lab entschieden & übernommen (21.08.2026): 2×2-Matrix (Karte/Fläche ×
+      Punkte/Doodles), **Sinan wählt D: Fläche full-bleed + Doodles** → auf der Website
+      umgesetzt, Lab gelöscht. Umsetzung: `.bg-doodle` als neues Hintergrund-Raster in
+      tokens.css (SVG-Tile 280px, Linien-Doodles „gute Vibes": Smiley ×2, Herz ×2, Funkel ×2,
+      Blitz, Pizza, Sprechblase ×2, Kaffeetasse, Wolke, Sonne, Mond, Note + Füllpunkte;
+      auf Sinans Wunsch dichter und sichtbarer als im Lab: ink 8 % statt 5,5 %);
+      FaqSection als drei volle Bänder (Kopf/Composer = paper mit Haarlinien oben+unten,
+      Verlauf = paper-2 + bg-doodle, Inhalt im Container); **Avatar + Composer sitzen
+      bündig auf der Textkante** (Kopf-Padding-inline 0, Sinans Screenshot-Feedback);
+      Bubbles q 72 % / a 76 % (mobil 94 %); Rails laufen durch die Bänder; Desktop im
+      Browser verifiziert (Kopf-Bündigkeit, Doodles, Akzente, Composer → Treppenkante)
 - [ ] Entschieden: kein interaktiver Preiskalkulator und kein E-Mail-Gate (Hormozi „eine Hürde“;
       Konfigurator = Baukasten-Signal, bei Custom-Arbeit keine ehrlichen Zahlen möglich)
 - [ ] Offene Entscheidung Sinan: „ab“-Preis öffentlich auf die Seite? (Listenpreis laut Akquise-Plan

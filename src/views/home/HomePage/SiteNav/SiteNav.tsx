@@ -14,12 +14,19 @@ type SiteNavProps = {
   markRef: RefObject<SVGSVGElement | null>;
   /* 'waiting': unsichtbar bis zur Preloader-Uebergabe · 'enter': einblenden + Logo zeichnen */
   intro: 'none' | 'waiting' | 'enter';
-  /* Treppenkanten in Seitenreihenfolge – Wechselpunkte der Theme-Invertierung */
-  stepEdgeRefs: ReadonlyArray<RefObject<HTMLDivElement | null>>;
+  /* Wechselpunkte der Theme-Invertierung in Seitenreihenfolge:
+     'edge' = Treppenkante, kippt auf Kantenmitte · 'band' = klebendes Band
+     (FAQ-Chat-Kopf), kippt sobald es die Pille beruehrt. hideNav: in dieser
+     Zone bleibt die Pille komplett ausgeblendet (der Chat gehoert sich
+     selbst); die hide-on-scroll-Logik laeuft intern weiter, damit sie beim
+     Verlassen der Zone nahtlos uebernimmt */
+  themeZones: ReadonlyArray<{
+    ref: RefObject<HTMLDivElement | null>;
+    dark: boolean;
+    kind: 'edge' | 'band';
+    hideNav?: boolean;
+  }>;
 };
-
-/* Zielflaeche nach jeder Treppenkante: dark-photo -> paper -> cobalt */
-const EDGE_LEADS_TO_DARK = [true, false, true];
 
 /* Scroll-Lock fuers Menue-Overlay: fixierter Body wie beim Preloader (haelt
    die Scrollbalken-Spur), zusaetzlich mit top-Offset, damit die Seite hinter
@@ -40,27 +47,34 @@ function unlockBodyScroll() {
   window.scrollTo({ top: scrollLockY, behavior: 'instant' });
 }
 
-function SiteNav({ markRef, intro, stepEdgeRefs }: SiteNavProps) {
+function SiteNav({ markRef, intro, themeZones }: SiteNavProps) {
   const [hidden, setHidden] = useState(false);
+  const [suppressed, setSuppressed] = useState(false);
   const [onDark, setOnDark] = useState(false);
   const [entered, setEntered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const rootRef = useRef<HTMLElement | null>(null);
   const lastYRef = useRef(0);
   const menuOpenRef = useRef(false);
-  const zonesRef = useRef<{ y: number; dark: boolean }[]>([]);
+  const zonesRef = useRef<{ y: number; dark: boolean; hideNav: boolean }[]>([]);
 
   useRemeasure(() => {
     const stepH =
       parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--step-h')) || 64;
     const mid = stepH * 1.5;
-    const zones: { y: number; dark: boolean }[] = [{ y: 0, dark: false }];
-    stepEdgeRefs.forEach((edgeRef, index) => {
-      const el = edgeRef.current;
+    const zones: { y: number; dark: boolean; hideNav: boolean }[] = [
+      { y: 0, dark: false, hideNav: false },
+    ];
+    themeZones.forEach((zone) => {
+      const el = zone.ref.current;
       if (!el) return;
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      /* 'band': Pillen-Unterkante liegt bei ~80 px, die Messbedingung addiert
+         44 – der Punkt top - 36 kippt also genau bei der Beruehrung */
       zones.push({
-        y: el.getBoundingClientRect().top + window.scrollY + mid,
-        dark: EDGE_LEADS_TO_DARK[index],
+        y: zone.kind === 'edge' ? top + mid : top - 36,
+        dark: zone.dark,
+        hideNav: zone.hideNav === true,
       });
     });
     zonesRef.current = zones;
@@ -132,10 +146,15 @@ function SiteNav({ markRef, intro, stepEdgeRefs }: SiteNavProps) {
       lastYRef.current = scrollY;
     }
     let dark = false;
+    let inHideZone = false;
     zonesRef.current.forEach((zone) => {
-      if (scrollY + 44 >= zone.y) dark = zone.dark;
+      if (scrollY + 44 >= zone.y) {
+        dark = zone.dark;
+        inHideZone = zone.hideNav;
+      }
     });
     setOnDark(dark);
+    setSuppressed(inHideZone);
   });
 
   const introStyle: CSSProperties | undefined =
@@ -151,7 +170,7 @@ function SiteNav({ markRef, intro, stepEdgeRefs }: SiteNavProps) {
   return (
     <>
       <header
-        className={`site-nav${hidden ? ' nav-hidden' : ''}${onDark ? ' on-dark' : ''}${menuOpen ? ' menu-open' : ''}`}
+        className={`site-nav${hidden || suppressed ? ' nav-hidden' : ''}${onDark ? ' on-dark' : ''}${menuOpen ? ' menu-open' : ''}`}
         style={introStyle}
         ref={rootRef}
       >

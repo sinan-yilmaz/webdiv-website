@@ -6,6 +6,7 @@ import { useSmoothScroll } from 'lib/motion/hooks/useSmoothScroll';
 import { scrollToAnchor } from 'lib/motion/services/smoothScroll';
 import AboutSection from './AboutSection';
 import ContactSection from './ContactSection';
+import FaqSection from './FaqSection';
 import HeroSection from './HeroSection';
 import PortraitSection from './PortraitSection';
 import Preloader from './Preloader';
@@ -33,6 +34,7 @@ function HomePage() {
   const stackRef = useRef<HTMLDivElement | null>(null);
   const edgeToDarkRef = useRef<HTMLDivElement | null>(null);
   const edgeToPaperRef = useRef<HTMLDivElement | null>(null);
+  const faqHeadRef = useRef<HTMLDivElement | null>(null);
   const edgeToCobaltRef = useRef<HTMLDivElement | null>(null);
 
   /* Preloader bei jedem vollen Aufruf – die Unterschrift gehoert zum Auftritt. */
@@ -65,7 +67,17 @@ function HomePage() {
       <SiteNav
         markRef={navMarkRef}
         intro={navIntro}
-        stepEdgeRefs={[edgeToDarkRef, edgeToPaperRef, edgeToCobaltRef]}
+        themeZones={[
+          { ref: edgeToDarkRef, dark: true, kind: 'edge' },
+          { ref: edgeToPaperRef, dark: false, kind: 'edge' },
+          /* Ab dem FAQ-Chat bis zum Seitenende bleibt die Pille komplett
+             ausgeblendet: im Chat ist der klebende Kopf die Kopfzeile, im
+             Kobalt-Footer steht der Kontakt selbst (Entscheidung Sinan
+             21.08.2026); dark greift nur, falls die Pille beim Uebergang
+             kurz sichtbar ist */
+          { ref: faqHeadRef, dark: true, kind: 'band', hideNav: true },
+          { ref: edgeToCobaltRef, dark: true, kind: 'edge', hideNav: true },
+        ]}
       />
       <main id="top">
         <HeroSection revealed={heroRevealed} sigRef={heroSigRef} />
@@ -84,6 +96,7 @@ function HomePage() {
         <ProjectsSection />
         <ProcessSection />
         <AboutSection />
+        <FaqSection headAnchorRef={faqHeadRef} />
         <StepEdge ref={edgeToCobaltRef} from="var(--paper)" to="var(--cobalt)" />
         <ContactSection />
       </main>
