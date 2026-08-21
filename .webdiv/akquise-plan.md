@@ -109,25 +109,15 @@ Regeln: festes Zeitbudget pro Pitch; fremde Fotos/Texte/Logos nur in der
 privaten Demo verwenden, nie öffentlich hosten oder bewerben (Urheberrecht);
 Demo nach Entscheidung offline nehmen.
 
-**Konkreter Kandidat (19.08.2026): aysenskitchen.com** – Ayşe Şen („Ayşen's
-Kitchen®", Ebersbach BW), Food-Creatorin mit laut Sinan über 1 Mio
-Instagram-Followern; gewünscht war eine Rezept-Website. Stand 19.08.2026 zeigt
-die Domain nur ein Impressum (WordPress; Ex-Dienstleister „Website Stuttgart"/
-Mehmet Soysal steht noch drin). Vorgeschichte laut Sinan: an unseriöse Anbieter
-geraten, Projekt gescheitert, liegt seitdem brach – Vertrauen ist verbrannt,
-Need-to-Believes entsprechend hoch → zeigen statt versprechen. Warmer Intro
-über einen Freund Sinans möglich.
-
-Vorgehen: erst webdiv.de live (sie wird googeln), dann Intro mit genau einem
-Stufe-1-Screen (Timebox; ihre Fotos nur privat teilen). Ton: Chance statt
-Befund, Ex-Dienstleister nicht schlechtreden. Pitch-Winkel: 1 Mio geliehene
-Reichweite auf einer fremden Plattform → eigene Rezept-Plattform (Rezept-
-Suche/Filter, Recipe-Strukturdaten für Google-Traffic, Newsletter, später
-Shop/Kochbuch). Gegenleistung explizit als Dealbestandteil verhandeln
-(Namensnennung/„created by webdiv", Testimonial, ggf. Story-Erwähnung –
-das ist Geld wert; Muster „Projektwert X, Referenzpreis Y" aus Abschnitt 9),
-nicht gratis auf vage Exposure-Hoffnung arbeiten. Nebeneffekt: wäre die zweite
-Case Study mit Anwendungs-Charakter (Rezept-Datenbank + Pflege-CMS).
+**Konkreter Kandidat: aysenskitchen.com** – Ayşe Şen („Ayşen's Kitchen®",
+Ebersbach BW), Food-Creatorin mit 2,9 Mio Instagram-Followern, zwei
+Kochbüchern (Spiegel-Bestseller) und dokumentierten Markenkooperationen
+(Bosch, WMF, Villeroy & Boch, Leicht Küchen). **Stand 21.08.2026:
+Gesprächszusage liegt vor.** Richtung vermutlich professioneller
+Markenauftritt (B2B: Marken/Verlage/Presse als Zielgruppe) statt
+Rezept-Website. Alle Details – Fakten, Vorgeschichte, Projekt-These,
+Fragenkatalog, Konkurrenz-Analyse (Sally, Pamela Reif, Food-Blogs,
+Weissman) und nächste Schritte – in **`lead-aysenskitchen.md`**.
 
 ## 5. Zeit-Ökonomie (Beobachtung aus dem eigenen Projekt)
 
@@ -247,7 +237,11 @@ Referenz-Rabatte explizit ausweisen: „Projektwert X, Referenzpreis Y").
 4. Eine Branchen-Nische mit der Bucan-Referenz gezielt beackern (Stufe-1-Pitches).
 5. Zwei Multiplikatoren-Beziehungen für den Anwendungsteil aufbauen.
 
-Alles andere erst, wenn diese fünf laufen.
+Alles andere erst, wenn diese fünf laufen. Zwei Parallel-Spuren sind erlaubt:
+Opportunitäten wie der Ayşe-Lead (`lead-aysenskitchen.md`), wenn sie sich
+ergeben, und das **Pro-bono-Programm** (Abschnitt 13) – Start frühestens nach
+Punkt 1, erste Runde handverlesen; es liefert in der Startphase genau die
+Referenzen und den Social-Content, die Punkt 4 und Abschnitt 11 brauchen.
 
 ## 11. Social Media: Instagram & LinkedIn (Grundrauschen, kein Hauptkanal)
 
@@ -303,6 +297,24 @@ Offene TODOs (bewusst noch nicht ausformuliert, Vorschläge als Startpunkt):
       über Excel?"-Geschichten). Der eigentliche Wachstumshebel sind
       10–15 substanzielle Kommentare/Woche bei Zielgruppe und
       Multiplikatoren – Posts ohne Kommentar-Praxis verpuffen
+- [ ] **Engager-zu-Lead-Mechanik (beide Kanäle, Hormozi).** Aufbauend auf den
+      Kommentar-Punkten: (1) mit dem Business-Account bei relevanten Themen
+      substanziell kommentieren – Aufmerksamkeit erzeugen, nie schlechtreden;
+      (2) beobachten, wer auf eigene Posts/Kommentare positiv reagiert
+      (Likes, Antworten) → das ist die Warm-Lead-Liste. (3) Kontakt aber
+      **nicht als proaktive DM an Liker** („du hast geliked, was hat dir
+      gefallen?") – rechtlich geprüft 20.08.2026: Social-DMs sind
+      elektronische Post i. S. v. § 7 Abs. 2 Nr. 2 UWG (EuGH 25.11.2021,
+      C-102/20; OLG Hamm 03.05.2023, 18 U 154/22), ein Like oder eine
+      Vernetzung ist keine ausdrückliche Einwilligung (AG Düsseldorf
+      20.11.2025, 23 C 120/25), und der weite Werbebegriff erfasst auch
+      angebotsfreie Anbahnungsfragen; gilt B2C wie B2B. Legale Umsetzung
+      derselben Mechanik: die „Was hat dich daran interessiert?"-Frage
+      öffentlich im Kommentar-Thread stellen (öffentliche Kommentare sind
+      keine elektronische Post), DMs nur reaktiv (Gegenüber schreibt zuerst
+      oder bittet erkennbar um Kontakt – dann ist Antworten kein UWG-Fall);
+      B2B-Engager mit erkennbarem Bedarf zusätzlich in die handverlesene
+      Ansprache aus Abschnitt 1 überführen (Brief/persönlich)
 - [ ] **Follower-Aufbau beide Kanäle.** Vorschlag: Cross-Verlinkung
       (Website-Footer, E-Mail-Signatur, Google Business Profile),
       Kunden-Tags/Reposts, jede Kommentar-Antwort mitnehmen; größter
@@ -314,3 +326,82 @@ Offene TODOs (bewusst noch nicht ausformuliert, Vorschläge als Startpunkt):
       `footer.soziale` (`content.ts`) mit `target="_blank" rel="noopener"`;
       Instagram als `sameAs` am LocalBusiness, LinkedIn am `founder`-Person-
       Objekt im JSON-LD (`src/app/page.tsx`)
+
+## 12. Website-Versprechen: Konkurrenz-Differenzierung (21.08.2026)
+
+Sinans Idee: auf webdiv.de versprechen, dass vor jedem Entwurf die direkten
+Wettbewerber des Kunden analysiert werden und der Auftritt sich von ihnen
+abhebt. Einordnung:
+
+- **Als Prozessversprechen formulieren, nicht als absolutes Ergebnis.**
+  „Hebt sich definitiv ab" ist subjektiv (wer entscheidet das?) und als
+  absolute Werbeaussage angreifbar. Stark und haltbar ist die Methode:
+  „Vor dem Entwurf analysieren wir Ihren Markt – Ihr Auftritt wird an Ihren
+  Wettbewerbern vorbei entworfen, nicht aus Templates." Zeitanker implizit:
+  Differenzierung gilt gegenüber dem Markt zum Projektzeitpunkt.
+- **Konfliktfall „Konkurrent fragt später auch an":** kein Widerspruch,
+  solange die Methode „individuell aus der Marke des Kunden heraus" ist –
+  zwei Wettbewerber bekommen zwangsläufig verschiedene Auftritte. Nie dasselbe
+  Designsystem im selben Markt recyceln. **Exklusivität nie gratis
+  versprechen:** Branchen-/Wettbewerbsexklusivität ist ein bezahltes Add-on
+  (Laufzeit definieren), sonst bleibt die Annahme von Konkurrenzaufträgen
+  frei. Wirklich kritisch ist **Vertraulichkeit**: Erkenntnisse aus Projekt A
+  (Zahlen, Strategie, Roadmap) fließen nie in Projekt B – als vertragliche
+  Zusicherung formulieren, das schützt Vertrauen mehr als Exklusivität.
+- **Spannung zur Nischen-Strategie** (Abschnitt 2: Branchen-Nischen statt
+  Geografie): je enger die Nische, desto wahrscheinlicher Konkurrenz-
+  Anfragen – auch deshalb Methode statt Exklusivität versprechen.
+- Offen: Copy-Formulierung in webdiv-Stimme, sobald das Versprechen auf die
+  Website soll (Sie-Form, keine Superlative; vgl. `.webdiv/faq.md` als Ort
+  für die Einwand-Behandlung).
+
+## 13. Förderprojekt: ein Projekt pro Quartal ohne Rechnung (Idee 21.08.2026)
+
+Sinans Idee: pro Quartal einem Selbstständigen/Gründer eine Website schenken –
+Ziel: premium wirken, nicht geldgetrieben, und zeigen, dass webdiv
+Business-Probleme löst (Website oder Anwendung).
+
+**Wording (Sinans Entscheidung 21.08.2026): „Pro bono"** – nicht „Kulanz"
+(= Entgegenkommen nach einem Kauf/Mangel). Alternative „Förderprojekt" als
+zugänglichere deutsche Variante in Reserve. Zielgruppen-Wort: „Selbstständige/
+Gründer/junge Betriebe" statt „Startups" (Tech-Assoziation, nicht die
+webdiv-Kernkundschaft). Bewerbungs-Mechanik ebenfalls bestätigt.
+
+**Programm-Grundsatz (Sinan, 21.08.2026):** Die Qualität ist identisch mit
+bezahlten Projekten – kleiner ist **nur der Scope**. Das Pro-bono-Projekt ist
+das Schaufenster des Standards, nie eine Light-Version der Qualität.
+
+**Warum es Premium stützt statt untergräbt:** Verschenken wirkt nur dann
+stark, wenn es **knapp und kuratiert** ist – eines pro Quartal, Bewerbung
+und Auswahl („wir suchen kein hübsches Projekt, sondern ein echtes
+Problem"). „Gratis-Websites" ohne Rahmen wäre das Gegenteil (Verzweiflungs-
+Signal, Preisdumping). Knappheit + Auswahlprozess = Stärke-Signal wie
+Pro-bono-Mandate großer Kanzleien.
+
+**Nebenwirkungen, alle erwünscht:** Referenz-/Portfolio-Aufbau in der
+Startphase · Social-Media-Content (jedes Projekt eine Story, Abschnitt 11) ·
+dankbare Multiplikatoren · UWG-sauberes Inbound (Leute bewerben sich –
+kein Cold-Outreach nötig, Abschnitt 1-Problematik entfällt).
+
+**Leitplanken (sonst wird das Geschenk teuer):**
+- Scope fix: One-Pager in „Essenz"-Klasse, harte Timebox (z. B. 3–5 Tage);
+  **keine Web-Anwendungen** – die Anwendungs-Kompetenz zeigt die Case Study
+  cnyn, nicht das Förderprojekt.
+- Gegenleistung vertraglich (auch bei 0 €): Case Study, Namensnennung,
+  Testimonial, Social-Erwähnung. Es ist ein Programm mit Regeln, kein
+  bedingungsloses Geschenk.
+- Laufende Kosten trägt der Empfänger (Domain, Hosting); Betreuung/Ausbau
+  = regulärer Retainer → natürlicher Upsell-Pfad.
+- Auswahl nach Kriterien (echtes Business, brauchbares Material, als
+  Referenz tauglich), **„Bewerbung + Auswahl", nie „Verlosung/Gewinnspiel"**
+  (Gewinnspielrecht vermeiden).
+- Klare Trennung zum Referenzpreis-Muster (Abschnitt 9): Referenzpreis =
+  bezahlt, reduziert gegen Gegenleistung (z. B. Ayşe); Förderprojekt =
+  unbezahlt, streng timeboxed, kuratiert. Nicht verschwimmen lassen, sonst
+  erwartet jeder Gratis-Konditionen.
+- Kapazität: max. 4/Jahr, in der Startphase sinnvoll (Portfolio), später
+  reduzierbar; Timebox schützt vor Scope-Creep.
+
+**Offen:** Programmname und Copy in webdiv-Stimme; Start erst nach Livegang
+der eigenen Website; erste Runde ggf. handverlesen statt öffentlicher
+Bewerbung (solange es noch keine Bewerber gibt).
