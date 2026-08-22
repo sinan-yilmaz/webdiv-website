@@ -85,6 +85,7 @@
 - [ ] Case Study durchlesen: http://localhost:3000/projekte/bucan-eventservice (Projekte-Zeile auf der Startseite verlinkt sie); Texte und Seitentitel/Description sind [Vorschlag] – bitte absegnen
 - [ ] Von der Case Study aus „Erstgespräch“ klicken: Startseite lädt mit Intro und fährt danach zur Kontakt-Sektion – Verhalten ok?
 - [ ] 404 ansehen: http://localhost:3000/gibt-es-nicht (im Dev-Server rendert jede unbekannte Adresse die 404) – Texte sind [Vorschlag], bitte absegnen
+- [ ] Impressum + Datenschutz ansehen: http://localhost:3000/impressum/ und /datenschutz/ (Fusszeilen-Querlinks, [Platzhalter] für Anschrift/E-Mail/Hoster); dazu die neue Datenschutz-Hinweiszeile unterm Kontaktformular – Fragen 1–7 im Abschnitt „Fertig (Impressum & Datenschutz)" beantworten
 
 ## Fertig (SEO/Meta-Grundausstattung, 17.08.2026)
 
@@ -108,6 +109,12 @@
 - [x] Abgeschnittene Hintergrund-Wortmarke (`contact-bg-mark`) entfernt; „Oder direkt“-Zeile unterm Formular ins Band gewandert (`footer.adresse` in `content.ts`)
 - [x] Social-Icons als Monoline-Glyphen (1,5 px, currentColor) in `src/lib/primitives/components/` (MailIcon, InstagramIcon, LinkedInIcon); Pill-Duktus `.icon-btn`, Hover invertiert Paper/Kobalt
 - [x] Kontakt-Sektion auf mindestens volle Viewport-Höhe (100svh als Flex-Spalte, Grid zentriert, Band + Credits unten): die Treppenkante ist am Seitenende komplett aus dem Bild; weiterer Feinschliff folgt
+- [x] Credits-Zeile exakt vertikal zentriert (22.08.2026, Prüfauftrag Sinan): das
+      asymmetrische Padding der Leiste (26px oben / 30px unten) ließ die Zeile messbar
+      ~2px zu hoch sitzen → `padding: 28px 0` (Leistenhöhe bleibt unverändert 76.8px),
+      Mobil-Override auf `max(28px, env(safe-area-inset-bottom))` mitgezogen; per
+      getBoundingClientRect nachgemessen: Innenraum zwischen Trennlinie und Seitenende
+      jetzt exakt mittig (Restwert 0.4px zur Gesamtbox = halbe Trennlinie, korrekt)
 
 ## Fertig (Leistungen: Rückbau auf ruhige Bühnen-Karten, 18.08.2026 spät)
 
@@ -117,19 +124,83 @@
 - [x] Dezente Schattierung wieder rein (Wunsch Sinan, „will das sehen“): zweischichtiger weicher Wurf nach unten (`0 2px 6px` 3% + `0 22px 48px` 6% Ink) – Blatt-auf-Papier-Tiefe; mobil aus (dort keine Box) – Look bewerten
 - [x] Tag-Pills: `cursor: default` (Labels, nicht klickbar; Selektion bleibt); Desktop-Größe erst wie Portrait-Pills (24px) → Sinan: zu groß → final eine Stufe darunter (19px / 14 28 = Mobil-Maß der Portrait-Pills); mobil <768 bleibt 15px / 11 20
 - [x] Titel höher + mehr Luft zum Text (Wunsch Sinan): Spacer-Row über dem Titel von 1fr auf 0.55fr (Titel rückt nach oben), Strich-margin-bottom 30→72px (Abstand Titelblock→Text wächst); mobil unverändert (dortiger Strich-margin-Override 24/32 bleibt)
-- [ ] **TEMPORÄRER TESTBLOCK am Ende von `main.css`** („VISUELLER TEST“, 18.08.2026): Dunkel läuft vom Statement bis „Zuletzt gebaut“ durch (Leistungen-Sektion + Karten in `--dark`, Karten nur mit `--line-dark`-Haarlinie), Treppenkante als Konturlinie in Rail-Liniensprache (1px, `--line-dark`; `::before` Originalform als Linie, `::after` um 1px geschrumpfte dunkle Füllung – Inline-`--edge-to` der Komponente wird per `::after`-background übersteuert; Selektor `.step-edge:has(+ .services)`) → nach Sinans Bewertung KOMPLETT ENTFERNEN (nur diesen Block löschen, sonst ist nichts angefasst)
+- [x] **Dunkles Kapitel ABGENOMMEN & fest eingebaut (22.08.2026):** Sinan: Design gefällt
+      „extremst", bis „Zuletzt gebaut" inkl. Karten gilt als fertig → der temporäre
+      Testblock („VISUELLER TEST", 18.08.2026) vom Ende von `main.css` wurde aufgelöst und
+      als reguläres Design eingebaut: `--dark-soft` ist echter Token in `tokens.css`,
+      alle Regeln (Konturkante `.step-edge:has(+ .services)`, Sektion, Karten-Farben)
+      sind in den Leistungen-Block von `main.css` gefaltet, `ServicesSection` steht auf
+      `data-theme="dark"` (Rail-Farbe kommt jetzt über den Token-Mechanismus),
+      Test-Vorbehalt im HomePage-Kommentar entfernt; Optik unverändert verifiziert
+      (Desktop im Browser: Kante/Karten/Kapitelende; Mobil 390 via iframe: Karten-Box
+      bleibt aufgelöst, gleiche Computed Styles; tsc sauber)
+- [x] Folge-Fix (22.08.2026, Freigabe Sinan): Tag-Trennlinie der Karten unter 1024 px
+      (`.svc-card-tags` border-top) von `--line` auf `--line-dark` – die Tinten-Haarlinie
+      stammte noch aus der hellen Karten-Ära und ging auf dem dunklen Kartengrund unter;
+      via iframe auf 390 + 800 verifiziert (Desktop ≥1024 hat dort keine Trennlinie,
+      unverändert)
 - [x] Dot-Lupe („Kreisel“) je Leistungs-Karte (Wunsch Sinan, exakt wie Portrait): Canvas pro Karte (`.svc-card-dots`, z-index -1 hinter dem Inhalt via `isolation: isolate`), gleiche Parameter wie die Portrait-Lupe (26px-Raster, Radius 260, Ring `0.06+0.14e`, Lerp amt 0.12 / Position 0.25), nur feine Pointer + `pointerType === 'mouse'` → mobil/Touch bewusst ohne Effekt (wie Portrait); Karten-Punktraster (bg-dots-dark-Werte) liegt aktuell im TESTBLOCK – bei Rückbau auf hell braucht die Lupe eine Ink-Farbvariante + helles Raster (Canvas-Farbe kommt aus `--paper`)
 - [x] Unteres Ende des dunklen Kapitels (Sinan: „nicht plötzlich gerade Linie zu weiß“): erst Probe nach Referenz-Übergang harrisoncarloss.com (`BrushEdge`, SVG-Ink-Riss mit Trockenpinsel-Fragmenten) – Entscheidung Sinan 19.08.2026: „einheitlich mit den Stufen“ → BrushEdge komplett entfernt (Komponente, Barrel, CSS), stattdessen `<StepEdge from="var(--dark)" to="var(--paper)" />` in HomePage zwischen Services und Projekte (ohne Ref, nicht in `stepEdgeRefs` der Nav)
 - [x] Folge-Punkt aus dem dunklen Test (gefixt 19.08.2026, gemeldet von Sinan: Nav war hell über den dunklen Leistungen): `edgeToPaperRef` (Hell-Messpunkt der Nav) von der Kante Statement→Services an die Kante Services→Projekte verschoben – Nav bleibt jetzt bis zum Ende des dunklen Kapitels invertiert und kippt über „Zuletzt gebaut“ zurück (beide Richtungen im Browser geprüft); bei Rückbau des Tests wandert das Ref zurück (Kommentar in HomePage.tsx)
 - [x] Leistungen dezent heller als das Statement (Wunsch Sinan 19.08.2026): Testblock-Variable `--dark-soft` (erst #1B1B1A, Sinan: „passt farblich nicht, dunkler“ → #161615; Statement bleibt `--dark` #121212) für Sektion, Karten, oberes Kontur-::after und die Grundfläche der unteren Kante (`.services + .step-edge`) – die obere Treppe liest sich dadurch als subtiler Zweiton + Konturlinie; bei Übernahme des Tests wird `--dark-soft` ein echter Token in tokens.css
-- [ ] Nächster Schritt: Look so bewerten; falls es weiterhin nicht sitzt, ganz neue Richtung für die Sektion erarbeiten (Sinan: „hmm, was ganz neues” – erst mal zurückgestellt)
+- [x] Look bewertet (22.08.2026): Sinan – Design gefällt „extremst", Sektion gilt bis
+      „Zuletzt gebaut" inkl. Karten als fertig; keine neue Richtung mehr nötig (die
+      Rückbau-/„aktuell im TESTBLOCK"-Vorbehalte in den Einträgen oben sind damit
+      hinfällig, siehe „Dunkles Kapitel ABGENOMMEN")
 
-## Projekte-Sektionstitel (20.08.2026, Entscheidung offen)
+## Fertig (Leistungen-Texte menschlicher, 21.08.2026)
 
-- [ ] Sinan fragt nach Alternativen zu „Zuletzt gebaut” (h2 der Projekte-Sektion) – Vorschläge
-      liegen vor (u. a. „Woran Sie mich messen können.”, „Echte Aufträge.”, „Arbeit, die Sie
-      sich ansehen können.”); Empfehlung: behalten oder „Woran Sie mich messen können.”;
-      Achtung bei Alternativen: keine „live/im Einsatz”-Behauptung (cnyn unveröffentlicht)
+- [x] Alle drei Kartentexte überarbeitet (Ziel Sinan: nicht nach Roboter klingen, Besucher
+      versteht den Nutzen; Vorgehen: je Karte Varianten → Auswahl durch Sinan):
+      01 „Kein Baukasten, kein gekauftes Theme. Ich entwerfe und baue Ihre Website eigens für
+      Ihre Firma. Sie sieht aus wie Ihr Betrieb, lädt schnell und macht aus Besuchern Anfragen."
+      · 02 „Manche Abläufe passen in kein fertiges Programm. Ich baue Ihnen dafür eine eigene
+      Anwendung, die genau Ihrem Ablauf folgt. …" · 03 „Hinter jeder Website und jeder Anwendung
+      liegt ein Fundament. …" (Supabase/„Backend" aus dem Text entfernt, „die Sie schon nutzen"
+      → „mit denen Sie schon arbeiten")
+- [x] Neue Copy-Regel Sinan (21.08.2026): KEIN Doppelpunkt mitten im Satz – zusätzlich zu den
+      bestehenden Regeln (keine Gedankenstriche, keine Tool-Namen im Web-Text); Aufzählungen
+      stattdessen als eigener Satz
+- [x] Titel und Pills aller drei Karten bleiben unverändert (Entscheidung Sinan; „Backend"-Pill
+      trotz Jargon-Frage behalten)
+- [x] Desktop-Apps (Tauri/Electron, React-Basis) bewusst NICHT auf Karte 02 – „Browser"-Wording
+      bleibt als Kundennutzen; als FAQ-Rohidee in `.webdiv/faq.md` notiert („Geht so eine
+      Anwendung auch als installierbares Programm?")
+
+## Fertig (Über-mich-Text, 22.08.2026)
+
+- [x] Profiltext final (Sektionen-Textrunde, viele Feedback-Schleifen): „Ich bin Sinan
+      Yilmaz, Webentwickler aus Günzburg. Seit über zehn Jahren entwickle ich fürs Web,
+      vom One-Pager bis zur ausgewachsenen Web-Anwendung. Die beste Lösung ist oft die
+      einfachste. Weniger, dafür zu Ende gedacht. Von mir kommt nichts, was ich
+      nicht unterschreiben würde." – Kern von Sinan selbst („weniger, und dieses Weniger
+      mit mehr Detail; so optimiert, dass es Komplexität spart"); wörtliches „Weniger ist
+      mehr" bewusst vermieden; Schlusssatz = Integritäts-Idee Sinans („nichts, womit ich
+      selbst nicht einverstanden wäre"), über „unterschreiben" formuliert, weil sich
+      direkt darunter die echte Unterschrift zeichnet (Text beglaubigt das Element);
+      Alternative lag vor: „Fertig ist es für mich erst, wenn es sich selbstverständlich
+      anfühlt." (Produkt-Gefühl statt persönlicher Haftung)
+- [x] Verworfene Anläufe dieser Runde (nicht wiederholen): „Das meiste im Netz ist mir zu
+      laut und zu voll" · „Ob etwas gut ist, entscheidet sich an den Stellen, die niemandem
+      auffallen. Man merkt sie trotzdem." · Varianten-Ritual-Satz („Bruchteil aus dem, was
+      ich mache, plump ausgewählt" – Prozess nie als Einzelritual verkürzen) ·
+      „auf meiner Seite wie auf Ihrer" · „Das zahlt sich im Alltag aus, in der Bedienung
+      wie in der Pflege." (Abschluss „zu plump", Nutzwert-Liste statt Gefühl)
+- [x] Entscheidungen auf dem Weg: React/Next.js/Supabase raus (Kompetenzbeleg tragen die
+      Case Studies) · „webdiv ist bewusst klein" verworfen (unehrlich: „hätte ich Geld,
+      hätte ich Mitarbeiter") · „webdiv, das bin ich." verworfen · Skizze-bis-Livegang-Satz
+      raus (Prozess-Botschaft, wohnt im Ablauf) · „Ich mag X"-Form abgelehnt („Klischee")
+      → Präferenz als Urteil über die Sache · Qualitätssatz von Zeit-Form („am längsten
+      sitze ich") auf Maßstab-Form gedreht (Missdeutung „ineffizient") · „eine Seite" →
+      „etwas" (gilt für Websites UND Anwendungen)
+- [x] Zahlform bestätigt: im Fließtext ausgeschrieben („über zehn Jahren"), Ziffern-Form
+      „10+" bleibt exklusiv dem Display-Statement
+
+## Projekte-Sektionstitel (entschieden 21.08.2026)
+
+- [x] „Zuletzt gebaut” bleibt (Entscheidung Sinan 21.08.2026, Textrunde): schließt das
+      „ich baue”-Motiv der neuen Leistungen-Texte ab; Alternativen („Woran Sie mich messen
+      können.”, „Echte Aufträge.”) verworfen, „Arbeit, die …” wegen Arbeit-Aversion raus
 
 ## Fertig (Leistungen als Service-Bühnen mit Sticky-Overlap, 18.08.2026 – Referenz harrisoncarloss.com)
 
@@ -155,7 +226,7 @@
 ## Fertig (Leistungen-Redesign „Farbboxen“, 18.08.2026)
 
 - [x] Sektion neu als große dunkle Karten (finale Richtung nach mehreren Lab-Iterationen in `public/lab/leistungen.html`: 5 Richtungen A–E → Farbboxen E1/Tint → Referenz-Impuls „dunkle Karten mit Keyword-Pills“): pro Leistung eine Karte (volle Containerbreite, `--r-box`, Punktraster, min-height 640px – Höhe testweise +1/3, Sinan will den Big-Card-Look prüfen); Aufbau: Titel (voll hell) → Kobalt-Strich (zeichnet sich beim Reveal) → Text → Keyword-Tags unten links als Kartenfuß; frei scrollend, bewusst ohne Pin; einheitlich dunkel = Kobalt bleibt reiner Akzent, Footer behält den einzigen großen Kobalt-Block
-- [ ] Tag-Labels absegnen (`leistungen.eintraege[].tags` in `content.ts`; 18.08.2026 spät auf Sinans Feedback überarbeitet): Design & Entwicklung / SEO / Hosting & Pflege · Kundenportale / Verwaltung / Buchung & Abwicklung · Backend / Nutzer & Rechte / Datenübernahme (Karte 3 neu: „Login & Rechte“ → „Nutzer & Rechte“, „Datenimporte“ → „Datenübernahme“ – beide [Vorschlag]; Alternativen falls unpassend: Zugriffsrechte, Benutzerverwaltung, Systemanbindung)
+- [x] Tag-Labels abgesegnet (21.08.2026, Leistungen-Textrunde): alle Pills bleiben wie sie sind – Design & Entwicklung / SEO / Hosting & Pflege · Kundenportale / Verwaltung / Buchung & Abwicklung · Backend / Nutzer & Rechte / Datenübernahme („Backend” bewusst behalten)
 - [x] Linienobjekte im Statement-Duktus (`BoxObject`: web/app/db, 1,5 px, pathLength-Zeichnen beim Reveal mit Strich-Stagger); Objekte schwenken gelerpt zur Mausposition (`--sway-x/-y` via frameLoop, Stärke je Box) und floaten leicht
 - [x] Mobile: Boxen full-bleed (Farbe volle Breite, Inhalt behält Seitenrand, Radius entfällt) statt der alten paper-2-Karten – Entscheidung Sinan: keine „eingerückten“ Boxen, kein Pinning
 - [x] Aufgeräumt: `MediaArea` (Browserrahmen-Platzhalter + Medien-SVGs) entfernt, `leistungen.browserUrl`/`screenshotPlatzhalter` aus `content.ts`; `.browser-frame` bleibt (Case Study nutzt ihn); neues Token `--r-box: 28px`
@@ -202,6 +273,119 @@
 - [x] Feedback-Runde 2 (21.08.2026): Sinan wählt A, aber „noch keine Chat-Blasen" → A umgebaut
       zur **Chat-App-Anmutung** (Fenster + Kopfzeile, WhatsApp-Tail nur am Gegenüber, Labels
       raus) und **von Sinan freigegeben → auf die Website übernommen, Lab gelöscht**
+- [x] Inhalts-Runde 3 (22.08.2026) – **Richtung „Prinzipien" probiert und verworfen.**
+      Ausgangssorge Sinan: „vier Schritte" hat jeder (nicht nur Web-Agenturen), Prozess-Rahmen
+      wirkt website-lastig (Web-Anwendungen laufen iterativ/anders). Auf dem Weg verworfen:
+      Zusagen-Rahmen (Titel-Kandidaten „krampfhaft gekürzt") · „Kunde gibt Tempo vor,
+      Zusagen als Gerüst" · Website/App-Gabelung im Ablauf (verwirrend) · Titel „Vier
+      Schritte, ein Ansprechpartner" (Klischee, fliegt in jedem Fall). Prinzipien-Kandidaten
+      waren: Direkter Draht · Erst verstehen, dann bauen · Der Preis steht vorher · Echter
+      Stand statt Folien · Über den Launch hinaus. Lab `public/lab/prinzipien.html` mit
+      4 Layout-Varianten (A Editorial · B Monument · C Raster 3+2 · D Statement mit
+      Kobalt-Akzentwort): „alle sehr schlecht, passt nicht zum aktuellen Design" → Lab samt
+      Iframe-Harness/Fonts gelöscht. Danach auch inhaltlich verworfen: fünf passen nicht ins
+      4-Spalten-Design, Prinzipien wirken als Selbstbeschreibung ohne Leserfrage schwach
+- [ ] **Offener Vorschlag (Sessionende 22.08.2026, unentschieden):** Diagnose Claude –
+      generisch sind nur Sektionstitel + die vier Phasenwörter (Erstgespräch/Konzept/
+      Umsetzung/Livegang), nicht der Inhalt; die Schritt-Texte sind bereits app-neutral
+      (04 sagt „Seite oder Anwendung"), das Besondere (Festpreis der gilt, Browser statt
+      Folien, kostenlos) steckt im Fließtext. Zweistufiger Minimal-Eingriff, Design/
+      Chronologie unangetastet: **(1)** nur Sektionstitel tauschen – Favorit „Sie wissen
+      vorher, woran Sie sind.", Alternative „Vom ersten Gespräch bis nach dem Livegang.";
+      **(2)** optional Schritt-Titel von Phasenwörtern auf Zusagen umstellen (01 „Reden
+      kostet nichts" · 02 „Der Preis steht, bevor ich anfange" · 03 „Zwischenstände im
+      Browser" · 04 „Live – und danach erreichbar"). Entscheidung Sinan steht aus;
+      Fortsetzung in neuer Session geplant → 22.08.2026: umgesetzt, siehe Folgeeintrag
+- [x] **Zusagen-Swap eingebaut und ABGELEHNT (22.08.2026, Sinan: „gefällt mir inhaltlich
+      nicht") – `content.ts` wieder auf den alten Stand zurückgedreht, nichts davon
+      wiederverwenden; der verworfene Stand war:**
+      Stufe 1+2 direkt in `content.ts` (bewusst kein Lab mehr – Lab-Varianten wirkten
+      isoliert dreimal „nicht wie die Website"; Bewertung jetzt im echten Scroll-Fluss):
+      Sektionstitel „Sie wissen vorher, woran Sie sind." · Schritt-Titel 01 „Reden kostet
+      nichts" / 02 „Der Preis steht, bevor ich anfange" / 03 „Zwischenstände im Browser" /
+      04 „Live und danach erreichbar" (Gedankenstrich der Skizze entfernt – Copy-Regel).
+      Fließtexte minimal mitgezogen: 01 beginnt mit „Unverbindlich." (Titel trägt schon
+      „kostet nichts", wörtliche Dopplung raus; „Und ob ich der Richtige dafür bin." als
+      eigener Satz) · 02/04 Gedankenstrich bzw. Doppelpunkt gemäß Copy-Regel 21.08.
+      aufgelöst („. Und einen Festpreis, der gilt." / „bleibe dran. Änderungen, …") ·
+      03 „Sie sehen den echten Stand, keine Folien." (wörtliche Titel-Dopplung
+      „Zwischenstände … im Browser" raus, Folien-Pointe bleibt). Unangetastet: Eyebrow +
+      Nav-Link „Ablauf", Chronologie/Design/Nummern-Zählung, Mono-Schlusszeile samt
+      Gedankenstrich (wortgleiches Echo im Kontakt-Text – wenn ändern, dann beide).
+      Ausweich-Titel, falls 01 im Browser zu locker wirkt: „Das erste Gespräch kostet
+      nichts"; falls 02 zu lang bricht: „Der Preis steht vorher"
+- [ ] **Lab-Runde 4 – vier INHALTLICHE Varianten (22.08.2026, Entscheidung Sinan steht aus):**
+      `public/lab/ablauf.html` (+ tokens-/main.css- und Font-Kopien in `public/lab/`, Lab nach
+      Entscheidung löschen): echtes Sektionsdesign, Umschalter A–D + Desktop/Mobil-390-
+      Telefonrahmen (iframe, Tasten 1–4 · d/m), Eyebrow „Ablauf" und Mono-Schlusszeile überall
+      unverändert. A „Was Sie in der Hand haben." (Artefakte je Schritt: Eine ehrliche
+      Antwort / Ein Angebot mit Festpreis / Ein Link, keine Folien / Eine Anlaufstelle, die
+      bleibt) · B „Wer was macht." (Rollen-Paare: Sie erzählen, ich höre zu / Ich rechne,
+      Sie entscheiden / Ich baue, Sie schauen rein / Es läuft, ich bleibe dran) · C „Kein
+      Schritt ins Ungewisse." (ohne Schritt-Titel, Zeitwörter im Text führen: Am Anfang /
+      Danach / Während der Umsetzung / Am Ende) · D „So läuft ein Projekt bei mir."
+      (Phasenwörter bleiben, Mono-Zusagenzeile darunter differenziert: kostenlos und
+      unverbindlich / Festpreis, schriftlich / Zwischenstände im Browser / und danach
+      erreichbar); alle vier im Browser verifiziert (Desktop A–D + Mobil-Stichproben C/D)
+- [ ] **Lab-Feedback Sinan (22.08.2026 spät): D ist Favorit** – zwei Punkte dazu, beide
+      im Lab umgesetzt: (1) Design-Bruch: ungleich lange Mono-Zusagen (1- vs. 2-zeilig)
+      verschoben die Textanfänge der Spalten (Screenshot Sinan) → Registerhaltung
+      eingebaut (CSS-Subgrid ≥ 1024: `.process-col` teilt die Zeilenhöhen Nummer/Titel/
+      Zusage/Text über alle Spalten, gilt im Lab für alle Varianten; bei Übernahme in
+      `main.css` mitnehmen; Tablet-2×2 verschiebt noch minimal → Feinschliff nach der
+      Entscheidung). (2) Inhalt: linearer Ablauf „gilt gefühlt nur für Websites,
+      eigentlich iteriert man – ich kooperiere gerne, statt Aufgabe anzunehmen und wie
+      am Fließband umzusetzen" → **Variante E** ergänzt (D-Form, kooperativ erzählt,
+      bewusst KEINE Website/App-Gabelung): Titel „Wir entwickeln das zusammen." ·
+      02-Text „Aus dem Gespräch wird ein Konzept mit Umfang und Zeitplan. Was dort
+      steht, gilt." · 03-Text „Sie sehen jeden Stand im Browser und sagen, was passt
+      und was fehlt. Das fließt direkt in die nächste Runde ein." (Iteration lebt IN
+      Schritt 03, Chronologie bleibt Gerüst, Festpreis unangetastet; 01/04 wie D);
+      Sinans Frage „hilft die Mono-Zeile dem Besucher?" mit Ja beantwortet (Scanner
+      lesen Titel + Mono-Zeile, nicht Fließtext; Analogie Projekte-Kicker) –
+      Entscheidung D vs. E steht aus
+- [x] Feinschliff-Runde 2 im Lab (22.08.2026 spät, Feedback Sinan): Sub-Zeile von Mono
+      auf Sans gedreht (--fs-small 14px, weight 500, ink-2 – „mono passt mir dort
+      nicht"), dadurch alle vier einzeilig, Register hält (Subgrid bleibt als Netz) ·
+      „und Zeitplan" aus 02 raus (D+E, jetzt „Konzept mit klarem Umfang") · E-03
+      gekürzt auf „Sie sehen jeden Stand live. Ihr Feedback fließt laufend ein."
+      („iterativ" bewusst vermieden, Kundenwort „laufend") · 04 in D+E neu, Sub-Zeile
+      „Betreuung auf Wunsch", Text „Ich bringe Ihre Seite oder Anwendung live. Wenn
+      Sie wollen, bleibe ich Ihr Partner für Pflege und Weiterentwicklung." (Wunsch
+      Sinan: auf Wunsch Partner, supportiv/administrativ, statt „und danach
+      erreichbar"; „Pflege" = etabliertes Vokabular aus den Leistungen-Tags;
+      „Ansprechpartner" bewusst vermieden); im Browser verifiziert (D+E Desktop);
+      Nachtrag: Text auf Wunsch Sinan „Wenn Sie wollen" → „Auf Wunsch bleibe ich …"
+      (Hinweis gegeben: doppelt sich wörtlich mit der Sub-Zeile „Betreuung auf
+      Wunsch" direkt darüber – Auflösung offen, Optionen notiert)
+- [ ] Geschäftlicher Folge-Punkt aus der Runde (Angebots-Vorlage, nicht Website):
+      „Feedback fließt laufend ein" + Festpreis → im schriftlichen Angebot den Rahmen
+      der Runden regeln (z. B. „Anpassungen im Rahmen des Konzepts"), damit die
+      Website-Erzählung keinen unbegrenzten Änderungsanspruch suggeriert; Kandidat
+      für Akquise-Plan Abschnitt 9 (Preise/Angebot)
+- [x] **Übernahme auf die Website (22.08.2026 spät, Auftrag Sinan; Texte weiter
+      [Vorschlag]):** Variante E in `content.ts` (Titel „Wir entwickeln das zusammen.",
+      Stationen + neues `zusage`-Feld + Texte), `ProcessSection` rendert die Zusagenzeile
+      (`.process-promise` zwischen h3 und Text), `main.css`: Promise-Stil (fs-small /
+      500 / ink-2 über die bestehende `.process-col p`-Farbe), h3-margin 14→10px,
+      Registerhaltung via `@supports (grid-template-rows: subgrid)` (Ableitung < 1024
+      setzt `display: block; grid-row: auto` zurück); 03 neu nach Sinans Exklusiv-Idee:
+      „Jeder neue Stand geht exklusiv an Sie und bleibt jederzeit erreichbar. Ihr
+      Feedback fließt laufend ein." (ersetzt die „live"-Fassung, löst zugleich die
+      live/Livegang-Dopplung); **„Livegang" bleibt** (Empfehlung Claude gegen „Go-live":
+      Duden-Wort, deutscher Duktus der Seite, „Go-live" ist Konzern-/IT-Jargon);
+      Lab `public/lab/` komplett gelöscht; tsc sauber, im Browser verifiziert
+      (Desktop: Register hält, Zusagen einzeilig)
+- [x] **Ablauf-Sektion ABGENOMMEN (Sinan 22.08.2026 spät: „passt, wir sind durch")** –
+      E-Fassung ist final, [Vorschlag]-Status aufgehoben (Kommentar in content.ts
+      aktualisiert); die folgenden Feinschliff-Punkte sind damit hinfällig, bleiben
+      nur als Randnotiz: Titel-Alternative D „So läuft ein
+      Projekt bei mir." (Ein-Zeilen-Swap in content.ts) · „auf Wunsch"-Dopplung
+      Sub-Zeile ↔ 04-Text (Optionen: Text „Danach bleibe ich Ihr Partner …, wenn Sie
+      das möchten." oder andere Sub-Zeile) · „exklusiv" ggf. → „nur an Sie", falls zu
+      werblich · Tablet 2×2 ohne Registerhaltung (Subgrid dort bewusst aus wegen
+      row-gap, Feinschliff bei Bedarf) · Durchsicht Sinan auf der echten Seite
+      (Desktop-Scrollfluss + Mobil 390/Tablet 768)
 - [x] FAQ-Sektion eingebaut (21.08.2026): `FaqSection` (views/home/HomePage) zwischen
       AboutSection und Kobalt-StepEdge, id `#faq`; Texte als `faq`-Export in `content.ts`
       (Startseiten-Fassungen; Antworten 2+3, Status „online" und Composer-Zeile weiter
@@ -266,11 +450,49 @@
       noch keine neue Website" – jeweils die Anti-Verkaufs-Kernaussage); komplettes
       Weglassen bleibt Ein-Zeilen-Option (akzent-Rendering in FaqSection); Details in
       `.webdiv/faq.md` („Value-first-Umbau")
+- [x] Composer erst ab „Chat betreten" (21.08.2026, Wunsch Sinan: FAQ-Footer erst
+      bei voll sichtbarer Sektion, nicht schon ab „— FAQ"): vorher klemmte sticky
+      das Band beim Sektionseintritt an die Sektions-Oberkante (ritt ~100 px auf
+      der Überschrift) und klebte dann unten; jetzt bleibt es verborgen
+      (translateY(100%) + opacity/visibility, ohne Fokus/Pointer) und gleitet
+      erst ein, wenn der Chat-Kopf oben andockt – gleiche Schwelle wie die
+      Nav-Zone, gemessen am headAnchorRef (useRemeasure + useFrame in FaqSection,
+      Klasse .in am Band, data-reveal am Band entfällt); beide Richtungen
+      symmetrisch, am Sektionsende unverändert Flussposition; im Browser
+      verifiziert (5 Scroll-Positionen + Screenshots, inkl. Remeasure-Probe:
+      svh-Reflow nach Viewport-Resize verschiebt die Schwelle korrekt mit),
+      tsc sauber
+- [x] Kopf-Abgang am Chat-Ende (21.08.2026, Wunsch Sinan: Kopf soll nicht bis zum
+      Seitenende mitkommen): vorher klebte der Kopf bis zum Schluss über dem
+      Kobalt-Footer und schob sich bei der nativen Rausschiebung sichtbar hinter
+      das Composer-Band (gleicher z-index, Composer später im DOM); jetzt
+      verabschiedet er sich nach oben (translateY(-100%) + Fade, Klasse .out),
+      sobald der Composer am Chat-Ende in seine Flussposition einparkt –
+      Schwelle über zweiten 0-Höhen-Fluss-Anker nach dem Composer-Band
+      (endAnchorRef in FaqSection, scrollY + vh ≥ Anker-Top im selben
+      useRemeasure/useFrame wie die Andock-Schwelle); Hochscrollen symmetrisch
+      (Kopf dockt wieder an, sobald der Composer wieder klebt); CSS-Regel als
+      .faq .faq-band-head.out (Spezifität über [data-reveal].in, Transition aus
+      der Reveal-Basisregel); im Browser verifiziert (5 Scroll-Positionen +
+      Screenshots, beide Richtungen, Seitenende ohne Kopf), tsc sauber
+- [x] Bugfix dazu (Meldung Sinan 21.08.2026: Kopf kam nach dem Abgang beim
+      Hochscrollen nicht wieder): useRevealChildren setzt die Reveal-Klasse
+      „in" einmalig per classList direkt am DOM – der out-Toggle ließ React
+      das className des Kopf-Bands neu schreiben und warf das DOM-„in" weg,
+      danach galt [data-reveal] ohne .in = opacity 0 (nur das Kopf-Band
+      betroffen: einziges data-reveal-Element mit React-verwaltetem
+      className; Bubbles/Composer unberührt) → Fix: „in" rendert React am
+      Kopf-Band selbst aus dem vorhandenen inView (gleiche Once-Semantik);
+      verifiziert mit zwei vollen Runter-hoch-Zyklen inkl. Endzustands-Reads
+      (Klasse „in out" beim Abgang, „in" + opacity 1 + top 0 nach Rückkehr)
 - [ ] FAQ-Feinschliff (weiter offen, mit Sinan): Tail-Kurve final abnehmen, Motion-Idee
       Tipp-Indikator (··· bevor die Antwort-Bubble poppt), Tablet-Durchgang, offene
-      Frage „FAQ" in die Nav?, Copy-Freigaben (neue Fragen/Antworten/Merksatz-Akzente,
-      Status-Zeile, Tipp-Geist-Beispielfragen); danach Profiltext („Über mich"),
-      dann Footer
+      Frage „FAQ" in die Nav?, Copy-Freigaben (Fragen/Antworten 1+3, Merksatz-Akzente,
+      Status-Zeile, Tipp-Geist-Beispielfragen; Frage 02 abgesegnet 22.08.); Plan
+      22.08. (Sinan): alle Q&As durchgehen, Font-Größen und Kobalt-Akzentwahl
+      prüfen – Reihenfolge Frage 02 ✓ → Design-Runde ✓ (Marker + Typo eingebaut,
+      Chat-Breite bleibt) → Fragen 1+3; danach
+      als Sektionen noch Ablauf und Kontakt (Profiltext ist seit 22.08. final)
 - [x] Feedback-Runde 3 umgesetzt (21.08.2026, direkt auf der Website): ✓✓-Häkchen entfernt;
       pro Antwort genau EIN Kobalt-Akzent (`faq.paare[].akzent` in content.ts, [Vorschlag]:
       „Präzision" / „Urteil, Geschmack, Verantwortung" / „das Erstgespräch"; Rendering via
@@ -288,6 +510,59 @@
       bündig auf der Textkante** (Kopf-Padding-inline 0, Sinans Screenshot-Feedback);
       Bubbles q 72 % / a 76 % (mobil 94 %); Rails laufen durch die Bänder; Desktop im
       Browser verifiziert (Kopf-Bündigkeit, Doodles, Akzente, Composer → Treppenkante)
+- [x] FAQ Frage 02 neu gedreht & abgesegnet (22.08.2026, Sektionen-Textrunde): Selbstbau-
+      Frage („Kann ich meine Website nicht einfach selbst mit KI bauen?") verworfen –
+      falsch gestellt, zwingt in die Rechtfertigung, und „Ich nutze KI selbst" fliegt
+      (KI-Nutzung ist Normalität, kein Thema). Neu: „Heute kann doch jeder mit KI bauen.
+      Wie heben wir uns da noch ab?" + Einordnungs-Antwort (Baukästen gab es vorher auch,
+      Expertise dahinter entschied schon immer; beherrschen/bedienen-Paar; Abstands-These
+      als hergeleitetes Fachurteil, Wahrheits-Check besprochen). Antwort ohne „ich",
+      gattungsneutral („bauen"/„Arbeit" statt „Website"). Akzent entschieden (Sinan,
+      gleiche Session): das einzelne Wort „Expertise" statt Merksatz – nur dieses
+      eine Wort wird Kobalt. Alter 50-€-Einwand + Visitenkarten-Antwort →
+      Kandidat FAQ-Unterseite; Details + verworfene Anläufe in `.webdiv/faq.md`
+      („Frage 2 der Startseite neu gedreht")
+- [x] **FAQ-Design-Lab (22.08.2026, ABGESCHLOSSEN – Lab gelöscht):** `public/lab/faq.html`
+      (+ tokens-/main.css- und Font-Kopien in `public/lab/`, Lab nach Entscheidung löschen).
+      Anlass Sinan: Kobalt-Akzent auf der dunklen Bubble schwer lesbar (gemessen: volles
+      Kobalt #2A3CFF auf --dark nur ~2,8:1), Frage/Antwort-Größen zu weit auseinander
+      (27/18 px), mobil muss es korrekt aussehen; Doodles gefallen sehr → bleiben überall.
+      Harness: Tasten 0/1–4 = Ist/A–D, d/m = Desktop/Telefonrahmen 390 (iframe);
+      Ansehen: http://localhost:3000/lab/faq.html. Alle Varianten: Typo enger (Frage
+      clamp 18→22 px, Antwort clamp 17→20 px statt 27/18).
+      **Runde 1 (hell) KOMPLETT VERWORFEN** (Sinan: „gar nichts davon" – A Haarlinien-
+      Bubble + Kobalt-Tail „hässlich" · B Blatt-Schatten „nicht gut lesbar, auch nur mit
+      Border" · C 7-%-Kobalt-Tint „Farbe passt nicht zur Website" · D offene Antwort mit
+      Kobalt-Strich „ganz schlimm") – nichts davon wiederverwenden, auch den Kobalt-Tail
+      nicht. Vorgabe danach: Antwort bleibt DUNKEL, Farbe aus den oberen Kapiteln
+      (Statement --dark / Leistungen --dark-soft; die Ist-Bubble IST bereits --dark).
+      **Runde 2 (dunkel): Sinan wählt C „Kobalt-Marker" → EINGEBAUT (22.08.2026):**
+      in main.css übernommen – .faq-accent jetzt Marker (Text --on-dark auf
+      --cobalt-Fläche, padding 0.08em/0.32em, radius 6px, box-decoration-break: clone
+      für mehrzeilige Satz-Akzente; Begründung im CSS-Kommentar: volles Kobalt als
+      Textfarbe läge auf --dark bei ~2,8:1) + engere Typo fest (Frage clamp 18→22 px,
+      Antwort clamp 17→20 px, line-height 1.6); Bubble selbst unverändert --dark +
+      Punktraster. Auf der Startseite im Browser verifiziert (Marker „Expertise" +
+      Satz-Marker, Kopf/Composer kleben; mobil identische Regeln, im Lab-Telefonrahmen
+      geprüft). Nicht gewählt: A Statement-Schwarz + helles Kobalt (color-mix 65/35,
+      ~5,6:1) · B „Leistungs-Karte" (--dark-soft + Kontur + Raster) · D „Ruhige
+      Fläche" (--dark-soft + Kontur ohne Raster). Offen aus C: Satzpunkt direkt nach
+      dem Marker wirkt leicht abgesetzt (Fix-Optionen: Punkt in den Akzent ziehen oder
+      padding rechts reduzieren – bei der Akzent-Runde mitentscheiden).
+      **Runde 3 (Chat-Breite Desktop) – ENTSCHIEDEN 22.08.2026: bleibt volle Breite
+      („wir lassen es so wie es ist"), Lab samt CSS-/Font-Kopien gelöscht, das
+      FAQ-Design-Thema ist damit zu (offen nur noch Copy/Akzente, s. Feinschliff):** Sinans
+      Befund „alles weit auseinander" + Sorge um die Flucht Avatar/H2/Bubbles →
+      Konzept „Chat-Spur" = gemeinsame max-width für Kopf-Inhalt, Chips, Bubbles und
+      Composer-Inhalt, LINKS an der Textkante verankert (nichts zentrieren → Flucht
+      H2/Avatar/Antworten bleibt komplett erhalten; nur die Fragen und der Send-Kreis
+      rücken ein; Bänder/Haarlinien weiter full-bleed; mobil wirkungslos, da
+      max-width > Mobilbreite): Taste 0 wie eingebaut (volle Breite) · A nur Verlauf
+      auf Spur 960 (Composer-Pfeil bleibt rechts außen) · B ganze Spur links 960
+      (Empfehlung) · C ganze Spur zentriert 960 (zeigt den Flucht-Bruch: Avatar löst
+      sich sichtbar von der H2-Kante) · D ganze Spur links 860 (engere Probe; die
+      Antwort-Bubble wird dabei schmaler, 76 % von 860 liegt unter dem 720-px-Cap);
+      alle 4 im Browser verifiziert
 - [ ] Entschieden: kein interaktiver Preiskalkulator und kein E-Mail-Gate (Hormozi „eine Hürde“;
       Konfigurator = Baukasten-Signal, bei Custom-Arbeit keine ehrlichen Zahlen möglich)
 - [ ] Offene Entscheidung Sinan: „ab“-Preis öffentlich auf die Seite? (Listenpreis laut Akquise-Plan
@@ -362,12 +637,112 @@
       Trennlinien der Hover-Kontur (eigene ::after-Linie, ::after der Zeile darüber via
       `:has(+ .project-row:hover)`, Listen-Kopflinie via `:has(> :first-child:hover)`),
       jeweils weich über border-color-Transition; beide Zeilen im Browser per Zoom geprüft
+- [x] Zeilen-Formel für künftige Projekt-Einträge festgeschrieben (22.08.2026, als Kommentar
+      über `projekte.eintraege` in content.ts): Kicker = Jahr · Gattung · Rolle (festes
+      Gattungs-Vokabular: One-Pager/Website/Web-Anwendung/Online-Shop, Rolle im Muster „A & B")
+      · Titel = stärkster nennbarer Identifikator (Kundenname; nur bei Vertraulichkeit die
+      Sache) · Sub = Antwort auf „… und das ist?", darf Titel-Jargon übersetzen, wiederholt
+      nie den Kicker; „One-Pager" im Bucan-Kicker bestätigt
+- [x] ERP-Sub „Modulare B2B-Anwendung" → „Modulare B2B-Software" (22.08.2026): „Anwendung"
+      doppelte den Kicker „Web-Anwendung"; Alternative „Betriebssoftware" verworfen –
+      Korrektur Sinan: das Produkt soll lizenziert und verkauft werden
+- [x] Projekt-Zeilen auf Touch ohne Hover-Effekte (22.08.2026, Wunsch Sinan „einfach nur
+      klickbar"): alle :hover-Regeln (Paper-2-Flut, Kontur, Titel-Dehnung 115 %, Pfeil-Schub,
+      weichende Trennlinien) in `@media (hover: hover) and (pointer: fine)` gewandert;
+      Geräte-Emulations-Check im Browser steht noch aus
+
+## Entschieden (22.08.2026, nach Außen-Feedback „2/10")
+
+- [x] Preloader/Unterschrift-Intro bei jedem Laden BLEIBT (Entscheidung Sinan): bewusste
+      Abgrenzung – der One-Pager zeigt, worauf webdiv achtet und was designtechnisch geht;
+      wen das Intro nicht interessiert, der scrollt einfach direkt weiter (die echte
+      Unterschrift als SVG bleibt als Asset-Todo unten offen)
+- [x] Reveal-Einblendungen beim schnellen Scrollen BLEIBEN wie sie sind (Entscheidung
+      Sinan): Inhalt kommt gefühlt sofort, wenn man irgendwo hinscrollt – kein
+      Nachjustieren nötig
+- Rest des Feedbacks: dunkles Kapitel abgenommen (siehe Leistungen-Abschnitt); die noch
+  sichtbaren Baustellen ([E-Mail-Adresse] im Footer, Impressum/Datenschutz-Unterseiten,
+  Bucan-Case-Study-Screenshot) sind als offene Todos erfasst und werden vor dem
+  Livegang erledigt
+
+## Fertig (Impressum & Datenschutz, 22.08.2026)
+
+- [x] Unterseiten `/impressum/` + `/datenschutz/` im aktuellen Design (rein typografisch,
+      Muster 404/Case-Study): gemeinsames Geruest `LegalPageShell` (core/components/shell –
+      SubpageNav, Eyebrow „Rechtliches", H1, Fliesstext max 68ch, mono-Fusszeile mit
+      Querlinks), Texte in `src/core/consts/legal.ts` (gemeinsame `anbieter`-Konstante:
+      Anschrift/E-Mail EINMAL ersetzen, wirkt auf beide Seiten; Platzhalter rendern als
+      Text, echte E-Mail wird automatisch mailto-Link), Styles als „Rechtsseiten"-Block
+      in main.css (Titel fluid 30px@390–72px@1440, damit „Datenschutzerklärung" auf 390
+      einzeilig bleibt – im 390er-iframe gefixt und verifiziert)
+- [x] **Rechtslage gegen Primärquellen geprüft (22.08.2026):** § 5 DDG (gesetze-im-internet)
+      → Pflicht: Name, Anschrift, E-Mail; USt-IdNr./W-IdNr. NUR „soweit vorhanden" (Nr. 6);
+      kein Register, kein Kammerberuf → Angaben entfallen · EU-OS-Plattform zum 20.07.2025
+      eingestellt (VO (EU) 2024/3228) → OS-Link WEGLASSEN ist Pflicht (toter Verweis wäre
+      irreführend/abmahnbar, § 5 UWG) · § 36 Abs. 3 VSBG: ≤ 10 Beschäftigte → keine
+      Streitbeilegungs-Info nötig, Satz bewusst weggelassen (wie Bucan) · § 2 Abs. 1 Nr. 11
+      DL-InfoV: Berufshaftpflicht nur angeben, falls eine besteht → Frage an Sinan ·
+      MStV-Verantwortlichen-Zeile nach Bucan-Blaupause · Kleinunternehmer-Satz (§ 19 UStG)
+      bewusst NICHT im Impressum (Rechnungs-Thema, keine Impressumspflicht, Website nennt
+      keine Preise)
+- [x] Datenschutzerklärung deckt exakt die technische Realität (Bucan-Prinzip): Hosting/
+      Server-Logfiles (Hoster = [Platzhalter] bis zur Hosting-Entscheidung, AVV-Satz),
+      Kontaktformular/E-Mail (Art. 6 Abs. 1 lit. b, ohne Einwilligungs-Checkbox),
+      keine Cookies/kein Tracking (per Grep verifiziert: kein localStorage/sessionStorage/
+      Cookie im src), Fonts lokal, Betroffenenrechte, Stand-Datum; Ich-Form wie die
+      restliche Site, Copy-Regeln eingehalten (keine Gedankenstriche/Satz-Doppelpunkte)
+- [x] Kontaktformular: Datenschutz-Hinweiszeile unterm Absenden-Knopf ergänzt
+      (`kontakt.formular.hinweis` in content.ts, `.form-hint` in main.css, Link auf
+      `/datenschutz/`) – Checkliste Abschnitt 7, Bucan-Blaupause; im SSR-HTML verifiziert
+- [x] `footer.rechtliches`-Hrefs auf Trailing-Slash-Form (`/impressum/`, `/datenschutz/`)
+      wie der statische Export (erspart den Hoster-301); Sitemap um beide URLs ergänzt;
+      Meta: Title/Description/Canonical je Seite (Descriptions sind **[Vorschlag]**)
+- [x] Verifiziert: tsc sauber; Desktop im Browser (beide Seiten, Reveals, Fusszeilen-
+      Klick Datenschutz→Impressum als Client-Navigation); Mobile 390 via iframe-Testseite
+      mit Transition-Kill (danach gelöscht)
+- [ ] **Fragen an Sinan (Platzhalter füllen, alle in `legal.ts`/`content.ts`):**
+      (1) ladungsfähige Anschrift (Straße + Hausnummer, PLZ + Ort) ·
+      (2) Impressums-/Kontakt-E-Mail (gmail oder erst mit Hosting eine @webdiv.de?) ·
+      (3) Telefonnummer ins Impressum? (keine Pflicht – E-Mail + Formular genügen als
+      zwei schnelle Kontaktwege, EuGH C-298/07) ·
+      (4) USt-IdNr. oder schon zugeteilte W-IdNr. vorhanden? (nur dann Pflichtangabe) ·
+      (5) Berufshaftpflichtversicherung vorhanden? (nur dann anzugeben: Versicherer +
+      Anschrift + Geltungsbereich) ·
+      (6) Hosting: bleibt es bei Strato nach Bucan-Blaupause? (dann Abschnitt 2 der
+      Datenschutzerklärung konkretisieren: „STRATO GmbH, Otto-Ostrowski-Straße 7,
+      10249 Berlin" + AVV abschließen/archivieren) ·
+      (7) Falls Formular-Backend NICHT beim Hoster landet (z. B. Supabase Edge Function):
+      Bescheid geben – dann braucht die Erklärung einen Abschnitt zum Drittanbieter
+- [x] **Antworten Sinan zu (6)+(7) (22.08.2026): „wie bei Bucan"** – Hosting Strato,
+      Formular als PHP-Handler auf dem eigenen Webspace (kein Drittanbieter):
+      Abschnitt 2 der Datenschutzerklärung konkretisiert („bei der STRATO GmbH
+      (Otto-Ostrowski-Straße 7, 10249 Berlin)"; Anschrift am 22.08.2026 gegen
+      strato.de/impressum verifiziert), der bedingte Drittanbieter-Abschnitt entfällt
+      planmäßig. Folge-Todos Sinan bei der Strato-Einrichtung: Paket für webdiv.de,
+      AVV-PDF aus dem Kundenlogin archivieren (ab Vertragsdatum 18.07.2022 automatisch
+      einbezogen, Bucan-Referenz Abschnitt 6), Postfach anlegen – das beantwortet
+      zugleich Frage (2): mit Strato gibt es eine echte @webdiv.de-Adresse, die wie
+      bei Bucan zugleich SMTP-Login des Formulars wird (nur Lokalteil wählen, z. B.
+      info@/hallo@/kontakt@). **Formular-Backend nach Bucan-Muster ist damit als
+      nächstes Arbeitspaket startklar** (kontakt.php mit Validierung/Honeypot/
+      Ausfülldauer-Check/JSON, PHPMailer vendored, kontakt-config.php gitignored +
+      example-Vorlage, .htaccess-Sperre, CI-Secret-Mechanik; smtp.strato.de:465);
+      Fragen (1)–(5) bleiben offen
+- [x] **Antwort Sinan zu (2) (22.08.2026): hallo@webdiv.de** („sympathisch"; Empfehlung
+      sinan@ besprochen, hallo@ gewählt – sinan@/info@ können später Aliase werden):
+      eingetragen in `anbieter.email` (legal.ts → Impressum + Datenschutz, rendert
+      automatisch als mailto-Link), Footer-Adresszeile, Mail-Icon-mailto und
+      Formular-Fehlertext (content.ts) sowie als `email` am LocalBusiness-JSON-LD
+      (page.tsx); tsc sauber, per Grep verifiziert: kein [E-Mail-Adresse]-Platzhalter
+      mehr in src/. Postfach hallo@webdiv.de bei der Strato-Einrichtung anlegen
+      (zugleich SMTP-Login des Formulars); offen bleiben (1) Anschrift, (3) Telefon,
+      (4) USt-IdNr., (5) Berufshaftpflicht
 
 ## Offen aus dem Bucan-Abgleich (für Deploy-Phase)
 
 - [ ] SkipLink im Layout (a11y; Bucan hat einen) – 17.08.2026: bewusst weggelassen (Entscheidung Sinan)
 - [ ] `.htaccess` (Caching für `_next/static`, Schutz der Formular-Config, `ErrorDocument 404 /404.html`) + GitHub-Actions-Deploy (`deploy.yml`) – erst wenn Hosting steht
-- [ ] JSON-LD um E-Mail/Telefon ergänzen, sobald die [Platzhalter] ersetzt sind; Impressum/Datenschutz in die Sitemap aufnehmen, sobald die Seiten existieren
+- [ ] JSON-LD um E-Mail/Telefon ergänzen, sobald die [Platzhalter] ersetzt sind (Sitemap-Teil erledigt 22.08.2026: `/impressum/` + `/datenschutz/` sind in `public/sitemap.xml`)
 
 ## Offene Entscheidungen (Feedback nötig)
 
@@ -381,18 +756,19 @@
 
 ## Meine Todos (Assets liefern)
 
-- [ ] Porträtfoto (frontal, schwarzer Hintergrund) als `public/portrait.jpg` ablegen → Porträt-Block und Über-mich übernehmen es automatisch
+- [x] Porträtfoto liegt vor (festgestellt 22.08.2026): `public/portrait.jpg` ist da, Porträt-Block und Über-mich zeigen es
 - [ ] Echte Unterschrift als SVG-Einstrich-Pfad (ersetzt Mr-Dafoe-Platzhalter in `src/core/consts/signature.ts`)
-- [ ] E-Mail-Adresse, Impressumsdaten (stehen als sichtbare `[Platzhalter]` in `src/core/consts/content.ts`); Domain webdiv.de ist seit 17.08.2026 hinterlegt
+- [ ] E-Mail-Adresse, Impressumsdaten (stehen als sichtbare `[Platzhalter]` in `src/core/consts/content.ts` und – Anschrift/E-Mail zentral – in der `anbieter`-Konstante in `src/core/consts/legal.ts`); Domain webdiv.de ist seit 17.08.2026 hinterlegt
 - [x] Instagram-/LinkedIn-Profil-URLs für die Footer-Icons (19.08.2026): beide als direkte externe Links in `footer.soziale` (`content.ts`) – https://www.instagram.com/webdiv.de und https://www.linkedin.com/in/sinan-yilmaz-webdiv/ (Slug auf Empfehlung geändert); externe Footer-Links bekommen `target="_blank" rel="noopener"` (`ContactSection.tsx`); JSON-LD (`src/app/page.tsx`): Instagram als `sameAs` am LocalBusiness, LinkedIn als `sameAs` am `founder`-Person-Objekt. Social-Strategie-TODOs: `.webdiv/akquise-plan.md` Abschnitt 11
-- [ ] Bucan-Screenshot (Projekt-Vorschaubild; der Slot in den Leistungen ist seit dem Farbboxen-Redesign 18.08.2026 entfallen); Case Study: Startseiten-Screenshot als `public/projekte/bucan/screen-home.webp` ablegen → Browserrahmen übernimmt ihn automatisch
+- [x] Bucan-Projekt-Vorschaubild liegt vor (festgestellt 22.08.2026): `public/projekte/bucan/thumb.webp` ist da, der Hover der Projekt-Zeile zeigt es (der Slot in den Leistungen ist seit dem Farbboxen-Redesign 18.08.2026 entfallen)
+- [ ] Bucan-Case-Study: Startseiten-Screenshot als `public/projekte/bucan/screen-home.webp` ablegen → Browserrahmen auf `/projekte/bucan-eventservice` übernimmt ihn automatisch (bis dahin zeigt NUR diese Stelle „Screenshot folgt")
 
 ## Runde 2 (nächste Session)
 
-- [ ] USP „performant + custom + zugeschnitten" belegt hervorheben: Satz-Ergänzung in Leistungen/Firmen-Websites (Text-[Vorschlag] liegt vor, absegnen) + Fakten-Leiste mit Messwerten im Technik-Kapitel der Case Study (PageSpeed/Ladezeit/Cookies der Bucan-Seite – erst messen, nichts behaupten)
+- [ ] USP „performant + custom + zugeschnitten" belegt hervorheben: Satz-Ergänzung in Leistungen/Firmen-Websites ERLEDIGT 21.08.2026 („lädt schnell" im neuen Karte-01-Text); offen bleibt die Fakten-Leiste mit Messwerten im Technik-Kapitel der Case Study (PageSpeed/Ladezeit/Cookies der Bucan-Seite – erst messen, nichts behaupten)
 
 - [x] Mobile-Ableitung bis 390 px (16.08.2026 – siehe „Fertig (Mobile/Tablet-Ableitung)“; Touch: nur Welle statt Lupe war schon im Port enthalten)
 - [x] Unterseite `/projekte/bucan-eventservice` (16.08.2026 – siehe „Fertig (Case Study Bucan)“)
-- [ ] Unterseiten `/impressum`, `/datenschutz` (rein typografisch)
+- [x] Unterseiten `/impressum`, `/datenschutz` (22.08.2026 – siehe „Fertig (Impressum & Datenschutz)“; Anschrift/E-Mail/Hoster noch [Platzhalter], Fragen an Sinan offen)
 - [ ] Motion-Feinschliff mit GSAP/ScrollTrigger (Lenis ist seit 16.08.2026 drin; Design-Intent steht in `.website/HANDOFF.md`)
 - [ ] Formular an echtes Backend anbinden (z. B. Supabase Edge Function)

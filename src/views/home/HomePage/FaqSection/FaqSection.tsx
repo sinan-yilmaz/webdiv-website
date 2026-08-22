@@ -1,9 +1,11 @@
 'use client';
 
-import { Fragment, useEffect, useRef } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import type { CSSProperties, MouseEvent, RefObject } from 'react';
 import { faq } from 'core/consts/content';
+import { useFrame } from 'lib/motion/hooks/useFrame';
 import { useInViewOnce } from 'lib/motion/hooks/useInViewOnce';
+import { useRemeasure } from 'lib/motion/hooks/useRemeasure';
 import { useRevealChildren } from 'lib/motion/hooks/useRevealChildren';
 import { scrollToAnchor } from 'lib/motion/services/smoothScroll';
 
@@ -33,12 +35,39 @@ function renderAntwortAbsatz(absatz: string, akzent: string) {
    des Besuchers: die eigene Frage rechts ohne Tail, Sinans dunkle Antwort
    kommt links als Gegenueber-Bubble mit Tail (ohne Absender-Label).
    Kopf und Composer kleben beim Scrollen oben/unten (Chat-App-Effekt),
-   im Composer tippen sich Beispiel-Fragen ein (Tipp-Geist). */
+   im Composer tippen sich Beispiel-Fragen ein (Tipp-Geist). Der Composer
+   erscheint erst, wenn der Kopf oben andockt (die Sektion fuellt dann den
+   Viewport) – vorher wuerde sticky ihn schon beim Sektionseintritt ueber
+   der Ueberschrift zeigen. Der Kopf verabschiedet sich nach oben, sobald
+   der Composer am Chat-Ende in seine Flussposition einparkt – sonst
+   klebte er bis zum Seitenende ueber dem Kobalt-Footer. */
 function FaqSection({ headAnchorRef }: FaqSectionProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const ghostRef = useRef<HTMLSpanElement | null>(null);
+  const endAnchorRef = useRef<HTMLDivElement | null>(null);
+  const dockYRef = useRef(Number.POSITIVE_INFINITY);
+  const endYRef = useRef(Number.POSITIVE_INFINITY);
+  const [composerIn, setComposerIn] = useState(false);
+  const [headOut, setHeadOut] = useState(false);
   const inView = useInViewOnce(sectionRef, 0.1);
   useRevealChildren(sectionRef);
+
+  /* Beide Schwellen an 0-Hoehen-Fluss-Ankern gemessen (wie die Nav-Zone –
+     die Baender selbst sind sticky und messen sich beim Kleben falsch):
+     der Kopf dockt an, sobald sein Anker die Viewport-Oberkante erreicht;
+     er verabschiedet sich, sobald die Fluss-Unterkante des Composer-Bands
+     (End-Anker) die Viewport-Unterkante erreicht – der Moment, in dem der
+     Composer einparkt und das Chat-Fenster seine untere Klammer verliert */
+  useRemeasure(() => {
+    const anchor = headAnchorRef.current;
+    if (anchor) dockYRef.current = anchor.getBoundingClientRect().top + window.scrollY;
+    const endAnchor = endAnchorRef.current;
+    if (endAnchor) endYRef.current = endAnchor.getBoundingClientRect().top + window.scrollY;
+  });
+  useFrame(({ scrollY, vh }) => {
+    setComposerIn(scrollY >= dockYRef.current);
+    setHeadOut(scrollY + vh >= endYRef.current);
+  });
 
   /* Tipp-Geist: startet erst, wenn die Sektion im Bild ist; tippt die
      Beispiel-Fragen zeichenweise, loescht schneller wieder und wechselt
@@ -92,7 +121,10 @@ function FaqSection({ headAnchorRef }: FaqSectionProps) {
         </h2>
       </div>
       <div ref={headAnchorRef} aria-hidden="true" />
-      <div className="faq-band-head" data-reveal>
+      {/* 'in' rendert React hier selbst (aus inView): der Reveal-Hook setzt
+          Klassen am DOM, und Reacts className-Writes beim out-Toggle wuerden
+          sie verwerfen – der Kopf bliebe nach dem ersten Abgang unsichtbar */}
+      <div className={`faq-band-head${inView ? ' in' : ''}${headOut ? ' out' : ''}`} data-reveal>
         <div className="container">
           <header className="faq-head">
             <span className="faq-avatar wordmark" aria-hidden="true">
@@ -130,7 +162,7 @@ function FaqSection({ headAnchorRef }: FaqSectionProps) {
           </div>
         </div>
       </div>
-      <div className="faq-band-composer" data-reveal>
+      <div className={`faq-band-composer${composerIn ? ' in' : ''}`}>
         <div className="container">
           <a
             className="faq-composer"
@@ -146,6 +178,9 @@ function FaqSection({ headAnchorRef }: FaqSectionProps) {
           </a>
         </div>
       </div>
+      {/* End-Anker: Fluss-Unterkante des Composer-Bands (sticky verschiebt
+          nachfolgende Flusspositionen nicht) */}
+      <div ref={endAnchorRef} aria-hidden="true" />
     </section>
   );
 }

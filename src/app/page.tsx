@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 };
 
 /* JSON-LD nach Bucan-Blaupause (WebSite + LocalBusiness); nur belegte Fakten –
-   E-Mail/Telefon folgen, sobald die [Platzhalter] im Briefing ersetzt sind.
+   E-Mail ergaenzt 22.08.2026, Telefon folgt nur, falls es ins Impressum kommt.
    Bewusst der generische LocalBusiness-Typ: ProfessionalService ist auf
    schema.org deprecated, und einen spezifischeren Subtyp fuer ein
    Web-Studio gibt es nicht (geprueft 17.08.2026). */
@@ -41,6 +41,7 @@ const jsonLd = [
     description: site.description,
     url: `${site.url}/`,
     image: `${site.url}${site.ogImage}`,
+    email: 'hallo@webdiv.de',
     sameAs: ['https://www.instagram.com/webdiv.de'],
     founder: {
       '@type': 'Person',

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { FormEvent } from 'react';
+import Link from 'next/link';
 import { kontakt } from 'core/consts/content';
 
 type FieldName = 'name' | 'email' | 'message';
@@ -78,6 +79,11 @@ function FormArea() {
             →
           </span>
         </button>
+        <p className="form-hint">
+          {kontakt.formular.hinweis.vor}
+          <Link href={kontakt.formular.hinweis.href}>{kontakt.formular.hinweis.linkLabel}</Link>
+          {kontakt.formular.hinweis.nach}
+        </p>
         <p className="form-message ok" role="status">
           {kontakt.formular.erfolg}
         </p>

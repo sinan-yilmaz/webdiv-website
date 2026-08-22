@@ -69,17 +69,17 @@ export const leistungen = {
   eintraege: [
     {
       titel: 'Firmen-Websites',
-      text: 'Kein Baukasten, kein gekauftes Theme. Ihre Website wird für Ihre Firma entworfen und gebaut, damit sie aussieht wie Ihr Betrieb und nicht wie eine Vorlage.',
+      text: 'Kein Baukasten, kein gekauftes Theme. Ich entwerfe und baue Ihre Website eigens für Ihre Firma. Sie sieht aus wie Ihr Betrieb, lädt schnell und macht aus Besuchern Anfragen.',
       tags: ['Design & Entwicklung', 'SEO', 'Hosting & Pflege'],
     },
     {
       titel: 'Web-Anwendungen',
-      text: 'Individuelle Software im Browser für einen konkreten Ablauf in Ihrem Betrieb: Kundenportal, interne Verwaltung, Buchung, Auftragsabwicklung. Nichts zu installieren.',
+      text: 'Manche Abläufe passen in kein fertiges Programm. Ich baue Ihnen dafür eine eigene Anwendung, die genau Ihrem Ablauf folgt. Ein Kundenportal, ein Buchungssystem, eine interne Verwaltung. Alles im Browser, ohne Installation, für Ihr ganzes Team.',
       tags: ['Kundenportale', 'Verwaltung', 'Buchung & Abwicklung'],
     },
     {
       titel: 'Schnittstellen & Datenbanken',
-      text: 'Das Fundament dahinter: Datenbank, Login und Rechte, Datenimporte, Anbindung an Systeme, die Sie schon nutzen. Ich baue das Backend auf Supabase oder binde Ihre bestehende Schnittstelle an.',
+      text: 'Hinter jeder Website und jeder Anwendung liegt ein Fundament. Datenbank, Login und Rechte, Anbindung an die Systeme, mit denen Sie schon arbeiten. Ich baue es solide auf oder binde Ihre bestehende Schnittstelle an.',
       tags: ['Backend', 'Nutzer & Rechte', 'Datenübernahme'],
     },
   ],
@@ -90,6 +90,15 @@ export const projekte = {
   titel: 'Zuletzt gebaut',
   cursorPill: 'Projekt ansehen',
   thumbPlatzhalter: 'Screenshot folgt',
+  /* Zeilen-Formel (22.08.2026, mit Sinan abgestimmt):
+     Kicker = jahr + meta, gerendert als "Jahr · Gattung · Rolle" (Gattung
+     aus festem Vokabular: One-Pager, Website, Web-Anwendung, Online-Shop, ...;
+     Rolle im Muster "A & B"). titel = staerkster nennbarer Identifikator –
+     im Normalfall der Kundenname, nur bei Vertraulichkeit die Sache.
+     sub = Antwort auf "... und das ist?" – beim Kundennamen Branche/Leistung
+     + Ort, bei der Sache eine verstaendliche Einordnung + Auftragskontext;
+     der sub darf Jargon des Titels uebersetzen, wiederholt aber nie etwas
+     aus dem Kicker. */
   eintraege: [
     {
       jahr: '2026',
@@ -102,7 +111,7 @@ export const projekte = {
     {
       jahr: '2025–26',
       titel: 'ERP für die Bauwirtschaft',
-      sub: 'Modulare B2B-Anwendung, im Kundenauftrag',
+      sub: 'Modulare B2B-Software, im Kundenauftrag',
       meta: 'Web-Anwendung · Frontend & Beratung',
       href: '/projekte/erp-bauwirtschaft',
       thumbSrc: '/projekte/erp-bauwirtschaft/thumb.webp',
@@ -112,27 +121,35 @@ export const projekte = {
 
 export const ablauf = {
   eyebrow: 'Ablauf',
-  titel: 'Vier Schritte, ein Ansprechpartner.',
+  /* Neue Fassung aus Lab-Runde 4, Variante E "kooperativ" (22.08.2026,
+     abgesegnet von Sinan 22.08.2026 – siehe .webdiv/tasklist.md "Ablauf-Sektion & CTA"):
+     Stationswort + Zusagenzeile (zusage) + Text, Iteration wohnt in
+     Schritt 03; D-Alternativen fuer Titel/03 stehen in der Tasklist */
+  titel: 'Wir entwickeln das zusammen.',
   schritte: [
     {
       nummer: '01',
       titel: 'Erstgespräch',
-      text: 'Kostenlos und unverbindlich. Wir klären, was Sie brauchen – und ob ich der Richtige dafür bin.',
+      zusage: 'kostenlos und unverbindlich',
+      text: 'Wir klären, was Sie brauchen. Und ob ich der Richtige dafür bin.',
     },
     {
       nummer: '02',
-      titel: 'Konzept & Festpreis',
-      text: 'Sie bekommen ein schriftliches Konzept mit Umfang und Zeitplan – und einen Festpreis, der gilt.',
+      titel: 'Angebot',
+      zusage: 'Festpreis, schriftlich',
+      text: 'Aus dem Gespräch wird ein Konzept mit klarem Umfang. Was dort steht, gilt.',
     },
     {
       nummer: '03',
-      titel: 'Design & Umsetzung',
-      text: 'Design und Code entstehen bei mir am selben Tisch. Zwischenstände sehen Sie im Browser, nicht auf Folien.',
+      titel: 'Umsetzung',
+      zusage: 'Zwischenstände im Browser',
+      text: 'Jeder neue Stand geht exklusiv an Sie und bleibt jederzeit erreichbar. Ihr Feedback fließt laufend ein.',
     },
     {
       nummer: '04',
-      titel: 'Livegang & Betreuung',
-      text: 'Ich bringe Ihre Seite oder Anwendung live und bleibe dran: Änderungen, Erweiterungen, Pflege.',
+      titel: 'Livegang',
+      zusage: 'Betreuung auf Wunsch',
+      text: 'Ich bringe Ihre Seite oder Anwendung live. Auf Wunsch bleibe ich Ihr Partner für Pflege und Weiterentwicklung.',
     },
   ],
   hinweis: 'Festpreis nach Erstgespräch – das Erstgespräch ist kostenlos.',
@@ -142,13 +159,14 @@ export const ueberMich = {
   eyebrow: 'Über mich',
   titel: 'Über mich',
   bildAlt: 'Sinan Yilmaz, engerer Bildausschnitt',
-  text: 'Ich bin Sinan Yilmaz, Webentwickler aus Günzburg. Seit über zehn Jahren baue ich Oberflächen und Anwendungen für den Browser – heute vor allem mit React, Next.js und Supabase. webdiv ist bewusst klein: Von der ersten Skizze bis zum Livegang sprechen Sie mit dem, der Ihre Seite auch baut.',
+  text: 'Ich bin Sinan Yilmaz, Webentwickler aus Günzburg. Seit über zehn Jahren entwickle ich fürs Web, vom One-Pager bis zur ausgewachsenen Web-Anwendung. Die beste Lösung ist oft die einfachste. Weniger, dafür zu Ende gedacht. Von mir kommt nichts, was ich nicht unterschreiben würde.',
   signaturLabel: 'Unterschrift Sinan Yilmaz',
 } as const;
 
 /* FAQ-Kurzsektion als Chat-Fenster (Beschluss 21.08.2026): Startseiten-
-   Fassungen der Fragen aus .webdiv/faq.md; Antworten 2+3 sowie Status- und
-   Composer-Zeile sind [Vorschlag] (siehe .webdiv/tasklist.md) */
+   Fassungen der Fragen aus .webdiv/faq.md; Frage 02 neu gedreht + abgesegnet
+   22.08.2026 (Abgrenzung statt Selbstbau-Rechtfertigung). Antwort 3, Status-
+   und Composer-Zeile sowie die Akzente 01+03 sind [Vorschlag] (siehe .webdiv/tasklist.md) */
 export const faq = {
   eyebrow: 'FAQ',
   titel: 'Bevor wir sprechen.',
@@ -158,9 +176,10 @@ export const faq = {
     /* bewusst kein Erreichbarkeits-Status („online" suggeriert Live-Chat) */
     status: 'Websites & Web-Anwendungen',
   },
-  /* akzent: genau eine Stelle pro Antwort faerbt sich Kobalt – jeweils der
-     eine Merksatz der Antwort (Anti-Verkaufs-/Kernaussage), muss woertlich
-     im Antwort-Text vorkommen. Texte value-first gekuerzt 21.08.2026,
+  /* akzent: genau eine Stelle pro Antwort faerbt sich Kobalt – Merksatz
+     (Anti-Verkaufs-/Kernaussage) oder ein einzelnes Wort (02 „Expertise",
+     Entscheidung Sinan 22.08.2026), muss woertlich im Antwort-Text
+     vorkommen. Texte value-first gekuerzt 21.08.2026, Akzente 01+03
      [Vorschlag] (siehe .webdiv/faq.md „Value-first-Umbau") */
   paare: [
     {
@@ -174,12 +193,12 @@ export const faq = {
     },
     {
       chip: 'Frage 02',
-      frage: 'Kann ich meine Website nicht einfach selbst mit KI bauen?',
+      frage: 'Heute kann doch jeder mit KI bauen. Wie heben wir uns da noch ab?',
       antwort: [
-        'Können Sie. Wenn Ihre Website vor allem Visitenkarte ist – Kontakt, Öffnungszeiten, drei Bilder –, reicht das oft völlig. Ich nutze KI selbst, sie macht mich schneller.',
-        'Was sie nicht ersetzt: das Urteil, was gut ist – und das Fertigmachen bis ins letzte Detail. Das Billige wird gerade billiger. Das Gute wird dadurch sichtbarer.',
+        'So neu ist die Lage nicht. Mit Baukästen konnte auch vorher jeder bauen. Am Werkzeug lag der Unterschied aber nie, sondern an der Expertise dahinter.',
+        'Die KI hebt das nicht auf, sie verschärft es. Wer sie beherrscht, macht gute Arbeit besser. Wer sie nur bedient, macht billige billiger. Der Abstand wird größer, nicht kleiner.',
       ],
-      akzent: 'Das Gute wird dadurch sichtbarer',
+      akzent: 'Expertise',
     },
     {
       chip: 'Frage 03',
@@ -212,8 +231,16 @@ export const kontakt = {
     email: { label: 'E-Mail', fehler: 'Bitte prüfen Sie die E-Mail-Adresse.' },
     nachricht: { label: 'Worum geht es?', fehler: 'Bitte beschreiben Sie kurz Ihr Vorhaben.' },
     absenden: 'Anfrage senden',
+    /* Pflichthinweis unterm Formular (Checkliste Abschnitt 7, Bucan-Blaupause):
+       keine erzwungene Einwilligung, nur der Link auf die Erklaerung */
+    hinweis: {
+      vor: 'Ihre Angaben verwende ich ausschließlich zur Bearbeitung Ihrer Anfrage. Näheres in der ',
+      linkLabel: 'Datenschutzerklärung',
+      href: '/datenschutz/',
+      nach: '.',
+    },
     erfolg: 'Danke – Ihre Nachricht ist angekommen. Ich melde mich.',
-    fehlerServer: 'Das hat nicht geklappt. Schreiben Sie mir direkt an [E-Mail-Adresse].',
+    fehlerServer: 'Das hat nicht geklappt. Schreiben Sie mir direkt an hallo@webdiv.de.',
   },
 } as const;
 
@@ -229,18 +256,20 @@ export const notFound = {
 export const footer = {
   /* Abschluss-Band ueber der Credits-Zeile: Marke + Adresszeile links, Icons rechts.
      E-Mail ist [Platzhalter], bis die Adresse final ist (siehe .webdiv/tasklist.md) */
-  adresse: 'Websites & Anwendungen · Günzburg · [E-Mail-Adresse]',
+  adresse: 'Websites & Anwendungen · Günzburg · hallo@webdiv.de',
   soziale: [
-    { id: 'mail', label: 'E-Mail', href: 'mailto:[E-Mail-Adresse]' },
+    { id: 'mail', label: 'E-Mail', href: 'mailto:hallo@webdiv.de' },
     { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/webdiv.de' },
     { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/sinan-yilmaz-webdiv/' },
   ],
   linksPrefix: 'created by',
   linksName: 'webdiv',
   copyright: '© 2026',
+  /* Trailing Slash wie der statische Export (next.config: trailingSlash) –
+     erspart den 301 des Hosters auf die Slash-Variante */
   rechtliches: [
-    { label: 'Impressum', href: '/impressum' },
-    { label: 'Datenschutz', href: '/datenschutz' },
+    { label: 'Impressum', href: '/impressum/' },
+    { label: 'Datenschutz', href: '/datenschutz/' },
   ],
   rechtsPrefix: 'created with',
   rechtsName: 'Claude Code',

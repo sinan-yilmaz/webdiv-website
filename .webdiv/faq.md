@@ -111,6 +111,7 @@ Frage 1 anders formulieren, die Kobalt-Akzentwörter („Präzision" usw.)
 schlecht gewählt – bessere wählen oder ganz weglassen.
 
 **Stand auf der Website (content.ts, alles [Vorschlag] – absegnen):**
+*(Frage 2 inzwischen ÜBERHOLT – neu gedreht 22.08.2026, eigener Abschnitt unten)*
 
 1. **Frage 1 NEU:** „Ist unsere Website eigentlich noch gut genug?"
    (ersetzt seriös/abheben; die wandert auf die FAQ-Unterseite,
@@ -147,6 +148,50 @@ einen Merksatz je Antwort (fett oben) – jeweils die Anti-Verkaufs-/
 Kernaussage. Komplettes Weglassen bleibt ein Handgriff (akzent-Felder in
 content.ts + Rendering in FaqSection).
 
+## Frage 2 der Startseite neu gedreht (22.08.2026, abgesegnet)
+
+Entscheidung Sinan: Die Selbstbau-Frage („Kann ich meine Website nicht einfach
+selbst mit KI bauen?") war falsch gestellt – fast schon Rechtfertigung, und
+„Ich nutze KI selbst" soll gar kein Thema sein (KI-Nutzung ist 2026 Normalität).
+Neue Richtung: die Abgrenzungsfrage. O-Ton-Kern: eigentlich hat sich nichts
+geändert, vorher gab es auch WordPress/Baukästen, es ist ein Werkzeug
+dazugekommen; Expertise ist wichtiger denn je, weil das Werkzeug dem einen
+größeren Boost gibt, der damit umgehen kann.
+
+**Auf der Website (content.ts, Frage + Antwort abgesegnet):**
+
+„Heute kann doch jeder mit KI bauen. Wie heben wir uns da noch ab?"
+
+> So neu ist die Lage nicht. Mit Baukästen konnte auch vorher jeder bauen.
+> Am Werkzeug lag der Unterschied aber nie, sondern an der **Expertise** dahinter.
+>
+> Die KI hebt das nicht auf, sie verschärft es. Wer sie beherrscht, macht
+> gute Arbeit besser. Wer sie nur bedient, macht billige billiger. Der
+> Abstand wird größer, nicht kleiner.
+
+Formung: Tool-Name WordPress bleibt draußen (Copy-Regel) → „Baukästen";
+Antwort komplett ohne „ich" (null Rechtfertigung) und gattungsneutral
+(„bauen"/„Arbeit" statt „Website" – gilt für Websites UND Anwendungen);
+beherrschen/bedienen-Paar trägt Sinans „ausschlaggebend ist, wer wie mit
+dem Werkzeug umgehen kann"; Abstands-These als hergeleitetes Fachurteil
+(Wahrheits-Check besprochen: Nivellierungs-Befunde gelten für
+Routineaufgaben, für offene Qualitätsarbeit und nach Marktbeobachtung
+gilt die Spreizung – als Ich-Einschätzung im Chat tragfähig).
+Akzent entschieden (Sinan, 22.08.2026): das einzelne Wort „Expertise"
+statt eines Merksatzes – bewusste Abweichung vom Akzent-Prinzip der
+Value-first-Runde, nur dieses eine Wort wird Kobalt (Absatz 1).
+
+Verworfen in dieser Runde (nicht wiederholen): Rat-Fassung „Zeigen Sie,
+was nur von Ihnen kommen kann" (echte Bilder statt gekaufter, eigene
+Sätze – Sinan: zu website-lastig) · „Die Frage ist älter als die KI"
+(Baukästen seit zwanzig Jahren) · „Es hat sich weniger geändert, als es
+wirkt" (Erfahrung/Verstärker-Fassung) · davor die drei Varianten mit
+Visitenkarten-Weiche als Antwort auf die alte Selbstbau-Frage.
+
+Die alte Selbstbau-Frage samt Visitenkarten-Antwort bleibt Kandidat für
+die FAQ-UNTERSEITE (passt zu Abschnitt 5 „Wie halten Sie es mit KI?";
+letzter Startseiten-Stand im Value-first-Abschnitt oben dokumentiert).
+
 ## Weitere Kandidaten (unsortiert)
 
 - **Was kostet eine Website?** – hängt an der offenen „ab"-Preis-Entscheidung
@@ -155,3 +200,22 @@ content.ts + Rendering in FaqSection).
 - **Wir haben schon eine Website – lohnt sich ein Neuanfang?** – Anschluss an
   den späteren Website-Check (Akquise-Plan Abschnitt 1 Variante B); bis dahin:
   ehrliche Einschätzung im Erstgespräch.
+- **Wie arbeiten Sie eigentlich?** [Rohmaterial 22.08.2026, O-Ton Sinan aus der
+  Profiltext-Runde]: Bei der ERP-Anwendung gefragt „wie findest du die Lösung?" →
+  Gedanken gemacht, notiert, mehrere Optionen durchgegangen, mehrere davon wirklich
+  umgesetzt und getestet, die beste ausgewählt; Edge Cases, Spacing, Modal-oder-nicht,
+  UX vs. UI, „wie kommt der Anwender besser zurecht" abgewogen, dann bis ins Detail
+  implementiert. Vorher offene Fragen geklärt: Kunde kam mit einem Datenmodell, das
+  die UI verkompliziert hätte – geprüft und beraten, was es vereinfacht. Kern: nie
+  die erste Idee bauen; Beratung VOR dem Bauen. Auch Rohmaterial für Arbeitsweise-
+  Kapitel künftiger Case Studies; der Über-mich-Schlusssatz („Oft probiere ich
+  mehrere Varianten aus und behalte nur die beste.") stammt hieraus.
+- **Geht so eine Anwendung auch als installierbares Programm?** [Rohidee]
+  (21.08.2026, aus der Leistungen-Textrunde) – Antwort-Kern: Ja, dieselbe
+  Anwendung lässt sich auch als installierbares Programm für den Desktop
+  ausliefern (technisch z. B. Tauri/Electron auf derselben React-Basis –
+  Werkzeugnamen nicht auf die Website); meist ist der Browser aber die
+  bessere Wahl: nichts zu verteilen, keine Updates auf jedem Rechner, läuft
+  auf jedem Gerät. Wann Desktop doch sinnvoll ist (Offline, Geräte-Zugriff),
+  gehört ins Erstgespräch. Entscheidung bewusst: Desktop-Apps NICHT auf die
+  Leistungen-Karte (verwässert „Websites & Web-Anwendungen", keine Referenz).

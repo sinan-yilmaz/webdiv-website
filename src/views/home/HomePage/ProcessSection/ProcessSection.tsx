@@ -55,6 +55,7 @@ function ProcessSection() {
                 {schritt.nummer}
               </span>
               <h3>{schritt.titel}</h3>
+              <p className="process-promise">{schritt.zusage}</p>
               <p>{schritt.text}</p>
             </div>
           ))}

@@ -15,6 +15,7 @@
   --ink-3: #8B8983;          /* Eyebrows, gedaempfte Labels, inaktive Titel */
   --line: rgba(17, 17, 17, 0.14);          /* Haarlinien auf hell */
   --dark: #121212;           /* dunkles Kapitel (Statement) */
+  --dark-soft: #161615;      /* Leistungen: Fortsetzung des dunklen Kapitels, dezent heller */
   --dark-photo: #0B0B0B;     /* Portraet-Sektion */
   --on-dark: #F2EFE9;        /* Text auf dunkel */
   --on-dark-dim: rgba(242, 239, 233, 0.28); /* ungefuellte Woerter im Statement */

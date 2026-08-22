@@ -175,7 +175,7 @@ function ServicesSection() {
   });
 
   return (
-    <section className="services" id="leistungen" data-theme="light" data-rails ref={sectionRef}>
+    <section className="services" id="leistungen" data-theme="dark" data-rails ref={sectionRef}>
       <h2 className="sr-only">{leistungen.titel}</h2>
       <div className="container">
         <p className="eyebrow" data-reveal>
