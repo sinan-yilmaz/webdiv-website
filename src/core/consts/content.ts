@@ -166,8 +166,10 @@ export const ueberMich = {
 /* FAQ-Kurzsektion als Chat-Fenster (Beschluss 21.08.2026): Startseiten-
    Fassungen der Fragen aus .webdiv/faq.md; Frage 02 neu gedreht + abgesegnet
    22.08.2026 (Abgrenzung statt Selbstbau-Rechtfertigung), Antworten 01+03
-   samt Akzenten neu gefasst + abgesegnet 22.08.2026 (Scan-Prinzip). Status-
-   und Composer-Zeile sind [Vorschlag] (siehe .webdiv/tasklist.md) */
+   samt Akzenten neu gefasst + abgesegnet 22.08.2026 (Scan-Prinzip). Danach
+   [Vorschlag] (22.08.2026): Antwort 01 als getippte Liste, Pruefung 2 als
+   10-Sekunden-Test, Akzent-Reihe neu Erstgespraech/Expertise/Loesung. Auch
+   Status- und Composer-Zeile sind [Vorschlag] (siehe .webdiv/tasklist.md) */
 export const faq = {
   eyebrow: 'FAQ',
   titel: 'Bevor wir sprechen.',
@@ -186,11 +188,32 @@ export const faq = {
     {
       chip: 'Frage 01',
       frage: 'Ist unsere Website eigentlich noch gut genug?',
+      /* Antwort-Eintraege sind Absaetze; ein { liste }-Eintrag rendert als
+         getippte Aufzaehlung in der Bubble (Idee Sinan 22.08.2026).
+         Pruefungs-Trio ABGESEGNET 22.08.2026 (Cafe-Limon-Runde): Technik /
+         Verstaendlichkeit / Markenwirkung – messbar, halb messbar, Urteil;
+         genau eine Gefuehlsfrage als Schlusspunkt. Der Mitbewerber-Vergleich
+         flog raus (misst als einziger relativ und kann in beide Richtungen
+         taeuschen; der Wettbewerbsgedanke wohnt schon in Frage 02), die
+         Markenwirkungs-Pruefung faengt den Fall „cooler Laden, Seite
+         verkauft ihn unter Wert"; alle drei sauber mit Ja beantwortbar
+         („Dreimal Ja?") */
       antwort: [
-        'Drei Prüfungen genügen, keine Minute Aufwand. Lädt Ihre Seite auf dem Handy sofort? Findet ein Fremder in zehn Sekunden Ihre Telefonnummer und Ihre wichtigste Leistung? Und wirkt sie neben Ihren zwei besten Mitbewerbern eine Klasse darüber – oder darunter?',
-        'Dreimal Ja? Dann behalten Sie Ihre Seite. Bei zwei Nein lohnt sich ein Gespräch.',
+        'Drei Prüfungen genügen, keine Minute Aufwand.',
+        {
+          liste: [
+            'Lädt Ihre Seite auf dem Handy sofort?',
+            'Versteht ein Besucher in zehn Sekunden, was Sie anbieten und wie er Sie erreicht?',
+            'Macht sie den Eindruck, den Ihr Betrieb verdient?',
+          ],
+        },
+        /* Schwelle bewusst „gezoegert" statt „bei zwei Nein" (Sinan 22.08.2026):
+           die ersten zwei Ja sind billig, das Urteil faellt bei Frage 3 –
+           Ja/Ja/Nein (der Cafe-Limon-Fall) darf keine Entwarnung lesen; Zoegern
+           geben sich auch stolze Inhaber zu, ein hartes Nein nicht */
+        'Dreimal Ja? Dann behalten Sie Ihre Seite. Haben Sie irgendwo gezögert, lohnt sich ein Erstgespräch.',
       ],
-      akzent: 'Drei Prüfungen',
+      akzent: 'Erstgespräch',
     },
     {
       chip: 'Frage 02',
@@ -205,19 +228,26 @@ export const faq = {
       chip: 'Frage 03',
       frage: 'Wir wissen noch nicht genau, was wir brauchen. Ist das zu früh?',
       antwort: [
-        'Nein – genau dafür ist das Erstgespräch da. Sie bringen die Ausgangslage mit, ich die Einschätzung, was sinnvoll ist und was nicht.',
+        'Nein – genau dafür ist das Erstgespräch da. Sie bringen die Ausgangslage mit, ich die Einschätzung und eine mögliche Lösung.',
         'Manchmal kommt dabei heraus, dass Sie im Moment gar nichts Neues brauchen. Auch das erfahren Sie kostenlos.',
       ],
-      akzent: 'Erstgespräch',
+      akzent: 'Lösung',
     },
   ],
   composer: {
     /* Tipp-Geist: Beispiel-Fragen tippen sich in die Leiste, die ganze
-       Leiste bleibt ein Link zum Kontaktformular (Entscheidung 21.08.2026) */
+       Leiste bleibt ein Link zum Kontaktformular (Entscheidung 21.08.2026).
+       Fragen-Set ABGESEGNET 22.08.2026: jede Frage ist ein anderer Kunde
+       mit einem anderen Problem, zusammen zeichnen sie das Leistungsbild
+       (Preis · Web-Anwendung/Verwaltung · Buchung · Schnittstellen) – der
+       Composer traegt so die Anwendungs-Seite, die die website-lastigen
+       Chat-Antworten darueber nicht abdecken. „Excel" bewusst trotz
+       Tool-Namen-Regel: simulierter Kundenmund, nicht webdiv-Vokabular */
     beispiele: [
       'Was kostet eine Website?',
-      'Wir haben schon eine Website – lohnt sich ein Neuanfang?',
-      'Wie lange dauert so ein Projekt?',
+      'Unsere Verwaltung läuft über Excel. Geht das besser?',
+      'Können unsere Kunden online Termine buchen?',
+      'Lässt sich das mit unserer Warenwirtschaft verbinden?',
     ],
     sendenLabel: 'Zum Kontaktformular',
     href: '#kontakt',
@@ -240,17 +270,17 @@ export const kontakt = {
       href: '/datenschutz/',
       nach: '.',
     },
-    erfolg: 'Danke – Ihre Nachricht ist angekommen. Ich melde mich.',
+    erfolg: 'Danke, Ihre Nachricht ist angekommen. Ich melde mich.',
     fehlerServer: 'Das hat nicht geklappt. Schreiben Sie mir direkt an hallo@webdiv.de.',
   },
 } as const;
 
-/* 404-Seite – Texte sind [Vorschlag], bitte absegnen (siehe .webdiv/tasklist.md) */
+/* 404-Seite – Texte abgesegnet 22.08.2026 */
 export const notFound = {
   metaTitle: 'Seite nicht gefunden – webdiv',
   code: '404',
   titel: 'Diese Seite gibt es nicht.',
-  text: 'Die aufgerufene Adresse führt ins Leere – vielleicht ein Tippfehler, vielleicht ein veralteter Link. Alles Weitere finden Sie auf der Startseite.',
+  text: 'Die aufgerufene Adresse führt ins Leere. Vielleicht ein Tippfehler, vielleicht ein veralteter Link. Alles Weitere finden Sie auf der Startseite.',
   cta: { label: 'Zur Startseite', href: '/' },
 } as const;
 
@@ -260,18 +290,16 @@ export const footer = {
   adresse: 'Websites & Anwendungen · Günzburg · hallo@webdiv.de',
   soziale: [
     { id: 'mail', label: 'E-Mail', href: 'mailto:hallo@webdiv.de' },
+    /* wa.me oeffnet direkt den Chat (Handy: App, Desktop: WhatsApp Web) */
+    { id: 'whatsapp', label: 'WhatsApp', href: 'https://wa.me/491605201548' },
     { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/webdiv.de' },
     { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/sinan-yilmaz-webdiv/' },
   ],
-  linksPrefix: 'created by',
-  linksName: 'webdiv',
-  copyright: '© 2026',
+  copyright: '© 2026 webdiv',
   /* Trailing Slash wie der statische Export (next.config: trailingSlash) –
      erspart den 301 des Hosters auf die Slash-Variante */
   rechtliches: [
     { label: 'Impressum', href: '/impressum/' },
     { label: 'Datenschutz', href: '/datenschutz/' },
   ],
-  rechtsPrefix: 'created with',
-  rechtsName: 'Claude Code',
 } as const;

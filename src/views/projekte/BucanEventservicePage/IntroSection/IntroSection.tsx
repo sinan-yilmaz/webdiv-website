@@ -2,11 +2,11 @@
 
 import { useRef } from 'react';
 import type { CSSProperties } from 'react';
-import Link from 'next/link';
+import { SubpageBackBand } from 'core/components/shell';
 import { caseStudyBucan } from 'core/consts/caseStudyBucan';
 import { useRevealChildren } from 'lib/motion/hooks/useRevealChildren';
 
-/* Projektkopf: Rueckweg, Titel, Live-Link und die Fakten-Leiste. */
+/* Projektkopf: Rueckweg-Band, Titel, Live-Link und die Fakten-Leiste. */
 function IntroSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   useRevealChildren(sectionRef);
@@ -15,12 +15,8 @@ function IntroSection() {
 
   return (
     <section className="case-intro" data-theme="light" data-rails ref={sectionRef}>
+      <SubpageBackBand href={zurueck.href} label={zurueck.label} />
       <div className="container">
-        <p className="case-back mono" data-reveal>
-          <Link className="link-draw" href={zurueck.href}>
-            ← {zurueck.label}
-          </Link>
-        </p>
         <p className="eyebrow" data-reveal style={{ '--ri': 1 } as CSSProperties}>
           {intro.eyebrow}
         </p>

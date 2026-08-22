@@ -16,6 +16,10 @@ type FaqSectionProps = {
   headAnchorRef: RefObject<HTMLDivElement | null>;
 };
 
+/* Antwort-Eintraege sind Absaetze (string) oder eine getippte Aufzaehlung
+   ({ liste }) – wie eine Liste in einer Chat-Nachricht */
+type AntwortTeil = string | { readonly liste: readonly string[] };
+
 /* Genau eine Kobalt-Stelle pro Antwort (faq.paare[].akzent, muss woertlich
    im Absatz stehen) */
 function renderAntwortAbsatz(absatz: string, akzent: string) {
@@ -153,9 +157,19 @@ function FaqSection({ headAnchorRef }: FaqSectionProps) {
                   <svg className="faq-tail" viewBox="0 0 12 14" aria-hidden="true">
                     <path className="faq-tail-fill" d="M12 0 L0.7 0 C0.25 0.3 0.15 0.85 0.45 1.35 C2.7 5.6 6.9 10.2 12 14 Z" />
                   </svg>
-                  {paar.antwort.map((absatz) => (
-                    <p key={absatz}>{renderAntwortAbsatz(absatz, paar.akzent)}</p>
-                  ))}
+                  {/* Die Tupel der drei Paare weiten sich hier zum gemeinsamen
+                      Array-Typ – .map auf der Tupel-Union waere nicht aufrufbar */}
+                  {(paar.antwort as readonly AntwortTeil[]).map((teil) =>
+                    typeof teil === 'string' ? (
+                      <p key={teil}>{renderAntwortAbsatz(teil, paar.akzent)}</p>
+                    ) : (
+                      <ul key={teil.liste[0]}>
+                        {teil.liste.map((punkt) => (
+                          <li key={punkt}>{renderAntwortAbsatz(punkt, paar.akzent)}</li>
+                        ))}
+                      </ul>
+                    ),
+                  )}
                 </div>
               </Fragment>
             ))}

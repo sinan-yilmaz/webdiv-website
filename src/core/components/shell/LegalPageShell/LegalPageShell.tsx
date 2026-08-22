@@ -3,21 +3,23 @@
 import { Fragment, useRef } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import Link from 'next/link';
+import { footer } from 'core/consts/content';
 import { legal } from 'core/consts/legal';
 import { useRevealChildren } from 'lib/motion/hooks/useRevealChildren';
+import SubpageBackBand from '../SubpageBackBand';
 import SubpageNav from '../SubpageNav';
 
 type LegalPageShellProps = {
   titel: string;
-  fussLinks: readonly { label: string; href: string }[];
   children: ReactNode;
 };
 
-/* Gemeinsames Geruest der Rechtsseiten (Impressum/Datenschutz): Subpage-Nav
-   und ein einzelnes helles, rein typografisches Kapitel – Kopf wie die 404,
-   darunter der Fliesstext der jeweiligen Seite, unten eine mono-Fusszeile
-   mit den Querlinks (Startseite + jeweils anderes Rechtsdokument). */
-function LegalPageShell({ titel, fussLinks, children }: LegalPageShellProps) {
+/* Gemeinsames Geruest der Rechtsseiten (Impressum/Datenschutz): Subpage-Nav,
+   dann ein Linien-Band im FAQ-Duktus (Haarlinien oben/unten ueber die volle
+   Breite, die Rails laufen durch) mit dem Rueckweg zur Startseite, darunter
+   das helle, rein typografische Kapitel. Den Abschluss macht eine helle
+   Footer-Zeile mit den Credits der One-Page (© + rechtliche Links). */
+function LegalPageShell({ titel, children }: LegalPageShellProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   useRevealChildren(sectionRef);
 
@@ -26,6 +28,7 @@ function LegalPageShell({ titel, fussLinks, children }: LegalPageShellProps) {
       <SubpageNav />
       <main>
         <section className="legal" data-theme="light" data-rails ref={sectionRef}>
+          <SubpageBackBand href={legal.zurueck.href} label={legal.zurueck.label} />
           <div className="container">
             <p className="eyebrow" data-reveal>
               {legal.eyebrow}
@@ -34,19 +37,22 @@ function LegalPageShell({ titel, fussLinks, children }: LegalPageShellProps) {
               {titel}
             </h1>
             <div className="legal-body">{children}</div>
-            <p className="legal-foot mono" data-reveal>
-              {fussLinks.map((link, index) => (
-                <Fragment key={link.href}>
-                  {index > 0 && ' · '}
-                  <Link className="link-draw" href={link.href}>
-                    {link.label}
-                  </Link>
-                </Fragment>
-              ))}
-            </p>
           </div>
         </section>
       </main>
+      <footer className="legal-footer" data-rails>
+        <div className="container mono">
+          <span className="cf-left">{footer.copyright}</span>
+          <span className="cf-right">
+            {footer.rechtliches.map((link, index) => (
+              <Fragment key={link.href}>
+                {index > 0 && ' · '}
+                <Link href={link.href}>{link.label}</Link>
+              </Fragment>
+            ))}
+          </span>
+        </div>
+      </footer>
     </>
   );
 }

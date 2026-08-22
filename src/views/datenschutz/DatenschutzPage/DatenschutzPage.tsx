@@ -10,7 +10,7 @@ function DatenschutzPage() {
   const emailIstPlatzhalter = anbieter.email.startsWith('[');
 
   return (
-    <LegalPageShell titel={datenschutz.titel} fussLinks={datenschutz.fussLinks}>
+    <LegalPageShell titel={datenschutz.titel}>
       <p data-reveal style={{ '--ri': 2 } as CSSProperties}>
         {datenschutz.intro}
       </p>

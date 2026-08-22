@@ -39,13 +39,15 @@ function CtaSection() {
       </div>
       <footer className="case-cta-footer">
         <div className="container mono">
-          {footer.copyright}
-          {footer.rechtliches.map((link) => (
-            <Fragment key={link.href}>
-              {' · '}
-              <a href={link.href}>{link.label}</a>
-            </Fragment>
-          ))}
+          <span className="cf-left">{footer.copyright}</span>
+          <span className="cf-right">
+            {footer.rechtliches.map((link, index) => (
+              <Fragment key={link.href}>
+                {index > 0 && ' · '}
+                <a href={link.href}>{link.label}</a>
+              </Fragment>
+            ))}
+          </span>
         </div>
       </footer>
     </section>

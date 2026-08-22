@@ -116,6 +116,24 @@
       getBoundingClientRect nachgemessen: Innenraum zwischen Trennlinie und Seitenende
       jetzt exakt mittig (Restwert 0.4px zur Gesamtbox = halbe Trennlinie, korrekt)
 
+## Fertig (Credits-Zeile vereinfacht, 22.08.2026)
+
+- [x] „created with Claude Code" entfernt, „created by webdiv" mit dem Copyright
+      verschmolzen (Entscheidung Sinan): Credits-Zeile jetzt zweispaltig –
+      links `© 2026 webdiv`, rechts `Impressum · Datenschutz` (in `content.ts`
+      nur noch `copyright` + `rechtliches`; `linksPrefix/linksName` und
+      `rechtsPrefix/rechtsName` raus, `.cf-mid` aus TSX/CSS entfernt)
+- [x] Case-Study-Footer (Bucan + ERP) ans Startseiten-Schema angeglichen
+      (Nachauftrag Sinan, war erst zentriert einspaltig): gleiche zweispaltige
+      Zeile `© 2026 webdiv` links / `Impressum · Datenschutz` rechts, mobil
+      gestapelt zentriert; dabei auch die vertikale Zentrierung gefixt –
+      `padding: 24px 0 28px` war asymmetrisch (Zeile saß ~2px zu hoch, gleicher
+      Fehler wie am 22.08. im Kontakt-Footer) → `28px 0`, safe-area-Override
+      nach < 768 verschoben; nachgemessen: 27,8/28px (Rest = halbe Trennlinie)
+- [x] Nebenbei: Formularfehler auf Kobalt lesbar gemacht – `--error-on-cobalt`
+      (#FFD2C7, ~4,8:1 auf Kobalt) als Token, Override `[data-theme="cobalt"] .field`;
+      vorher stand Rostrot #B23A2E auf Kobalt (~1,1:1, unsichtbar)
+
 ## Fertig (Leistungen: Rückbau auf ruhige Bühnen-Karten, 18.08.2026 spät)
 
 - [x] Entscheidung Sinan nach Ansicht von Sticky-Overlap + Bild-Texturen: „passt alles nicht zur Website“ – Sticky-Overlap raus („dass die Card pinned ist, bis das nächste kommt, stört mich“ → auch sticky zählt als Pinning), Wurfschatten raus, Bilder raus (kommen nicht wieder; `public/leistungen/` gelöscht, `bildSrc` aus `content.ts`, `.svc-card-bg` aus TSX/CSS), Karten-Tönung zurück von `--paper-2` auf `--paper`
@@ -485,14 +503,12 @@
       Kopf-Band selbst aus dem vorhandenen inView (gleiche Once-Semantik);
       verifiziert mit zwei vollen Runter-hoch-Zyklen inkl. Endzustands-Reads
       (Klasse „in out" beim Abgang, „in" + opacity 1 + top 0 nach Rückkehr)
-- [ ] FAQ-Feinschliff (weiter offen, mit Sinan): Tail-Kurve final abnehmen, Motion-Idee
-      Tipp-Indikator (··· bevor die Antwort-Bubble poppt), Tablet-Durchgang, Mobile-Pass
-      für die vergrößerte Desktop-Typo (Minima bewusst unangetastet), offene Frage
-      „FAQ" in die Nav?, Copy-Freigaben nur noch Status-Zeile + Tipp-Geist-
-      Beispielfragen (Fragen/Antworten alle abgesegnet: 02 + 01/03 am 22.08.);
-      beim Draufschauen offen: Antwort-Bubble-Breite (720 px ≈ 53 Zeichen bei 24 px –
-      ggf. auf ~860 px mitziehen) und Chip-Größe (11 px Mono neben 32-px-Frage); danach
-      als Sektionen noch Ablauf und Kontakt (Profiltext ist seit 22.08. final)
+- [x] FAQ-Feinschliff GESCHLOSSEN (Entscheidung Sinan 22.08.2026: „hier passt alles,
+      muss nichts mehr gemacht werden"): Tail-Kurve bleibt, Tipp-Indikator-Idee (···)
+      verworfen, kein weiterer Tablet-/Mobile-Pass, Antwort-Bubble-Breite (720 px) und
+      Chip-Größe bleiben; Status-Zeile („Websites & Web-Anwendungen") abgesegnet;
+      Frage „FAQ in die Nav?" entschieden: erst mal nicht (gestrichen) –
+      die FAQ-Sektion ist damit KOMPLETT FERTIG
 - [x] FAQ Antworten 01+03 neu gefasst + abgesegnet, Akzent-Prinzip = Scan-Test,
       Desktop-Typo vergrößert (22.08.2026): Anlass Sinan – Kobalt-Stellen werden
       beim Überfliegen als Botschaft gelesen (markiertes „Behalten Sie Ihre Seite" =
@@ -574,16 +590,86 @@
       sich sichtbar von der H2-Kante) · D ganze Spur links 860 (engere Probe; die
       Antwort-Bubble wird dabei schmaler, 76 % von 860 liegt unter dem 720-px-Cap);
       alle 4 im Browser verifiziert
+- [x] FAQ Antwort 01 als getippte Liste + Prüfungen nachgeschärft (22.08.2026,
+      ABGESEGNET 22.08.2026): Idee Sinan „markdown-ähnliche" Antworten → die drei
+      Prüfungen als echte Aufzählung in der Bubble (Mechanik: `{ liste }`-Eintrag
+      im Antwort-Array in content.ts, FaqSection rendert `<ul>`, KEIN
+      Markdown-Parsing; Marker = gedämpfter --on-dark-Punkt, CSS in main.css beim
+      Bubble-Block, Tupel-Weitung als AntwortTeil-Typ in FaqSection). Inhaltlich
+      auf Sinans Anstoß („Telefonnummer wirklich einer der drei wichtigsten
+      Punkte?"): Prüfung 2 neu als 10-Sekunden-Test „Versteht ein Besucher in
+      zehn Sekunden, was Sie anbieten und wie er Sie erreicht?" („Telefonnummer"
+      war zu lokal gedacht; „Fremder" → „Besucher" auf Einwand Sinan, etabliertes
+      Vokabular aus Leistungs-Karte 01); Prüfung 3 ohne „oder darunter" (jede
+      Prüfung sauber mit Ja beantwortbar wegen „Dreimal Ja?", Gedankenstrich
+      entfällt); Achsen-Struktur bleibt Technik/Klarheit/Vergleich; Details in
+      .webdiv/faq.md; tsc sauber, Desktop im Browser verifiziert (Liste, Marker,
+      Akzent unverändert), Mobil 390 via iframe geprüft
+- [x] FAQ Akzent-Reihe neu: Erstgespräch · Expertise · Lösung (22.08.2026,
+      ABGESEGNET 22.08.2026): Folge-Idee Sinan „sauberer Fluss" → Antwort 01
+      endet auf „… lohnt sich ein Erstgespräch" (Akzent wandert von „Drei
+      Prüfungen" dorthin – seit der Liste redundant), Antwort 03 zweiter
+      Halbsatz neu „…, ich die Einschätzung und eine mögliche Lösung." mit
+      Akzent „Lösung" (Sinans Skizze „Einschätzung mit Analyse und einer
+      möglichen Lösung" verschlankt, „Analyse" als Alternativ-Wort offen;
+      löst zugleich die wörtliche „was sinnvoll ist und was nicht"-Dopplung
+      mit dem Kontakt-Text); Listen-Marker auf volle Textfarbe (Dots waren
+      Sinan zu dunkel); Scan-Test geprüft, Details in .webdiv/faq.md;
+      Desktop im Browser verifiziert
+- [x] FAQ Prüfungs-Trio neu: Verständlichkeit · Wettbewerb · Markenwirkung
+      (22.08.2026, erledigt – gleiche Session final revidiert, s. Folgeeintrag): Anlass cafelimon.de (cooler Laden,
+      Seite verkauft ihn unter Wert – alter Check hätte Entwarnung gegeben;
+      KEIN Lead, Entscheidung Sinan) → neue Prüfung 3 „Macht sie den Eindruck,
+      den Ihr Betrieb verdient?", Mitbewerber-Punkt bleibt, Handy-/Lade-Punkt
+      raus (Technik steckt implizit in den Wirkungsfragen; Preis: alle drei
+      jetzt Urteilsfragen, bewusst akzeptiert); Punkt 2 nennt jetzt „Ihre
+      Seite" als Bezug fürs „sie" in Punkt 3; dazu Composer-Text (Tipp-Geist)
+      von hart 16px auf clamp(1rem, 1.4vw, 1.25rem) = 20px bei 1440, Minimum/
+      Mobil unverändert; Details in .webdiv/faq.md; tsc sauber, Desktop im
+      Browser verifiziert → gleiche Session final revidiert, siehe Folgeeintrag
+- [x] FAQ Prüfungs-Trio FINAL + ABGESEGNET (22.08.2026, „passt, nehmen wir
+      deine Änderung"): Technik / Verständlichkeit / Markenwirkung – „Lädt
+      Ihre Seite auf dem Handy sofort?" · „Versteht ein Besucher in zehn
+      Sekunden, was Sie anbieten und wie er Sie erreicht?" · „Macht sie den
+      Eindruck, den Ihr Betrieb verdient?". Anlass: Sinans Nachfrage „ab-
+      oder aufgewertet?" → Bilanz: Zwischenstand (Verständlichkeit/
+      Wettbewerb/Markenwirkung) hatte den durchführbaren Test zu drei
+      Urteilsfragen gemacht; finale Fassung = Handy-Punkt zurück (messbar,
+      häufigster ehrlicher Treffer der Zielgruppe), Mitbewerber-Punkt raus
+      (misst relativ, täuscht in beide Richtungen; Wettbewerbsgedanke wohnt
+      in Frage 02; Kandidat FAQ-Unterseite); Details in .webdiv/faq.md;
+      im Browser verifiziert
+- [x] FAQ Schwellen-Fix + Bubble-Farbe (22.08.2026, ABGESEGNET): Einwand Sinan
+      „die meisten bekommen safe 2 mal Ja" → Ja/Ja/Nein (der Café-Limón-Fall)
+      lag beim alten „Bei zwei Nein"-Schluss in einer Grauzone, die Entwarnung
+      las; neuer Schlusssatz (Wahl B von Sinan): „Dreimal Ja? Dann behalten
+      Sie Ihre Seite. Haben Sie irgendwo gezögert, lohnt sich ein
+      Erstgespräch." (Zögern fängt auch das Halb-Ja stolzer Inhaber, Akzent
+      bleibt „Erstgespräch"); dazu Antwort-Bubble + Tail von --dark auf
+      --dark-soft (Angleichung an die Leistungen-Karten, Wunsch Sinan;
+      Avatar bleibt --dark); Details in .webdiv/faq.md; tsc sauber, im
+      Browser verifiziert
+- [x] FAQ Tipp-Geist-Fragen neu + ABGESEGNET (22.08.2026): Wunsch Sinan
+      „Fragen, die bereits etwas über mich aussagen" (alte Fragen bis auf die
+      Preis-Frage verworfen; Neuanfang-Frage war seit dem Selbst-Check ohnehin
+      redundant + Gedankenstrich) → Prinzip: jede Frage ein anderer Kunde,
+      zusammen das Leistungsbild, der Composer trägt die Anwendungs-Seite der
+      website-lastigen Sektion; Set: „Was kostet eine Website?" · „Unsere
+      Verwaltung läuft über Excel. Geht das besser?" („Excel" bewusst als
+      Kundenmund trotz Tool-Namen-Regel) · „Können unsere Kunden online
+      Termine buchen?" · „Lässt sich das mit unserer Warenwirtschaft
+      verbinden?"; Reserve-Kandidaten in .webdiv/faq.md; tsc sauber, im
+      Browser verifiziert
 - [ ] Entschieden: kein interaktiver Preiskalkulator und kein E-Mail-Gate (Hormozi „eine Hürde“;
       Konfigurator = Baukasten-Signal, bei Custom-Arbeit keine ehrlichen Zahlen möglich)
-- [ ] Offene Entscheidung Sinan: „ab“-Preis öffentlich auf die Seite? (Listenpreis laut Akquise-Plan
-      Abschnitt 9: 3.500–6.000 € Custom-One-Pager; KI-Einwand „mach ich selbst für 50 €“ besprochen –
-      Preis selektiert richtig, aber nur tragfähig, wenn Sinan selbst dahintersteht)
-- [ ] Idee fürs Kontaktformular: Anliegen-Feld (neue Website / bestehende Seite verbessern /
-      Anwendung) zur Qualifizierung, ggf. Budget-Select – Entscheidung offen
-- [ ] Kontakttext ggf. um die Facette „ehrliche Einschätzung Ihrer bestehenden Seite“ schärfen
-      (ersetzt einen separaten prominenten „Website-Check“-CTA auf der One-Page; der Check selbst
-      kommt später als eigenes Tool, siehe Akquise-Plan Abschnitt 1 Variante B)
+- [x] Entschieden (22.08.2026): KEIN „ab“-Preis auf der Startseite (Listenpreis laut Akquise-Plan
+      Abschnitt 9: 3.500–6.000 € Custom-One-Pager); wenn ein Preis öffentlich wird, dann
+      künftig auf der FAQ-Unterseite – Kandidat „Was kostet eine Website?" in
+      `.webdiv/faq.md` entsprechend vermerkt
+- [x] Entschieden (22.08.2026, Sinan: „bzgl. Kontakt alles so lassen wie es ist"): KEIN
+      Anliegen-Feld/Budget-Select im Formular, Kontakttext bleibt unverändert (die Facette
+      „ehrliche Einschätzung Ihrer bestehenden Seite" entfällt; der Website-Check selbst
+      bleibt späteres Tool-Thema, Akquise-Plan Abschnitt 1 Variante B)
 
 ## Projekte-Sektion & cnyn-Referenz (19.08.2026, in Arbeit)
 
@@ -660,7 +746,11 @@
 - [x] Projekt-Zeilen auf Touch ohne Hover-Effekte (22.08.2026, Wunsch Sinan „einfach nur
       klickbar"): alle :hover-Regeln (Paper-2-Flut, Kontur, Titel-Dehnung 115 %, Pfeil-Schub,
       weichende Trennlinien) in `@media (hover: hover) and (pointer: fine)` gewandert;
-      Geräte-Emulations-Check im Browser steht noch aus
+      Check erledigt 22.08.2026 ohne Gerät: per CSS-Durchsicht verifiziert, dass ALLE
+      Projekt-Hover-Regeln in dem einen Media-Block liegen (main.css, keine Streuner) –
+      auf Geräten ohne Maus (hover: none / pointer: coarse) greift davon per
+      Browser-Standard nichts, die Zeile ist ein schlichter Link; Cursor-Follower war
+      auf Touch schon immer aus; echter Smartphone-Gegencheck optional beim Livegang
 
 ## Entschieden (22.08.2026, nach Außen-Feedback „2/10")
 
@@ -686,6 +776,32 @@
       Text, echte E-Mail wird automatisch mailto-Link), Styles als „Rechtsseiten"-Block
       in main.css (Titel fluid 30px@390–72px@1440, damit „Datenschutzerklärung" auf 390
       einzeilig bleibt – im 390er-iframe gefixt und verifiziert)
+- [x] Struktur-Rework der Rechtsseiten (22.08.2026, Wunsch Sinan): Linien-Band im
+      FAQ-Duktus über dem Eyebrow „Rechtliches" (Haarlinien oben/unten volle Breite,
+      Rails laufen durch) mit Rückweg „← Zur Startseite" (dunkler Kreis wie der
+      FAQ-Avatar, NICHT kobalt – Feedback Sinan; ganze Zeile ist der Link); Band-Abstand
+      zur Nav = Nav-Abstand zur Viewport-Oberkante (22px symmetrisch, Desktop 101px /
+      <1024 107px padding-top); mono-Fusszeile mit Querlinks ersetzt durch helle
+      Footer-Zeile im Credits-Layout der One-Page (© 2026 webdiv links, Impressum ·
+      Datenschutz rechts, Haarlinie oben – Kobalt-Variante verworfen, passt nicht
+      unters helle Typo-Kapitel); `fussLinks` aus legal.ts entfernt, `legal.zurueck`
+      neu; verifiziert 1440 + 390 via iframe-Testseite, tsc sauber
+- [x] Vertikale Symmetrie der Rechtsseiten (22.08.2026, Wunsch Sinan): Abstand
+      Seitenstart→Band == letzter Text→Footer-Haarlinie (Desktop 101/101,
+      <1024 107/107 – padding-bottom 87 bzw. 93 + 14px Absatz-Endabstand;
+      per iframe-Testseite mit Transition-Kill nachgemessen, Achtung: Messung
+      ohne Kill ist durch unrevealte data-reveal-Transforms um 28px verfälscht)
+- [x] Projekte-Pfeile („Zuletzt gebaut"): dunkle Variante probiert und REVIDIERT
+      (beides 22.08.2026, Sinan): erst Kreis var(--dark) wie der Rückweg-Knopf,
+      am Abend zurück zur Haarlinien-Kontur mit Tinten-Pfeil – zu laut für die
+      Typo-Liste, der dunkle Kreis lebt nur im SubpageBackBand der Unterseiten
+- [x] Rückweg-Band auf die Case-Study-Seiten ausgerollt (22.08.2026, Wunsch Sinan):
+      Band als geteilte Komponente `SubpageBackBand` (core/components/shell, CSS
+      `.subpage-band*` in main.css zum Nav-Block umgezogen); auf Bucan + ERP ersetzt
+      es den alten `case-back`-Textlink (Label bleibt „Alle Projekte" → /#projekte,
+      Konstanten unverändert), LegalPageShell nutzt dieselbe Komponente;
+      `.case-intro`-Padding auf den Nav-Rhythmus der Rechtsseiten (101px / <1024
+      107px, Gap Pille→Band 22px) – nachgemessen 1440 + 390, tsc sauber
 - [x] **Rechtslage gegen Primärquellen geprüft (22.08.2026):** § 5 DDG (gesetze-im-internet)
       → Pflicht: Name, Anschrift, E-Mail; USt-IdNr./W-IdNr. NUR „soweit vorhanden" (Nr. 6);
       kein Register, kein Kammerberuf → Angaben entfallen · EU-OS-Plattform zum 20.07.2025
@@ -739,6 +855,14 @@
       Ausfülldauer-Check/JSON, PHPMailer vendored, kontakt-config.php gitignored +
       example-Vorlage, .htaccess-Sperre, CI-Secret-Mechanik; smtp.strato.de:465);
       Fragen (1)–(5) bleiben offen
+- [x] **Antwort Sinan zu (1) (22.08.2026): Eisenhausgasse 7, 89312 Günzburg**
+      (Privatwohnung, kein Büro – als ladungsfähige Anschrift des
+      Einzelunternehmens zulässig und nötig): eingetragen in `anbieter`
+      (legal.ts → rendert in Impressum-Anbieterblock + Datenschutz Abschnitt 1),
+      im Browser auf beiden Seiten verifiziert. NICHT ins LocalBusiness-JSON-LD
+      übernommen (dort weiter nur Ort + Land) – Privatadresse muss nicht
+      maschinenlesbar ausgezeichnet sein, Entscheidung bei Sinan.
+      Fragen (3)–(5) bleiben offen (Telefon? W-IdNr./USt-IdNr.? Berufshaftpflicht?)
 - [x] **Antwort Sinan zu (2) (22.08.2026): hallo@webdiv.de** („sympathisch"; Empfehlung
       sinan@ besprochen, hallo@ gewählt – sinan@/info@ können später Aliase werden):
       eingetragen in `anbieter.email` (legal.ts → Impressum + Datenschutz, rendert
@@ -757,18 +881,46 @@
 
 ## Offene Entscheidungen (Feedback nötig)
 
-- [ ] Hero-Wortmarke: mit Token-Skala ~62 % der Inhaltsbreite statt ~80 % aus dem Briefing – Skala behalten oder auf ~22,5vw vergrößern?
+- [x] **WhatsApp als Footer-Icon: UMGESETZT (22.08.2026, Auftrag Sinan):** zweites
+      Icon zwischen Mail und Instagram (`WhatsAppIcon` in lib/primitives, Monoline
+      wie die anderen; `footer.soziale` in content.ts), reiner wa.me-Link auf
+      +49 160 5201548 – KEIN Widget/Embed, Site bleibt einwilligungsfrei; neuer
+      Abschnitt „4. Kontakt über WhatsApp" in der Datenschutzerklärung (WhatsApp
+      Ireland Limited, Drittland-Hinweis; Folgeabschnitte auf 5./6. umnummeriert).
+      OFFEN dabei: Die Nummer ist Sinans bestehende (privates WhatsApp-Konto,
+      Business-Test wurde rückabgewickelt) und steht jetzt öffentlich auf der
+      Site – wenn später WhatsApp Business mit Zweit-/Festnetznummer kommt, nur
+      den href in `footer.soziale` ändern; Business-Profil-Einrichtung siehe
+      Gesprächsnotizen 22.08. (Verifizierung per SMS/Anruf, Apps laufen parallel)
+
+- [x] Entschieden (22.08.2026): Hero-Wortmarke bleibt bei der Token-Skala (~62 % der
+      Inhaltsbreite) – keine Vergrößerung auf das ~80-%-Briefing-Maß
 - [ ] Logo Variante 2: Strichstärke 16/120 statt exakt Mona-Sans-800-Stamm (20/120) – bewusste Abweichung, ok so?
 - [x] Logo-Favorit benannt (16.08.2026): Variante 3 (Icon, Kobalt-Quadrat) – bereits als Favicon/App-Icon im Einsatz; die Varianten haben laut Briefing feste Rollen (V1 Monoline = feine Kontexte, V2 Schwer = Nav/Lockups, V3 = Icon). Falls V3 auch im Nav-Lockup gewünscht: Bescheid geben
-- [ ] Eyebrows in `--ink-3` (13 px) ≈ 3,2:1 Kontrast, unter AA – so lassen oder auf `--ink-2` heben?
+- [x] Eyebrows auf `--ink-2` gehoben (22.08.2026, Entscheidung Sinan „anpassen, aber
+      stimmig"): Basisregel `.eyebrow` in tokens.css von `--ink-3` (~3,1:1) auf `--ink-2`
+      (7,8:1 auf Paper, 7,1:1 auf Paper-2/Ablauf) – trifft Projekte/Ablauf/Über mich/FAQ
+      + helle Case-Study-Kapitel; der dunkle Leistungen-Override (55 % on-dark) bleibt
+      UNVERÄNDERT: schon AA-konform (~5,5:1 auf --dark-soft); Sinans Alternative
+      „Karten-Nummern-Farbe" (45 % on-dark ≈ 4,1:1) wäre eine Verschlechterung gewesen;
+      Bucan-/ERP-Kapitel setzen eigene Eyebrow-Farben (Gold/Salbei), unberührt
 - [x] Regler-Toggle unten links: obsolet (19.08.2026) – die Prototyp-Regler (DevControls) wurden nie in die Next.js-App portiert und bleiben bewusst draußen; CSS-Rest `.controls` in `main.css` mit entfernt
-- [ ] Nav-Button „Erstgespräch“ springt zu `#kontakt` – gewünschtes Verhalten?
-- [ ] Ergänzte [Vorschlag]-Texte absegnen: Seitentitel, Formular-Validierungstexte, Platzhalter-Labels, 404-Texte (`notFound` in `content.ts`) (Meta-Description: Variante A am 17.08.2026 abgesegnet)
+- [x] Bestätigt (22.08.2026): Nav-Button „Erstgespräch“ fährt zu `#kontakt` – bleibt so
+- [x] [Vorschlag]-Texte ABGESEGNET (22.08.2026): Formular-Validierungstexte, Labels,
+      Erfolgs-/Servermeldung, 404-Texte; dabei Gedankenstriche gemäß Copy-Regel 21.08.
+      aufgelöst (Erfolg „Danke, Ihre Nachricht ist angekommen.", 404 „… führt ins Leere.
+      Vielleicht ein Tippfehler, …"); Meta-Description war schon am 17.08. abgesegnet
+- [x] Seitentitel-Detailfrage entschieden (22.08.2026, Sinan: „passt für mich"):
+      „Günzburg" BLEIBT im Title – Local-SEO („Webdesign Günzburg"-Suchen sind die
+      realistischste Ranking-Chance einer neuen Domain), sichtbar fast nur bei Google,
+      konsistent mit Description/JSON-LD/Über-mich; Seitentitel damit komplett abgesegnet
 
 ## Meine Todos (Assets liefern)
 
 - [x] Porträtfoto liegt vor (festgestellt 22.08.2026): `public/portrait.jpg` ist da, Porträt-Block und Über-mich zeigen es
-- [ ] Echte Unterschrift als SVG-Einstrich-Pfad (ersetzt Mr-Dafoe-Platzhalter in `src/core/consts/signature.ts`)
+- [x] GESTRICHEN (Entscheidung Sinan 22.08.2026, „Assets & Technik: müssen wir nichts
+      mehr machen"): echte Unterschrift als SVG kommt nicht mehr – die aktuelle
+      Unterschrift (Mr-Dafoe-Basis in `src/core/consts/signature.ts`) bleibt dauerhaft
 - [ ] E-Mail-Adresse, Impressumsdaten (stehen als sichtbare `[Platzhalter]` in `src/core/consts/content.ts` und – Anschrift/E-Mail zentral – in der `anbieter`-Konstante in `src/core/consts/legal.ts`); Domain webdiv.de ist seit 17.08.2026 hinterlegt
 - [x] Instagram-/LinkedIn-Profil-URLs für die Footer-Icons (19.08.2026): beide als direkte externe Links in `footer.soziale` (`content.ts`) – https://www.instagram.com/webdiv.de und https://www.linkedin.com/in/sinan-yilmaz-webdiv/ (Slug auf Empfehlung geändert); externe Footer-Links bekommen `target="_blank" rel="noopener"` (`ContactSection.tsx`); JSON-LD (`src/app/page.tsx`): Instagram als `sameAs` am LocalBusiness, LinkedIn als `sameAs` am `founder`-Person-Objekt. Social-Strategie-TODOs: `.webdiv/akquise-plan.md` Abschnitt 11
 - [x] Bucan-Projekt-Vorschaubild liegt vor (festgestellt 22.08.2026): `public/projekte/bucan/thumb.webp` ist da, der Hover der Projekt-Zeile zeigt es (der Slot in den Leistungen ist seit dem Farbboxen-Redesign 18.08.2026 entfallen)
@@ -781,5 +933,6 @@
 - [x] Mobile-Ableitung bis 390 px (16.08.2026 – siehe „Fertig (Mobile/Tablet-Ableitung)“; Touch: nur Welle statt Lupe war schon im Port enthalten)
 - [x] Unterseite `/projekte/bucan-eventservice` (16.08.2026 – siehe „Fertig (Case Study Bucan)“)
 - [x] Unterseiten `/impressum`, `/datenschutz` (22.08.2026 – siehe „Fertig (Impressum & Datenschutz)“; Anschrift/E-Mail/Hoster noch [Platzhalter], Fragen an Sinan offen)
-- [ ] Motion-Feinschliff mit GSAP/ScrollTrigger (Lenis ist seit 16.08.2026 drin; Design-Intent steht in `.website/HANDOFF.md`)
+- [x] GESTRICHEN (Entscheidung Sinan 22.08.2026): kein GSAP/ScrollTrigger-Feinschliff mehr –
+      der Motion-Stand mit Lenis + eigenem rAF-Loop ist final
 - [ ] Formular an echtes Backend anbinden (z. B. Supabase Edge Function)

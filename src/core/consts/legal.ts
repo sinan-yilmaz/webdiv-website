@@ -8,18 +8,21 @@
    [Platzhalter] bleiben sichtbar, bis die echten Angaben vorliegen
    (siehe .webdiv/tasklist.md). */
 
-/* Anbieterdaten: einzige Quelle fuer Impressum UND Datenschutzerklaerung –
-   Sinan liefert Anschrift/E-Mail, dann hier einmal ersetzen. */
+/* Anbieterdaten: einzige Quelle fuer Impressum UND Datenschutzerklaerung.
+   Anschrift = Privatwohnung (kein Buero, Angabe Sinan 22.08.2026) – als
+   Einzelunternehmer ist das die ladungsfaehige Anschrift nach § 5 DDG. */
 export const anbieter = {
   marke: 'webdiv',
   name: 'Sinan Yilmaz',
-  strasse: '[Straße und Hausnummer]',
-  ort: '[PLZ und Ort]',
+  strasse: 'Eisenhausgasse 7',
+  ort: '89312 Günzburg',
   email: 'hallo@webdiv.de',
 } as const;
 
 export const legal = {
   eyebrow: 'Rechtliches',
+  /* Rueckweg im Linien-Band ueber dem Kapitel (LegalPageShell) */
+  zurueck: { label: 'Zur Startseite', href: '/' },
 } as const;
 
 export const impressum = {
@@ -33,10 +36,6 @@ export const impressum = {
   emailLabel: 'E-Mail',
   verantwortlichTitel: 'Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV',
   verantwortlichText: 'Sinan Yilmaz, Anschrift wie oben.',
-  fussLinks: [
-    { label: 'Zur Startseite', href: '/' },
-    { label: 'Datenschutzerklärung', href: '/datenschutz/' },
-  ],
 } as const;
 
 export const datenschutz = {
@@ -59,17 +58,20 @@ export const datenschutz = {
       text: 'Wenn Sie mir über das Kontaktformular oder per E-Mail schreiben, verarbeite ich die von Ihnen angegebenen Daten, also Name, E-Mail-Adresse und den Inhalt Ihrer Nachricht, ausschließlich zur Bearbeitung Ihrer Anfrage (Art. 6 Abs. 1 lit. b DSGVO). Die Daten werden gelöscht, sobald sie für die Bearbeitung nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.',
     },
     {
-      titel: '4. Keine Cookies, kein Tracking',
+      /* Nur ein wa.me-Link im Footer, keine Einbindung von WhatsApp-Code in
+         die Website; Anbieterangabe WhatsApp Ireland Limited am 22.08.2026
+         gegen gaengige Datenschutzhinweise verifiziert */
+      titel: '4. Kontakt über WhatsApp',
+      text: 'Als zusätzlichen Kontaktweg verlinke ich auf WhatsApp. Wenn Sie mir dort schreiben, verarbeite ich Ihre Rufnummer, Ihren Profilnamen und den Inhalt Ihrer Nachricht ausschließlich zur Bearbeitung Ihrer Anfrage (Art. 6 Abs. 1 lit. b DSGVO). Anbieter des Dienstes ist die WhatsApp Ireland Limited, 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Irland. WhatsApp verarbeitet daneben Metadaten der Kommunikation nach eigenen Richtlinien und kann Daten in Drittländer, insbesondere in die USA, übermitteln. Die Nutzung ist freiwillig. Dieselben Anliegen erreichen mich jederzeit über das Kontaktformular oder per E-Mail.',
+    },
+    {
+      titel: '5. Keine Cookies, kein Tracking',
       text: 'Diese Website verwendet keine Cookies, keine Analyse-Tools und keine externen Einbindungen, die eine Einwilligung erfordern würden. Schriften sind lokal eingebunden und werden von keinem fremden Server geladen.',
     },
     {
-      titel: '5. Ihre Rechte',
+      titel: '6. Ihre Rechte',
       text: 'Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen die Verarbeitung Ihrer Daten (Art. 15 bis 21 DSGVO). Zudem besteht ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde (Art. 77 DSGVO).',
     },
   ],
   stand: 'Stand: August 2026',
-  fussLinks: [
-    { label: 'Zur Startseite', href: '/' },
-    { label: 'Impressum', href: '/impressum/' },
-  ],
 } as const;

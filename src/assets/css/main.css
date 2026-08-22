@@ -138,6 +138,43 @@ html[data-intro-pending] .site-nav { opacity: 0; }
 .subpage-nav { width: min(691px, calc(100% - 2 * var(--pad))); }
 .subpage-nav .nav-pill { justify-content: space-between; }
 
+/* Linien-Band am Kopf der Unterseiten (SubpageBackBand – Rechtsseiten und
+   Case Studies): Haarlinien oben/unten ueber die volle Breite; das Band
+   bleibt transparent, die Sektions-Rails ([data-rails]::before) laufen
+   durch – exakt das Linienbild des FAQ-Composers */
+.subpage-band {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 64px;
+}
+/* Rueckweg: dunkler Kreis im Duktus des FAQ-Avatars plus Label in der
+   Composer-Typo; die ganze Zeile ist der Link (kompakter als die
+   Projekt-Pfeile – anderer Zweck, Entscheid Sinan 22.08.2026) */
+.subpage-band-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+}
+.subpage-band-send {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--dark);
+  color: var(--on-dark);
+  display: grid;
+  place-items: center;
+  font-size: 1.125rem;
+  transition: background var(--t-micro) var(--ease), transform var(--t-micro) var(--ease);
+}
+.subpage-band-link:hover .subpage-band-send,
+.subpage-band-link:focus-visible .subpage-band-send {
+  background: #2A2A28;
+  /* zurueck = nach links (der Composer hebt seinen Send-Knopf nach oben) */
+  transform: translateX(-2px);
+}
+
 /* ==========================================================================
    Hero
    ========================================================================== */
@@ -831,6 +868,9 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   font-size: var(--fs-body);
   margin-top: 16px;
 }
+/* Haarlinien-Kontur mit Tinten-Pfeil (dunkle Variante am 22.08.2026 probiert
+   und wieder verworfen – zu laut fuer die Typo-Liste; der dunkle Kreis lebt
+   nur im SubpageBackBand der Unterseiten) */
 .project-arrow {
   width: 64px;
   height: 64px;
@@ -1200,11 +1240,13 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   height: 14px;
   overflow: visible;
 }
-.faq-tail-fill { fill: var(--dark); }
+/* Bubble + Tail in der Leistungen-Farbe --dark-soft statt Statement---dark
+   (Wunsch Sinan 22.08.2026, Angleichung an das Leistungen-Kapitel) */
+.faq-tail-fill { fill: var(--dark-soft); }
 .faq-msg-a {
   align-self: flex-start;
   max-width: min(720px, 76%);
-  background: var(--dark);
+  background: var(--dark-soft);
   color: var(--on-dark);
   background-image: radial-gradient(rgb(242 239 233 / 0.07) 1px, transparent 1.6px);
   background-size: 26px 26px;
@@ -1217,6 +1259,36 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   line-height: 1.6;
 }
 .faq-msg-a > p + p { margin-top: 0.9em; }
+/* Getippte Aufzaehlung in der Antwort (faq.paare[].antwort mit { liste }):
+   schlichte Punkte wie in einer Chat-Nachricht, Marker in der Textfarbe
+   (Entscheidung Sinan 22.08.2026, gedaempfte Probe wirkte zu dunkel;
+   kein Browser-Bullet, kein Kobalt – der Akzent bleibt das einzige
+   Farbsignal in der Bubble) */
+.faq-msg-a > ul {
+  list-style: none;
+  margin: 0.9em 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5em;
+}
+.faq-msg-a > ul + p { margin-top: 0.9em; }
+.faq-msg-a > ul > li {
+  position: relative;
+  padding-left: 1.1em;
+  font-size: clamp(1.0625rem, 1.7vw, 1.5rem);
+  line-height: 1.6;
+}
+.faq-msg-a > ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0.1em;
+  /* optisch auf der Mitte der ersten Zeile (line-height 1.6) */
+  top: 0.66em;
+  width: 0.3em;
+  height: 0.3em;
+  border-radius: 50%;
+  background: var(--on-dark);
+}
 /* Akzent als Kobalt-Marker hinterm Wort (Lab-Entscheidung Sinan 22.08.2026):
    volles Kobalt als Textfarbe laege auf --dark bei ~2,8:1 – als Flaeche mit
    --on-dark-Text bleibt der Akzent satt UND lesbar; clone gibt umbrechenden
@@ -1242,7 +1314,10 @@ html[data-intro-pending] .site-nav { opacity: 0; }
 .faq-ghost {
   flex: 1;
   color: var(--ink-3);
-  font-size: 1rem;
+  /* wie Frage/Antwort-Typo der Sektion: bei 1440 auf 20px angehoben
+     (Wunsch Sinan 22.08.2026, vorher hart 1rem), Minimum bleibt 16px –
+     unter ~1150px also alles wie vorher, mobil unveraendert */
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
   white-space: nowrap;
   overflow: hidden;
   /* laeuft die getippte Frage ueber (schmale Viewports), endet sie in … */
@@ -1404,15 +1479,13 @@ html[data-intro-pending] .site-nav { opacity: 0; }
 .contact.in .contact-footer { opacity: 1; }
 .contact-footer .container {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto;
   align-items: center;
   font-family: var(--font-mono);
   font-size: 0.78125rem; /* 12.5 px */
   letter-spacing: 0.02em;
 }
 .contact-footer .cf-right { text-align: right; }
-.contact-footer .cf-mid { text-align: center; }
-.contact-footer b { font-weight: 700; }
 .contact-footer a { text-decoration: none; }
 .contact-footer a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
@@ -1541,10 +1614,14 @@ html[data-intro-pending] .site-nav { opacity: 0; }
 /* ==========================================================================
    Rechtsseiten (Impressum/Datenschutz) – rein typografische Unterseiten,
    Geruest in core/components/shell/LegalPageShell. Typo skaliert ueber
-   clamp, daher ohne eigene Responsive-Ableitung.
+   clamp; eigene Responsive-Ableitung nur fuer Band-Knopf und Kobalt-Footer.
    ========================================================================== */
 
-.legal { padding: 172px 0 140px; }
+/* Nav-Rhythmus: der 22px-Abstand der Nav-Pille zur Viewport-Oberkante kehrt
+   zwischen Pille und Band wieder – 22 + Pillenhoehe (~57px Desktop) + 22.
+   Unten spiegelt oben: 87 + 14px Endabstand des letzten Absatzes = 101,
+   also Seitenstart->Band == letzter Text->Footer-Haarlinie */
+.legal { padding: 101px 0 87px; }
 .legal .eyebrow { margin-bottom: 18px; }
 .legal-title {
   /* fluid 30px@390 bis 72px@1440 – der Floor muss "Datenschutzerklärung"
@@ -1587,14 +1664,26 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   color: var(--ink-3);
   margin-top: 56px;
 }
-/* Fusszeile mit den Querlinks (Startseite + anderes Rechtsdokument) */
-.legal-foot {
-  margin-top: 96px;
-  padding-top: 26px;
+/* Footer: die Credits-Zeile der One-Page (© + rechtliche Links), hier hell
+   hinter einer Haarlinie – Kobalt saehe unter dem Typo-Kapitel fremd aus */
+.legal-footer {
   border-top: 1px solid var(--line);
   color: var(--ink-2);
+  padding: 28px 0;
 }
-.legal-foot a:hover { color: var(--ink); }
+.legal-footer .container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  font-size: 0.78125rem; /* 12.5 px */
+  letter-spacing: 0.02em;
+}
+.legal-footer .cf-right { text-align: right; }
+.legal-footer a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
 /* ==========================================================================
    Responsive-Ableitung (Runde 2) – Tablet < 1024 px, Mobile < 768 px.
@@ -1681,6 +1770,11 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   /* Engere Spalten-Gaps */
   .about-grid { gap: 56px; }
   .contact-grid { gap: 64px; padding-block: 88px 120px; }
+
+  /* Rechtsseiten: die Pille traegt ab hier den Menue-Knopf (~63px hoch) –
+     Band-Oberkante wieder 22 + Pillenhoehe + 22, unten gespiegelt
+     (93 + 14px Absatz-Endabstand = 107) */
+  .legal { padding-block: 107px 93px; }
 }
 
 /* --- Mobile (< 768): einspaltig, zentrierte Hero-Subzeilen --- */
@@ -1809,7 +1903,6 @@ html[data-intro-pending] .site-nav { opacity: 0; }
     justify-items: center;
   }
   .contact-footer .cf-left,
-  .contact-footer .cf-mid,
   .contact-footer .cf-right { text-align: center; }
 
   /* FAQ: Bubbles fast volle Breite, Kopf/Composer kompakter */
@@ -1817,6 +1910,18 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   .faq-msg-a { max-width: 94%; }
   .faq-avatar { width: 38px; height: 38px; font-size: 1rem; }
   .faq-send { width: 38px; height: 38px; }
+
+  /* Unterseiten-Band-Knopf wie der FAQ-Send kompakter; Rechtsseiten:
+     Footer-Zeile stapelt wie die Startseiten-Credits */
+  .subpage-band-send { width: 38px; height: 38px; }
+  .legal-footer { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
+  .legal-footer .container {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    justify-items: center;
+  }
+  .legal-footer .cf-left,
+  .legal-footer .cf-right { text-align: center; }
 
   /* Werkzeuge */
   .preloader-sig { width: min(300px, 64vw); }

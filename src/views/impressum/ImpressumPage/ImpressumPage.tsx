@@ -10,7 +10,7 @@ function ImpressumPage() {
   const emailIstPlatzhalter = anbieter.email.startsWith('[');
 
   return (
-    <LegalPageShell titel={impressum.titel} fussLinks={impressum.fussLinks}>
+    <LegalPageShell titel={impressum.titel}>
       <div data-reveal style={{ '--ri': 2 } as CSSProperties}>
         <h2>{impressum.angabenTitel}</h2>
         <p>

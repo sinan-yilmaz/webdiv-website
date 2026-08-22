@@ -242,11 +242,180 @@ Startseiten-Trio bestätigt (Dramaturgie: Problembewusstsein → KI-Einwand →
 Hürde senken vor dem Kontakt); die übrigen Kandidaten bleiben für die
 FAQ-Unterseite.
 
+## Antwort 01 als getippte Liste, Prüfung 2 neu (22.08.2026, [Vorschlag])
+
+Idee Sinan: Antworten dürfen „markdown-ähnlich" formatiert sein – für die drei
+Prüfungen heißt das eine echte Aufzählung in der Bubble (authentisch zur
+Chat-Metapher, Scanner sieht die Drei sofort; Mechanik in FaqSection als
+`{ liste }`-Eintrag im Antwort-Array, kein Markdown-Parsing). Dabei zwei
+inhaltliche Korrekturen (Anstoß Sinan: „sind das wirklich die drei wichtigsten
+Punkte? Zumindest das mit der Telefonnummer …"):
+
+- **Prüfung 2 neu:** „Telefonnummer" war Lokal-Geschäft-Denke (webdiv zielt
+  überregional, auch Anwendungs-Kunden). Das eigentliche Kriterium ist der
+  10-Sekunden-Test auf Angebot + Kontaktweg. „Fremder" → „Besucher"
+  (Einwand Sinan, „Fremder" kein gutes Wort; „Besucher" ist etabliertes
+  Vokabular, vgl. Leistungs-Karte 01 „macht aus Besuchern Anfragen").
+- **Prüfung 3 ohne „oder darunter":** in der Listenform muss jede Prüfung
+  sauber mit Ja beantwortbar sein („Dreimal Ja?"), der Zusatz kippte die
+  Frage ins Entweder-oder. Der Gedankenstrich fällt damit auch weg
+  (Copy-Regel). Die Achsen-Struktur bleibt: Technik / Klarheit / Vergleich.
+
+> **Drei Prüfungen** genügen, keine Minute Aufwand.
+>
+> - Lädt Ihre Seite auf dem Handy sofort?
+> - Versteht ein Besucher in zehn Sekunden, was Sie anbieten und wie er Sie
+>   erreicht?
+> - Wirkt sie neben Ihren zwei besten Mitbewerbern eine Klasse darüber?
+>
+> Dreimal Ja? Dann behalten Sie Ihre Seite. Bei zwei Nein lohnt sich ein
+> Erstgespräch.
+
+## Akzent-Reihe neu: Erstgespräch · Expertise · Lösung (22.08.2026, [Vorschlag])
+
+Folge-Idee Sinan direkt nach dem Listen-Umbau („sauberer Fluss"): Die
+Scan-Reihe der drei Akzente wird ein Prozessbogen – rein ins **Erstgespräch**,
+dahinter **Expertise**, heraus kommt eine **Lösung**. Änderungen:
+
+- **Antwort 01:** Schlusssatz „… lohnt sich ein Gespräch" → „… lohnt sich ein
+  Erstgespräch", Akzent wandert von „Drei Prüfungen" auf „Erstgespräch".
+  Begründung: Seit die Prüfungen als sichtbare Liste dastehen, war der
+  „Drei Prüfungen"-Akzent redundant; der Scanner bekommt jetzt die Handlung.
+- **Antwort 02:** unverändert, Akzent bleibt „Expertise".
+- **Antwort 03:** zweiter Halbsatz neu „Sie bringen die Ausgangslage mit, ich
+  die Einschätzung und eine mögliche Lösung." – Akzent jetzt das Wort
+  „Lösung" (statt „Erstgespräch", das sonst doppelt Kobalt wäre; es bleibt
+  unmarkiert im ersten Satz). Sinans Skizze war „die Einschätzung mit Analyse
+  und einer möglichen Lösung" – „Einschätzung mit Analyse" doppelt sich
+  inhaltlich, daher die schlanke Fassung; „Analyse" als Wort liegt als
+  Alternative bereit. Nebeneffekt: die wörtliche Dopplung von „was sinnvoll
+  ist und was nicht" mit dem Kontakt-Text direkt darunter ist aufgelöst.
+- **Listen-Marker:** von gedämpft (55 % --on-dark) auf volle Textfarbe
+  (Sinan: Dots waren zu dunkel).
+
+Scan-Test geprüft: F1 + „Erstgespräch" = „finden wir im Gespräch heraus" ·
+F2 + „Expertise" = „darauf kommt es an" · F3 + „Lösung" = „zu früh gibt es
+nicht, am Ende steht eine Lösung". Keine Anti-Verkaufs-Aussage markiert.
+
+## Prüfungs-Trio neu: Verständlichkeit · Wettbewerb · Markenwirkung (22.08.2026, [Vorschlag])
+
+Anlass Sinan (Beispiel cafelimon.de, Marktplatz Günzburg – KEIN Lead,
+Entscheidung Sinan): cooler Laden, aber die Seite spiegelt ihn nicht – die
+bisherigen drei Prüfungen hätten trotzdem Entwarnung gegeben („brauchen
+nichts Neues"), obwohl die Seite den Laden unter Wert verkauft. Diagnose:
+Die Prüfungen maßen Funktion, nicht Repräsentation; der Mitbewerber-Vergleich
+beruhigt als einzige relative Prüfung fälschlich, wenn die ganze Branche
+schwache Seiten hat (Gastro/Handwerk). These Sinan dazu: Website = Identität;
+Präzisierung im Gespräch: Die Website ist nicht die Identität, sondern deren
+sichtbarste Übertragung an alle, die den Betrieb noch nicht kennen – wer nur
+die Seite kennt, urteilt nach ihr.
+
+Entscheidung Sinan: Markenwirkungs-Prüfung „Macht sie den Eindruck, den Ihr
+Betrieb verdient?" kommt rein, der Mitbewerber-Punkt bleibt (auch wichtig),
+dafür fliegt der Handy-/Lade-Punkt – Begründung: Technik steckt implizit in
+den Wirkungsfragen (eine mobil kaputte Seite macht den verdienten Eindruck
+sicher nicht), umgekehrt nicht. Preis der Entscheidung, bewusst akzeptiert:
+Die objektivste, am leichtesten prüfbare Frage entfällt, alle drei sind
+jetzt Urteilsfragen. Punkt 2 nennt jetzt explizit „Ihre Seite" (Bezug für
+das „sie" in Punkt 3, der Handy-Punkt trug den Bezug vorher).
+
+> **Drei Prüfungen** genügen, keine Minute Aufwand.
+>
+> - Versteht ein Besucher in zehn Sekunden, was Sie anbieten und wie er Sie
+>   erreicht?
+> - Wirkt Ihre Seite neben Ihren zwei besten Mitbewerbern eine Klasse
+>   darüber?
+> - Macht sie den Eindruck, den Ihr Betrieb verdient?
+>
+> Dreimal Ja? Dann behalten Sie Ihre Seite. Bei zwei Nein lohnt sich ein
+> Erstgespräch.
+
+Nebenbei entschieden: Der Composer-Text (Tipp-Geist) wächst auf Desktop von
+hart 16px auf clamp bis 20px bei 1440 (Minimum 16px, mobil unverändert) –
+Typo-Systematik der Sektion.
+
+**Finale Runde, ABGESEGNET (22.08.2026, „passt, nehmen wir deine Änderung"):**
+Auf Sinans Nachfrage „haben wir die Antwort ab- oder aufgewertet?" ehrliche
+Bilanz: inhaltlich aufgewertet (Café-Limón-Fall wird gefangen), im Charakter
+abgewertet – aus einem durchführbaren Test wurden drei Urteilsfragen
+(Selbstbild-Bias, „keine Minute Aufwand" nicht mehr wörtlich, Punkt 2+3 beide
+„Wirkt sie?"-Fragen). Finale Fassung vereint beides: **Handy-Punkt zurück,
+Mitbewerber-Punkt raus** – Trio **Technik / Verständlichkeit / Markenwirkung**
+(messbar → halb messbar → Urteil, genau eine Gefühlsfrage als Schlusspunkt;
+drei orthogonale Achsen: funktioniert sie / versteht man sie / repräsentiert
+sie). Der Mitbewerber-Vergleich flog, weil er als einziger relativ misst und
+in beide Richtungen täuschen kann (schwache Branche beruhigt fälschlich;
+besser als zwei schlechte Seiten heißt nicht gut) – der Wettbewerbsgedanke
+wohnt in derselben Sektion bereits in Frage 02 („Wie heben wir uns da noch
+ab?"). Kandidat für die FAQ-Unterseite, falls der Vergleichs-Gedanke dort
+eine eigene Frage verdient.
+
+> **Drei Prüfungen** genügen, keine Minute Aufwand.
+>
+> - Lädt Ihre Seite auf dem Handy sofort?
+> - Versteht ein Besucher in zehn Sekunden, was Sie anbieten und wie er Sie
+>   erreicht?
+> - Macht sie den Eindruck, den Ihr Betrieb verdient?
+>
+> Dreimal Ja? Dann behalten Sie Ihre Seite. Bei zwei Nein lohnt sich ein
+> Erstgespräch.
+
+## Schwellen-Fix „gezögert" + Bubble-Farbe (22.08.2026, ABGESEGNET)
+
+Einwand Sinan: „Die meisten bekommen safe 2 mal Ja" – Kontakt/Leistungen sind
+fast überall sofort sichtbar, Handy lädt meist schnell. Analyse dazu: Der
+Schlusssatz „Bei zwei Nein lohnt sich ein Erstgespräch" ließ genau den
+Café-Limón-Fall (Ja/Ja/Nein – zwei billige Ja, Urteil fällt erst bei der
+Markenwirkung) in einer unadressierten Grauzone, die faktisch Entwarnung las.
+Fix: Ein Zögern reicht. Aus zwei Kandidaten wählt Sinan B („gezögert" statt
+„schon ein Nein" – Zögern geben sich auch stolze Inhaber zu, ein hartes Nein
+nicht; passt zur Urteils-Natur von Frage 3). Finaler Schlusssatz:
+
+> Dreimal Ja? Dann behalten Sie Ihre Seite. Haben Sie irgendwo gezögert,
+> lohnt sich ein **Erstgespräch**.
+
+Dazu Design (Wunsch Sinan, gleiche Runde): Antwort-Bubble + Tail von
+`--dark` (Statement-Schwarz) auf `--dark-soft` (Farbe der Leistungen-Karten)
+– die FAQ hängt sich damit farblich ans Leistungen-Kapitel statt ans
+Statement; Avatar im Chat-Kopf bleibt `--dark`.
+
+## Tipp-Geist-Fragen neu: Fragen, die etwas über Sinan aussagen (22.08.2026, ABGESEGNET)
+
+Anlass Sinan: Die bisherigen Composer-Fragen („Was kostet eine Website?" /
+„Wir haben schon eine Website – lohnt sich ein Neuanfang?" / „Wie lange
+dauert so ein Projekt?") gefielen ihm bis auf die erste nicht mehr; Wunsch:
+„Fragen, die bereits etwas über mich aussagen". Dazu kam: Die Neuanfang-Frage
+war seit dem Selbst-Check redundant (Antwort 01 beantwortet sie) und verstieß
+mit dem Gedankenstrich gegen die Copy-Regel.
+
+**Neues Prinzip:** Jede getippte Frage ist ein anderer Kunde mit einem
+anderen Problem – zusammen zeichnen sie das Leistungsbild (der Besucher
+lernt aus der Existenz der Frage, was man Sinan fragen kann). Der Composer
+trägt damit die Anwendungs-/Schnittstellen-Seite, die die website-lastigen
+Chat-Antworten darüber nicht abdecken. Set (je Leistungs-Karte ein Signal):
+
+1. „Was kostet eine Website?" (Preis, die häufigste echte Frage – bewusst
+   nirgends auf der Seite beantwortet)
+2. „Unsere Verwaltung läuft über Excel. Geht das besser?" (Web-Anwendungen;
+   Kunden-O-Ton – „Excel" bewusst trotz Tool-Namen-Regel: simulierter
+   Kundenmund, nicht webdiv-Vokabular)
+3. „Können unsere Kunden online Termine buchen?" (Buchung & Abwicklung)
+4. „Lässt sich das mit unserer Warenwirtschaft verbinden?" (Schnittstellen
+   & Datenbanken)
+
+Reserve-Kandidaten aus der Runde (nicht gewählt, ggf. FAQ-Unterseite):
+„Geht so eine Anwendung auch mit Anmeldung für unsere Kunden?"
+(Kundenportale) · „Können Sie die Inhalte unserer alten Seite übernehmen?"
+(Datenübernahme) · „Arbeiten Sie auch mit Firmen außerhalb von Günzburg?"
+(Überregional-Signal) · „Wie schnell können Sie anfangen?" ·
+„Können wir die Seite später selbst pflegen?" (CMS-/Kontroll-Sorge).
+
 ## Weitere Kandidaten (unsortiert)
 
-- **Was kostet eine Website?** – hängt an der offenen „ab"-Preis-Entscheidung
-  (tasklist, Listenpreis Akquise-Plan Abschnitt 9); erst nach dieser
-  Entscheidung formulieren.
+- **Was kostet eine Website?** – Entscheidung 22.08.2026: KEIN „ab"-Preis auf der
+  Startseite; wenn ein Preis öffentlich wird, dann hier auf der FAQ-Unterseite
+  (Listenpreis Akquise-Plan Abschnitt 9) – ob mit konkreter Zahl oder als
+  Preisfaktoren-Antwort, bei der Formulierung entscheiden.
 - **Wir haben schon eine Website – lohnt sich ein Neuanfang?** – Anschluss an
   den späteren Website-Check (Akquise-Plan Abschnitt 1 Variante B); bis dahin:
   ehrliche Einschätzung im Erstgespräch.

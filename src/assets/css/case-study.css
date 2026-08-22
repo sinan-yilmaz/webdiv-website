@@ -15,10 +15,10 @@
 
 /* --- Projektkopf --- */
 
-.case-intro { padding: 172px 0 96px; }
-.case-back { margin-bottom: 44px; }
-.case-back a { color: var(--ink-2); }
-.case-back a:hover { color: var(--ink); }
+/* Nav-Rhythmus wie die Rechtsseiten: 22px-Abstand der Nav-Pille kehrt
+   zwischen Pille und Rueckweg-Band (SubpageBackBand) wieder –
+   22 + Pillenhoehe (~57px Desktop) + 22 */
+.case-intro { padding: 101px 0 96px; }
 .case-intro .eyebrow { margin-bottom: 18px; }
 
 .case-title {
@@ -246,13 +246,17 @@
 }
 .case-cta-footer {
   border-top: 1px solid var(--line-cobalt);
-  padding: 24px 0 max(28px, env(safe-area-inset-bottom));
+  /* symmetrisch wie die Startseiten-Credits, sonst sitzt die Zeile ~2px zu hoch */
+  padding: 28px 0;
 }
 .case-cta-footer .container {
-  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
   font-size: 0.78125rem;
   letter-spacing: 0.02em;
 }
+.case-cta-footer .cf-right { text-align: right; }
 .case-cta-footer a:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -261,7 +265,8 @@
 /* --- Responsive-Ableitung (Stufen wie die One-Page) --- */
 
 @media (max-width: 1023px) {
-  .case-intro { padding: 150px 0 80px; }
+  /* Pille traegt ab hier den Menue-Knopf (~63px hoch): 22 + 63 + 22 */
+  .case-intro { padding: 107px 0 80px; }
   .case-facts { grid-template-columns: repeat(2, 1fr); }
   .case-brief-grid { grid-template-columns: 1fr; gap: 36px; }
   .case-craft-grid { grid-template-columns: 1fr 1fr; }
@@ -269,8 +274,7 @@
 }
 
 @media (max-width: 767px) {
-  .case-intro { padding: 126px 0 64px; }
-  .case-back { margin-bottom: 30px; }
+  .case-intro { padding-bottom: 64px; }
   .case-lead { margin-bottom: 44px; }
   .case-sub { font-size: 1.125rem; }
   .case-swatches { gap: 12px; margin-bottom: 44px; }
@@ -282,6 +286,14 @@
   .case-craft-grid { grid-template-columns: 1fr; gap: 0; }
   .case-craft-item { padding: 20px 0 26px 20px; }
   .case-craft-note { margin-top: 44px; }
+  .case-cta-footer { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
+  .case-cta-footer .container {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    justify-items: center;
+  }
+  .case-cta-footer .cf-left,
+  .case-cta-footer .cf-right { text-align: center; }
 }
 
 @media (max-width: 559px) {

@@ -3,11 +3,12 @@
 import { Fragment, useRef } from 'react';
 import { footer, kontakt, marke } from 'core/consts/content';
 import { useInViewOnce } from 'lib/motion/hooks/useInViewOnce';
-import { InstagramIcon, LinkedInIcon, MailIcon } from 'lib/primitives/components';
+import { InstagramIcon, LinkedInIcon, MailIcon, WhatsAppIcon } from 'lib/primitives/components';
 import FormArea from './FormArea';
 
 const socialIcons = {
   mail: MailIcon,
+  whatsapp: WhatsAppIcon,
   instagram: InstagramIcon,
   linkedin: LinkedInIcon,
 } as const;
@@ -62,20 +63,14 @@ function ContactSection() {
 
       <footer className="contact-footer">
         <div className="container">
-          <span className="cf-left">
-            {footer.linksPrefix} <b>{footer.linksName}</b>
-          </span>
-          <span className="cf-mid">
-            {footer.copyright}
-            {footer.rechtliches.map((link) => (
+          <span className="cf-left">{footer.copyright}</span>
+          <span className="cf-right">
+            {footer.rechtliches.map((link, index) => (
               <Fragment key={link.href}>
-                {' · '}
+                {index > 0 && ' · '}
                 <a href={link.href}>{link.label}</a>
               </Fragment>
             ))}
-          </span>
-          <span className="cf-right">
-            {footer.rechtsPrefix} <b>{footer.rechtsName}</b>
           </span>
         </div>
       </footer>

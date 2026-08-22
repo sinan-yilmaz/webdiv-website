@@ -12,7 +12,7 @@
   --paper-2: #E8E4DB;        /* Karten, Baender, Hover-Flaechen */
   --ink: #111111;            /* Text auf hell, dunkle Buttons */
   --ink-2: #4A4946;          /* Sekundaertext */
-  --ink-3: #8B8983;          /* Eyebrows, gedaempfte Labels, inaktive Titel */
+  --ink-3: #8B8983;          /* gedaempfte Labels, inaktive Titel (nicht mehr fuer Eyebrows) */
   --line: rgba(17, 17, 17, 0.14);          /* Haarlinien auf hell */
   --dark: #121212;           /* dunkles Kapitel (Statement) */
   --dark-soft: #161615;      /* Leistungen: Fortsetzung des dunklen Kapitels, dezent heller */
@@ -24,7 +24,8 @@
   --cobalt-deep: #1F2FE0;    /* Hover/Active des Akzents */
   --cobalt-tint: #DCE0FF;    /* dezente Akzentflaechen auf hell */
   --on-cobalt: #F2EFE9;      /* Text auf Kobalt – nie --ink auf Kobalt */
-  --error: #B23A2E;          /* Formularfehler */
+  --error: #B23A2E;          /* Formularfehler auf hell */
+  --error-on-cobalt: #FFD2C7; /* Formularfehler auf Kobalt – Rostrot waere dort unlesbar */
   --line-cobalt: rgba(242, 239, 233, 0.28); /* Haarlinien auf Kobalt */
 
   /* --- Typografie --- */
@@ -144,7 +145,9 @@ img, svg, canvas { display: block; max-width: 100%; }
   font-weight: 500;
   letter-spacing: var(--track-eyebrow);
   text-transform: uppercase;
-  color: var(--ink-3);
+  /* --ink-2 statt --ink-3: 13-px-Text braucht AA 4,5:1 (--ink-3 laege bei ~3:1);
+     dunkle Kapitel setzen eigene, bereits konforme Eyebrow-Farben */
+  color: var(--ink-2);
 }
 .eyebrow::before {
   content: "";
@@ -321,6 +324,7 @@ img, svg, canvas { display: block; max-width: 100%; }
 [data-theme="cobalt"] .field textarea:focus {
   border-bottom-color: var(--paper);
 }
+[data-theme="cobalt"] .field { --error: var(--error-on-cobalt); }
 .field.has-error input,
 .field.has-error textarea { border-bottom-color: var(--error); }
 .field .field-error {
