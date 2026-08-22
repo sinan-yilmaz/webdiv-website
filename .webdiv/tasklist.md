@@ -486,13 +486,24 @@
       verifiziert mit zwei vollen Runter-hoch-Zyklen inkl. Endzustands-Reads
       (Klasse „in out" beim Abgang, „in" + opacity 1 + top 0 nach Rückkehr)
 - [ ] FAQ-Feinschliff (weiter offen, mit Sinan): Tail-Kurve final abnehmen, Motion-Idee
-      Tipp-Indikator (··· bevor die Antwort-Bubble poppt), Tablet-Durchgang, offene
-      Frage „FAQ" in die Nav?, Copy-Freigaben (Fragen/Antworten 1+3, Merksatz-Akzente,
-      Status-Zeile, Tipp-Geist-Beispielfragen; Frage 02 abgesegnet 22.08.); Plan
-      22.08. (Sinan): alle Q&As durchgehen, Font-Größen und Kobalt-Akzentwahl
-      prüfen – Reihenfolge Frage 02 ✓ → Design-Runde ✓ (Marker + Typo eingebaut,
-      Chat-Breite bleibt) → Fragen 1+3; danach
+      Tipp-Indikator (··· bevor die Antwort-Bubble poppt), Tablet-Durchgang, Mobile-Pass
+      für die vergrößerte Desktop-Typo (Minima bewusst unangetastet), offene Frage
+      „FAQ" in die Nav?, Copy-Freigaben nur noch Status-Zeile + Tipp-Geist-
+      Beispielfragen (Fragen/Antworten alle abgesegnet: 02 + 01/03 am 22.08.);
+      beim Draufschauen offen: Antwort-Bubble-Breite (720 px ≈ 53 Zeichen bei 24 px –
+      ggf. auf ~860 px mitziehen) und Chip-Größe (11 px Mono neben 32-px-Frage); danach
       als Sektionen noch Ablauf und Kontakt (Profiltext ist seit 22.08. final)
+- [x] FAQ Antworten 01+03 neu gefasst + abgesegnet, Akzent-Prinzip = Scan-Test,
+      Desktop-Typo vergrößert (22.08.2026): Anlass Sinan – Kobalt-Stellen werden
+      beim Überfliegen als Botschaft gelesen (markiertes „Behalten Sie Ihre Seite" =
+      „kein Bedarf"-Signal), dazu 01/03 „low quality, zu viele Doppelpunkte".
+      Prinzip neu: Akzent = Kurzantwort auf die Frage, Scan-Reihe „Drei Prüfungen ·
+      Expertise · Erstgespräch", Anti-Verkaufs-Sätze bleiben unmarkiert im Fließtext;
+      Ton an Antwort 02 angeglichen (kurze Aussagesätze, 0 Doppelpunkte), Antwort 03
+      endet gattungsneutral, Frage 01 bleibt bewusst website-konkret, Startseiten-Trio
+      bestätigt (Details in .webdiv/faq.md). Typo: Frage/Antwort 32/24 px bei 1440
+      (clamp-Steigung + Deckel in main.css angehoben, Minima unverändert →
+      unter ~1000 px alles wie vorher, Mobile-Pass separat)
 - [x] Feedback-Runde 3 umgesetzt (21.08.2026, direkt auf der Website): ✓✓-Häkchen entfernt;
       pro Antwort genau EIN Kobalt-Akzent (`faq.paare[].akzent` in content.ts, [Vorschlag]:
       „Präzision" / „Urteil, Geschmack, Verantwortung" / „das Erstgespräch"; Rendering via

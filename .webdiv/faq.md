@@ -111,7 +111,8 @@ Frage 1 anders formulieren, die Kobalt-Akzentwörter („Präzision" usw.)
 schlecht gewählt – bessere wählen oder ganz weglassen.
 
 **Stand auf der Website (content.ts, alles [Vorschlag] – absegnen):**
-*(Frage 2 inzwischen ÜBERHOLT – neu gedreht 22.08.2026, eigener Abschnitt unten)*
+*(Inzwischen ÜBERHOLT: Frage 2 neu gedreht, Antworten 1+3 samt Akzent-Prinzip
+neu gefasst – 22.08.2026, eigene Abschnitte unten)*
 
 1. **Frage 1 NEU:** „Ist unsere Website eigentlich noch gut genug?"
    (ersetzt seriös/abheben; die wandert auf die FAQ-Unterseite,
@@ -191,6 +192,55 @@ Visitenkarten-Weiche als Antwort auf die alte Selbstbau-Frage.
 Die alte Selbstbau-Frage samt Visitenkarten-Antwort bleibt Kandidat für
 die FAQ-UNTERSEITE (passt zu Abschnitt 5 „Wie halten Sie es mit KI?";
 letzter Startseiten-Stand im Value-first-Abschnitt oben dokumentiert).
+
+## Antworten 1 + 3 neu gefasst, Akzent-Prinzip = Scan-Test (22.08.2026, abgesegnet)
+
+Anlass Sinan: Die Kobalt-Stellen werden beim Überfliegen als direkte Botschaft
+gelesen – das markierte „Behalten Sie Ihre Seite" sagte dem Scanner „alles gut,
+weiterziehen", das markierte „Sie brauchen noch keine neue Website" war die
+zweite „kein Bedarf"-Botschaft in Folge (und beantwortete die Frage „zu früh?"
+nicht einmal). Dazu: Antworten 1 und 3 „low quality, zu viele Doppelpunkte"
+(Antwort 1 hatte drei – Telegramm-Ton neben der ruhigen Antwort 2).
+
+**Akzent-Prinzip neu (ersetzt das Merksatz-Prinzip der Value-first-Runde):**
+Der Akzent ist die Kurzantwort auf die Frage – wer nur Frage + Kobalt liest,
+hat die Essenz (Scan-Test). Nie eine „Sie brauchen mich nicht"-Aussage
+markieren; die Anti-Verkaufs-Sätze bleiben, aber unmarkiert im Fließtext als
+Belohnung für den, der wirklich liest. Scan-Reihe der Sektion:
+**Drei Prüfungen · Expertise · Erstgespräch** (prüfen Sie selbst → darauf
+kommt es an → so geht es los; unter 03 folgt direkt der Composer).
+
+**Auf der Website (content.ts, abgesegnet):**
+
+Frage 01 (unverändert): „Ist unsere Website eigentlich noch gut genug?"
+
+> **Drei Prüfungen** genügen, keine Minute Aufwand. Lädt Ihre Seite auf dem
+> Handy sofort? Findet ein Fremder in zehn Sekunden Ihre Telefonnummer und
+> Ihre wichtigste Leistung? Und wirkt sie neben Ihren zwei besten
+> Mitbewerbern eine Klasse darüber – oder darunter?
+>
+> Dreimal Ja? Dann behalten Sie Ihre Seite. Bei zwei Nein lohnt sich ein
+> Gespräch.
+
+Frage 03 (unverändert): „Wir wissen noch nicht genau, was wir brauchen.
+Ist das zu früh?"
+
+> Nein – genau dafür ist das **Erstgespräch** da. Sie bringen die
+> Ausgangslage mit, ich die Einschätzung, was sinnvoll ist und was nicht.
+>
+> Manchmal kommt dabei heraus, dass Sie im Moment gar nichts Neues brauchen.
+> Auch das erfahren Sie kostenlos.
+
+Formung: Ton an Antwort 2 angeglichen (kurze Aussagesätze, null Doppelpunkte);
+Antwort 1 endet handlungsoffen auf dem Gespräch-Satz, der Anti-Verkaufs-Satz
+steht davor; Antwort 3 gattungsneutral („gar nichts Neues" statt „keine neue
+Website" – gilt für Websites UND Anwendungen). Entscheidung Website-Bezug:
+Frage 01 bleibt bewusst website-konkret (die drei Prüfungen SIND der Wert,
+abstrahiert würde der Selbsttest schwammig; Anwendungs-Interessenten holt die
+gattungsoffene Frage 03 ab, Balance entsteht übers Trio – 02 ist neutral).
+Startseiten-Trio bestätigt (Dramaturgie: Problembewusstsein → KI-Einwand →
+Hürde senken vor dem Kontakt); die übrigen Kandidaten bleiben für die
+FAQ-Unterseite.
 
 ## Weitere Kandidaten (unsortiert)
 

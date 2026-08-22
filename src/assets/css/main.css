@@ -1182,8 +1182,11 @@ html[data-intro-pending] .site-nav { opacity: 0; }
 }
 .faq-msg-q > p {
   /* Lab 22.08.2026: Frage/Antwort ruecken zusammen (vorher 28/19 – las sich
-     als Ueberschrift + Kleingedrucktes statt als Gespraech) */
-  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+     als Ueberschrift + Kleingedrucktes statt als Gespraech). Desktop danach
+     vergroessert (Sinan 22.08.2026): 32/24 bei 1440, Verhaeltnis bleibt
+     moderater als das verworfene 28/19; Minima unveraendert – Mobile-Pass
+     entscheidet separat */
+  font-size: clamp(1.125rem, 2.25vw, 2rem);
   font-weight: 600;
   font-stretch: 102%;
   letter-spacing: -0.015em;
@@ -1210,7 +1213,7 @@ html[data-intro-pending] .site-nav { opacity: 0; }
   border-top-left-radius: 0;
 }
 .faq-msg-a > p {
-  font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
+  font-size: clamp(1.0625rem, 1.7vw, 1.5rem);
   line-height: 1.6;
 }
 .faq-msg-a > p + p { margin-top: 0.9em; }

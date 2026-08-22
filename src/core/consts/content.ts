@@ -165,8 +165,9 @@ export const ueberMich = {
 
 /* FAQ-Kurzsektion als Chat-Fenster (Beschluss 21.08.2026): Startseiten-
    Fassungen der Fragen aus .webdiv/faq.md; Frage 02 neu gedreht + abgesegnet
-   22.08.2026 (Abgrenzung statt Selbstbau-Rechtfertigung). Antwort 3, Status-
-   und Composer-Zeile sowie die Akzente 01+03 sind [Vorschlag] (siehe .webdiv/tasklist.md) */
+   22.08.2026 (Abgrenzung statt Selbstbau-Rechtfertigung), Antworten 01+03
+   samt Akzenten neu gefasst + abgesegnet 22.08.2026 (Scan-Prinzip). Status-
+   und Composer-Zeile sind [Vorschlag] (siehe .webdiv/tasklist.md) */
 export const faq = {
   eyebrow: 'FAQ',
   titel: 'Bevor wir sprechen.',
@@ -176,20 +177,20 @@ export const faq = {
     /* bewusst kein Erreichbarkeits-Status („online" suggeriert Live-Chat) */
     status: 'Websites & Web-Anwendungen',
   },
-  /* akzent: genau eine Stelle pro Antwort faerbt sich Kobalt – Merksatz
-     (Anti-Verkaufs-/Kernaussage) oder ein einzelnes Wort (02 „Expertise",
-     Entscheidung Sinan 22.08.2026), muss woertlich im Antwort-Text
-     vorkommen. Texte value-first gekuerzt 21.08.2026, Akzente 01+03
-     [Vorschlag] (siehe .webdiv/faq.md „Value-first-Umbau") */
+  /* akzent: genau eine Stelle pro Antwort faerbt sich Kobalt, muss woertlich
+     im Antwort-Text vorkommen. Prinzip (Sinan 22.08.2026): der Akzent ist die
+     Kurzantwort auf die Frage – wer nur Frage + Kobalt liest, hat die Essenz
+     (Scan-Test); nie eine „Sie brauchen mich nicht"-Aussage markieren.
+     Details in .webdiv/faq.md */
   paare: [
     {
       chip: 'Frage 01',
       frage: 'Ist unsere Website eigentlich noch gut genug?',
       antwort: [
-        'Drei Prüfungen, keine Minute Aufwand: Lädt sie auf dem Handy sofort? Findet ein Fremder Ihre Telefonnummer und Ihre wichtigste Leistung in zehn Sekunden? Und wirkt sie neben Ihren zwei besten Mitbewerbern eine Klasse darüber – oder darunter?',
-        'Zweimal Nein: Dann lohnt sich ein Gespräch. Alles Ja: Behalten Sie Ihre Seite.',
+        'Drei Prüfungen genügen, keine Minute Aufwand. Lädt Ihre Seite auf dem Handy sofort? Findet ein Fremder in zehn Sekunden Ihre Telefonnummer und Ihre wichtigste Leistung? Und wirkt sie neben Ihren zwei besten Mitbewerbern eine Klasse darüber – oder darunter?',
+        'Dreimal Ja? Dann behalten Sie Ihre Seite. Bei zwei Nein lohnt sich ein Gespräch.',
       ],
-      akzent: 'Behalten Sie Ihre Seite',
+      akzent: 'Drei Prüfungen',
     },
     {
       chip: 'Frage 02',
@@ -205,9 +206,9 @@ export const faq = {
       frage: 'Wir wissen noch nicht genau, was wir brauchen. Ist das zu früh?',
       antwort: [
         'Nein – genau dafür ist das Erstgespräch da. Sie bringen die Ausgangslage mit, ich die Einschätzung, was sinnvoll ist und was nicht.',
-        'Manchmal lautet die Antwort auch: Sie brauchen noch keine neue Website. Auch das erfahren Sie kostenlos.',
+        'Manchmal kommt dabei heraus, dass Sie im Moment gar nichts Neues brauchen. Auch das erfahren Sie kostenlos.',
       ],
-      akzent: 'Sie brauchen noch keine neue Website',
+      akzent: 'Erstgespräch',
     },
   ],
   composer: {
